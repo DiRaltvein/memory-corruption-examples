@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     char *script = (char *)malloc(32 + strlen(url) + strlen(host));
     script[0] = '\0';
     strcat(script, "findProxyForURL('");
-    strcat(script, sanitized_url);
+    strcat(script, sanitized_url); // Problem that memory is allocated considering url length but sanitized_url can be longer then url.
     strcat(script, "', '");
     strcat(script, host);
     strcat(script, "')");
