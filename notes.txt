@@ -1,0 +1,48 @@
+Ubuntu 22.04.03 <- with clang
+
+SETUP (https://clang.llvm.org/get_started.html)
+clone clang
+create build directory
+go into build directory
+cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
+make
+After compiling whole LLVM use just make clang-tidy/clang to compile only clang-tidy or clang
+
+
+CLANG TIDY ------------------------------------------------------------------------
+
+/home/raltvein/packets/llvm-project/clang-tools-extra/clang-tidy	<- clang-tidy that comes with LLVM
+- /misc		<- all checks are here
+- python3 add_new_check.py <category like performance> <check name> 	<- add new check
+
+clang-tidy array_out_of_bound.c -checks=-*,raltvein
+
+
+CLANG STATIC ANALYSIS --------------------------------------------------------------
+
+To add clang checker (https://clang-analyzer.llvm.org/checker_dev_manual.html)
+- /home/raltvein/packets/llvm-project/clang/lib/StaticAnalyzer/Checkers/CMakeLists.txt
+	add your checker name into the list and create file in Checkers directory
+- /home/raltvein/packets/llvm-project/clang/include/clang/StaticAnalyzer/Checkers/Checkers.td
+	add your created checker
+
+Clang to use
+- /home/raltvein/packets/llvm-project/build/bin/clang
+
+see all availible checkers
+clang -cc1 -analyzer-checker-help
+
+Run custom clang checker
+clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.RaltveinZero" <file>
+
+
+-----------------------------------------------------------------------------------------
+
+
+Ubuntu 20.04.03 <- with symbotic
+
+CFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c-simple/array.c
+CFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c-simple/overflow.c
+
+CPPFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c++-simple/array.cc
+CPPFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c++-simple/overflow.cc

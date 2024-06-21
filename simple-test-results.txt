@@ -1,4 +1,4 @@
-                        | clang/clang++  |  clang-tidy  | cppcheck  |
+                        | clang/clang++  |  clang-tidy  | cppcheck  |  scan-build  |  Symbolic  |
 array_out_of_bound.c    |       ✖        |      ✔      |     ✔     |
 stack_overflow.c        |       ✖        |      ✔      |     ✖     |
 use_before_init.c       |       ✔        |      ✔      |     ✔     |
