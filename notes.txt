@@ -1,15 +1,54 @@
-Ubuntu 22.04.03 <- with clang
+// ---------------------------------- LLVM ---------------------------------- \\
 
 SETUP (https://clang.llvm.org/get_started.html)
-clone clang
-create build directory
-go into build directory
-cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
-make
-After compiling whole LLVM use just make clang-tidy/clang to compile only clang-tidy or clang
+clone llvm
+- mkdir build && cd build
+- apt-get update && apt-get install build-essential && apt-get install cmake
+- cmake -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../llvm
+- make
+After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
+- make clang-tidy OR make clang
 
 
-CLANG TIDY ------------------------------------------------------------------------
+// ---------------------------------- Local notes ---------------------------------- \\
+
+/mnt/a/master
+/usr/llvm-project/build/bin/clang
+/usr/symbiotic/scripts/symbiotic
+
+!! Ubuntu 24 does not build llvm
+Ubuntu 22 holds llvm
+Ubuntu 20 holds symbolic
+
+
+[ubuntu 22] /usr/llvm-project/build/bin/clang --analyze /mnt/a/master
+[ubuntu 22] /usr/llvm-project/build/bin/clang++ --analyze /mnt/a/master
+[ubuntu 22] /usr/llvm-project/build/bin/clang-tidy -checks=* /mnt/a/master
+[ubuntu 22] cppcheck --enable=all /mnt/a/master
+[ubuntu 20] /usr/symbiotic/scripts/symbiotic --prp=memsafety /mnt/a/master
+
+[Windows] gcc -fanalyzer <file>
+
+/usr/symbiotic/scripts/symbiotic --prp=memsafety <file>
+/usr/symbiotic/scripts/symbiotic-cc --prp=memsafety <file>
+symbolic also accepts flags as CPPFLAGS='-I/usr/include/clang/10/include' OR CFLAGS='-I/usr/include/clang/10/include'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------- CLANG TIDY ---------------------------------- \\
 
 /home/raltvein/packets/llvm-project/clang-tools-extra/clang-tidy	<- clang-tidy that comes with LLVM
 - /misc		<- all checks are here
@@ -18,7 +57,7 @@ CLANG TIDY ---------------------------------------------------------------------
 clang-tidy array_out_of_bound.c -checks=-*,raltvein
 
 
-CLANG STATIC ANALYSIS --------------------------------------------------------------
+// ---------------------------------- CLANG STATIC ANALYSIS ---------------------------------- \\
 
 To add clang checker (https://clang-analyzer.llvm.org/checker_dev_manual.html)
 - /home/raltvein/packets/llvm-project/clang/lib/StaticAnalyzer/Checkers/CMakeLists.txt
@@ -27,7 +66,7 @@ To add clang checker (https://clang-analyzer.llvm.org/checker_dev_manual.html)
 	add your created checker
 
 Clang to use
-- /home/raltvein/packets/llvm-project/build/bin/clang
+- /usr/llvm-project/build/bin/clang
 
 see all availible checkers
 clang -cc1 -analyzer-checker-help
@@ -36,13 +75,101 @@ Run custom clang checker
 clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.RaltveinZero" <file>
 
 
------------------------------------------------------------------------------------------
 
 
-Ubuntu 20.04.03 <- with symbotic
 
-CFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c-simple/array.c
-CFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c-simple/overflow.c
 
-CPPFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c++-simple/array.cc
-CPPFLAGS='-I/usr/include/clang/10/include' /home/raltvein/custom/symbiotic/install/bin/symbiotic --prp=memsafety /home/raltvein/custom/c++-simple/overflow.cc
+
+
+CVE's
+
+2>&1 | grep -c "error:"
+2>&1 | grep -c "warning:"
+2>&1 | grep -c "note:"
+
+
+NOTES
+https://www.cvedetails.com/cve/CVE-2019-25078/ (pacparser):
+- clang --analyze -I spidermonkey/js/src -ferror-limit=0 pacparser.c
+- clang-tidy --extra-arg=-Ispidermonkey/js/src pacparser.c
+
+
+
+
+
+# CVE's  2022 filtered by publish date. 2023 year not always has solutions
+# https://www.cvedetails.com/vulnerability-list/year-2022/vulnerabilities.html?page=1&opov=1&order=3&trc=1886&sha=5cdc05fffa8e8780f77b2034508e9f9a16cacbf9
+https://www.cvedetails.com/cve/CVE-2022-4603/
+https://www.cvedetails.com/cve/CVE-2019-25078/
+https://www.cvedetails.com/cve/CVE-2022-4603/
+
+
+# Found but not tested
+https://www.cvedetails.com/cve/CVE-2021-23165/
+https://www.cvedetails.com/cve/CVE-2022-1699/ <- not a memory corruption
+https://www.cvedetails.com/cve/CVE-2021-27425/ <- no commit
+https://www.cvedetails.com/cve/CVE-2021-27427/
+https://www.cvedetails.com/cve/CVE-2021-27433/
+https://www.cvedetails.com/cve/CVE-2021-27435/
+https://www.cvedetails.com/cve/CVE-2021-33912/
+https://www.cvedetails.com/cve/CVE-2021-33913/
+https://www.cvedetails.com/cve/CVE-2021-33945/
+https://www.cvedetails.com/cve/CVE-2021-37778/
+https://www.cvedetails.com/cve/CVE-2021-41751/
+https://www.cvedetails.com/cve/CVE-2021-42863/
+https://www.cvedetails.com/cve/CVE-2021-45005/
+https://www.cvedetails.com/cve/CVE-2021-46461/
+https://www.cvedetails.com/cve/CVE-2022-0080/
+https://www.cvedetails.com/cve/CVE-2022-0318/
+https://www.cvedetails.com/cve/CVE-2022-0570/
+https://www.cvedetails.com/cve/CVE-2022-0631/
+https://www.cvedetails.com/cve/CVE-2022-1253/
+https://www.cvedetails.com/cve/CVE-2022-1286/
+https://www.cvedetails.com/cve/CVE-2022-3023/
+https://www.cvedetails.com/cve/CVE-2022-3520/
+https://www.cvedetails.com/cve/CVE-2022-4639/
+https://www.cvedetails.com/cve/CVE-2022-22822/
+https://www.cvedetails.com/cve/CVE-2022-22823/
+https://www.cvedetails.com/cve/CVE-2022-22824/
+https://www.cvedetails.com/cve/CVE-2022-23537/
+https://www.cvedetails.com/cve/CVE-2022-23547/
+https://www.cvedetails.com/cve/CVE-2022-23587/
+https://www.cvedetails.com/cve/CVE-2022-23852/
+https://www.cvedetails.com/cve/CVE-2022-24704/
+https://www.cvedetails.com/cve/CVE-2022-24705/
+https://www.cvedetails.com/cve/CVE-2022-24754/
+https://www.cvedetails.com/cve/CVE-2022-24788/
+https://www.cvedetails.com/cve/CVE-2022-24845/
+https://www.cvedetails.com/cve/CVE-2022-29021/
+https://www.cvedetails.com/cve/CVE-2022-29022/
+https://www.cvedetails.com/cve/CVE-2022-29023/
+https://www.cvedetails.com/cve/CVE-2022-29077/
+https://www.cvedetails.com/cve/CVE-2022-30767/
+https://www.cvedetails.com/cve/CVE-2022-31003/
+https://www.cvedetails.com/cve/CVE-2022-31031/
+https://www.cvedetails.com/cve/CVE-2022-32073/
+https://www.cvedetails.com/cve/CVE-2022-34835/
+https://www.cvedetails.com/cve/CVE-2022-35289/
+https://www.cvedetails.com/cve/CVE-2022-35927/
+https://www.cvedetails.com/cve/CVE-2022-36086/
+https://www.cvedetails.com/cve/CVE-2022-37434/
+https://www.cvedetails.com/cve/CVE-2022-37452/
+https://www.cvedetails.com/cve/CVE-2022-39244/
+https://www.cvedetails.com/cve/CVE-2022-39274/
+https://www.cvedetails.com/cve/CVE-2022-39293/
+https://www.cvedetails.com/cve/CVE-2022-40008/
+
+
+
+Not used that have github commit
+https://www.cvedetails.com/cve/CVE-2022-47942/ - linux
+https://www.cvedetails.com/cve/CVE-2022-47521/ - linux
+https://www.cvedetails.com/cve/CVE-2022-47518/ - linux
+https://www.cvedetails.com/cve/CVE-2022-23468/ - No Commit
+https://www.cvedetails.com/cve/CVE-2020-36619/ - not memory corruption
+https://www.cvedetails.com/cve/CVE-2022-23547/ - compicated
+https://www.cvedetails.com/cve/CVE-2022-42898/ - complicated (althrough possible)
+https://www.cvedetails.com/cve/CVE-2022-23537/ - complex (but possible)
+https://www.cvedetails.com/cve/CVE-2022-4639/ - not memory corruption
+https://www.cvedetails.com/cve/CVE-2022-44789/ - js internal with exploit being malicious js file
+https://www.cvedetails.com/cve/CVE-2022-45332/ - idk

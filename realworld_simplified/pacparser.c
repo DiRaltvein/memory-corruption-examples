@@ -1,12 +1,12 @@
 // https://www.cvedetails.com/cve/CVE-2019-25078/
-// extract of: src/pacparser.c
+// repository: https://github.com/manugarg/pacparser
+// commit: f013613
+// extract of: src/pacparser.c (function: pacparser_find_proxy)
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 // -------------------------- COPIED --------------------------
-// You must free the result if result is non-NULL.
 char *str_replace(const char *orig, char *rep, char *with)
 {
     char *result;  // the return string
@@ -44,6 +44,7 @@ char *str_replace(const char *orig, char *rep, char *with)
     strcpy(tmp, orig);
     return result;
 }
+// -------------------------- COPIED --------------------------
 
 int main(int argc, char *argv[])
 {
@@ -56,11 +57,10 @@ int main(int argc, char *argv[])
     char *script = (char *)malloc(32 + strlen(url) + strlen(host));
     script[0] = '\0';
     strcat(script, "findProxyForURL('");
-    strcat(script, sanitized_url); // Problem: memory is allocated considering url length but sanitized_url can be longer then url.
+    strcat(script, sanitized_url); // Problem: memory of script is allocated considering url variable length but sanitized_url can be longer then url.
     strcat(script, "', '");
     strcat(script, host);
     strcat(script, "')");
-    printf("%s\n", script);
     free(script);
     free(sanitized_url);
     return 0;
