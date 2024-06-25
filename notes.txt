@@ -21,24 +21,27 @@ Ubuntu 22 holds llvm
 Ubuntu 20 holds symbolic
 
 
-[ubuntu 22] /usr/llvm-project/build/bin/clang --analyze /mnt/a/master
-[ubuntu 22] /usr/llvm-project/build/bin/clang++ --analyze /mnt/a/master
-[ubuntu 22] /usr/llvm-project/build/bin/clang-tidy -checks=* /mnt/a/master
-[ubuntu 22] cppcheck --enable=all /mnt/a/master
-[ubuntu 20] /usr/symbiotic/scripts/symbiotic --prp=memsafety /mnt/a/master
-
-[Windows] gcc -fanalyzer <file>
-
-/usr/symbiotic/scripts/symbiotic --prp=memsafety <file>
-/usr/symbiotic/scripts/symbiotic-cc --prp=memsafety <file>
-symbolic also accepts flags as CPPFLAGS='-I/usr/include/clang/10/include' OR CFLAGS='-I/usr/include/clang/10/include'
-
-
-
-
+[ubuntu 22] /usr/llvm-project/build/bin/clang --analyze -ferror-limit=0 /mnt/a/master
+- -I/mnt/
+[ubuntu 22] /usr/llvm-project/build/bin/clang++ --analyze -ferror-limit=0 /mnt/a/master
+- -I/mnt/
+[ubuntu 22] /usr/llvm-project/build/bin/clang-tidy /mnt/a/master
+- --extra-arg=-I/mnt
+- -checks=*
+[ubuntu 22] cppcheck --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force /mnt/a/master
+- -I/mnt/
+[ubuntu 20] /usr/symbiotic/scripts/symbiotic --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
+[ubuntu 20] /usr/symbiotic/scripts/symbiotic-cc --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
+- CPPFLAGS='-I/usr/include/clang/10/include'
+- CFLAGS='-I/usr/include/clang/10/include'
 
 
-
+[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c
+	- node a.js /mnt/a/master/master/realworld_simplified/ppp.c
+[pacparser] node a.js /mnt/a/master/projects/pacparser/src/pacparser.c /mnt/a/master/projects/pacparser/src/spidermonkey/js/src
+	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c
+[gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c /mnt/a/master/projects/gpac/include
+	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c
 
 
 
@@ -79,19 +82,6 @@ clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.
 
 
 
-
-
-CVE's
-
-2>&1 | grep -c "error:"
-2>&1 | grep -c "warning:"
-2>&1 | grep -c "note:"
-
-
-NOTES
-https://www.cvedetails.com/cve/CVE-2019-25078/ (pacparser):
-- clang --analyze -I spidermonkey/js/src -ferror-limit=0 pacparser.c
-- clang-tidy --extra-arg=-Ispidermonkey/js/src pacparser.c
 
 
 
@@ -173,3 +163,10 @@ https://www.cvedetails.com/cve/CVE-2022-23537/ - complex (but possible)
 https://www.cvedetails.com/cve/CVE-2022-4639/ - not memory corruption
 https://www.cvedetails.com/cve/CVE-2022-44789/ - js internal with exploit being malicious js file
 https://www.cvedetails.com/cve/CVE-2022-45332/ - idk
+
+
+
+thoughts:
+[gpac]. Cppcheck can not find a problem when in the example the exploit is not triggered.
+Eg. not 31 is passed to the function but 30. It is strange and I would argue that function should check for it anyway to be secure on its own and not rely
+on environment or caller to check its parameters.

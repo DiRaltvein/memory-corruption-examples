@@ -13,10 +13,10 @@ Extracted vulnerability logic means that the vulnerability that was present in a
 
 Commands and static code analyzers that were used:
 
-- clang/clang++ --analyze \<filename>
-- clang-tidy -checks=\* \<filename>
-- cppcheck --enable=all \<filename>
-- /usr/symbiotic/scripts/symbiotic --prp=memsafety \<filename>
+- clang/clang++ --analyze -ferror-limit=0 \<filename>
+- clang-tidy \<filename>
+- cppcheck --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force \<filename>
+- symbiotic --prp=memsafety -ferror-limit=0 \<filename>
 
 ### Versions of static code analyzers used
 
@@ -45,11 +45,22 @@ Second row in a table where in a CVE column 'Extracted' is specified stands for 
 
 If static code analyzer has ✖ instead of the results it measn that static code analyzer was for some reason unable to analyze the file.
 
-|      CVE       |                         Project (url)                         | Commit (hash) |                   file (function)                    | clang/clang++ | clang-tidy  | scan-build  |  cppcheck   |  symbiotic  |
-| :------------: | :-----------------------------------------------------------: | :-----------: | :--------------------------------------------------: | :-----------: | :---------: | :---------: | :---------: | :---------: |
-| CVE-2022-4603  |     <a href="https://github.com/ppp-project/ppp">ppp</a>      |    fb3529c    |        pppdump/pppdump.c (function: dumpppp)         |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) |      ✖      |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 1/0/0 (✓/✓) |
-| CVE-2019-25078 | <a href="https://github.com/manugarg/pacparser">pacparser</a> |    f013613    |   src/pacparser.c (function: pacparser_find_proxy)   |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) |
-| CVE-2022-4202  |        <a href="https://github.com/gpac/gpac">gpac</a>        |    faac2ce    | src/laser/lsr_dec.c (function: lsr_translate_coords) |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✓/✖)  | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) | 0/0/0 (✓/✖) |
+|      CVE       |                         Project (url)                         | Commit (hash) |                   file (function)                    | clang/clang++ |   clang-tidy   |   cppcheck    |  symbiotic  |
+| :------------: | :-----------------------------------------------------------: | :-----------: | :--------------------------------------------------: | :-----------: | :------------: | :-----------: | :---------: |
+| CVE-2022-4603  |     <a href="https://github.com/ppp-project/ppp">ppp</a>      |    fb3529c    |        pppdump/pppdump.c (function: dumpppp)         | 0/20/0 (✖/✖)  | 0/36/463 (✖/✖) |  1/0/4 (✖/✖)  |      ✖      |
+|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  |  0/0/0 (✖/✖)   |  0/0/0 (✖/✖)  | 1/0/0 (✓/✓) |
+| CVE-2019-25078 | <a href="https://github.com/manugarg/pacparser">pacparser</a> |    f013613    |   src/pacparser.c (function: pacparser_find_proxy)   | 37/0/5 (✖/✖)  |  37/0/5 (✖/✖)  |  1/0/7 (✖/✖)  |      ✖      |
+|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  | 0/8/7 (✖/✖)\*  |  0/0/1 (✖/✖)  | 0/0/0 (✖/✖) |
+| CVE-2022-4202  |        <a href="https://github.com/gpac/gpac">gpac</a>        |    faac2ce    | src/laser/lsr_dec.c (function: lsr_translate_coords) |  0/0/0 (✖/✖)  | 0/44/40 (✖/✖)  | 3/2/311 (✓/✖) |      ✖      |
+|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  |  0/0/0 (✖/✖)   |  1/0/2 (✓/✓)  | 0/0/0 (✖/✖) |
+
+Star next to result means that althrough static code analyzer was not able to detect the vulnerability it pointed out that insecure method is used and if resolved the vulnerability would also be fixed.
+
+CppCheck:
+
+- errors
+  - portability problems
+- warnings
+- notes:
+  - style notes
+  - note

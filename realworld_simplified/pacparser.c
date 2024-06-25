@@ -48,18 +48,15 @@ char *str_replace(const char *orig, char *rep, char *with)
 
 int main(int argc, char *argv[])
 {
-    char host[] = "I am host";
     char url[] = "and I''''''''' am url";
     // URL-encode "'" as we use single quotes to stick the URL into a temporary script.
     char *sanitized_url = str_replace(url, "'", "%27");
 
-    // char script[32 + strlen(url) + strlen(host)];
-    char *script = (char *)malloc(32 + strlen(url) + strlen(host));
+    char *script = (char *)malloc(32 + strlen(url));
     script[0] = '\0';
     strcat(script, "findProxyForURL('");
-    strcat(script, sanitized_url); // Problem: memory of script is allocated considering url variable length but sanitized_url can be longer then url.
+    strcat(script, sanitized_url); // Problem: memory of script is allocated considering length of variable 'url' but variable 'sanitized_url' longer can be greater then of url variable due to str_replace.
     strcat(script, "', '");
-    strcat(script, host);
     strcat(script, "')");
     free(script);
     free(sanitized_url);
