@@ -9,6 +9,10 @@ clone llvm
 After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 - make clang-tidy OR make clang
 
+// ---------------------------------- Random ---------------------------------- \\
+
+9991fc6
+
 
 // ---------------------------------- Local notes ---------------------------------- \\
 
@@ -42,11 +46,10 @@ Ubuntu 20 holds symbolic
 	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c
 [gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c
-
-
-
-
-
+[gpssim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c
+	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c
+[openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c
+	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c
 
 
 
@@ -92,44 +95,10 @@ clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.
 https://www.cvedetails.com/cve/CVE-2022-4603/
 https://www.cvedetails.com/cve/CVE-2019-25078/
 https://www.cvedetails.com/cve/CVE-2022-4603/
+https://www.cvedetails.com/cve/CVE-2021-37778/
 
 
 # Found but not tested
-https://www.cvedetails.com/cve/CVE-2021-23165/
-https://www.cvedetails.com/cve/CVE-2022-1699/ <- not a memory corruption
-https://www.cvedetails.com/cve/CVE-2021-27425/ <- no commit
-https://www.cvedetails.com/cve/CVE-2021-27427/
-https://www.cvedetails.com/cve/CVE-2021-27433/
-https://www.cvedetails.com/cve/CVE-2021-27435/
-https://www.cvedetails.com/cve/CVE-2021-33912/
-https://www.cvedetails.com/cve/CVE-2021-33913/
-https://www.cvedetails.com/cve/CVE-2021-33945/
-https://www.cvedetails.com/cve/CVE-2021-37778/
-https://www.cvedetails.com/cve/CVE-2021-41751/
-https://www.cvedetails.com/cve/CVE-2021-42863/
-https://www.cvedetails.com/cve/CVE-2021-45005/
-https://www.cvedetails.com/cve/CVE-2021-46461/
-https://www.cvedetails.com/cve/CVE-2022-0080/
-https://www.cvedetails.com/cve/CVE-2022-0318/
-https://www.cvedetails.com/cve/CVE-2022-0570/
-https://www.cvedetails.com/cve/CVE-2022-0631/
-https://www.cvedetails.com/cve/CVE-2022-1253/
-https://www.cvedetails.com/cve/CVE-2022-1286/
-https://www.cvedetails.com/cve/CVE-2022-3023/
-https://www.cvedetails.com/cve/CVE-2022-3520/
-https://www.cvedetails.com/cve/CVE-2022-4639/
-https://www.cvedetails.com/cve/CVE-2022-22822/
-https://www.cvedetails.com/cve/CVE-2022-22823/
-https://www.cvedetails.com/cve/CVE-2022-22824/
-https://www.cvedetails.com/cve/CVE-2022-23537/
-https://www.cvedetails.com/cve/CVE-2022-23547/
-https://www.cvedetails.com/cve/CVE-2022-23587/
-https://www.cvedetails.com/cve/CVE-2022-23852/
-https://www.cvedetails.com/cve/CVE-2022-24704/
-https://www.cvedetails.com/cve/CVE-2022-24705/
-https://www.cvedetails.com/cve/CVE-2022-24754/
-https://www.cvedetails.com/cve/CVE-2022-24788/
-https://www.cvedetails.com/cve/CVE-2022-24845/
 https://www.cvedetails.com/cve/CVE-2022-29021/
 https://www.cvedetails.com/cve/CVE-2022-29022/
 https://www.cvedetails.com/cve/CVE-2022-29023/
@@ -152,6 +121,10 @@ https://www.cvedetails.com/cve/CVE-2022-40008/
 
 
 Not used that have github commit
+https://www.cvedetails.com/cve/CVE-2021-27435/ - calloc problem when allocation more memory then calloc can handle... can not reproduce
+https://www.cvedetails.com/cve/CVE-2021-23165/ - poorly documented code that is hard to read and even harder to understand the vulnerability.
+https://www.cvedetails.com/cve/CVE-2021-33912/ - no commit directly and no releases... Could not find the version affected
+
 https://www.cvedetails.com/cve/CVE-2022-47942/ - linux
 https://www.cvedetails.com/cve/CVE-2022-47521/ - linux
 https://www.cvedetails.com/cve/CVE-2022-47518/ - linux
@@ -163,6 +136,8 @@ https://www.cvedetails.com/cve/CVE-2022-23537/ - complex (but possible)
 https://www.cvedetails.com/cve/CVE-2022-4639/ - not memory corruption
 https://www.cvedetails.com/cve/CVE-2022-44789/ - js internal with exploit being malicious js file
 https://www.cvedetails.com/cve/CVE-2022-45332/ - idk
+https://www.cvedetails.com/cve/CVE-2022-1699/ <- not a memory corruption
+https://www.cvedetails.com/cve/CVE-2021-27425/ <- no commit
 
 
 
@@ -170,3 +145,9 @@ thoughts:
 [gpac]. Cppcheck can not find a problem when in the example the exploit is not triggered.
 Eg. not 31 is passed to the function but 30. It is strange and I would argue that function should check for it anyway to be secure on its own and not rely
 on environment or caller to check its parameters.
+
+A lot of vulnerabilities are bound to some user input or data that comes from outside the application. In that case it is hard to detect memory corruptions because any method
+
+People do not want to use fat pointers but also clang-tidy throws warning on any method that does not perform bound check. (like memcpy)
+
+symbiotic wants a main fucntion that often is not present in single files that are analyzed in a projects

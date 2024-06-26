@@ -45,14 +45,22 @@ Second row in a table where in a CVE column 'Extracted' is specified stands for 
 
 If static code analyzer has ✖ instead of the results it measn that static code analyzer was for some reason unable to analyze the file.
 
-|      CVE       |                         Project (url)                         | Commit (hash) |                   file (function)                    | clang/clang++ |   clang-tidy   |   cppcheck    |  symbiotic  |
-| :------------: | :-----------------------------------------------------------: | :-----------: | :--------------------------------------------------: | :-----------: | :------------: | :-----------: | :---------: |
-| CVE-2022-4603  |     <a href="https://github.com/ppp-project/ppp">ppp</a>      |    fb3529c    |        pppdump/pppdump.c (function: dumpppp)         | 0/20/0 (✖/✖)  | 0/36/463 (✖/✖) |  1/0/4 (✖/✖)  |      ✖      |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  |  0/0/0 (✖/✖)   |  0/0/0 (✖/✖)  | 1/0/0 (✓/✓) |
-| CVE-2019-25078 | <a href="https://github.com/manugarg/pacparser">pacparser</a> |    f013613    |   src/pacparser.c (function: pacparser_find_proxy)   | 37/0/5 (✖/✖)  |  37/0/5 (✖/✖)  |  1/0/7 (✖/✖)  |      ✖      |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  | 0/8/7 (✖/✖)\*  |  0/0/1 (✖/✖)  | 0/0/0 (✖/✖) |
-| CVE-2022-4202  |        <a href="https://github.com/gpac/gpac">gpac</a>        |    faac2ce    | src/laser/lsr_dec.c (function: lsr_translate_coords) |  0/0/0 (✖/✖)  | 0/44/40 (✖/✖)  | 3/2/311 (✓/✖) |      ✖      |
-|   Extracted    |                                                               |               |                                                      |  0/0/0 (✖/✖)  |  0/0/0 (✖/✖)   |  1/0/2 (✓/✓)  | 0/0/0 (✖/✖) |
+|      CVE       | Project (url) | Commit (hash) | file length | clang/clang++ |    clang-tidy    |   cppcheck    |  symbiotic  |
+| :------------: | :-----------: | :-----------: | :---------: | :-----------: | :--------------: | :-----------: | :---------: |
+| CVE-2022-4603  |      ppp      |    fb3529c    |     534     | 0/20/0 (✖/✖)  |  0/36/463 (✖/✖)  |  1/0/4 (✖/✖)  |      ✖      |
+|   Extracted    |               |               |             |  0/0/0 (✖/✖)  |   0/0/0 (✖/✖)    |  0/0/0 (✖/✖)  | 1/0/0 (✓/✓) |
+| CVE-2019-25078 |   pacparser   |    f013613    |     536     | 37/0/5 (✖/✖)  |   37/0/5 (✖/✖)   |  1/0/7 (✖/✖)  |      ✖      |
+|   Extracted    |               |               |             |  0/0/0 (✖/✖)  |  0/8/7 (✖/✖)\*   |  0/0/1 (✖/✖)  | 0/0/0 (✖/✖) |
+| CVE-2022-4202  |     gpac      |    faac2ce    |    6141     |  0/0/0 (✖/✖)  |  0/44/40 (✖/✖)   | 3/2/311 (✓/✖) |      ✖      |
+|   Extracted    |               |               |             |  0/0/0 (✖/✖)  |   0/0/0 (✖/✖)    |  1/0/2 (✓/✓)  | 0/0/0 (✖/✖) |
+| CVE-2021-37778 |  gps-sdr-sim  |    d361b2c    |    2364     |  0/6/0 (✖/✖)  | 0/91/120 (✖/✖)\* | 0/0/29 (✖/✖)  | 0/0/0 (✖/✖) |
+|   Extracted    |               |               |             |  0/0/0 (✖/✖)  |  0/1/1 (✖/✖)\*   |  0/0/0 (✖/✖)  | 0/0/0 (✖/✖) |
+| CVE-2022-29021 |   openrazer   |    9991fc6    |    1445     |  0/0/0 (✖/✖)  |   0/0/0 (✖/✖)    | 0/0/84 (✖/✖)  |      ✖      |
+|   Extracted    |               |               |             |  0/0/0 (✖/✖)  |  0/1/1 (✖/✖)\*   |  0/0/0 (✖/✖)  | 1/0/0 (✓/✓) |
+|    CVE-000     |               |               |             |       -       |        -         |       -       |      -      |
+|   Extracted    |               |               |             |       -       |        -         |       -       |      -      |
+|    CVE-000     |               |               |             |       -       |        -         |       -       |      -      |
+|   Extracted    |               |               |             |       -       |        -         |       -       |      -      |
 
 Star next to result means that althrough static code analyzer was not able to detect the vulnerability it pointed out that insecure method is used and if resolved the vulnerability would also be fixed.
 

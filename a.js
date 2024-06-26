@@ -43,7 +43,8 @@ if (fileToAnalyze.endsWith('.c')) {
   );
 } else {
   oaf(
-    'CLANG'`/usr/llvm-project/build/bin/clang++ --analyze -ferror-limit=0 ${getIncludes()} ${fileToAnalyze}`
+    'CLANG',
+    `/usr/llvm-project/build/bin/clang++ --analyze -ferror-limit=0 ${getIncludes()} ${fileToAnalyze}`
   );
 }
 oaf(
