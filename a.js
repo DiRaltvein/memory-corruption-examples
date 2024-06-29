@@ -1,7 +1,15 @@
 // script to generate commands needed to run to analyze a particular file.
+// usage:
+// - First argument is path to the file to analyze
+// - Second argument is a function name in a file to analyze. Needed because ikos static code analyzer needs an entry point when main is not present.
+//   when main is present then still pass main as a second argument
+// - Third and later arguments are paths to the include files that the file needs to properly compule.
 
 const fileToAnalyze = process.argv[2];
-const headerDirectories = process.argv.slice(3).map((d) =>
+const file = fileToAnalyze.split('/').splice(-1, 1)[0];
+const isCFile = file.endsWith('.c');
+const entryPoint = process.argv[3];
+const headerDirectories = process.argv.slice(4).map((d) =>
   d
     .split('/')
     .map((a) => (a.includes(' ') ? `'${a}'` : a))
@@ -18,59 +26,77 @@ const showHeaders = headerDirectories.length > 0;
 
 // /usr/llvm-project/llvm/include/llvm <- folder with folders that contain header files
 
+const randomColorGenerator = () => {
+  const colors = [
+    '\x1b[31m', // red
+    '\x1b[32m', // green
+    '\x1b[33m', // yellow
+    '\x1b[34m', // blue
+    '\x1b[35m', // magneta
+    '\x1b[36m', // cyan
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
+const mainColor = randomColorGenerator();
+const accentColor = randomColorGenerator();
+
 const getIncludes = (prefix = '-I', separator = ' ') =>
   !showHeaders
     ? ''
-    : headerDirectories.map((d) => `${prefix}${d}`).join(separator);
+    : `${headerDirectories.map((d) => `${prefix}${d}`).join(separator)} `;
+
+const c = (text, accent = false) =>
+  `${accent ? accentColor : mainColor}${text}\x1b[0m`;
 
 const oaf = (name, str, showGreps = true) => {
-  const finalCommand = `${str} 2>&1 | grep ${fileToAnalyze}:`;
-  console.log(`\x1b[31m${name}\x1b[0m: ${finalCommand}\n`);
+  const finalCommand = `${str} ${c('2>&1', true)} | grep ${fileToAnalyze}:`;
+  console.log(`${c(name)}: ${finalCommand}\n`);
   if (!showGreps) return;
   for (const grep of [
     '| grep -c "error:"',
     '| grep -c "warning:"',
     '| grep -c "note:"',
   ]) {
-    console.log(`\x1b[43m-\x1b[0m ${finalCommand} ${grep}\n`);
+    console.log(`${c('-', true)} ${finalCommand} ${grep}\n`);
   }
 };
 
-if (fileToAnalyze.endsWith('.c')) {
-  oaf(
-    'CLANG',
-    `/usr/llvm-project/build/bin/clang --analyze -ferror-limit=0 ${getIncludes()} ${fileToAnalyze}`
-  );
-} else {
-  oaf(
-    'CLANG',
-    `/usr/llvm-project/build/bin/clang++ --analyze -ferror-limit=0 ${getIncludes()} ${fileToAnalyze}`
-  );
-}
 oaf(
-  'CLANG-TIDY',
-  `/usr/llvm-project/build/bin/clang-tidy -extra-arg=-ferror-limit=0 ${getIncludes(
-    '--extra-arg=-I'
-  )} ${fileToAnalyze}`
-);
-oaf(
-  'CPPCHECK',
-  `cppcheck --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force ${getIncludes()} ${fileToAnalyze}`,
+  'CLANG',
+  `clang${
+    isCFile ? '' : '++'
+  } --analyze -Xclang -analyzer-checker=core,alpha -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`,
   false
 );
-// oaf('INFER', `infer run -- clang --keep-going ${fileToAnalyze}`, false);
-if (fileToAnalyze.endsWith('.c')) {
-  oaf(
-    'SYMBIOTIC',
-    `${
-      !showHeaders ? '' : `CFLAGS='${getIncludes()}'`
-    } /usr/symbiotic/scripts/symbiotic --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
-  );
-} else {
-  oaf(
-    'SYMBIOTIC',
-    `${
-      !showHeaders ? '' : `CPPFLAGS='${getIncludes()}'`
-    } /usr/symbiotic/scripts/symbiotic-cc --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
-  );
-}
+
+// oaf(
+//   'CLANG-TIDY',
+//   `clang-tidy -checks="*,-clang-analyzer-*" -extra-arg=-ferror-limit=0 ${
+//     showHeaders ? `${getIncludes('--extra-arg=-I')} ` : ''
+//   }${fileToAnalyze}`
+// );
+
+oaf(
+  'GCC',
+  `${isCFile ? 'gcc' : 'g++'} -fanalyzer ${getIncludes()}${fileToAnalyze}`
+);
+
+// --suppress=*:/mnt/a/master/projects/pacparser/src/ <- flag that can supress errors from a certain path
+// --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force
+oaf('CPPCHECK', `cppcheck ${getIncludes()}${fileToAnalyze}`, false);
+
+oaf(
+  'IKOS',
+  `ikos -f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`,
+  false
+);
+
+const headersKey = isCFile ? 'CFLAGS' : 'CPPFLAGS';
+oaf(
+  'SYMBIOTIC',
+  `${!showHeaders ? '' : `${headersKey}='${getIncludes()}'`}symbiotic${
+    isCFile ? '' : '++'
+  } --prp=memsafety --malloc-never-fails ${fileToAnalyze}`,
+  false
+);

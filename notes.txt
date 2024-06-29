@@ -12,51 +12,59 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 // ---------------------------------- Random ---------------------------------- \\
 
 
+// ---------------------------------- Options used ---------------------------------- \\
+
+[ubuntu 24]
+	- gcc
+[ubuntu 22]
+	- LLVM - /usr/llvm-project/build/bin/clang
+	- cppcheck
+	- ikos
+[ubuntu 20]
+	- symbiotic - /usr/symbiotic/scripts/symbiotic
 
 // ---------------------------------- Local notes ---------------------------------- \\
-
-/mnt/a/master
-/usr/llvm-project/build/bin/clang
-/usr/symbiotic/scripts/symbiotic
 
 !! Ubuntu 24 does not build llvm
 Ubuntu 22 holds llvm
 Ubuntu 20 holds symbolic
 
 
-[ubuntu 22] /usr/llvm-project/build/bin/clang --analyze -ferror-limit=0 /mnt/a/master
+[ubuntu 22] clang --analyze -ferror-limit=0 /mnt/a/master
 - -I/mnt/
-[ubuntu 22] /usr/llvm-project/build/bin/clang++ --analyze -ferror-limit=0 /mnt/a/master
+[ubuntu 22] clang++ --analyze -ferror-limit=0 /mnt/a/master
 - -I/mnt/
-[ubuntu 22] /usr/llvm-project/build/bin/clang-tidy /mnt/a/master
+[ubuntu 22] clang-tidy /mnt/a/master
 - --extra-arg=-I/mnt
 - -checks=*
 [ubuntu 22] cppcheck --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force /mnt/a/master
 - -I/mnt/
-[ubuntu 20] /usr/symbiotic/scripts/symbiotic --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
-[ubuntu 20] /usr/symbiotic/scripts/symbiotic-cc --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
+[ubuntu 20] symbiotic --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
+[ubuntu 20] symbiotic-cc --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
 - CPPFLAGS='-I/usr/include/clang/10/include'
 - CFLAGS='-I/usr/include/clang/10/include'
 
 
-[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c
-	- node a.js /mnt/a/master/master/realworld_simplified/ppp.c
-[pacparser] node a.js /mnt/a/master/projects/pacparser/src/pacparser.c /mnt/a/master/projects/pacparser/src/spidermonkey/js/src
-	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c
-[gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c /mnt/a/master/projects/gpac/include
-	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c
+[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c main
+	- node a.js /mnt/a/master/master/realworld_simplified/ppp.c main
+[pacparser] node a.js /mnt/a/master/projects/pacparser/src/pacparser.c pacparser_find_proxy pacparser_find_proxy /mnt/a/master/projects/pacparser/src/spidermonkey/js/src
+	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c main
+[gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c lsr_translate_coords /mnt/a/master/projects/gpac/include
+	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c main
 [gpac] node a.js /mnt/a/master/projects/gpac/src/filters/load_text.c /mnt/a/master/projects/gpac/include
-	- node a.js /mnt/a/master/master/realworld_simplified/gpac_1.c
+	- node a.js /mnt/a/master/master/realworld_simplified/gpac_1.c main
 [gpssim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c
-	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c
+	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c main
 [openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c
-	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c
+	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c main
 [openrazer] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/sdp/sdp_parse.c /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/open_c
-	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip.c
+	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip.c main
 [nanopb] node a.js /mnt/a/master/projects/nanopb/pb_decode.c
-	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c
+	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
 [zephyr] ?? node a.js /mnt/a/master/projects/zephyr/subsys/fs/fuse_fs_access.c
-	- node a.js /mnt/a/master/master/realworld_simplified/zephyr.c
+	- node a.js /mnt/a/master/master/realworld_simplified/zephyr.c main
+[json-c] node a.js /mnt/a/master/projects/json-c/apps/json_parse.c parseit /mnt/a/master/projects/json-c
+	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
 
 
 
@@ -76,9 +84,6 @@ To add clang checker (https://clang-analyzer.llvm.org/checker_dev_manual.html)
 	add your checker name into the list and create file in Checkers directory
 - /home/raltvein/packets/llvm-project/clang/include/clang/StaticAnalyzer/Checkers/Checkers.td
 	add your created checker
-
-Clang to use
-- /usr/llvm-project/build/bin/clang
 
 see all availible checkers
 clang -cc1 -analyzer-checker-help
@@ -105,14 +110,13 @@ https://www.cvedetails.com/cve/CVE-2022-31003/
 https://www.cvedetails.com/cve/CVE-2024-0321/
 https://www.cvedetails.com/cve/CVE-2023-4260/
 https://www.cvedetails.com/cve/CVE-2014-125106/
+https://www.cvedetails.com/cve/CVE-2021-32292/
+https://www.cvedetails.com/cve/CVE-2021-33304/
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
 #found cvedetails
-https://www.cvedetails.com/cve/CVE-2020-19693/
-https://www.cvedetails.com/cve/CVE-2021-32292/
-https://www.cvedetails.com/cve/CVE-2021-33304/
 https://www.cvedetails.com/cve/CVE-2022-3806/
 https://www.cvedetails.com/cve/CVE-2022-28550/
 
@@ -128,3 +132,5 @@ People do not want to use fat pointers but also clang-tidy throws warning on any
 
 symbiotic wants a main fucntion that often is not present in single files that are analyzed in a projects
 https://www.cvedetails.com/cve/CVE-2023-26489/ lol
+
+Sometimes I found additional vulnerabilities such as memory leak in CVE-2019-25078 using clang
