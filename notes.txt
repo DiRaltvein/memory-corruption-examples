@@ -45,7 +45,7 @@ Ubuntu 20 holds symbolic
 - CFLAGS='-I/usr/include/clang/10/include'
 
 
-[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c main
+[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c dumpppp
 	- node a.js /mnt/a/master/master/realworld_simplified/ppp.c main
 [pacparser] node a.js /mnt/a/master/projects/pacparser/src/pacparser.c pacparser_find_proxy pacparser_find_proxy /mnt/a/master/projects/pacparser/src/spidermonkey/js/src
 	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c main
