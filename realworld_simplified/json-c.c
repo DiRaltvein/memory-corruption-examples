@@ -1,7 +1,7 @@
 // https://www.cvedetails.com/cve/CVE-2021-32292/
 // repository: https://github.com/json-c/json-c
 // commit: 56a89f9
-// extract of: json_parse.c (function: parseit)
+// extract of: apps/json_parse.c (function: parseit)
 
 #include <assert.h>
 #include <fcntl.h>
