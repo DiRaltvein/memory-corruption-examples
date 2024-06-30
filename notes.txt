@@ -51,20 +51,22 @@ Ubuntu 20 holds symbolic
 	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c main
 [gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c lsr_translate_coords /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/filters/load_text.c /mnt/a/master/projects/gpac/include
+[gpac] node a.js /mnt/a/master/projects/gpac/src/filters/load_text.c gf_text_get_utf8_line /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_1.c main
-[gpssim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c
+[gpssim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c main
 	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c main
-[openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c
+[openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c razer_chroma_standard_matrix_set_custom_frame
 	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c main
-[openrazer] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/sdp/sdp_parse.c /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/open_c
+[sofia-sip] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/sdp/sdp_parse.c parse_message /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/open_c
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip.c main
-[nanopb] node a.js /mnt/a/master/projects/nanopb/pb_decode.c
-	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
-[zephyr] ?? node a.js /mnt/a/master/projects/zephyr/subsys/fs/fuse_fs_access.c
+? [zephyr] node a.js /mnt/a/master/projects/zephyr/subsys/fs/fuse_fs_access.c fuse_fs_access_readdir
 	- node a.js /mnt/a/master/master/realworld_simplified/zephyr.c main
+[nanopb] node a.js /mnt/a/master/projects/nanopb/pb_decode.c pb_dec_string
+	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
 [json-c] node a.js /mnt/a/master/projects/json-c/apps/json_parse.c parseit /mnt/a/master/projects/json-c
 	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
+? [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/include
+	- node a.js /mnt/a/master/master/realworld_simplified/picotcp.c main
 
 
 

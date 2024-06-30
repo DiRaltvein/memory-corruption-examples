@@ -9,7 +9,7 @@ const fileToAnalyze = process.argv[2];
 const file = fileToAnalyze.split('/').splice(-1, 1)[0];
 const isCFile = file.endsWith('.c');
 const entryPoint = process.argv[3];
-const headerDirectories = process.argv.slice(5).map((d) =>
+const headerDirectories = process.argv.slice(4).map((d) =>
   d
     .split('/')
     .map((a) => (a.includes(' ') ? `'${a}'` : a))
@@ -84,7 +84,7 @@ oaf(
 
 oaf(
   '[ubuntu 22] INFER',
-  `infer run --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze}`,
+  `infer run --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`,
   false
 );
 
@@ -103,12 +103,11 @@ oaf(
 );
 
 // greps
-for (const grep of [
-  '| grep -c ": error:"',
-  '| grep -c ": warning:"',
-  '| grep -c ": note:"',
-]) {
+for (const noteType of ['error', 'warning', 'note']) {
   console.log(
-    `${c('-', true)} ${c('2>&1', true)} | grep ${fileToAnalyze}: ${grep}\n`
+    `${c(
+      '- 2>&1',
+      true
+    )} | grep -Ec "${fileToAnalyze}:[0-9]+:([0-9]+:)? ${noteType}:"\n`
   );
 }

@@ -5,8 +5,7 @@
 
 #include <stdio.h>
 
-int main(int argc, char *argv[])
-{
-    // Repro
-    printf("%i, %s, %c, %.2f\n", 5, "string", 'R', 5.235);
+int main(int argc, char *argv[]) {
+  // Repro
+  printf("%i, %s, %c, %.2f\n", 5, "string", 'R', 5.235);
 }

@@ -45,69 +45,70 @@ and similar were not counted into the total number of errors/warnings/notes outp
 Second row in a table where in a CVE column 'Extracted' is specified stands for the simplified version of the vulnerability that was extraced into a separate file to make a test case out of it. This test case is once again analyzer in the exactly same way as the original file and the analysis results are documented in the table in an exactly the same way as the original file results.
 
 If static code analyzer has ✖ instead of the results it means that static code analyzer was for some reason unable to analyze the file.
+File length is last file row where at least some symbols are present.
 
-|       CVE       | Project (url) | Commit (hash) |          file (function)           | file length |    clang    |  cppcheck  |    ikos     |   infer    | gcc        | symbiotic |
-| :-------------: | :-----------: | :-----------: | :--------------------------------: | :---------: | :---------: | :--------: | :---------: | :--------: | ---------- | --------- |
-|  CVE-2022-4603  |      ppp      |    fb3529c    |        pppdump.c (dumpppp)         |     534     | 0/20/0(✖/✖) | 0/0/0(✖/✖) | 0/39/0(✓/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖         |
-|    Extracted    |               |               |                 -                  |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/2/0(✓/✓)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✓         |
-| CVE-2019-25078  |   pacparser   |    f013613    | pacparser.c (pacparser_find_proxy) |     536     | 0/7/3(✖/✖)  | 1/0/0(✖/✖) | 0/11/0(✖/✖) | 1/0/0(✓/✓) | 0/2/0(✖/✖) | ✖         |
-|    Extracted    |               |               |                 -                  |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/17/0(✓/✖) | 1/0/0(✖/✖) | 0/4/2(✖/✖) | ✖         |
-|  CVE-2022-4202  |     gpac      |    faac2ce    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|  CVE-2024-0321  |     gpac      |    d2de8b5    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2021-37778  |  gps-sdr-sim  |    d361b2c    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2022-29021  |   openrazer   |    9991fc6    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2022-31003  |   sofia-sip   |    5f18366    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|  CVE-2023-4260  |    zephyr     |  14d88c6dc8b  |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2014-125106 |    nanopb     |    d0466bd    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2021-32292  |    json-c     |    104b408    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-| CVE-2021-33304  |    picotcp    |    f336ead    |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|     CVE-000     |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
-|    Extracted    |               |               |                 -                  |      -      |      -      |     -      |      -      |     -      | -          | -         |
+|       CVE       | Project (url) | Commit (hash) |               file (function)                | file length |    clang     |  cppcheck  |     ikos     |   infer    | gcc        | symbiotic  |
+| :-------------: | :-----------: | :-----------: | :------------------------------------------: | :---------: | :----------: | :--------: | :----------: | :--------: | ---------- | ---------- |
+|  CVE-2022-4603  |      ppp      |    fb3529c    |             pppdump.c (dumpppp)              |     534     | 0/20/0(✖/✖)  | 0/0/0(✖/✖) | 0/39/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  0/2/0(✓/✓)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 1/0/0(✓/✓) |
+| CVE-2019-25078  |   pacparser   |    f013613    |      pacparser.c (pacparser_find_proxy)      |     536     |  0/7/3(✖/✖)  | 1/0/0(✖/✖) | 0/11/0(✖/✖)  | 1/0/0(✓/✓) | 0/2/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/17/0(✓/✖)  | 1/0/0(✖/✖) | 0/4/2(✖/✖) | 0/0/0(✖/✖) |
+|  CVE-2022-4202  |     gpac      |    faac2ce    |       lsr_dec.c (lsr_translate_coords)       |    6141     | 0/34/37(✖/✖) | 0/0/0(✖/✖) |  0/4/0(✖/✖)  | 9/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  1/0/0(✓/✓)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
+|  CVE-2024-0321  |     gpac      |    d2de8b5    |     load_text.c (gf_text_get_utf8_line)      |    4656     | 0/35/26(✖/✖) | 0/0/0(✖/✖) | 0/89/0(✓/✖)  | 3/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/1/0(✓/✓)  | 0/0/0(✖/✖) |  0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 1/0/0(✓/✓) |
+| CVE-2021-37778  |  gps-sdr-sim  |    d361b2c    |               gpssim.c (main)                |    2364     | 0/22/19(✖/✖) | 0/0/0(✖/✖) |      ✖       | 6/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  1/1/0(✖/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+| CVE-2022-29021  |   openrazer   |    9991fc6    |           razerchromacommon.c (-)            |    1448     | 0/23/32(✖/✖) | 0/0/0(✖/✖) | 0/23/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/1/0(✓/✓)  | 0/0/0(✖/✖) |  2/0/0(✓/✓)  | 1/0/0(✓/✓) | 0/1/2(✓/✓) | -          |
+| CVE-2022-31003  |   sofia-sip   |    5f18366    |         sdp_parse.c (parse_message)          |    1943     |  0/4/2(✖/✖)  | 0/0/0(✖/✖) | 0/885/0(✖/✖) | 1/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  1/0/0(✓/✓)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+|  CVE-2023-4260  |    zephyr     |  14d88c6dc8b  |  fuse_fs_access.c (fuse_fs_access_readdir)   |     544     |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+| CVE-2014-125106 |    nanopb     |    d0466bd    |         pb_decode.c (pb_dec_string)          |    1159     |  0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/79/0(✖/✖)  | 7/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  1/0/0(✓/✓)  | 1/0/0(✓/✓) | 0/0/0(✖/✖) | -          |
+| CVE-2021-32292  |    json-c     |    56a89f9    |            json_parse.c (parseit)            |     188     |  0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/43/0(✖/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖) |  0/8/0(✓/✓)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | -          |
+| CVE-2021-33304  |    picotcp    |    f336ead    | pico_fragments.c (pico_fragments_reassemble) |     589     |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |  0/1/0(✓/✓)  | 1/0/2(✓/✓) |  0/2/0(✓/✓)  | 2/0/0(✓/✓) | 0/1/0(✓/✓) | 1/0/0(✓/✓) |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|     CVE-000     |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
+|    Extracted    |               |               |                      -                       |      -      |      -       |     -      |      -       |     -      | -          | -          |
 
 Star next to result means that althrough static code analyzer was not able to detect the vulnerability it pointed out that insecure method is used and if resolved the vulnerability would also be fixed.
 
@@ -133,3 +134,7 @@ Also Ikos provices following classification for output notifications:
 - unreachable
 
 Ikos outputs a lot of unreachable notices that were not taken into account because they are false positives. Code is reachable and because of that unreachable notes were not taken into account when creating table.
+
+CVE-2024-0321:
+
+- ikos: memory access might be invalid, could not infer information about pointer 'szLine'. Gave it a star(\*) but it lacks knowledge to report it as error
