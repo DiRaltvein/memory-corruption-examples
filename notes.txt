@@ -65,8 +65,10 @@ Ubuntu 20 holds symbolic
 	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
 [json-c] node a.js /mnt/a/master/projects/json-c/apps/json_parse.c parseit /mnt/a/master/projects/json-c
 	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
-? [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/build/include /mnt/a/master/projects/picotcp/modules /mnt/a/master/projects/picotcp/include
+CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/build/include /mnt/a/master/projects/picotcp/modules /mnt/a/master/projects/picotcp/include
 	- node a.js /mnt/a/master/master/realworld_simplified/picotcp.c main
+[jhead] node a.js /mnt/a/master/projects/jhead/jhead.c DoCommand
+	- node a.js /mnt/a/master/master/realworld_simplified/jhead.c main
 
 gcc -c -I/mnt/a/master/projects/picotcp/build/include -Iinclude -Imodules  -DPICO_COMPILE_TIME=`date +%s`
 -DPICO_6LOWPAN_IPHC_ENABLED -DPICO_6LOWPAN_LLS=0 -Wall -W -Wextra -Wshadow -Wcast-qual -Wwrite-strings -Wundef -Wdeclaration-after-statement -Wno-address-of-packed-member
@@ -116,13 +118,12 @@ https://www.cvedetails.com/cve/CVE-2023-4260/
 https://www.cvedetails.com/cve/CVE-2014-125106/
 https://www.cvedetails.com/cve/CVE-2021-32292/
 https://www.cvedetails.com/cve/CVE-2021-33304/
+https://www.cvedetails.com/cve/CVE-2022-28550/
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
 #found cvedetails
-https://www.cvedetails.com/cve/CVE-2022-3806/
-https://www.cvedetails.com/cve/CVE-2022-28550/
 
 
 thoughts:
