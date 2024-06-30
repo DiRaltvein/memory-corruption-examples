@@ -65,10 +65,12 @@ Ubuntu 20 holds symbolic
 	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
 [json-c] node a.js /mnt/a/master/projects/json-c/apps/json_parse.c parseit /mnt/a/master/projects/json-c
 	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
-? [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/include
+? [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/build/include /mnt/a/master/projects/picotcp/modules /mnt/a/master/projects/picotcp/include
 	- node a.js /mnt/a/master/master/realworld_simplified/picotcp.c main
 
-
+gcc -c -I/mnt/a/master/projects/picotcp/build/include -Iinclude -Imodules  -DPICO_COMPILE_TIME=`date +%s`
+-DPICO_6LOWPAN_IPHC_ENABLED -DPICO_6LOWPAN_LLS=0 -Wall -W -Wextra -Wshadow -Wcast-qual -Wwrite-strings -Wundef -Wdeclaration-after-statement -Wno-address-of-packed-member
+-Wconversion -Wcast-align -Wmissing-prototypes -Wno-missing-field-initializers -ggdb -o modules/pico_fragments.o modules/pico_fragments.c
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 

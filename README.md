@@ -112,6 +112,8 @@ File length is last file row where at least some symbols are present.
 
 Star next to result means that althrough static code analyzer was not able to detect the vulnerability it pointed out that insecure method is used and if resolved the vulnerability would also be fixed.
 
+No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it. because of that some errors are unnotices like CVE-2021-33304.
+
 CppCheck:
 
 - errors
