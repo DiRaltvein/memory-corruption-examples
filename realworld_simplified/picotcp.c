@@ -28,7 +28,7 @@ int pico_transport_receive(struct pico_frame *full, int proto) {
 int main(int argc, char *argv[]) {
   struct pico_frame *full = (struct pico_frame *)malloc(sizeof(struct pico_frame));
   if (pico_transport_receive(full, argc) == -1) {
-    free(full);
+    free(full); // Problem: double free because if pico_transport_receive returns -1 full pointer is freed inside it
   }
   if (full != NULL) {
     free(full);

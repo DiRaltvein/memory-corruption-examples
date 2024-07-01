@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   while ((result = getopt(argc, argv, "e:")) != -1) {
     switch (result) {
     case 'e':
-      strcpy(navfile, optarg); // PROBLEM: If command line argument will be greater than 100 characters then stack buffer overflow will occur.
+      strcpy(navfile, optarg); // Problem: If command line argument will be greater than 100 characters then stack buffer overflow will occur.
       break;
     default:
       break;

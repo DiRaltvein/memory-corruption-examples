@@ -55,9 +55,11 @@ const oaf = (name, command) => {
 
 oaf(
   '[ubuntu 22] CLANG',
-  `clang${
-    isCFile ? '' : '++'
-  } --analyze -Xclang -analyzer-checker=core,alpha -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
+  `clang${isCFile ? '' : '++'} --analyze -Xclang -analyzer-checker=core,alpha ${
+    isCFile
+      ? ''
+      : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true'
+  } -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
 // oaf(
@@ -92,9 +94,9 @@ oaf(
 const headersKey = isCFile ? 'CFLAGS' : 'CPPFLAGS';
 oaf(
   '[ubuntu 20] SYMBIOTIC',
-  `${!showHeaders ? '' : `${headersKey}='${getIncludes().trim()}' `}symbiotic${
-    isCFile ? '' : '++'
-  } --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
+  `${
+    !showHeaders ? '' : `${headersKey}='${getIncludes().trim()}' `
+  }symbiotic --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
 );
 
 // greps
