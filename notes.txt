@@ -14,7 +14,7 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 
 // ---------------------------------- Options used ---------------------------------- \\
 
-[ubuntu 24]
+[ubuntu 24] (does not build LLVM)
 	- gcc
 [ubuntu 22]
 	- LLVM - /usr/llvm-project/build/bin/clang
@@ -24,25 +24,6 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 	- symbiotic - /usr/symbiotic/scripts/symbiotic
 
 // ---------------------------------- Local notes ---------------------------------- \\
-
-!! Ubuntu 24 does not build llvm
-Ubuntu 22 holds llvm
-Ubuntu 20 holds symbolic
-
-
-[ubuntu 22] clang --analyze -ferror-limit=0 /mnt/a/master
-- -I/mnt/
-[ubuntu 22] clang++ --analyze -ferror-limit=0 /mnt/a/master
-- -I/mnt/
-[ubuntu 22] clang-tidy /mnt/a/master
-- --extra-arg=-I/mnt
-- -checks=*
-[ubuntu 22] cppcheck --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force /mnt/a/master
-- -I/mnt/
-[ubuntu 20] symbiotic --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
-[ubuntu 20] symbiotic-cc --prp=memsafety --malloc-never-fails -ferror-limit=0 /mnt/a/master
-- CPPFLAGS='-I/usr/include/clang/10/include'
-- CFLAGS='-I/usr/include/clang/10/include'
 
 
 [ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c dumpppp
@@ -70,9 +51,6 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [jhead] node a.js /mnt/a/master/projects/jhead/jhead.c DoCommand
 	- node a.js /mnt/a/master/master/realworld_simplified/jhead.c main
 
-gcc -c -I/mnt/a/master/projects/picotcp/build/include -Iinclude -Imodules  -DPICO_COMPILE_TIME=`date +%s`
--DPICO_6LOWPAN_IPHC_ENABLED -DPICO_6LOWPAN_LLS=0 -Wall -W -Wextra -Wshadow -Wcast-qual -Wwrite-strings -Wundef -Wdeclaration-after-statement -Wno-address-of-packed-member
--Wconversion -Wcast-align -Wmissing-prototypes -Wno-missing-field-initializers -ggdb -o modules/pico_fragments.o modules/pico_fragments.c
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 

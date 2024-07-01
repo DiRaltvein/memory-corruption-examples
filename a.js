@@ -57,8 +57,7 @@ oaf(
   '[ubuntu 22] CLANG',
   `clang${
     isCFile ? '' : '++'
-  } --analyze -Xclang -analyzer-checker=core,alpha -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`,
-  false
+  } --analyze -Xclang -analyzer-checker=core,alpha -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
 // oaf(
@@ -68,24 +67,21 @@ oaf(
 //   }${fileToAnalyze}`
 // );
 
-// --suppress=*:/mnt/a/master/projects/pacparser/src/ <- flag that can supress errors from a certain path
-// --enable=all --suppress=missingIncludeSystem --suppress=unmatchedSuppression --force
 oaf(
   '[ubuntu 22] CPPCHECK',
-  `cppcheck --force ${getIncludes()}${fileToAnalyze}`,
-  false
+  `cppcheck --force ${getIncludes()}${fileToAnalyze}`
 );
 
 oaf(
   '[ubuntu 22] IKOS',
-  `ikos -f text --rm-db --entry-points=${entryPoint} --status-filter="error,warning" ${getIncludes()}${fileToAnalyze}`,
-  false
-);
+  `ikos -w --globals-init=all ` +
+    `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
+    `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
+); //  --status-filter="error,warning" PROBABLY NOT NEEDED
 
 oaf(
   '[ubuntu 22] INFER',
-  `infer run --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`,
-  false
+  `infer run --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`
 );
 
 oaf(
@@ -98,8 +94,7 @@ oaf(
   '[ubuntu 20] SYMBIOTIC',
   `${!showHeaders ? '' : `${headersKey}='${getIncludes().trim()}' `}symbiotic${
     isCFile ? '' : '++'
-  } --prp=memsafety --malloc-never-fails ${fileToAnalyze}`,
-  false
+  } --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
 );
 
 // greps
