@@ -94,8 +94,8 @@ File length is last file row where at least some symbols are present.
 |    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/16/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 | CVE-2015-10065  |     FiND      |    3cc9b68    |        my_validator.cpp (init_result)        |     127     |  0/9/0(✖/✖)  | 12/0/0(✖/✖) |  0/45/0(✖/✖)  | 1/0/0(✖/✖) | 0/6/0(✖/✖) | ✖          |
 |    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 0/0/0(✖/✖) | 0/2/0(✖/✖) | 0/0/0(✖/✖) |
-|     CVE-000     |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
-|    Extracted    |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
+|     CVE-000     |     mujs      |    292415b    |             jsdtoa.c (js_strtod)             |     747     |  0/1/1(✖/✖)  | 0/0/0(✖/✖)  |       ✖       | 8/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+|    Extracted    |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/11/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 
 | CVE-000 | | | - | - | - | - | - | - | - | - |
 | Extracted | | | - | - | - | - | - | - | - | - |
@@ -129,10 +129,9 @@ File length is last file row where at least some symbols are present.
 | Extracted | | | - | - | - | - | - | - | - | - |
 | CVE-000 | | | - | - | - | - | - | - | - | - |
 | Extracted | | | - | - | - | - | - | - | - | - |
-
-Star next to result means that althrough static code analyzer was not able to detect the vulnerability it pointed out that insecure method is used and if resolved the vulnerability would also be fixed.
 
 No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it. because of that some errors are unnotices like CVE-2021-33304.
+At least for now. Maybe later I will do CTU
 
 CppCheck:
 

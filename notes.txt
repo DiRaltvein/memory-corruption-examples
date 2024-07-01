@@ -52,6 +52,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/jhead.c main
 [FiND] node a.js /mnt/a/master/projects/FiND/validator/my_validator.cpp init_result /usr/include/mysql /mnt/a/master/subProjects/boinc /mnt/a/master/subProjects/boinc/lib /mnt/a/master/subProjects/boinc/db /mnt/a/master/subProjects/boinc/sched
 	- node a.js /mnt/a/master/master/realworld_simplified/FiND.cc main
+[mujs] node a.js /mnt/a/master/projects/mujs/jsdtoa.c js_strtod
+	- node a.js /mnt/a/master/master/realworld_simplified/mujs.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
@@ -99,17 +101,13 @@ https://www.cvedetails.com/cve/CVE-2014-125106/
 https://www.cvedetails.com/cve/CVE-2021-32292/
 https://www.cvedetails.com/cve/CVE-2021-33304/
 https://www.cvedetails.com/cve/CVE-2022-28550/
+https://www.cvedetails.com/cve/CVE-2015-10065/
+https://www.cvedetails.com/cve/CVE-2021-33797/
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=12&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
 #found cvedetails
-https://www.cvedetails.com/cve/CVE-2015-10065/
-https://www.cvedetails.com/cve/CVE-2020-19692/
-https://www.cvedetails.com/cve/CVE-2020-27507/
-https://www.cvedetails.com/cve/CVE-2021-4327/
-https://www.cvedetails.com/cve/CVE-2021-32292/
-https://www.cvedetails.com/cve/CVE-2021-33797/
 https://www.cvedetails.com/cve/CVE-2021-45423/
 https://www.cvedetails.com/cve/CVE-2022-1812/
 https://www.cvedetails.com/cve/CVE-2022-28550/

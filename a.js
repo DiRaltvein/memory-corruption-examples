@@ -58,8 +58,8 @@ oaf(
   `clang${isCFile ? '' : '++'} --analyze -Xclang -analyzer-checker=core,alpha ${
     isCFile
       ? ''
-      : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true'
-  } -ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
+      : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
+  }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
 // oaf(
