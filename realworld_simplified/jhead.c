@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     if (*argv[i] == 'a') {
       int i = 0;
       while (argv[0][i]) {
-        ExecString[j++] = argv[0][i++]; // Problem: as we are substituting every a passed as an argument with a executable name ExecString can overflow
+        ExecString[j++] = argv[0][i++]; // Problem: as we are substituting every a passed as an argument with an executable file name ExecString can overflow
       }
     }
   }
