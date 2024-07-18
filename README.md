@@ -30,7 +30,7 @@ Apart from sorting and filtering CVE's were selected based on the following crit
 - CVE should have a link to a github or any other public open source repository
 - Author should understand the vulnerability\*
 
-While last criteria may seem inadequate it is important to understant why and where the vulnerability is in the code in order to correctly extract it and to be able to tell wheather static code analyzer managed to find it or not. While in most cases it was possible to understand where the vulnerability lies in some instances it was extremly challanging and vulnerabilities where author could not determine the exact code location with a flaw were skipped.
+While last criteria may seem inappropriate as it is too subjective it is important to understant why and where the vulnerability is in the code in order to correctly extract it and to be able to tell wheather static code analyzer managed to find it or not. While in most cases it was possible to understand where the vulnerability lies in some instances it was extremly challanging and vulnerabilities where author could not determine the exact code location with a flaw were skipped.
 
 ### Selection of static code analyzers
 
@@ -148,10 +148,10 @@ Vulnerability types:
 |    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/16/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 | CVE-2015-10065  |    AOOB    |     FiND      |    3cc9b68    |        my_validator.cpp (init_result)        |     127     |  0/9/0(✖/✖)  | 12/0/0(✖/✖) |  0/45/0(✖/✖)  | 1/0/0(✖/✖) | 0/6/0(✖/✖) | ✖          |
 |    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 0/0/0(✖/✖) | 0/2/0(✖/✖) | 0/0/0(✖/✖) |
-|     CVE-000     |     IO     |     mujs      |    292415b    |             jsdtoa.c (js_strtod)             |     747     |  0/1/1(✖/✖)  | 0/0/0(✖/✖)  |       ✖       | 8/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
+| CVE-2021-33797  |     IO     |     mujs      |    292415b    |             jsdtoa.c (js_strtod)             |     747     |  0/1/1(✖/✖)  | 0/0/0(✖/✖)  |       ✖       | 8/0/0(✖/✖) | 0/0/0(✖/✖) | ✖          |
 |    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/11/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
-|     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
-|    Extracted    |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
+| CVE-2023-25076  |    AOOB    |   sniproxy    |    822bb80    |           address.c (new_address)            |     492     |  0/6/0(✖/✖)  | 0/0/0(✖/✖)  |  1/68/0(✓/✖)  | 0/0/0(✖/✖) | 0/2/0(✖/✖) | ✖          |
+|    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/12//0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 |     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
 |    Extracted    |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
 |     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |

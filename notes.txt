@@ -54,6 +54,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/FiND.cc main
 [mujs] node a.js /mnt/a/master/projects/mujs/jsdtoa.c js_strtod
 	- node a.js /mnt/a/master/master/realworld_simplified/mujs.c main
+[sniproxy] node a.js /mnt/a/master/projects/sniproxy/src/address.c new_address
+	- node a.js /mnt/a/master/master/realworld_simplified/sniproxy.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
@@ -103,20 +105,35 @@ https://www.cvedetails.com/cve/CVE-2021-33304/
 https://www.cvedetails.com/cve/CVE-2022-28550/
 https://www.cvedetails.com/cve/CVE-2015-10065/
 https://www.cvedetails.com/cve/CVE-2021-33797/
+https://www.cvedetails.com/cve/CVE-2023-25076/
 
-https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=12&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
-https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=4&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
+https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=19&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
+https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=16&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
 #found cvedetails
-https://www.cvedetails.com/cve/CVE-2021-45423/
-https://www.cvedetails.com/cve/CVE-2022-1812/
-https://www.cvedetails.com/cve/CVE-2022-28550/
-https://www.cvedetails.com/cve/CVE-2022-43634/
-https://www.cvedetails.com/cve/CVE-2023-4257/
-https://www.cvedetails.com/cve/CVE-2023-4322/
-https://www.cvedetails.com/cve/CVE-2023-7158/
-https://www.cvedetails.com/cve/CVE-2023-22741/
-https://www.cvedetails.com/cve/CVE-2023-23088/
+# https://www.cvedetails.com/cve/CVE-2021-45423/ <- easy but hard to reproduce
+https://www.cvedetails.com/cve/CVE-2022-1812/ <- example of wrong category
+
+https://www.cvedetails.com/cve/CVE-2023-28753/ <- maybe
+
+
+
+https://www.cvedetails.com/cve/CVE-2023-25664/
+https://www.cvedetails.com/cve/CVE-2023-25668/
+https://www.cvedetails.com/cve/CVE-2023-28116/
+https://www.cvedetails.com/cve/CVE-2023-28753/
+https://www.cvedetails.com/cve/CVE-2023-31470/
+https://www.cvedetails.com/cve/CVE-2023-34832/
+https://www.cvedetails.com/cve/CVE-2023-36326/
+https://www.cvedetails.com/cve/CVE-2023-36327/
+https://www.cvedetails.com/cve/CVE-2023-36328/
+https://www.cvedetails.com/cve/CVE-2023-38632/
+https://www.cvedetails.com/cve/CVE-2023-39976/
+https://www.cvedetails.com/cve/CVE-2023-41101/
+https://www.cvedetails.com/cve/CVE-2023-41361/
+https://www.cvedetails.com/cve/CVE-2023-42299/
+
+
 
 thoughts:
 [gpac]. Cppcheck can not find a problem when in the example the exploit is not triggered.
@@ -129,5 +146,8 @@ People do not want to use fat pointers but also clang-tidy throws warning on any
 
 symbiotic wants a main fucntion that often is not present in single files that are analyzed in a projects
 https://www.cvedetails.com/cve/CVE-2023-26489/ lol
+https://www.cvedetails.com/cve/CVE-2023-42276/
+
+https://github.com/NASA-SW-VnV/ikos/issues/197 got it quiet a few times
 
 Sometimes I found additional vulnerabilities such as memory leak in CVE-2019-25078 using clang
