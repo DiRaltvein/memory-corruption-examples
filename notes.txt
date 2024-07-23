@@ -58,6 +58,13 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/sniproxy.c main
 [frr] node a.js /mnt/a/master/projects/frr/bgpd/bgp_open.c bgp_capability_software_version /mnt/a/master/projects/frr /mnt/a/master/projects/frr/lib /mnt/a/master/projects/frr/inlude/linux
 	- node a.js /mnt/a/master/master/realworld_simplified/frr.c main
+[MicroHttpServer] node a.js /mnt/a/master/projects/MicroHttpServer/c-version/lib/middleware.c _ReadStaticFiles
+	- node a.js /mnt/a/master/master/realworld_simplified/MicroHttpServer.c main
+
+
+
+
+
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
@@ -109,10 +116,11 @@ https://www.cvedetails.com/cve/CVE-2015-10065/
 https://www.cvedetails.com/cve/CVE-2021-33797/
 https://www.cvedetails.com/cve/CVE-2023-25076/
 https://www.cvedetails.com/cve/CVE-2023-41361/
+https://www.cvedetails.com/cve/CVE-2023-50965/
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=19&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
-https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=16&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
+// -> MAIN https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=41&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 # found cvedetails
 # https://www.cvedetails.com/cve/CVE-2021-45423/ <- easy but hard to reproduce
 https://www.cvedetails.com/cve/CVE-2022-1812/ <- example of wrong category
@@ -120,8 +128,60 @@ https://www.cvedetails.com/cve/CVE-2022-1812/ <- example of wrong category
 https://www.cvedetails.com/cve/CVE-2023-28753/ <- maybe
 https://www.cvedetails.com/cve/CVE-2023-36328/ <- easy but do not see a bug
 https://www.cvedetails.com/cve/CVE-2023-38632/ <- easy but how to extract logic? sockets
+https://www.cvedetails.com/cve/CVE-2023-42299/ <- configuration meh
 
-https://www.cvedetails.com/cve/CVE-2023-42299/
+
+https://www.cvedetails.com/cve/CVE-2023-50965/
+https://www.cvedetails.com/cve/CVE-2023-51084/
+https://www.cvedetails.com/cve/CVE-2023-31146/
+https://www.cvedetails.com/cve/CVE-2022-26592/
+https://www.cvedetails.com/cve/CVE-2022-45748/
+https://www.cvedetails.com/cve/CVE-2023-2905/
+https://www.cvedetails.com/cve/CVE-2023-5686/
+https://www.cvedetails.com/cve/CVE-2023-25222/
+https://www.cvedetails.com/cve/CVE-2023-27103/
+https://www.cvedetails.com/cve/CVE-2023-29421/
+https://www.cvedetails.com/cve/CVE-2023-29578/
+https://www.cvedetails.com/cve/CVE-2023-29584/
+https://www.cvedetails.com/cve/CVE-2023-30078/
+https://www.cvedetails.com/cve/CVE-2023-30079/
+https://www.cvedetails.com/cve/CVE-2023-31566/
+https://www.cvedetails.com/cve/CVE-2023-31567/
+https://www.cvedetails.com/cve/CVE-2023-31568/
+https://www.cvedetails.com/cve/CVE-2023-31976/
+https://www.cvedetails.com/cve/CVE-2023-36271/
+https://www.cvedetails.com/cve/CVE-2023-36272/
+https://www.cvedetails.com/cve/CVE-2023-36273/
+https://www.cvedetails.com/cve/CVE-2023-36274/
+https://www.cvedetails.com/cve/CVE-2023-39975/
+https://www.cvedetails.com/cve/CVE-2023-40295/
+https://www.cvedetails.com/cve/CVE-2023-40857/
+https://www.cvedetails.com/cve/CVE-2023-43641/
+https://www.cvedetails.com/cve/CVE-2023-44398/
+https://www.cvedetails.com/cve/CVE-2023-46602/
+https://www.cvedetails.com/cve/CVE-2023-47004/
+https://www.cvedetails.com/cve/CVE-2023-48106/
+https://www.cvedetails.com/cve/CVE-2023-48107/
+https://www.cvedetails.com/cve/CVE-2023-49465/
+https://www.cvedetails.com/cve/CVE-2023-49467/
+https://www.cvedetails.com/cve/CVE-2023-49468/
+https://www.cvedetails.com/cve/CVE-2023-42459/
+https://www.cvedetails.com/cve/CVE-2023-1355/
+https://www.cvedetails.com/cve/CVE-2023-23609/
+https://www.cvedetails.com/cve/CVE-2023-25564/
+https://www.cvedetails.com/cve/CVE-2023-39946/
+https://www.cvedetails.com/cve/CVE-2023-39947/
+https://www.cvedetails.com/cve/CVE-2023-42443/
+https://www.cvedetails.com/cve/CVE-2023-46136/
+https://www.cvedetails.com/cve/CVE-2023-0266/
+https://www.cvedetails.com/cve/CVE-2020-18831/
+https://www.cvedetails.com/cve/CVE-2021-3674/
+https://www.cvedetails.com/cve/CVE-2021-32142/
+https://www.cvedetails.com/cve/CVE-2021-32845/
+https://www.cvedetails.com/cve/CVE-2021-32846/
+https://www.cvedetails.com/cve/CVE-2021-34119/
+https://www.cvedetails.com/cve/CVE-2021-46878/
+https://www.cvedetails.com/cve/CVE-2021-46879/
 
 
 
