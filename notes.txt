@@ -60,7 +60,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/frr.c main
 [MicroHttpServer] node a.js /mnt/a/master/projects/MicroHttpServer/c-version/lib/middleware.c _ReadStaticFiles
 	- node a.js /mnt/a/master/master/realworld_simplified/MicroHttpServer.c main
-
+[mongoose] node a.js /mnt/a/master/projects/mongoose/src/mqtt.c decode_variable_length
+	- node a.js /mnt/a/master/master/realworld_simplified/mongoose.c main
 
 
 
@@ -117,6 +118,7 @@ https://www.cvedetails.com/cve/CVE-2021-33797/
 https://www.cvedetails.com/cve/CVE-2023-25076/
 https://www.cvedetails.com/cve/CVE-2023-41361/
 https://www.cvedetails.com/cve/CVE-2023-50965/
+https://www.cvedetails.com/cve/CVE-2023-2905/
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=19&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
 
@@ -131,12 +133,6 @@ https://www.cvedetails.com/cve/CVE-2023-38632/ <- easy but how to extract logic?
 https://www.cvedetails.com/cve/CVE-2023-42299/ <- configuration meh
 
 
-https://www.cvedetails.com/cve/CVE-2023-50965/
-https://www.cvedetails.com/cve/CVE-2023-51084/
-https://www.cvedetails.com/cve/CVE-2023-31146/
-https://www.cvedetails.com/cve/CVE-2022-26592/
-https://www.cvedetails.com/cve/CVE-2022-45748/
-https://www.cvedetails.com/cve/CVE-2023-2905/
 https://www.cvedetails.com/cve/CVE-2023-5686/
 https://www.cvedetails.com/cve/CVE-2023-25222/
 https://www.cvedetails.com/cve/CVE-2023-27103/
