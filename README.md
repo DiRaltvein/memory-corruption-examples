@@ -28,7 +28,7 @@ Apart from sorting and filtering CVE's were selected based on the following crit
 
 - CVE should be related to memory corruption
 - CVE should have a link to a github or any other public open source repository
-- Author should understand the vulnerability\*
+- The cause of vulnerability should be determinable\*
 
 While last criteria may seem inappropriate as it is too subjective it is important to understant why and where the vulnerability is in the code in order to correctly extract it and to be able to tell wheather static code analyzer managed to find it or not. While in most cases it was possible to understand where the vulnerability lies in some instances it was extremly challanging and vulnerabilities where author could not determine the exact code location with a flaw were skipped.
 
@@ -152,8 +152,8 @@ Vulnerability types:
 |    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/11/0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 | CVE-2023-25076  |    AOOB    |   sniproxy    |    822bb80    |           address.c (new_address)            |     492     |  0/6/0(✖/✖)  | 0/0/0(✖/✖)  |  1/68/0(✓/✖)  | 0/0/0(✖/✖) | 0/2/0(✖/✖) | ✖          |
 |    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/12//0(✓/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
-|     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
-|    Extracted    |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
+| CVE-2023-41361  |    AOOB    |      frr      |    c2b0d6a    | bgp_open.c (bgp_capability_software_version) |    1973     |      -       |      -      |       -       |     -      | -          | -          |
+|    Extracted    |            |               |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/8/0(✓/✓)   | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
 |     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
 |    Extracted    |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
 |     CVE-000     |            |               |               |                      -                       |      -      |      -       |      -      |       -       |     -      | -          | -          |
