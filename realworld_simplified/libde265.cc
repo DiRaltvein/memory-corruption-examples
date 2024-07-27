@@ -3,6 +3,7 @@
 // commit: 97b334a
 // extract of: libde265/motion.cc (function: derive_collocated_motion_vectors)
 
+#include <stdio.h>
 #include <vector>
 
 struct de265_image {
@@ -12,5 +13,5 @@ struct de265_image {
 
 int main(int argc, char *argv[]) {
   de265_image colImg;
-  colImg.slices[colImg.get_SliceHeaderIndex(5, 5)]; // Problem slices vector has length of 0 and the access of element on index 10 is out of bound
+  printf("%i", colImg.slices[colImg.get_SliceHeaderIndex(5, 5)]); // Problem slices vector has length of 0 and the access of element on index 10 is out of bound
 }
