@@ -69,8 +69,9 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [podofo] node a.js /mnt/a/master/projects/podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 /mnt/a/master/projects/podofo/src
 	- node a.js /mnt/a/master/master/realworld_simplified/podofo.cc main
 [krb5] node a.js /mnt/a/master/projects/krb5/src/kdc/do_tgs_req.c process_tgs_req /mnt/a/master/projects/krb5/src/include
-	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c
-
+	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c main
+[libcue] node a.js /mnt/a/master/projects/libcue/cd.c track_set_index
+	- node a.js /mnt/a/master/master/realworld_simplified/libcue.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
@@ -146,8 +147,6 @@ https://www.cvedetails.com/cve/CVE-2023-31976/ <- open issue as per 29.07.24
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-40295/
-https://www.cvedetails.com/cve/CVE-2023-40857/
 https://www.cvedetails.com/cve/CVE-2023-43641/
 https://www.cvedetails.com/cve/CVE-2023-44398/
 https://www.cvedetails.com/cve/CVE-2023-46602/

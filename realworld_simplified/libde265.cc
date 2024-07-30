@@ -13,5 +13,5 @@ struct de265_image {
 
 int main(int argc, char *argv[]) {
   de265_image colImg;
-  printf("%i", colImg.slices[colImg.get_SliceHeaderIndex(5, 5)]); // Problem slices vector has length of 0 and the access of element on index 10 is out of bound
+  printf("%i", colImg.slices[colImg.get_SliceHeaderIndex(5, 5)]); // Problem: slices vector has length of 0 and the access of element on index 10 is out of bound
 }
