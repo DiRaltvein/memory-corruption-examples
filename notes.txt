@@ -68,7 +68,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/libeconf.c main
 [podofo] node a.js /mnt/a/master/projects/podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 /mnt/a/master/projects/podofo/src
 	- node a.js /mnt/a/master/master/realworld_simplified/podofo.cc main
-
+[krb5] node a.js /mnt/a/master/projects/krb5/src/kdc/do_tgs_req.c process_tgs_req /mnt/a/master/projects/krb5/src/include
+	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c
 
 
 
@@ -129,6 +130,7 @@ https://www.cvedetails.com/cve/CVE-2023-2905/
 https://www.cvedetails.com/cve/CVE-2023-27103/
 https://www.cvedetails.com/cve/CVE-2023-30078/
 https://www.cvedetails.com/cve/CVE-2023-31568/
+https://www.cvedetails.com/cve/CVE-2023-39975/
 
 
 # found cvedetails
@@ -139,16 +141,11 @@ https://www.cvedetails.com/cve/CVE-2023-28753/ <- maybe
 https://www.cvedetails.com/cve/CVE-2023-36328/ <- easy but do not see a bug
 https://www.cvedetails.com/cve/CVE-2023-38632/ <- easy but how to extract logic? sockets
 https://www.cvedetails.com/cve/CVE-2023-42299/ <- configuration meh
+https://www.cvedetails.com/cve/CVE-2023-31976/ <- open issue as per 29.07.24
 [https://www.cvedetails.com/cve/CVE-2023-5686/] https://github.com/radareorg/radare2/commit/1bdda93e348c160c84e30da3637acef26d0348de <- example of vulnerability that is hard to understand
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-31976/
-https://www.cvedetails.com/cve/CVE-2023-36271/
-https://www.cvedetails.com/cve/CVE-2023-36272/
-https://www.cvedetails.com/cve/CVE-2023-36273/
-https://www.cvedetails.com/cve/CVE-2023-36274/
-https://www.cvedetails.com/cve/CVE-2023-39975/
 https://www.cvedetails.com/cve/CVE-2023-40295/
 https://www.cvedetails.com/cve/CVE-2023-40857/
 https://www.cvedetails.com/cve/CVE-2023-43641/

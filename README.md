@@ -28,7 +28,10 @@ Apart from sorting and filtering CVE's were selected based on the following crit
 
 - CVE should be related to memory corruption
 - CVE should have a link to a github or any other public open source repository
+- CVE must be resolved
 - The cause of vulnerability should be determinable\*
+
+CVE status is important because when CVE is resolved then it is mostly much easier to locate and understand the problem.
 
 While last criteria may seem inappropriate as it is too subjective it is important to understant why and where the vulnerability is in the code in order to correctly extract it and to be able to tell wheather static code analyzer managed to find it or not. While in most cases it was possible to understand where the vulnerability lies in some instances it was extremly challanging and vulnerabilities where author could not determine the exact code location with a flaw were skipped.
 
@@ -164,8 +167,8 @@ Vulnerability types:
 |     |    Extracted    |            |                 |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/2/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖) | ✖          |
 | 21  | CVE-2023-31568  |    AOOB    |     podofo      |    882e729    |        PdfEncrypt.cpp (PdfEncryptRC4)        |    2002     |  0/7/3(✖/✖)  | 0/0/0(✖/✖)  |       ✖       | 5/0/0(✖/✖)  | 0/0/4(✖/✖) | ✖          |
 |     |    Extracted    |            |                 |               |                      -                       |      -      |  0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖) | 0/0/0(✖/✖) |
-| 22  |     CVE-000     |            |                 |               |                      -                       |      -      |      -       |      -      |       -       |      -      | -          | -          |
-|     |    Extracted    |            |                 |               |                      -                       |      -      |      -       |      -      |       -       |      -      | -          | -          |
+| 22  |    CVE-39975    |    UAF     |      krb5       |   0ceab6c36   |        do_tgs_req.c (process_tgs_req)        |    1128     |      -       |      -      |       -       |      -      | -          | -          |
+|     |    Extracted    |            |                 |               |                      -                       |      -      |  0/1/0(✓/✓)  | 0/0/0(✖/✖)  |       ✖       | 1/0/0(✓/✓)  | 0/2/0(✓/✓) | 1/0/0(✓/✓) |
 | 23  |     CVE-000     |            |                 |               |                      -                       |      -      |      -       |      -      |       -       |      -      | -          | -          |
 |     |    Extracted    |            |                 |               |                      -                       |      -      |      -       |      -      |       -       |      -      | -          | -          |
 | 24  |     CVE-000     |            |                 |               |                      -                       |      -      |      -       |      -      |       -       |      -      | -          | -          |
