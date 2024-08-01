@@ -74,7 +74,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/libcue.c main
 [DemoIccMAX] node a.js /mnt/a/master/projects/DemoIccMAX/IccXML/IccLibXML/IccUtilXml.cpp icFixXml /mnt/a/master/projects/DemoIccMAX/IccProfLib /usr/include/libxml2/
 	- node a.js /mnt/a/master/master/realworld_simplified/demolccMAX.cc main
-
+[minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_resolve
+	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng.c main
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
@@ -136,6 +137,7 @@ https://www.cvedetails.com/cve/CVE-2023-31568/
 https://www.cvedetails.com/cve/CVE-2023-39975/
 https://www.cvedetails.com/cve/CVE-2023-43641/
 https://www.cvedetails.com/cve/CVE-2023-46602/
+https://www.cvedetails.com/cve/CVE-2023-48106/
 
 
 # found cvedetails
@@ -152,8 +154,6 @@ https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-47004/
-https://www.cvedetails.com/cve/CVE-2023-48106/
 https://www.cvedetails.com/cve/CVE-2023-48107/
 https://www.cvedetails.com/cve/CVE-2023-49465/
 https://www.cvedetails.com/cve/CVE-2023-49467/
@@ -194,3 +194,6 @@ https://www.cvedetails.com/cve/CVE-2023-42276/
 https://github.com/NASA-SW-VnV/ikos/issues/197 got it quiet a few times
 
 Sometimes I found additional vulnerabilities such as memory leak in CVE-2019-25078 using clang
+
+ikos may appear to point on all potential vulnerabilities but it actually reports more then needed. For example minizip-ng.c simplified version of vulnerability does not take any arguments and every variable is defined statically.
+ikos still reports a lot of warnings in a format of 'pointer might overflow'. When you know the exact value then there is no need to report that.
