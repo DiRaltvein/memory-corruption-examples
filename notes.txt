@@ -76,6 +76,9 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/demolccMAX.cc main
 [minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_resolve
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng.c main
+[minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_has_slash
+	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng_1.c main
+
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
@@ -138,6 +141,7 @@ https://www.cvedetails.com/cve/CVE-2023-39975/
 https://www.cvedetails.com/cve/CVE-2023-43641/
 https://www.cvedetails.com/cve/CVE-2023-46602/
 https://www.cvedetails.com/cve/CVE-2023-48106/
+https://www.cvedetails.com/cve/CVE-2023-48107/
 
 
 # found cvedetails
@@ -154,7 +158,6 @@ https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-48107/
 https://www.cvedetails.com/cve/CVE-2023-49465/
 https://www.cvedetails.com/cve/CVE-2023-49467/
 https://www.cvedetails.com/cve/CVE-2023-49468/
