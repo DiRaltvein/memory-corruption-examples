@@ -9,6 +9,7 @@ int main(int argc, char *argv[]) {
   }
   char *string = argv[1];
   int exp = 0;
+  // convert string into number
   while ((*string >= '0') && (*string <= '9')) {
     exp = exp * 10 + (*string - '0'); // Problem: number from command line can be greater then an 4 byte int can hold. If big enough number is given signed integer overflow can happen
     string += 1;

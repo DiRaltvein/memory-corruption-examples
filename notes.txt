@@ -15,7 +15,7 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 // ---------------------------------- Options used ---------------------------------- \\
 
 [ubuntu 24] (does not build LLVM)
-	- gcc
+	- gcc (-fsanitize=address")
 [ubuntu 22]
 	- LLVM - /usr/llvm-project/build/bin/clang
 	- cppcheck
@@ -78,6 +78,9 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng.c main
 [minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_has_slash
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng_1.c main
+[contiki-ng] node a.js /mnt/a/master/projects/contiki-ng/os/net/mac/ble/ble-l2cap.c input_l2cap_frame_flow_channel /mnt/a/master/projects/contiki-ng/os/ /mnt/a/master/projects/contiki-ng/arch/platform/native/ /mnt/a/master/projects/contiki-ng/arch/cpu/native (same problem as podofo.cc)
+	- node a.js /mnt/a/master/master/realworld_simplified/contiki-ng.c main
+
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
@@ -142,6 +145,7 @@ https://www.cvedetails.com/cve/CVE-2023-43641/
 https://www.cvedetails.com/cve/CVE-2023-46602/
 https://www.cvedetails.com/cve/CVE-2023-48106/
 https://www.cvedetails.com/cve/CVE-2023-48107/
+https://www.cvedetails.com/cve/CVE-2023-23609/
 
 
 # found cvedetails
@@ -155,15 +159,10 @@ https://www.cvedetails.com/cve/CVE-2023-42299/ <- configuration meh
 https://www.cvedetails.com/cve/CVE-2023-31976/ <- open issue as per 29.07.24
 https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (sudo apt install libbrotli-dev libinih-dev)
 [https://www.cvedetails.com/cve/CVE-2023-5686/] https://github.com/radareorg/radare2/commit/1bdda93e348c160c84e30da3637acef26d0348de <- example of vulnerability that is hard to understand
+https://www.cvedetails.com/cve/CVE-2023-49468/ <- just stupid access of buffer while not checking index
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-49465/
-https://www.cvedetails.com/cve/CVE-2023-49467/
-https://www.cvedetails.com/cve/CVE-2023-49468/
-https://www.cvedetails.com/cve/CVE-2023-42459/
-https://www.cvedetails.com/cve/CVE-2023-1355/
-https://www.cvedetails.com/cve/CVE-2023-23609/
 https://www.cvedetails.com/cve/CVE-2023-25564/
 https://www.cvedetails.com/cve/CVE-2023-39946/
 https://www.cvedetails.com/cve/CVE-2023-39947/
