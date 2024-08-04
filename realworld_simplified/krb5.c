@@ -27,12 +27,14 @@ struct tgs_req_info {
 void tgs_issue_ticket(struct tgs_req_info *t) {
   krb5_ticket ticket_reply = *t->header_tkt;
 
+  // Random reason why function may exit early
   time_t now = time(NULL);
   struct tm *tm = localtime(&now);
 
   if (tm->tm_hour > 5) {
     goto cleanup; // In case it is 6 hours or more skip the ciphertext.data reassignment part
   }
+  //
 
   ticket_reply.enc_part.ciphertext.data = calloc(6, sizeof(char));
 

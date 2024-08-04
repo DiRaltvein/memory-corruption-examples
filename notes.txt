@@ -82,6 +82,10 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/contiki-ng.c main
 [gss-ntlmssp] node a.js /mnt/a/master/projects/gss-ntlmssp/src/ntlm.c ntlm_decode_u16l_str_hdr
 	- node a.js /mnt/a/master/master/realworld_simplified/gss-ntlmssp.c main
+[hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_rnd.c pci_vtrnd_notify /mnt/a/master/projects/hyperkit/src/include
+	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit.c main
+
+
 
 
 
@@ -149,6 +153,8 @@ https://www.cvedetails.com/cve/CVE-2023-46602/
 https://www.cvedetails.com/cve/CVE-2023-48106/
 https://www.cvedetails.com/cve/CVE-2023-48107/
 https://www.cvedetails.com/cve/CVE-2023-23609/
+https://www.cvedetails.com/cve/CVE-2023-25564/
+https://www.cvedetails.com/cve/CVE-2021-32845/
 
 
 # found cvedetails
@@ -163,19 +169,11 @@ https://www.cvedetails.com/cve/CVE-2023-31976/ <- open issue as per 29.07.24
 https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (sudo apt install libbrotli-dev libinih-dev)
 [https://www.cvedetails.com/cve/CVE-2023-5686/] https://github.com/radareorg/radare2/commit/1bdda93e348c160c84e30da3637acef26d0348de <- example of vulnerability that is hard to understand
 https://www.cvedetails.com/cve/CVE-2023-49468/ <- just stupid access of buffer while not checking index
+https://www.cvedetails.com/cve/CVE-2023-42443/ <- python is it you?
+https://www.cvedetails.com/cve/CVE-2023-46136/ <- python is it you?
 
 
 
-https://www.cvedetails.com/cve/CVE-2023-25564/
-https://www.cvedetails.com/cve/CVE-2023-39946/
-https://www.cvedetails.com/cve/CVE-2023-39947/
-https://www.cvedetails.com/cve/CVE-2023-42443/
-https://www.cvedetails.com/cve/CVE-2023-46136/
-https://www.cvedetails.com/cve/CVE-2023-0266/
-https://www.cvedetails.com/cve/CVE-2020-18831/
-https://www.cvedetails.com/cve/CVE-2021-3674/
-https://www.cvedetails.com/cve/CVE-2021-32142/
-https://www.cvedetails.com/cve/CVE-2021-32845/
 https://www.cvedetails.com/cve/CVE-2021-32846/
 https://www.cvedetails.com/cve/CVE-2021-34119/
 https://www.cvedetails.com/cve/CVE-2021-46878/
