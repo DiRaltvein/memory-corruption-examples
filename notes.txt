@@ -84,7 +84,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/gss-ntlmssp.c main
 [hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_rnd.c pci_vtrnd_notify /mnt/a/master/projects/hyperkit/src/include
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit.c main
-
+[hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_sock.c iovec_pull /mnt/a/master/projects/hyperkit/src/include
+	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit_1.c main
 
 
 
@@ -155,6 +156,7 @@ https://www.cvedetails.com/cve/CVE-2023-48107/
 https://www.cvedetails.com/cve/CVE-2023-23609/
 https://www.cvedetails.com/cve/CVE-2023-25564/
 https://www.cvedetails.com/cve/CVE-2021-32845/
+https://www.cvedetails.com/cve/CVE-2021-32846/
 
 
 # found cvedetails
@@ -174,7 +176,6 @@ https://www.cvedetails.com/cve/CVE-2023-46136/ <- python is it you?
 
 
 
-https://www.cvedetails.com/cve/CVE-2021-32846/
 https://www.cvedetails.com/cve/CVE-2021-34119/
 https://www.cvedetails.com/cve/CVE-2021-46878/
 https://www.cvedetails.com/cve/CVE-2021-46879/
