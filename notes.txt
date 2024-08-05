@@ -126,7 +126,7 @@ clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.
 
 
 https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=19&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
-// -> MAIN https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=41&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
+// -> MAIN https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=58&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
 
 # used cves
 https://www.cvedetails.com/cve/CVE-2022-4603/
@@ -159,6 +159,7 @@ https://www.cvedetails.com/cve/CVE-2023-23609/
 https://www.cvedetails.com/cve/CVE-2023-25564/
 https://www.cvedetails.com/cve/CVE-2021-32845/
 https://www.cvedetails.com/cve/CVE-2021-32846/
+https://www.cvedetails.com/cve/CVE-2021-34119/
 
 
 # found cvedetails
@@ -175,12 +176,9 @@ https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (
 https://www.cvedetails.com/cve/CVE-2023-49468/ <- just stupid access of buffer while not checking index
 https://www.cvedetails.com/cve/CVE-2023-42443/ <- python is it you?
 https://www.cvedetails.com/cve/CVE-2023-46136/ <- python is it you?
+https://www.cvedetails.com/cve/CVE-2022-40080/, https://www.cvedetails.com/cve/CVE-2023-1626/ <- github with pictures of proprietary software bugs
 
 
-
-https://www.cvedetails.com/cve/CVE-2021-34119/
-https://www.cvedetails.com/cve/CVE-2021-46878/
-https://www.cvedetails.com/cve/CVE-2021-46879/
 
 
 
@@ -203,3 +201,5 @@ Sometimes I found additional vulnerabilities such as memory leak in CVE-2019-250
 
 ikos may appear to point on all potential vulnerabilities but it actually reports more then needed. For example minizip-ng.c simplified version of vulnerability does not take any arguments and every variable is defined statically.
 ikos still reports a lot of warnings in a format of 'pointer might overflow'. When you know the exact value then there is no need to report that.
+
+a lot of proprietary software and CVE's are assigned to mostly vim/gpac/linux
