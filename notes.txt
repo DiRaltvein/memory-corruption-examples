@@ -11,6 +11,7 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 
 // ---------------------------------- Random ---------------------------------- \\
 
+sed -i -e 's/\r$//' </bin/bash script file>
 
 // ---------------------------------- Options used ---------------------------------- \\
 
@@ -86,7 +87,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit.c main
 [hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_sock.c iovec_pull /mnt/a/master/projects/hyperkit/src/include
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit_1.c main
-
+[htmldoc] node a.js /mnt/a/master/projects/htmldoc/htmldoc/ps-pdf.cxx parse_paragraph /mnt/a/master/projects/htmldoc
+	- node a.js /mnt/a/master/master/realworld_simplified/htmldoc.cc main
 
 
 
