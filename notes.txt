@@ -93,7 +93,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/htmldoc.cc main
 [radare2]	node a.js /mnt/a/master/projects/radare2/libr/bin/format/pyc/marshal.c get_object /mnt/a/master/projects/radare2/libr/include /mnt/a/master/projects/radare2/shlr/sdb/src
 	- node a.js /mnt/a/master/master/realworld_simplified/radare2.c main
-
+[opusfile] node a.js /mnt/a/master/projects/opusfile/src/opusfile.c op_open1 /mnt/a/master/projects/opusfile/include
+	- node a.js /mnt/a/master/master/realworld_simplified/opusfile.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
