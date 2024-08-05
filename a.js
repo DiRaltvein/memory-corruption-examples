@@ -91,6 +91,14 @@ oaf(
   `${isCFile ? 'gcc' : 'g++'} -fanalyzer -c ${getIncludes()}${fileToAnalyze}`
 ); // -c analyze but do not link. We are not building the file we are only analyzing it so only compiling the file is enough
 
+if (entryPoint === 'main') {
+  console.log(
+    ` ${c('Verify', true)}: ${
+      isCFile ? 'gcc' : 'g++'
+    } ${getIncludes()}${fileToAnalyze} -o memory.out -fsanitize=address -static-libasan -g -fno-omit-frame-pointer\n`
+  );
+}
+
 const headersKey = isCFile ? 'CFLAGS' : 'CPPFLAGS';
 oaf(
   '[ubuntu 20] SYMBIOTIC',

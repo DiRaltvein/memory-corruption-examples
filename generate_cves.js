@@ -2,6 +2,7 @@ import fs from 'fs';
 import { parse } from 'node-html-parser';
 
 // This script is used to query pages from https://www.cvedetails.com and to gather all CVE's who have a github link attached to the CVE.
+// Extracted CVE's are saved into cves.json file
 
 const cvesFile = './cves.json';
 
@@ -63,7 +64,19 @@ async function main() {
     }
   }
 
-  fs.writeFileSync(cvesFile, JSON.stringify({ cves: foundCves }, null, 2));
+  fs.writeFileSync(
+    cvesFile,
+    JSON.stringify(
+      foundCves.map((url) => ({
+        url,
+        picked: false,
+        reason: -1,
+        notes: '',
+      })),
+      null,
+      2
+    )
+  );
 }
 
 main();

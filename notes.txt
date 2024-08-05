@@ -13,10 +13,12 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 
 sed -i -e 's/\r$//' </bin/bash script file>
 
+gcc <file> -o a -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
+
 // ---------------------------------- Options used ---------------------------------- \\
 
 [ubuntu 24] (does not build LLVM)
-	- gcc (-fsanitize=address")
+	- gcc
 [ubuntu 22]
 	- LLVM - /usr/llvm-project/build/bin/clang
 	- cppcheck
@@ -89,7 +91,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit_1.c main
 [htmldoc] node a.js /mnt/a/master/projects/htmldoc/htmldoc/ps-pdf.cxx parse_paragraph /mnt/a/master/projects/htmldoc
 	- node a.js /mnt/a/master/master/realworld_simplified/htmldoc.cc main
-
+[radare2]	node a.js /mnt/a/master/projects/radare2/libr/bin/format/pyc/marshal.c get_object /mnt/a/master/projects/radare2/libr/include /mnt/a/master/projects/radare2/shlr/sdb/src
+	- node a.js /mnt/a/master/master/realworld_simplified/radare2.c main
 
 
 
@@ -121,63 +124,15 @@ clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.
 
 
 
-
-
-
-
-https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=19&opov=1&order=3&trc=1757&sha=4ae91d54bdbef4601bd9c4cdb3252519105763a4
-// -> MAIN https://www.cvedetails.com/vulnerability-list/year-2023/vulnerabilities.html?page=58&opmemc=1&order=3&trc=2798&sha=56f214f9adef32acf96792d39bffd5607ae3c835
-
 # used cves
+# Cves listed below were found as a test to check weather this thesis is viable and because of that they do not meet all the filter requirements for the CVE's.
+# Nevertheless, as they were analyzed before the main work they are also included into this analysis.
 https://www.cvedetails.com/cve/CVE-2022-4603/
 https://www.cvedetails.com/cve/CVE-2019-25078/
-https://www.cvedetails.com/cve/CVE-2022-4603/
 https://www.cvedetails.com/cve/CVE-2021-37778/
 https://www.cvedetails.com/cve/CVE-2022-29021/
 https://www.cvedetails.com/cve/CVE-2022-31003/
 https://www.cvedetails.com/cve/CVE-2024-0321/
-https://www.cvedetails.com/cve/CVE-2023-4260/
-https://www.cvedetails.com/cve/CVE-2014-125106/
-https://www.cvedetails.com/cve/CVE-2021-32292/
-https://www.cvedetails.com/cve/CVE-2021-33304/
-https://www.cvedetails.com/cve/CVE-2022-28550/
-https://www.cvedetails.com/cve/CVE-2015-10065/
-https://www.cvedetails.com/cve/CVE-2021-33797/
-https://www.cvedetails.com/cve/CVE-2023-25076/
-https://www.cvedetails.com/cve/CVE-2023-41361/
-https://www.cvedetails.com/cve/CVE-2023-50965/
-https://www.cvedetails.com/cve/CVE-2023-2905/
-https://www.cvedetails.com/cve/CVE-2023-27103/
-https://www.cvedetails.com/cve/CVE-2023-30078/
-https://www.cvedetails.com/cve/CVE-2023-31568/
-https://www.cvedetails.com/cve/CVE-2023-39975/
-https://www.cvedetails.com/cve/CVE-2023-43641/
-https://www.cvedetails.com/cve/CVE-2023-46602/
-https://www.cvedetails.com/cve/CVE-2023-48106/
-https://www.cvedetails.com/cve/CVE-2023-48107/
-https://www.cvedetails.com/cve/CVE-2023-23609/
-https://www.cvedetails.com/cve/CVE-2023-25564/
-https://www.cvedetails.com/cve/CVE-2021-32845/
-https://www.cvedetails.com/cve/CVE-2021-32846/
-https://www.cvedetails.com/cve/CVE-2021-34119/
-
-
-# found cvedetails
-https://www.cvedetails.com/cve/CVE-2021-45423/ <- easy but hard to reproduce
-https://www.cvedetails.com/cve/CVE-2022-1812/ <- example of wrong category
-
-https://www.cvedetails.com/cve/CVE-2023-28753/ <- maybe
-https://www.cvedetails.com/cve/CVE-2023-36328/ <- easy but do not see a bug
-https://www.cvedetails.com/cve/CVE-2023-38632/ <- easy but how to extract logic? sockets
-https://www.cvedetails.com/cve/CVE-2023-42299/ <- configuration meh
-https://www.cvedetails.com/cve/CVE-2023-31976/ <- open issue as per 29.07.24
-https://www.cvedetails.com/cve/CVE-2023-44398/ <- relies on external libraries (sudo apt install libbrotli-dev libinih-dev)
-[https://www.cvedetails.com/cve/CVE-2023-5686/] https://github.com/radareorg/radare2/commit/1bdda93e348c160c84e30da3637acef26d0348de <- example of vulnerability that is hard to understand
-https://www.cvedetails.com/cve/CVE-2023-49468/ <- just stupid access of buffer while not checking index
-https://www.cvedetails.com/cve/CVE-2023-42443/ <- python is it you?
-https://www.cvedetails.com/cve/CVE-2023-46136/ <- python is it you?
-https://www.cvedetails.com/cve/CVE-2022-40080/, https://www.cvedetails.com/cve/CVE-2023-1626/ <- github with pictures of proprietary software bugs
-
 
 
 
@@ -203,3 +158,8 @@ ikos may appear to point on all potential vulnerabilities but it actually report
 ikos still reports a lot of warnings in a format of 'pointer might overflow'. When you know the exact value then there is no need to report that.
 
 a lot of proprietary software and CVE's are assigned to mostly vim/gpac/linux
+
+To extract CVE's script was used that queried cvedetails website. Total number of CVE's found is 864. Criterias were:
+- CVSS score 7.0 or higher
+- published in 2023
+- type either 'Overflow' or 'Memory corruption'
