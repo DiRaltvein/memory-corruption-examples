@@ -2073,42 +2073,42 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47655/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47659/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47661/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Gpac"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47665/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0030/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0054/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Vim"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0240/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0341/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {

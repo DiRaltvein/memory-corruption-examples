@@ -98,8 +98,10 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/opusfile.c main
 [gpac] node a.js /mnt/a/master/projects/gpac/src/filters/dmx_m2ts.c m2tsdmx_declare_pid /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_2.c main
-
-
+[gpac] 
+	- node a.js /mnt/a/master/master/realworld_simplified/gpac_3.c main
+[editorconfig-core-c] node a.js /mnt/a/master/projects/editorconfig-core-c/src/lib/ec_glob.c ec_glob /mnt/a/master/projects/editorconfig-core-c/include
+	- node a.js /mnt/a/master/master/realworld_simplified/editorconfig-core-c.c main
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
