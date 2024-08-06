@@ -2056,19 +2056,19 @@
     "reason": 0,
     "notes": ""
   },
-  { // TODO: HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47024/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Vim"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47093/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47094/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {

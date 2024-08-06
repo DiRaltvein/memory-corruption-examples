@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/minizip-ng",
+      "program": "/mnt/a/master/master/realworld_simplified/gpac_2",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
