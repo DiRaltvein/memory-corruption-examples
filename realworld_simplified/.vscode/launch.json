@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/editorconfig-core-c",
+      "program": "/mnt/a/master/master/realworld_simplified/gpac_4",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
