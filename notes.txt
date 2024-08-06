@@ -104,7 +104,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/editorconfig-core-c.c main
 [gpac] node a.js /mnt/a/master/projects/gpac/src/utils/xml_parser.c xml_sax_append_string /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_4.c main
-
+[libde265] node a.js /mnt/a/master/projects/libde265/libde265/motion.cc derive_spatial_luma_vector_prediction /mnt/a/master/projects/libde265 /mnt/a/master/projects/libde265/extra
+	- node a.js /mnt/a/master/master/realworld_simplified/libde265_1.cc main
 
 
 
