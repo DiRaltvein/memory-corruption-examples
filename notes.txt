@@ -108,8 +108,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_1.cc main
 [rizin] node a.js /mnt/a/master/projects/rizin/librz/reg/profile.c gdb_to_rz_profile /mnt/a/master/projects/rizin/librz/include /mnt/a/master/projects/rizin/librz/util/sdb/src /mnt/a/master/projects/rizin/build
 	- node a.js /mnt/a/master/master/realworld_simplified/rizin.c main
-
-
+[nanomq] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
+	- node a.js /mnt/a/master/master/realworld_simplified/nanonng.c main
 
 
 
@@ -186,3 +186,9 @@ To extract CVE's script was used that queried cvedetails website. Total number o
 - type either 'Overflow' or 'Memory corruption'
 
 Static code analyzers do not model methods that are not poplar like rizin.c example where no analyzer could detect problem with sscanf method althrough it is a default method that is included in stdio.h.
+
+
+Maybe revisit 33551, 33552
+
+Not all problems can be prevented uzing static code analyzer. When a buffer gets passed to a function it is impossible to check wheather the buffer acccess is valid or not.
+Such checks may be possible to some extend with fixed sized buffers and whole program analysis but even then dynamic length buffers are impossible to check (example nanonng.c).

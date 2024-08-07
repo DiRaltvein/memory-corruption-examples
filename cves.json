@@ -2271,77 +2271,77 @@
     "reason": 0,
     "notes": ""
   },
-  { // TODO: HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2023-27781/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-30549/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31284/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31436/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31906/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31907/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31908/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31910/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31973/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31981/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-31982/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-32233/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33551/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33552/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
-  {
+  { // TODO: HERE
     "url": "https://www.cvedetails.com/cve/CVE-2023-34488/",
     "reason": -1,
     "notes": ""
