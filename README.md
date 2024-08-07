@@ -146,7 +146,7 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  1/0/0(✓/✓)   | 1/0/0(✓/✓)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖) |       |
 | 10  | CVE-2021-32292  |    AOOB    |       json-c        |    56a89f9    |              json_parse.c (parseit)               |     188     |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/51/0(✓/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | ✖          |       |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/8/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖) |       |
-| 11  | CVE-2021-33304  |    UAF     |       picotcp       |    f336ead    |   pico_fragments.c (pico_fragments_reassemble)    |     589     |       -        |      -      |       -       |      -      | -           | -          |       |
+| 11  | CVE-2021-33304  |    UAF     |       picotcp       |    f336ead    |   pico_fragments.c (pico_fragments_reassemble)    |     589     |       -        |      -      |       -       |      -      | -           | -          | CTU   |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/1/0(✓/✓)   | 1/0/2(✓/✓)  |  0/2/0(✓/✓)   | 2/0/0(✓/✓)  | 0/1/0(✓/✓)  | 1/0/0(✓/✓) |       |
 | 12  | CVE-2022-28550  |    AOOB    |        jhead        |    06e8d7a    |                jhead.c (DoCommand)                |    1814     |   0/7/0(✖/✖)   | 1/0/0(✖/✖)  |  1/18/0(✖/✖)  | 2/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖) |       |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/16/0(✓/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖) |       |
@@ -202,8 +202,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 1/0/0(✓/✓) |       |
 | 38  | CVE-2023-25221  |    AOOB    |      libde265       |    a050853    | motion.cc (derive_spatial_luma_vector_prediction) |    2166     |  0/18/14(✖/✖)  | 0/0/0(✖/✖)  | 0/588/0(✓/✖)  | 8/0/0(✖/✖)  | 0/0/0(✖/✖)  | ✖          |       |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/3/0(✓/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 1/0/0(✓/✓) |       |
-| 39  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
+| 39  | CVE-2023-27590  |    AOOB    |        rizin        |    e7eae14    |           profile.c (gdb_to_rz_profile)           |     678     |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  2/39/0(✖/✖)  | 0/0/0(✖/✖)  | 0/1/9(✖/✖)  | ✖          |       |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/1/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖) |       |
 | 40  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
 | 41  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
@@ -291,5 +291,5 @@ Vulnerability types:
 | 82  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -           | -          |       |
 
-No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it. because of that some errors are unnotices like CVE-2021-33304.
+No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it.
 At least for now. Maybe later I will do CTU
