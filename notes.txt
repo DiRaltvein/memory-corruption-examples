@@ -13,6 +13,7 @@ After compiling whole LLVM clang or clang-tidy can be rebuilt separatly
 
 dos2unix </bin/bash script file>
 find . -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
+autoconf for configure.ac files
 
 gcc <file> -o a -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
 
@@ -110,7 +111,10 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/rizin.c main
 [nanomq] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
 	- node a.js /mnt/a/master/master/realworld_simplified/nanonng.c main
-
+[sngrep] node a.js /mnt/a/master/projects/sngrep/src/capture.c capture_ws_check_packet
+[gifsicle] node a.js /mnt/a/master/projects/gifsicle/src/clp.c ambiguity_error /mnt/a/master/projects/gifsicle/include
+[vorbis-tools] node a.js /mnt/a/master/projects/vorbis-tools/oggenc/platform.c create_directories /mnt/a/master/projects/vorbis-tools/include
+	- node a.js /mnt/a/master/master/realworld_simplified/vorbis-tools.cc main
 
 
 
