@@ -13,5 +13,5 @@ int main(int argc, char *argv[]) {
     num_scalability_types = 16;
   }
 
-  dim_bit_offset[num_scalability_types] = 6;
+  dim_bit_offset[num_scalability_types] = 6; // Problem: access of dim_bit_offset at index 16 that is out of bound
 }
