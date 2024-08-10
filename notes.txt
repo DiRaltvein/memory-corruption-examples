@@ -132,7 +132,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_unsubinfo_decode /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
 [sofia-sip] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attr_error_code /mnt/a/master/projects/sofia-sip /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip_1.c main
-
+[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_subinfo_decode /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
+[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_str /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
 
 
 

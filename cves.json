@@ -2711,32 +2711,32 @@
     "reason": 0,
     "notes": ""
   },
-  { // HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2023-32324/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33657/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33658/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33659/",
-    "reason": -1,
+    "reason": 0, // TODO
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33660/",
-    "reason": -1,
+    "reason": 0, // TODO
     "notes": ""
   },
-  {
+  { // TODO: HERE
     "url": "https://www.cvedetails.com/cve/CVE-2023-33672/",
     "reason": -1,
     "notes": ""
