@@ -109,7 +109,7 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_1.cc main
 [rizin] node a.js /mnt/a/master/projects/rizin/librz/reg/profile.c gdb_to_rz_profile /mnt/a/master/projects/rizin/librz/include /mnt/a/master/projects/rizin/librz/util/sdb/src /mnt/a/master/projects/rizin/build
 	- node a.js /mnt/a/master/master/realworld_simplified/rizin.c main
-[nanomq] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
+[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
 	- node a.js /mnt/a/master/master/realworld_simplified/nanonng.c main
 [sngrep] node a.js /mnt/a/master/projects/sngrep/src/capture.c capture_ws_check_packet
 [gifsicle] node a.js /mnt/a/master/projects/gifsicle/src/clp.c ambiguity_error /mnt/a/master/projects/gifsicle/include
@@ -127,6 +127,13 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [opencv_contrib] node a.js /mnt/a/master/projects/opencv_contrib/modules/wechat_qrcode/src/zxing/qrcode/decoder/decoded_bit_stream_parser.cpp decodeByteSegment
 [crasm] node a.js /mnt/a/master/projects/crasm/src/pseudos.c Xasc
 	- node a.js /mnt/a/master/master/realworld_simplified/crasm.c main
+[libyang] node a.js /mnt/a/master/projects/libyang/src/parser_common.c lysp_stmt_validate_value /mnt/a/master/projects/libyang/src /mnt/a/master/projects/libyang/compat
+[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_utf8_str /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
+[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_unsubinfo_decode /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
+[sofia-sip] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attr_error_code /mnt/a/master/projects/sofia-sip /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun
+	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip_1.c main
+
+
 
 
 
@@ -207,3 +214,7 @@ Maybe revisit 33551, 33552, 2020-22218
 
 Not all problems can be prevented uzing static code analyzer. When a buffer gets passed to a function it is impossible to check wheather the buffer acccess is valid or not.
 Such checks may be possible to some extend with fixed sized buffers and whole program analysis but even then dynamic length buffers are impossible to check (example nanonng.c).
+
+
+Static analysis is not suitable for discovery of memory corruptions because most of the time it is impossible to prevent memory corruption judging by the code alone. A lot of the time there is another variable that shows length of an array or something that
+can not be checked for statically. Only strings are null byte terminated and theirs length can be checked. Same can not be done with any other arrays. In addition, even this convention that strings are null byte terminated not always hold true.

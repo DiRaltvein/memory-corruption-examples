@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/vorbis-tools",
+      "program": "/mnt/a/master/master/realworld_simplified/sofia-sip_1",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
