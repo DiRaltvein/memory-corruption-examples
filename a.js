@@ -16,13 +16,14 @@ const headerDirectories = process.argv.slice(4).map((d) =>
     .join('/')
 );
 
+// // windows header files
+// headerDirectories.push(
+//   "/mnt/c/'Program Files (x86)'/'Windows Kits'/10/Include/10.0.22621.0/shared",
+//   "/mnt/c/'Program Files (x86)'/'Windows Kits'/10/Include/10.0.22621.0/um",
+//   "/mnt/c/'Program Files'/'Microsoft Visual Studio'/2022/Enterprise/VC/Tools/MSVC/14.40.33807/include"
+// );
 console.clear();
 const showHeaders = headerDirectories.length > 0;
-
-// // windows header files
-// headerDirectories.join(
-//   "/mnt/c/'Program Files (x86)'/'Windows Kits'/10/Include/10.0.22621.0/shared"
-// );
 
 // /usr/llvm-project/llvm/include/llvm <- folder with folders that contain header files
 

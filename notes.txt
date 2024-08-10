@@ -125,7 +125,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [MPD]
 	- node a.js /mnt/a/master/master/realworld_simplified/MPD.cc main
 [opencv_contrib] node a.js /mnt/a/master/projects/opencv_contrib/modules/wechat_qrcode/src/zxing/qrcode/decoder/decoded_bit_stream_parser.cpp decodeByteSegment
-
+[crasm] node a.js /mnt/a/master/projects/crasm/src/pseudos.c Xasc
+	- node a.js /mnt/a/master/master/realworld_simplified/crasm.c main
 
 
 

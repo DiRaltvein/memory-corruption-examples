@@ -2538,42 +2538,42 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0210/",
-    "reason": 0,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linxu"
   },
-  { // TODO: HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2023-2617/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-2798/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-3430/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-3894/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Java"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-5344/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Vim"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-5590/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Windows only"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-23108/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
