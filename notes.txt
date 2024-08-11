@@ -15,7 +15,7 @@ dos2unix </bin/bash script file>
 find . -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
 autoconf for configure.ac files
 
-gcc <file> -o a -fsanitize=address -static-libasan -g -fno-omit-frame-pointer
+cp -r ./projects/<file> /mnt/a/master/projects/
 
 // ---------------------------------- Options used ---------------------------------- \\
 
@@ -138,7 +138,10 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/ndlz/ndlz8x8.c ndlz8_decompress /mnt/a/master/projects/c-blosc2/include
 [c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_acc_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
 [c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_rate_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
-
+[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c preauthenticated
+	- node a.js /mnt/a/master/master/realworld_simplified/openNDS.c main
+[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c try_to_authenticate
+[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c show_preauthpage
 
 
 

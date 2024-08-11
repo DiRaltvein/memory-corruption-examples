@@ -54,15 +54,6 @@ const oaf = (name, command) => {
   console.log(`${c(name)}: ${command}\n`);
 };
 
-if (entryPoint !== 'main') {
-  console.log(
-    ` ${c(
-      'Copy back',
-      true
-    )}: cp -r ./projects/<file> /mnt/a/master/projects/\n`
-  );
-}
-
 oaf(
   '[ubuntu 22] CLANG',
   `clang${isCFile ? '' : '++'} --analyze -Xclang -analyzer-checker=core,alpha ${
