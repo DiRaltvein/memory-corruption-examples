@@ -142,6 +142,7 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/openNDS.c main
 [openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c try_to_authenticate
 [openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c show_preauthpage
+[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c do_binauth
 
 
 
