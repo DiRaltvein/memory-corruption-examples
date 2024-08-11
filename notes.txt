@@ -134,6 +134,11 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip_1.c main
 [NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_subinfo_decode /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
 [NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_str /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
+[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_prec_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
+[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/ndlz/ndlz8x8.c ndlz8_decompress /mnt/a/master/projects/c-blosc2/include
+[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_acc_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
+[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_rate_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
+
 
 
 
