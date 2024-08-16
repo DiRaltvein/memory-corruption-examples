@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/sofia-sip_1",
+      "program": "/mnt/a/master/master/realworld_simplified/xHTTP",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
