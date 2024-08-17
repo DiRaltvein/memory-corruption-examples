@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  vq_getchain(&iov); // in case this function 'fails' for any reason iov struct will not be initialized and its further use is danherous
+  vq_getchain(&iov); // in case this function 'fails' for any reason iov struct will not be initialized and its further use is dangerous
 
   read(file, iov.iov_base, iov.iov_len); // Problem: trying to read contents of a file using buffer and length from potentially uninitialized struct
 
