@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/NTSC-CRT",
+      "program": "/mnt/a/master/master/realworld_simplified/FreeRDP",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"

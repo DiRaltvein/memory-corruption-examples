@@ -147,7 +147,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/xHTTP.c main
 [NTSC-CRT] node a.js /mnt/a/master/projects/NTSC-CRT/bmp_rw.c loadBMP
 	- node a.js /mnt/a/master/master/realworld_simplified/NTSC-CRT.c main
-
+[FreeRDP] node a.js /mnt/a/master/projects/FreeRDP/libfreerdp/codec/rfx.c rfx_process_message /mnt/a/master/projects/FreeRDP/include /mnt/a/master/projects/FreeRDP/winpr/include
+	- node a.js /mnt/a/master/master/realworld_simplified/FreeRDP.c main
 
 
 
