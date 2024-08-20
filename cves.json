@@ -3043,10 +3043,10 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-47016/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
-  {
+  { // TODO: HERE
     "url": "https://www.cvedetails.com/cve/CVE-2023-48105/",
     "reason": -1,
     "notes": ""

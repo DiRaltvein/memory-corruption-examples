@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/async-sockets-cpp",
+      "program": "/mnt/a/master/master/realworld_simplified/wasm-micro-runtime",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"

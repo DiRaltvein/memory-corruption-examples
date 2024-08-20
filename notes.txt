@@ -15,7 +15,7 @@ dos2unix </bin/bash script file>
 find . -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
 autoconf for configure.ac files
 
-cp -r ./projects/<file> /mnt/a/master/projects/
+cp -r ./<file> /mnt/a/master/projects/
 
 // ---------------------------------- Options used ---------------------------------- \\
 
@@ -153,6 +153,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/async-sockets-cpp.cc main
 [radare2] node a.js /mnt/a/master/projects/radare2/libr/bin/p/bin_xnu_kernelcache.c process_constructors /mnt/a/master/projects/radare2/libr/include
 	- node a.js /mnt/a/master/master/realworld_simplified/radare2_1.c main
+[wasm-micro-runtime] node a.js /mnt/a/master/projects/wasm-micro-runtime/core/iwasm/interpreter/wasm_loader.c wasm_loader_prepare_bytecode /mnt/a/master/projects/wasm-micro-runtime/core/shared/utils /mnt/a/master/projects/wasm-micro-runtime/core/shared/platform/darwin
+	- node a.js /mnt/a/master/master/realworld_simplified/wasm-micro-runtime.c main
 
 
 

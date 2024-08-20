@@ -248,8 +248,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/21/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          |     |
 | 69  | CVE-2023-47016  |    AOOB    |       radare2       |  386d9486a1   |   bin_xnu_kernelcache.c (process_constructors)    |    2219     |  0/10/2(✖/✖)   | 0/0/0(✖/✖)  |  0/85/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          | 2\* |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/9/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 1/0/0(✓/✓) |     |
-| 70  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 70  | CVE-2023-48105  |    AOOB    | wasm-micro-runtime  |    52db362    |   wasm_loader.c (wasm_loader_prepare_bytecode)    |    9979     |  0/17/8(✖/✖)   | 0/0/0(✖/✖)  | 0/1286/0(✓/✖) | 24/0/0(✖/✖) | 0/0/0(✖/✖)   | ✖          | 3\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/2/1(✓/✓)   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 2/0/0(✓/✓)  | 0/0/0(✖/✖)   | 1/0/0(✓/✓) |     |
 | 71  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 72  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -284,3 +284,5 @@ Notes:
   - udp-client.cpp file was analyzed in the examples folder but only notes from udpsocket.hpp file were recorded. udp-server file was analyzed because static code analyzers like ikos and symbiotic can not analyze whole file and need and entry point
 - 2\*
   - static code analyzer notifications were counter from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
+- 3\*
+  - while loop where is vulnerability takes 2812 code rows WOW.
