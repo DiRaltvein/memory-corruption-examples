@@ -59,7 +59,6 @@ private:
   sockaddr_in address;
 
   static void Receive(UDPSocket *udpSocket) {
-    std::cout << "received" << std::endl;
     char tempBuffer[BUFFER_SIZE];
     int messageLength;
 
