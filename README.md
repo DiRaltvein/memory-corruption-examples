@@ -244,8 +244,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/7/0(✖/✖)   | 0/0/0(✖/✖)  |  0/14/0(✓/✓)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) |     |
 | 67  | CVE-2023-39351  |     ND     |       FreeRDP       |    63a2f65    |             rfx.c rfx_process_message             |    2121     |   0/6/1(✖/✖)   | 0/0/0(✖/✖)  | 0/1496/0(✓/✖) | 1/0/0(✖/✖)  | 0/2/20(✖/✖)  | ✖          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/1/0(✓/✓)   | 0/0/0(✖/✖)  |  0/6/0(✓/✓)   | 1/0/0(✓/✓)  | 0/2/0(✓/✓)   | 0/0/0(✖/✖) |     |
-| 68  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 68  | CVE-2023-40296  |    AOOB    |  async-sockets-cpp  |    d66588d    |              udpsocket.hpp (Receive)              |     170     |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/54/0(✖/✖)  | 0/0/0(✖/✖)  | 0/1/0(✖/✖)   | ✖          | 1\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/21/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          |     |
 | 69  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 70  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -277,3 +277,8 @@ Vulnerability types:
 
 No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it.
 At least for now. Maybe later I will do CTU
+
+Notes:
+
+- 1\*
+  - udp-client.cpp file was analyzed in the examples folder but only notes from udpsocket.hpp file were recorded. udp-server file was analyzed because static code analyzers like ikos and symbiotic can not analyze whole file and need and entry point

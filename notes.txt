@@ -149,6 +149,9 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/NTSC-CRT.c main
 [FreeRDP] node a.js /mnt/a/master/projects/FreeRDP/libfreerdp/codec/rfx.c rfx_process_message /mnt/a/master/projects/FreeRDP/include /mnt/a/master/projects/FreeRDP/winpr/include
 	- node a.js /mnt/a/master/master/realworld_simplified/FreeRDP.c main
+[async-sockets-cpp] node a.js /mnt/a/master/projects/async-sockets-cpp/examples/udp-client.cpp main /mnt/a/master/projects/async-sockets-cpp/async-sockets/include
+	- node a.js /mnt/a/master/master/realworld_simplified/async-sockets-cpp.cc main
+
 
 
 
