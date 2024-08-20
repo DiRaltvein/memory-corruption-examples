@@ -246,8 +246,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/1/0(✓/✓)   | 0/0/0(✖/✖)  |  0/6/0(✓/✓)   | 1/0/0(✓/✓)  | 0/2/0(✓/✓)   | 0/0/0(✖/✖) |     |
 | 68  | CVE-2023-40296  |    AOOB    |  async-sockets-cpp  |    d66588d    |              udpsocket.hpp (Receive)              |     170     |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/54/0(✖/✖)  | 0/0/0(✖/✖)  | 0/1/0(✖/✖)   | ✖          | 1\* |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/21/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          |     |
-| 69  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 69  | CVE-2023-47016  |    AOOB    |       radare2       |  386d9486a1   |   bin_xnu_kernelcache.c (process_constructors)    |    2219     |  0/10/2(✖/✖)   | 0/0/0(✖/✖)  |  0/85/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          | 2\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/9/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 1/0/0(✓/✓) |     |
 | 70  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 71  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -282,3 +282,5 @@ Notes:
 
 - 1\*
   - udp-client.cpp file was analyzed in the examples folder but only notes from udpsocket.hpp file were recorded. udp-server file was analyzed because static code analyzers like ikos and symbiotic can not analyze whole file and need and entry point
+- 2\*
+  - static code analyzer notifications were counter from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
