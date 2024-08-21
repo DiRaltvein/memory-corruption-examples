@@ -157,8 +157,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/wasm-micro-runtime.c main
 [jq] node a.js /mnt/a/master/projects/jq/src/decNumber/decNumber.c decToString
 	- node a.js /mnt/a/master/master/realworld_simplified/jq.c main
-
-
+[cups] node a.js /mnt/a/master/projects/cups/cups/raster-interpret.c scan_ps /mnt/a/master/projects/cups/
+	- node a.js /mnt/a/master/master/realworld_simplified/cups.c main
 
 
 

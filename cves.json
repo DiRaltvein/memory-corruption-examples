@@ -3086,62 +3086,62 @@
     "reason": 0,
     "notes": ""
   },
-  { // TODO: HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2023-49356/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-49800/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-51080/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-52266/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-41325/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-29390/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-41858/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4387/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-34241/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "CTU"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-48161/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4504/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
-  {
+  { // TODO: HERE
     "url": "https://www.cvedetails.com/cve/CVE-2023-6546/",
     "reason": -1,
     "notes": ""
