@@ -159,6 +159,10 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/jq.c main
 [cups] node a.js /mnt/a/master/projects/cups/cups/raster-interpret.c scan_ps /mnt/a/master/projects/cups/
 	- node a.js /mnt/a/master/master/realworld_simplified/cups.c main
+[libpe] node a.js /mnt/a/master/projects/libpe/exports.c pe_exports /mnt/a/master/projects/libpe/include
+	- node a.js /mnt/a/master/master/realworld_simplified/libpe.c main
+
+
 
 
 

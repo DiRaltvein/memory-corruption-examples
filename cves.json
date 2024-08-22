@@ -3141,15 +3141,15 @@
     "reason": 0,
     "notes": ""
   },
-  { // TODO: HERE
+  {
     "url": "https://www.cvedetails.com/cve/CVE-2023-6546/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Linux"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-26923/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Configuration"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4260/",
@@ -3158,22 +3158,22 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4262/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-6906/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-7095/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-36355/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
@@ -3183,42 +3183,42 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-19319/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-19320/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-19692/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-19695/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-20703/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Vim"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-27507/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-4327/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "OS"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-33226/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
@@ -3229,7 +3229,7 @@
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-45423/",
     "reason": 0,
-    "notes": "easy but hard to reproduce"
+    "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-1812/",
