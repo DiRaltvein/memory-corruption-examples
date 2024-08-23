@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/openNDS_1",
+      "program": "/mnt/a/master/master/realworld_simplified/plutovg",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
