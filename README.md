@@ -262,8 +262,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/7/0(✖/✖)   | 0/0/0(✖/✖)  | 0/3/1(✖/✖)   | 3/0/0(✓/✓) |     |
 | 76  | CVE-2023-44709  |     IO     |       plutovg       |    30ccd4d    |        plutovg.c (plutovg_surface_create)         |     654     |   0/1/1(✖/✖)   | 0/0/0(✖/✖)  |       ✖       | 0/0/0(✖/✖)  | 0/8/0(✖/✖)   | ✖          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 1/0/2(✓/✓)  |  1/0/0(✓/✓)   | 2/0/0(✓/✓)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) |     |
-| 77  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 77  | CVE-2023-49287  |    AOOB    |       tinydir       |    74acffd    |           tinydir.h (tinydir_file_open)           |     838     |   0/1/1(✖/✖)   | 0/0/0(✖/✖)  |  0/49/0(✓/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) | 4\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/6/0(✓/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) |     |
 | 78  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 79  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -286,3 +286,5 @@ Notes:
   - static code analyzer notifications were counter from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
 - 3\*
   - while loop where is vulnerability takes 2812 code rows WOW.
+- 4\*
+  - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table

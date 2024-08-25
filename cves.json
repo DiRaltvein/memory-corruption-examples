@@ -3548,13 +3548,13 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-45853/",
-    "reason": -1,
-    "notes": ""
+    "reason": 2,
+    "notes": "Logical error (file header is invalid)"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-49208/",
-    "reason": -1,
-    "notes": ""
+    "reason": 2,
+    "notes": "Configuration but easy otherwise"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-49287/",

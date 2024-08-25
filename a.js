@@ -7,7 +7,7 @@
 
 const fileToAnalyze = process.argv[2];
 const file = fileToAnalyze.split('/').splice(-1, 1)[0];
-const isCFile = file.endsWith('.c');
+const isCFile = file.endsWith('.c') || file.endsWith('h');
 const entryPoint = process.argv[3];
 const headerDirectories = process.argv.slice(4).map((d) =>
   d

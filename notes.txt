@@ -167,6 +167,14 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/openNDS_1.c main
 [plutovg] node a.js /mnt/a/master/projects/plutovg/source/plutovg.c plutovg_surface_create /mnt/a/master/projects/plutovg/include /mnt/a/master/projects/plutovg/3rdparty/stb
 	- node a.js /mnt/a/master/master/realworld_simplified/plutovg.c main
+[tinydir] node a.js /mnt/a/master/projects/tinydir/samples/file_open_sample.c main /mnt/a/master/projects/tinydir
+	- node a.js /mnt/a/master/master/realworld_simplified/tinydir.c main
+
+
+
+
+
+
 
 
 
