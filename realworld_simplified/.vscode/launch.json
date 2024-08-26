@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/MicroHttpServer_1",
+      "program": "/mnt/a/master/master/realworld_simplified/mongoose_1",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"

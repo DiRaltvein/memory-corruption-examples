@@ -3,6 +3,7 @@
     "random": "c",
     "string.h": "c",
     "inet.h": "c",
-    "errno.h": "c"
+    "errno.h": "c",
+    "stdio.h": "c"
   }
 }

@@ -171,6 +171,8 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 	- node a.js /mnt/a/master/master/realworld_simplified/tinydir.c main
 [MicroHttpServer] node a.js /mnt/a/master/projects/MicroHttpServer/c-version/lib/server.c _ParseHeader
 	- node a.js /mnt/a/master/master/realworld_simplified/MicroHttpServer_1.c main
+[mongoose] node a.js /mnt/a/master/projects/mongoose/src/mg_resolv.c mg_resolve_from_hosts_file /mnt/a/master/projects/mongoose/src
+	- node a.js /mnt/a/master/master/realworld_simplified/mongoose_1.c main
 
 
 

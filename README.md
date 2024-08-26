@@ -266,8 +266,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/6/0(✓/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) |     |
 | 78  | CVE-2023-51771  |    AOOB    |   MicroHttpServer   |    a8ab029    |             server.c (\_ParseHeader)              |     469     |   0/1/0(✖/✖)   | 0/0/0(✖/✖)  | 0/139/0(✓/✓)  | 1/0/0(✖/✖)  | 0/3/0(✖/✖)   | ✖          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/17/0(✖/✖)  | 0/0/0(✖/✖)  | 0/2/0(✖/✖)   | ✖          |     |
-| 79  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 79  | CVE-2020-25887  |    AOOB    |      mongoose       |   9fe1c93c    |     mg_resolv.c (mg_resolve_from_hosts_file)      |     288     |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/6/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          | 5\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/6/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)   | ✖          |     |
 | 80  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 81  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -288,3 +288,5 @@ Notes:
   - while loop where is vulnerability takes 2812 code rows WOW.
 - 4\*
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
+- 5\*
+  - analyzed function mg_resolve_from_hosts_file was isolated
