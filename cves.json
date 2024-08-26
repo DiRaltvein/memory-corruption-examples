@@ -3608,52 +3608,52 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-38072/",
-    "reason": 0, // TODO
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0841/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4259/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4263/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4424/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-4863/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-5184/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-5753/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Zephyr"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-7187/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-33457/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
