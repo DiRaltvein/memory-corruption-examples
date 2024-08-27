@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/workflow",
+      "program": "/mnt/a/master/master/realworld_simplified/libming",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"

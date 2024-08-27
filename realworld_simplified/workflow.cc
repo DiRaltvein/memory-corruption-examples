@@ -186,7 +186,7 @@ int main(int argc, char *argv[]) {
 
       if (i == URI_HOST && str[start_idx[i]] == '[') {
         len -= 2;
-        memcpy(*dst[i], str + start_idx[i] + 1, len); // Problem: if len is 1 and 2 is subtracted len becomes extremly big
+        memcpy(*dst[i], str + start_idx[i] + 1, len); // Problem: if len of URI segment is 1 and 2 is subtracted len becomes extremly big
       } else
         memcpy(*dst[i], str + start_idx[i], len);
       (*dst[i])[len] = '\0';

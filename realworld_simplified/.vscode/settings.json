@@ -4,6 +4,7 @@
     "string.h": "c",
     "inet.h": "c",
     "errno.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "string_view": "c"
   }
 }
