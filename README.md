@@ -278,8 +278,8 @@ Vulnerability types:
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/1/0(✓/✓)   | 0/0/0(✖/✖)  |  0/7/0(✖/✖)   | 2/0/0(✓/✓)  | 0/0/0(✖/✖)   | 0/0/0(✖/✖) |     |
 | 84  | CVE-2023-37457  |    AOOB    |      asterisk       |    39760d1    |     res_pjsip_header_funcs.c (update_header)      |    1294     |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |   0/0/0(✖/✖)   | 0/0/0(✖/✖)  |  0/8/0(✓/✓)   | 0/0/0(✖/✖)  | 0/3/0(✖/✖)   | 3/0/0(✓/✓) |     |
-| 85  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
-|     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
+| 85  | CVE-2015-10088  |    AOOB    |        ayttm        |    da8940c    |              proxy.c (http_connect)               |     373     |  0/18/0(✖/✖)   | 0/1/2(✖/✖)  |  1/35/0(✖/✖)  | 3/0/0(✖/✖)  | 0/10/2(✓/✓)  | ✖          | 6\* |
+|     |    Extracted    |            |                     |               |                         -                         |      -      |   0/2/0(✖/✖)   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 0/0/0(✖/✖)  | 0/4/1(✓/✓)   | 0/0/0(✖/✖) |     |
 | 86  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 |     |    Extracted    |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
 | 87  |     CVE-000     |            |                     |               |                         -                         |      -      |       -        |      -      |       -       |      -      | -            | -          |     |
@@ -338,3 +338,5 @@ Notes:
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
 - 5\*
   - analyzed function mg_resolve_from_hosts_file was isolated
+- 6\*
+  - New commands. Ikos/Symbiotic are fine

@@ -56,7 +56,11 @@ const oaf = (name, command) => {
 
 oaf(
   '[ubuntu 22] CLANG',
-  `clang${isCFile ? '' : '++'} --analyze -Xclang -analyzer-checker=core,alpha ${
+  `clang${
+    isCFile ? '' : '++'
+  } --analyze -Xclang -analyzer-checker=core,alpha.core,security,alpha.security,optin,alpha.security.taint,unix,alpha.unix,nullability${
+    isCFile ? '' : ',cplusplus,alpha.cplusplus'
+  } ${
     isCFile
       ? ''
       : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
@@ -72,7 +76,7 @@ oaf(
 
 oaf(
   '[ubuntu 22] CPPCHECK',
-  `cppcheck --force ${getIncludes()}${fileToAnalyze}`
+  `cppcheck --enable=warning,portability --force --inconclusive ${getIncludes()}${fileToAnalyze}`
 );
 
 oaf(
@@ -84,12 +88,14 @@ oaf(
 
 oaf(
   '[ubuntu 22] INFER',
-  `infer run --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`
+  `infer run --default-checkers --headers --biabduction --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`
 );
 
 oaf(
   '[ubuntu 24] GCC',
-  `${isCFile ? 'gcc' : 'g++'} -fanalyzer -c ${getIncludes()}${fileToAnalyze}`
+  `${
+    isCFile ? 'gcc' : 'g++'
+  } -fanalyzer -Wall -Wextra -Wformat=2 -c ${getIncludes()}${fileToAnalyze}`
 ); // -c analyze but do not link. We are not building the file we are only analyzing it so only compiling the file is enough
 
 if (entryPoint === 'main') {

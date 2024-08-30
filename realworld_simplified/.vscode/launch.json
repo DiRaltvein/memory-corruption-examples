@@ -12,7 +12,7 @@
       "stopAtEntry": false,
       "environment": [],
       "externalConsole": false,
-      "program": "/mnt/a/master/master/realworld_simplified/asterisk",
+      "program": "/mnt/a/master/master/realworld_simplified/ayttm",
       "cwd": "${workspaceFolder}",
       "linux": {
         "miDebuggerPath": "gdb"
