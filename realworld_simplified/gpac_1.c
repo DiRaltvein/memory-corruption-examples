@@ -12,8 +12,7 @@ void gf_text_get_utf8_line(char *szLine) {
   strcpy(szLine, szLineConv); // Problem: trying to copy 2048 bytes into buffer with length of 1024.
 }
 
-int main(int argc, char *argv[]) {
-
+int main() {
   char szLine[1024];
   gf_text_get_utf8_line(szLine);
 }

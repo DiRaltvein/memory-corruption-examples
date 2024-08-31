@@ -8,7 +8,7 @@
 
 #define BUFSIZE 32
 
-int main(int argc, char *argv[]) {
+int main() {
   char stringToCopy[BUFSIZE + 2] = "Books are windows to other worlds";
   char buf[BUFSIZE];
   char *line;

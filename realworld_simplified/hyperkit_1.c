@@ -11,7 +11,7 @@ struct iovec {
 
 int vq_getchain(struct iovec *iov) {
   int i = 0;
-  for (; i < rand() % 32; i++) {
+  for (; i < 32; i++) {
     int iov_len = rand() % 10;
     if (iov_len == 9) {
       return -1; // some error because of what not all iovec structs could be generated
@@ -31,7 +31,7 @@ void iovec_pull(struct iovec **iov, int iov_len, int *result) {
   }
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   int iov_len, result;
   struct iovec iov_array[32];
   struct iovec *iov = iov_array;

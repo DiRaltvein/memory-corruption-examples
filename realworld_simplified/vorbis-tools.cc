@@ -5,7 +5,7 @@
 
 #include <cstring>
 
-int main(int argc, char *argv[]) {
+int main() {
   char fn[] = "/home/test/";
 
   char *end, *start;

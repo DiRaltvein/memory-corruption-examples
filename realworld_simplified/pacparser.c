@@ -43,7 +43,7 @@ char *str_replace(const char *orig, char *rep, char *with) {
 }
 // -------------------------- COPIED --------------------------
 
-int main(int argc, char *argv[]) {
+int main() {
   char url[] = "and I''''''''' am url";
   // URL-encode "'" as we use single quotes to stick the URL into a temporary script.
   char *sanitized_url = str_replace(url, "'", "%27");

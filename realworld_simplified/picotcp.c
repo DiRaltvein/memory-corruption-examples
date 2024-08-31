@@ -10,7 +10,7 @@ struct pico_frame {
 };
 
 int pico_transport_receive(struct pico_frame *full, int proto) {
-  int ret = -1;
+  int ret;
   switch (proto) {
   case 0:
     ret = 99;

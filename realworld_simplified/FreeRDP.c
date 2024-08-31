@@ -3,8 +3,6 @@
 // commit: 63a2f65
 // extract of: libfreerdp/codec/rfx.c (function: rfx_process_message)
 
-// test was run with --malloc-never-fails flags removed
-
 #include <stdlib.h>
 
 typedef struct {
@@ -14,13 +12,13 @@ typedef struct {
 
 void rfx_allocate_tiles(RFX_MESSAGE *message, size_t count) {
   int *tmpTiles = calloc(count, sizeof(int));
-  if (!tmpTiles && (count != 0))
+  if (tmpTiles == NULL)
     return;
   message->tiles = tmpTiles;
 }
 
 int rfx_message_get_tile(RFX_MESSAGE *message, int index) {
-  return message->tiles[index]; // Problem: access of null pointer
+  return message->tiles[index]; // Problem: potential null pointer dereference
 }
 
 int main(int argc, char *argv[]) {

@@ -3,7 +3,6 @@
 // commit: ee77825
 // extract of: htmldoc/ps-pdf.cxx (function: parse_paragraph)
 
-#include <stdio.h> // printf
 #include <string.h>
 
 typedef enum {
@@ -19,7 +18,7 @@ typedef struct tree_str {
 void parse_paragraph(tree_t *t, int size) {
   for (int i = 0; i < size; i++) {
     if (t[i].markup == MARKUP_NONE) {
-      int ch = t[i].data[strlen((char *)t[i].data) - 1]; // Problem: tree_str.data is not initialized
+      int ch = t[i].data[strlen(t[i].data) - 1]; // Problem: tree_str.data is not initialized
 
       if (ch == 173)
         break;
@@ -27,7 +26,7 @@ void parse_paragraph(tree_t *t, int size) {
   }
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   int size = 10;
   tree_t document[10];
   for (int i = 0; i < size; i++) {

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 void conn_handler(char *packet) {
-  packet[26] = 'b'; // Problem
+  packet[26] = 'b'; // Problem: potential out of bound write if argc is less than 4
 }
 
 int main(int argc, char *argv[]) {

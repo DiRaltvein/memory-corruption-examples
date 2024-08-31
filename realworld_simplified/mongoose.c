@@ -9,7 +9,6 @@ int main(int argc, char *argv[]) {
   char *buf = argv[0];
 
   for (int offset = 0; offset < 10; offset++) {
-    char encoded_byte = buf[offset]; // Problem: reading from a buffer which length can be smaller than 10
-    printf("%s\n", &encoded_byte);
+    printf("%s\n", &buf[offset]); // Problem: reading from a buffer which length can be smaller than 10
   }
 }

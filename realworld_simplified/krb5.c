@@ -42,7 +42,7 @@ cleanup:
   free(ticket_reply.enc_part.ciphertext.data); // First free of data memory segment (if it is more than 6 hours)
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   struct tgs_req_info t = {0};
   t.header_tkt = (krb5_ticket *)malloc(sizeof(krb5_ticket));
   t.header_tkt->enc_part.ciphertext.data = calloc(6, sizeof(char));

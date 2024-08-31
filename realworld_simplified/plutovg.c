@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   int width = 23171;
   void *p = calloc(1, (size_t)(width * width * 4)); // Problem: integer overflow
   free(p);

@@ -14,10 +14,6 @@ typedef struct r_list_iter_t {
   void *data;
 } RListIter;
 
-pyc_object *get_none_object() {
-  return malloc(sizeof(pyc_object));
-}
-
 RListIter *r_list_append(void *data) {
   RListIter *item = malloc(sizeof(RListIter));
   item->data = data;
@@ -34,7 +30,8 @@ int main(int argc, char *argv[]) {
   pyc_object *ret = NULL;
   RListIter *ref_idx = NULL;
 
-  ret = get_none_object();
+  ret = malloc(sizeof(pyc_object));
+  ret->type = 5;
   ref_idx = r_list_append(ret);
 
   switch (argc) {

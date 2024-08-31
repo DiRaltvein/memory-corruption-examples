@@ -7,7 +7,7 @@
 
 #define debug_print printf
 
-int main(int argc, char *argv[]) {
+int main() {
   char cmd[512];
   char debug_buff[512];
 

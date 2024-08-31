@@ -4,7 +4,7 @@
 // extract of: src/pseudos.c (function: Xasc)
 
 int main(int argc, char *argv[]) {
-  char delimiter = *argv[1]; // Problem: potential null pointer dereference
+  char delimiter = *argv[1]; // Problem: potential null pointer dereference as well as access out of bound
   if (delimiter == '/')
     return 1;
 }

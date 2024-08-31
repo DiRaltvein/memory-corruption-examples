@@ -14,11 +14,11 @@ s32 lsr_translate_coords(u32 val, u32 nb_bits) {
     return 0;
 
   if (val >> (nb_bits - 1)) {
-    return (s32)val - (1 << nb_bits); // Problem: if nb_bits is 31 then left shift of a number 1 will overflow
+    return (s32)val - (1 << nb_bits); // Problem: if nb_bits is 31 then left shift of a number 1 will overflow to a negative number
   }
   return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   lsr_translate_coords(INT_MAX, 31);
 }

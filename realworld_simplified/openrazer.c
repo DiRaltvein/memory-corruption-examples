@@ -17,6 +17,6 @@ void razer_chroma_standard_matrix_set_custom_frame(unsigned char start_col, unsi
   memcpy(report_argument, "012345678", row_length); // Problem: row_length is greater than 10 bytes
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   razer_chroma_standard_matrix_set_custom_frame(97, 102);
 }

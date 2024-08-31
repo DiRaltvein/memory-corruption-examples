@@ -3,7 +3,6 @@
 // commit: 97d8e65
 // extract of: mz_os.c (function: mz_path_has_slash)
 
-#include <stdio.h> // printf
 #include <string.h>
 
 int mz_path_has_slash(const char *path) {

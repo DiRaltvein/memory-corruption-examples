@@ -40,6 +40,6 @@ int ec_glob(char *pattern) {
 }
 
 // the idea is that provided pattern quickly fills pcre_str by utilizing 'case ?' and after that writes out of bound by uzing default case where bound is not checked
-int main(int argc, char *argv[]) {
+int main() {
   ec_glob("???????????????????aaaaaaaaaaa");
 }

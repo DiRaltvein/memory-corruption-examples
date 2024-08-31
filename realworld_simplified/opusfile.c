@@ -16,7 +16,7 @@ char *ogg_sync_buffer(size_t size) {
 
 int main(int argc, char *argv[]) {
   char *buffer;
-  size_t size = sizeof(argv[0]);
+  size_t size = strlen(argv[0]);
   buffer = ogg_sync_buffer(size);
   memcpy(buffer, argv[0], size); // Problem: buffer can be potentially NULL
   free(buffer);

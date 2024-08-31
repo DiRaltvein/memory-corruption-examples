@@ -19,7 +19,7 @@ unsigned long readUInt32(FILE *f) {
   return (unsigned long)(readUInt8(f) + (readUInt8(f) << 8) + (readUInt8(f) << 16) + (readUInt8(f) << 24));
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   FILE *f = fopen("libming.hex", "r");
   if (f == NULL)
     return -1;

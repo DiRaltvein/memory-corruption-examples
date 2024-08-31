@@ -5,8 +5,9 @@
 
 #include <string.h>
 
-// copy of the original function that has a problem. It does not check for the length of the m_ptr and wheather szDest is long enough
-// to contain all the text it holds.
+// copy of the original function that has a problem.
+// It does not check for the length of the m_ptr and wheather szDest is long enough
+// to contain all the text from szStr as well as substitutes.
 const char *icFixXml(char *szDest, const char *szStr) {
   char *m_ptr = szDest;
 

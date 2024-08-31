@@ -69,7 +69,7 @@ char *getResponse() {
   return output;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   struct sockaddr_in srv_addr;
   char req_buf[20];
   int sock;

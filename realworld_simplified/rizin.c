@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   char name[16];
   sscanf("someLongTextThatIsDefinitelyLongerThan15Characters", "%s", name);
 }

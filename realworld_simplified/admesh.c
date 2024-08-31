@@ -18,7 +18,7 @@ typedef struct {
 } numbers_file;
 
 /**
- * Stl is initialized to have 12 as a number_of_numbers and a chain of numers, where stl has reference only to the first number and each next number has a reference to the next element (number).
+ * Stl is initialized to have 12 as a number_of_numbers and a chain of numers, where stl has reference only to the first number and each next number has a reference to the next element (number). Linked list structure.
  * Last number has a NULL pointer. The problem is that the chain of numbers is 14 numbers long while number_of_numbers only states that the chain is 12 numbers long
  */
 numbers_file *initializeStl() {
@@ -50,7 +50,7 @@ numbers_file *initializeStl() {
   return stl;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   numbers_file *stl = initializeStl();
   int i = 0;
   int *extractedNumbers = (int *)calloc(stl->number_of_numbers, sizeof(int)); // numbers get extracted and put here.

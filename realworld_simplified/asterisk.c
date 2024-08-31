@@ -40,7 +40,7 @@ Header *initializeHeaders() {
   return headers;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   Header *headers = initializeHeaders();
   char *headerToUpdate = "Content-Length";
   char *newHeaderValue = "Over 999";

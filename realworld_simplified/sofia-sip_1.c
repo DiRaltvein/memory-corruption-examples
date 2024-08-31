@@ -7,10 +7,12 @@
 #include <string.h>
 
 typedef unsigned int uint32_t;
-// But is it a problem? memory sanitizer does not think so
+
 int main(int argc, char *argv[]) {
-  if (argc < 2)
+  if (argc == 1) {
     return 0;
+  }
+
   uint32_t tmp;
   memcpy(&tmp, argv[1], sizeof(uint32_t)); // Problem: access out of bound if command line arguments length is less than 3 characters
 }

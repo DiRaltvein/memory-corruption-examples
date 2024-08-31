@@ -56,15 +56,14 @@ const oaf = (name, command) => {
 
 oaf(
   '[ubuntu 22] CLANG',
-  `clang${
-    isCFile ? '' : '++'
-  } --analyze -Xclang -analyzer-checker=core,alpha.core,security,alpha.security,optin,alpha.security.taint,unix,alpha.unix,nullability${
-    isCFile ? '' : ',cplusplus,alpha.cplusplus'
-  } ${
-    isCFile
-      ? ''
-      : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
-  }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
+  `clang${isCFile ? '' : '++'} --analyze` +
+    ` -Xclang -analyzer-checker=core,alpha.core,security,alpha.security,optin,unix,alpha.unix,nullability${
+      isCFile ? '' : ',cplusplus,alpha.cplusplus'
+    } -Xclang -analyzer-disable-checker=security.insecureAPI ${
+      isCFile
+        ? ''
+        : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
+    }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
 // oaf(
@@ -75,12 +74,12 @@ oaf(
 // );
 
 oaf(
-  '[ubuntu 22] CPPCHECK',
+  '[ubuntu 22*] CPPCHECK',
   `cppcheck --enable=warning,portability --force --inconclusive ${getIncludes()}${fileToAnalyze}`
 );
 
 oaf(
-  '[ubuntu 22] IKOS',
+  '[ubuntu 22*] IKOS',
   `ikos -w --globals-init=all ` +
     `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
     `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
@@ -88,11 +87,11 @@ oaf(
 
 oaf(
   '[ubuntu 22] INFER',
-  `infer run --default-checkers --headers --biabduction --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze} *`
+  `infer run --default-checkers --headers --biabduction --biabduction-unsafe-malloc --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze}`
 );
 
 oaf(
-  '[ubuntu 24] GCC',
+  '[ubuntu 22] GCC',
   `${
     isCFile ? 'gcc' : 'g++'
   } -fanalyzer -Wall -Wextra -Wformat=2 -c ${getIncludes()}${fileToAnalyze}`

@@ -27,8 +27,8 @@ int gf_list_count(GF_List *ptr) {
   return ptr->entryCount;
 }
 
-int main(int argc, char *argv[]) {
-  GF_M2TS_PES stream;
+int main() {
+  GF_M2TS_PES stream = {0};
   stream.program = malloc(sizeof(GF_M2TS_Program));
 
   gf_list_count(stream.program->pmt_iod->ESDescriptors); // Problem: pmt_iod and ESDescriptors are not initialized

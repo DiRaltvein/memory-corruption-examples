@@ -9,25 +9,29 @@
 // dymmy function that copies input (in) to the output (out) and in the end sets outlen to be equal to the output string size
 // can fail in case input (in) contains character 'a'
 int ntlm_str_convert(const char *in, char *out, size_t *outlen) {
-
-  for (int i = 0; i < sizeof(*in); i++) {
+  int i = 0;
+  for (; i < strlen(in); i++) {
     if (in[i] == 'a') {
       return 1;
     }
     out[i] = in[i];
   }
+  out[i] = '\0';
 
   if (outlen) {
-    *outlen = sizeof(out);
+    *outlen = strlen(out);
   }
   return 0;
 }
 
 int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    return 0;
+  }
   size_t outlen;
 
-  char *out = malloc(strlen(argv[0]) + 1);
-  ntlm_str_convert(argv[0], out, &outlen);
+  char *out = malloc(strlen(argv[1]) * sizeof(char) + 1);
+  ntlm_str_convert(argv[1], out, &outlen);
   out[outlen] = '\0'; // Problem: in case ntlm_str_convert function failed then outlen is not defined
   free(out);
 }

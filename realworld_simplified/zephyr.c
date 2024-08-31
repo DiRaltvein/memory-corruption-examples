@@ -13,7 +13,7 @@ void fuse_fs_access_readdir(const char *path) {
   // two slashes '//' is writte for program to cause stack smash when executed
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   char path[PATH_MAX] = "0123456789";
   fuse_fs_access_readdir(path);
 }

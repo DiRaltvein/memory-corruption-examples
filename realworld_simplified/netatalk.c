@@ -21,7 +21,7 @@ size_t dsi_writeinit(DSI *dsi, void *buf, const size_t buflen) {
   if (dsi->eof > dsi->start) {
     /* We have data in the buffer */
     bytes = MIN(dsi->eof - dsi->start, dsi->datasize);
-    memmove(buf, dsi->start, bytes); // Problem: buf overflow if executable name is 6 or more characters
+    memmove(buf, dsi->start, bytes); // Problem: buf overflow if executable name is 5 or more characters
     dsi->start += bytes;
     dsi->datasize -= bytes;
     if (dsi->start >= dsi->eof)

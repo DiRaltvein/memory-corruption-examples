@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     if (sscanf(line, "%u.%u.%u.%u%n", &a, &b, &c, &d, &len) == 0) {
       continue;
     }
-    for (p = line + len; sscanf(p, "%s%n", alias, &len) == 1; p += len) { // Problem: potential buffer overflow of alias buffer. Reading from a file and sscanf with assumption that alias if less than 60 characters
+    for (p = line + len; sscanf(p, "%s%n", alias, &len) == 1; p += len) { // Problem: potential buffer overflow of alias buffer. Reading from a file with sscanf with assumption that alias is less than 60 characters
       if (strcmp(alias, argv[0]) == 0) {
         fclose(fp);
         return -1;

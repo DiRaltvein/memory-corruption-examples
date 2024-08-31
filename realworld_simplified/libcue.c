@@ -15,7 +15,7 @@ int getAnInt(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
-  long index[MAXINDEX + 1];
+  int index[MAXINDEX + 1] = {0};
   int randomInt = getAnInt(argc, argv);
 
   if (randomInt > MAXINDEX) {

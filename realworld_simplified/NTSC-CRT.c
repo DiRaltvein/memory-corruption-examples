@@ -9,7 +9,7 @@
 
 #define HEADER_SIZE 8
 
-int main(int argc, char *argv[]) {
+int main() {
   FILE *f;
   unsigned char header[54];
   unsigned char pad[3];

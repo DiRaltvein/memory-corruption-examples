@@ -3,7 +3,7 @@
 // commit: 9d57699
 // extract of: cups/raster-interpret.c (function: scan_ps)
 
-int main(int argc, char *argv[]) {
+int main() {
   char *cur = "(Hello\\";
 
   for (cur++; *cur; cur++) {

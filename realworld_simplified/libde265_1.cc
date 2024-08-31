@@ -12,14 +12,14 @@ int getAnInt(int max) {
 }
 
 typedef struct {
-  char refIdx[2]; // index into LongTermRefPic
+  int refIdx[2]; // index into LongTermRefPic
 } PBMotion;
 
 typedef struct {
   char LongTermRefPic[2][16];
 } slice_segment_header;
 
-int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, char X) {
+int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int X) {
   PBMotion vi;
   vi.refIdx[X] = getAnInt(20);
 
@@ -29,7 +29,7 @@ int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, char
   return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   srand(time(0));
   slice_segment_header shdr = {0};
   derive_spatial_luma_vector_prediction(&shdr, 1);

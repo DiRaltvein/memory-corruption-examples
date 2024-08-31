@@ -20,5 +20,5 @@ int main(int argc, char *argv[]) {
 
   char file_name_buf[_TINYDIR_FILENAME_MAX];
 
-  strcpy(file_name_buf, path); // Problem: path may be longer then the file_name_buf length
+  strcpy(file_name_buf, path); // Problem: path may be longer than the file_name_buf length
 }

@@ -3,6 +3,7 @@
 // commit: 822bb80
 // extract of: src/address.c (function: new_address)
 
+#include <stdio.h>
 #include <string.h>
 
 int main(int argc, char *argv[]) {
@@ -19,7 +20,9 @@ int main(int argc, char *argv[]) {
       (port = strchr(hostname_or_ip, ']')) != NULL) {
     len = (size_t)(port - hostname_or_ip - 1);
 
-    strncpy(ip_buf, hostname_or_ip + 1, len); // Problem: in case ipv6 address is malformed and is larger than the buffer, ip_buf will overflow
+    strncpy(ip_buf, hostname_or_ip + 1, len); // Problem: in case ipv6 address is malformed and is larger than the ip_buf buffer, buffer will overflow
     ip_buf[len] = '\0';
+
+    printf("%s\n", ip_buf);
   }
 }

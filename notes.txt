@@ -39,7 +39,7 @@ cp -r ./<file> /mnt/a/master/projects/
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c main
 [gpac] node a.js /mnt/a/master/projects/gpac/src/filters/load_text.c gf_text_get_utf8_line /mnt/a/master/projects/gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_1.c main
-[gpssim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c main
+[gps-sdr-sim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c main
 	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c main
 [openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c razer_chroma_standard_matrix_set_custom_frame
 	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c main
@@ -110,7 +110,7 @@ CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c 
 [rizin] node a.js /mnt/a/master/projects/rizin/librz/reg/profile.c gdb_to_rz_profile /mnt/a/master/projects/rizin/librz/include /mnt/a/master/projects/rizin/librz/util/sdb/src /mnt/a/master/projects/rizin/build
 	- node a.js /mnt/a/master/master/realworld_simplified/rizin.c main
 [NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
-	- node a.js /mnt/a/master/master/realworld_simplified/nanonng.c main
+	- node a.js /mnt/a/master/master/realworld_simplified/NanoNNG.c main
 [sngrep] node a.js /mnt/a/master/projects/sngrep/src/capture.c capture_ws_check_packet
 [gifsicle] node a.js /mnt/a/master/projects/gifsicle/src/clp.c ambiguity_error /mnt/a/master/projects/gifsicle/include
 [vorbis-tools] node a.js /mnt/a/master/projects/vorbis-tools/oggenc/platform.c create_directories /mnt/a/master/projects/vorbis-tools/include

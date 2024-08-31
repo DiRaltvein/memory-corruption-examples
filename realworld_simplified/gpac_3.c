@@ -15,7 +15,7 @@ void latm_dmx_sync_frame_bs(char *buffer) {
   memset(buffer, 9, size); // Problem: memset can set memory outside of the provided buffer in size is greater than 380
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   char latm_buffer[380];
   latm_dmx_sync_frame_bs(latm_buffer);
 }

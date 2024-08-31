@@ -5,8 +5,8 @@
 
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   char buffer[16];
   size_t length = snprintf(buffer, sizeof(buffer), "%s", "Sunsets are gold");
-  *(buffer + length) = ':'; // Problem: write out of bound
+  *(buffer + length) = ':'; // Problem: write out of bound by one byte
 }

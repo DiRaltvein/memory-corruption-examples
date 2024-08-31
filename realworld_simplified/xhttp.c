@@ -1,7 +1,7 @@
-// <cvedetails url>
-// repository: <repository url>
-// commit: <commit hash where vulnerability exists>
-// extract of: <path from project root to file with vulnerability> (function: <function name with vulnerability>)
+// https://www.cvedetails.com/cve/CVE-2023-38434/
+// repository: https://github.com/cozis/xHTTP
+// commit: 72f812d
+// extract of: xhttp.c (function: xhttp)
 
 #include <stdlib.h>
 #include <string.h>
@@ -45,10 +45,10 @@ void when_data_is_ready_to_be_read(conn_t *conn) {
 
 void close_connection(conn_t *conn) {
   if (conn->request.public.headers.list != NULL)
-    free(conn->request.public.headers.list); // Problem: potential double free if list was freed in parse function
+    free(conn->request.public.headers.list); // Problem: double free if list was freed in parse function
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   conn_t conn = {0};
   when_data_is_ready_to_be_read(&conn);
   close_connection(&conn);

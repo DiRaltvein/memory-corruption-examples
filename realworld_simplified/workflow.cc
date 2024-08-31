@@ -48,16 +48,11 @@ static unsigned char authority_map[256] = {
 };
 
 // program parses url's into different segments.
-// url must be provided as a argument to the program
-// most url's are parsed correctly, like 'https://www.youtube.com/watch?v=fNFzfwLM72c'
-// example of malicious input '1://['
+// most url's are parsed correctly, like 'https://www.youtube.com/watch?v=fNFzfwLM72c', but some urls like '1://[' lead to problems
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 1;
-  }
+int main() {
   ParsedURI uri = {0};
-  const char *str = argv[1]; // example of malicious input '1://['
+  const char *str = "1://[";
 
   int start_idx[URI_PART_ELEMENTS] = {0};
   int end_idx[URI_PART_ELEMENTS] = {0};
@@ -193,7 +188,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // just print uri components to the cli back to the user
+  // Print uri components to the cli back to the user
   for (int i = 0; i < URI_PART_ELEMENTS; i++) {
     if (i == 0) {
       printf("URI_SCHEME: ");

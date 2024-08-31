@@ -7,8 +7,12 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    return 0;
+  }
+
   char filepath[100];
   strcpy(filepath, "/static/");
-  strcat(filepath, argv[0]); // Problem: in case executable name is long enough buffer overflow will occur
+  strcat(filepath, argv[1]); // Problem: in case parameter is long enough buffer overflow will occur
   return access(filepath, R_OK) == 0;
 }

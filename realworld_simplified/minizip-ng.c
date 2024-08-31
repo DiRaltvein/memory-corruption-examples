@@ -10,7 +10,7 @@
 // if path is given as 'c:\test\123\..\abc.txt' it will get resolved to 'c:\test\abc.txt' ('c:\test\abc.txt' will be written into output buffer)
 int mz_path_resolve(const char *path, char *output, int max_output) {
   const char *source = path;
-  const char *check = output;
+  const char *check;
   char *target = output;
 
   if (max_output <= 0)
@@ -67,7 +67,7 @@ int mz_path_resolve(const char *path, char *output, int max_output) {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   char output[256];
   mz_path_resolve("x/../y", output, sizeof(output));
 }

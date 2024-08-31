@@ -11,8 +11,8 @@ struct de265_image {
   int get_SliceHeaderIndex(int x, int y) { return x + y; }
 };
 
-int main(int argc, char *argv[]) {
+int main() {
   de265_image colImg;
-  // printf is used to preserve the access statement. Otherwise some static code analyzers will not detect it because compiler will optimize code and will remove array access that is not used
+  colImg.slices.push_back(1);
   printf("%i", colImg.slices[colImg.get_SliceHeaderIndex(5, 5)]); // Problem: slices vector has length of 0 and the access of element on index 10 is out of bound
 }

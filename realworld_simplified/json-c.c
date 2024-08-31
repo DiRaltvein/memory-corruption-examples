@@ -23,9 +23,7 @@ void parseit(int fd) {
   close(fd);
 }
 
-int main(int argc, char *argv[]) {
-  if (argc >= 2) {
-    int fd = open(argv[1], O_RDONLY, 0);
-    parseit(fd);
-  }
+int main() {
+  int fd = open("text.txt", O_RDONLY, 0);
+  parseit(fd);
 }

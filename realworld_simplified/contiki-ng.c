@@ -6,6 +6,10 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    return 0;
+  }
+
   unsigned char m_oValue[48];
-  memcpy(m_oValue, argv[0], sizeof(argv[0])); // Problem: if executable name is larger than 48 bytes then buffer will overflow
+  memcpy(m_oValue, argv[1], strlen(argv[1])); // Problem: if first argument is longer than 48 characters then buffer will overflow
 }
