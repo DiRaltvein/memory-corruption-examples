@@ -27,6 +27,11 @@ const showHeaders = headerDirectories.length > 0;
 
 // /usr/llvm-project/llvm/include/llvm <- folder with folders that contain header files
 
+const removeLeadingSlashWithDot = (path) => {
+  if (path.startsWith('./')) return path.substring(2);
+  return path;
+};
+
 const randomColorGenerator = () => {
   const colors = [
     '\x1b[31m', // red
@@ -116,9 +121,14 @@ oaf(
 // greps
 for (const noteType of ['error', 'warning', 'note']) {
   console.log(
-    `${c(
-      '- 2>&1',
-      true
-    )} | grep -Ec "${fileToAnalyze}:[0-9]+:([0-9]+:)? ${noteType}:"\n`
+    `${c('- 2>&1', true)} | grep -Ec "${removeLeadingSlashWithDot(
+      fileToAnalyze
+    )}:[0-9]+:([0-9]+:)? ${noteType}:"\n`
   );
 }
+
+console.log(
+  `${c('- 2>&1', true)} | grep -E "${removeLeadingSlashWithDot(
+    fileToAnalyze
+  )}:[0-9]+:([0-9]+:)? (error|warning|note):"\n`
+);

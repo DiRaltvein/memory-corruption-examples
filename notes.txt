@@ -15,14 +15,13 @@ dos2unix </bin/bash script file>
 find . -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
 autoconf for configure.ac files
 
-cp -r ./<file> /mnt/a/master/projects/
+cp -r ./<file> /mnt/a/master/projects
 
 // ---------------------------------- Options used ---------------------------------- \\
 
-[ubuntu 24] (does not build LLVM)
-	- gcc
 [ubuntu 22]
 	- LLVM - /usr/llvm-project/build/bin/clang
+	- gcc
 	- cppcheck
 	- ikos
 [ubuntu 20]
@@ -31,159 +30,159 @@ cp -r ./<file> /mnt/a/master/projects/
 // ---------------------------------- Local notes ---------------------------------- \\
 
 
-[ppp] node a.js /mnt/a/master/projects/ppp/pppdump/pppdump.c dumpppp
+[ppp] node a.js ./ppp/pppdump/pppdump.c dumpppp
 	- node a.js /mnt/a/master/master/realworld_simplified/ppp.c main
-[pacparser] node a.js /mnt/a/master/projects/pacparser/src/pacparser.c pacparser_find_proxy pacparser_find_proxy /mnt/a/master/projects/pacparser/src/spidermonkey/js/src
+[pacparser] node a.js ./pacparser/src/pacparser.c pacparser_find_proxy ./pacparser/src/spidermonkey/js/src
 	- node a.js /mnt/a/master/master/realworld_simplified/pacparser.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/laser/lsr_dec.c lsr_translate_coords /mnt/a/master/projects/gpac/include
+[gpac] node a.js ./gpac/src/laser/lsr_dec.c lsr_translate_coords ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/filters/load_text.c gf_text_get_utf8_line /mnt/a/master/projects/gpac/include
+[gpac] node a.js ./gpac/src/filters/load_text.c gf_text_get_utf8_line ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_1.c main
 [gps-sdr-sim] node a.js /mnt/a/master/projects/gps-sdr-sim/gpssim.c main
 	- node a.js /mnt/a/master/master/realworld_simplified/gps-sdr-sim.c main
-[openrazer] node a.js /mnt/a/master/projects/openrazer/driver/razerchromacommon.c razer_chroma_standard_matrix_set_custom_frame
+[openrazer] node a.js ./openrazer/driver/razerchromacommon.c razer_chroma_standard_matrix_set_custom_frame
 	- node a.js /mnt/a/master/master/realworld_simplified/openrazer.c main
-[sofia-sip] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/sdp/sdp_parse.c parse_message /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/open_c
+[sofia-sip] node a.js ./sofia-sip/libsofia-sip-ua/sdp/sdp_parse.c parse_message ./sofia-sip/libsofia-sip-ua/su ./sofia-sip/open_c
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip.c main
-? [zephyr] node a.js /mnt/a/master/projects/zephyr/subsys/fs/fuse_fs_access.c fuse_fs_access_readdir
+? [zephyr] node a.js ./zephyr/subsys/fs/fuse_fs_access.c fuse_fs_access_readdir
 	- node a.js /mnt/a/master/master/realworld_simplified/zephyr.c main
-[nanopb] node a.js /mnt/a/master/projects/nanopb/pb_decode.c pb_dec_string
+[nanopb] node a.js ./nanopb/pb_decode.c pb_dec_string
 	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
-[json-c] node a.js /mnt/a/master/projects/json-c/apps/json_parse.c parseit /mnt/a/master/projects/json-c
+[json-c] node a.js ./json-c/apps/json_parse.c parseit ./json-c
 	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
-CTU [picotcp] node a.js /mnt/a/master/projects/picotcp/modules/pico_fragments.c pico_fragments_reassemble /mnt/a/master/projects/picotcp/build/include /mnt/a/master/projects/picotcp/modules /mnt/a/master/projects/picotcp/include
+CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reassemble ./picotcp/build/include ./picotcp/modules ./picotcp/include
 	- node a.js /mnt/a/master/master/realworld_simplified/picotcp.c main
-[jhead] node a.js /mnt/a/master/projects/jhead/jhead.c DoCommand
+[jhead] node a.js ./jhead/jhead.c DoCommand
 	- node a.js /mnt/a/master/master/realworld_simplified/jhead.c main
-[FiND] node a.js /mnt/a/master/projects/FiND/validator/my_validator.cpp init_result /usr/include/mysql /mnt/a/master/subProjects/boinc /mnt/a/master/subProjects/boinc/lib /mnt/a/master/subProjects/boinc/db /mnt/a/master/subProjects/boinc/sched
+[FiND] node a.js ./FiND/validator/my_validator.cpp init_result /usr/include/mysql ./boinc ./boinc/lib ./boinc/db ./boinc/sched
 	- node a.js /mnt/a/master/master/realworld_simplified/FiND.cc main
-[mujs] node a.js /mnt/a/master/projects/mujs/jsdtoa.c js_strtod
+[mujs] node a.js ./mujs/jsdtoa.c js_strtod
 	- node a.js /mnt/a/master/master/realworld_simplified/mujs.c main
-[sniproxy] node a.js /mnt/a/master/projects/sniproxy/src/address.c new_address
+[sniproxy] node a.js ./sniproxy/src/address.c new_address
 	- node a.js /mnt/a/master/master/realworld_simplified/sniproxy.c main
-[frr] node a.js /mnt/a/master/projects/frr/bgpd/bgp_open.c bgp_capability_software_version /mnt/a/master/projects/frr /mnt/a/master/projects/frr/lib /mnt/a/master/projects/frr/inlude/linux
+[frr] node a.js ./frr/bgpd/bgp_open.c bgp_capability_software_version ./frr ./frr/lib ./frr/inlude/linux
 	- node a.js /mnt/a/master/master/realworld_simplified/frr.c main
-[MicroHttpServer] node a.js /mnt/a/master/projects/MicroHttpServer/c-version/lib/middleware.c _ReadStaticFiles
+[MicroHttpServer] node a.js ./MicroHttpServer/c-version/lib/middleware.c _ReadStaticFiles
 	- node a.js /mnt/a/master/master/realworld_simplified/MicroHttpServer.c main
-[mongoose] node a.js /mnt/a/master/projects/mongoose/src/mqtt.c decode_variable_length
+[mongoose] node a.js ./mongoose/src/mqtt.c decode_variable_length
 	- node a.js /mnt/a/master/master/realworld_simplified/mongoose.c main
-[libde265] node a.js /mnt/a/master/projects/libde265/libde265/motion.cc derive_collocated_motion_vectors /mnt/a/master/projects/libde265
+[libde265] node a.js ./libde265/libde265/motion.cc derive_collocated_motion_vectors ./libde265
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265.cc main
-[libeconf] node a.js /mnt/a/master/projects/libeconf/lib/libeconf.c econf_writeFile /mnt/a/master/projects/libeconf/include
+[libeconf] node a.js ./libeconf/lib/libeconf.c econf_writeFile ./libeconf/include
 	- node a.js /mnt/a/master/master/realworld_simplified/libeconf.c main
-[podofo] node a.js /mnt/a/master/projects/podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 /mnt/a/master/projects/podofo/src
+[podofo] node a.js ./podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 ./podofo/src/podofo ./podofo/src
 	- node a.js /mnt/a/master/master/realworld_simplified/podofo.cc main
-[krb5] node a.js /mnt/a/master/projects/krb5/src/kdc/do_tgs_req.c process_tgs_req /mnt/a/master/projects/krb5/src/include
+[krb5] node a.js ./krb5/src/kdc/do_tgs_req.c process_tgs_req ./krb5/src/include
 	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c main
-[libcue] node a.js /mnt/a/master/projects/libcue/cd.c track_set_index
+[libcue] node a.js ./libcue/cd.c track_set_index
 	- node a.js /mnt/a/master/master/realworld_simplified/libcue.c main
-[DemoIccMAX] node a.js /mnt/a/master/projects/DemoIccMAX/IccXML/IccLibXML/IccUtilXml.cpp icFixXml /mnt/a/master/projects/DemoIccMAX/IccProfLib /usr/include/libxml2/
+[DemoIccMAX] node a.js ./DemoIccMAX/IccXML/IccLibXML/IccUtilXml.cpp icFixXml ./DemoIccMAX/IccProfLib /usr/include/libxml2/
 	- node a.js /mnt/a/master/master/realworld_simplified/demolccMAX.cc main
-[minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_resolve
+[minizip-ng] node a.js ./minizip-ng/mz_os.c mz_path_resolve
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng.c main
-[minizip-ng] node a.js /mnt/a/master/projects/minizip-ng/mz_os.c mz_path_has_slash
+[minizip-ng] node a.js ./minizip-ng/mz_os.c mz_path_has_slash
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng_1.c main
-[contiki-ng] node a.js /mnt/a/master/projects/contiki-ng/os/net/mac/ble/ble-l2cap.c input_l2cap_frame_flow_channel /mnt/a/master/projects/contiki-ng/os/ /mnt/a/master/projects/contiki-ng/arch/platform/native/ /mnt/a/master/projects/contiki-ng/arch/cpu/native (same problem as podofo.cc)
+[contiki-ng] node a.js ./contiki-ng/os/net/mac/ble/ble-l2cap.c input_l2cap_frame_flow_channel ./contiki-ng/os/ ./contiki-ng/arch/platform/native/ ./contiki-ng/arch/cpu/native
 	- node a.js /mnt/a/master/master/realworld_simplified/contiki-ng.c main
-[gss-ntlmssp] node a.js /mnt/a/master/projects/gss-ntlmssp/src/ntlm.c ntlm_decode_u16l_str_hdr
+[gss-ntlmssp] node a.js ./gss-ntlmssp/src/ntlm.c ntlm_decode_u16l_str_hdr
 	- node a.js /mnt/a/master/master/realworld_simplified/gss-ntlmssp.c main
-[hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_rnd.c pci_vtrnd_notify /mnt/a/master/projects/hyperkit/src/include
+[hyperkit] node a.js ./hyperkit/src/lib/pci_virtio_rnd.c pci_vtrnd_notify ./hyperkit/src/include
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit.c main
-[hyperkit] node a.js /mnt/a/master/projects/hyperkit/src/lib/pci_virtio_sock.c iovec_pull /mnt/a/master/projects/hyperkit/src/include
+[hyperkit] node a.js ./hyperkit/src/lib/pci_virtio_sock.c iovec_pull ./hyperkit/src/include
 	- node a.js /mnt/a/master/master/realworld_simplified/hyperkit_1.c main
-[htmldoc] node a.js /mnt/a/master/projects/htmldoc/htmldoc/ps-pdf.cxx parse_paragraph /mnt/a/master/projects/htmldoc
+[htmldoc] node a.js ./htmldoc/htmldoc/ps-pdf.cxx parse_paragraph ./htmldoc
 	- node a.js /mnt/a/master/master/realworld_simplified/htmldoc.cc main
-[radare2]	node a.js /mnt/a/master/projects/radare2/libr/bin/format/pyc/marshal.c get_object /mnt/a/master/projects/radare2/libr/include /mnt/a/master/projects/radare2/shlr/sdb/src
+[radare2]	node a.js ./radare2/libr/bin/format/pyc/marshal.c get_object ./radare2/libr/include ./radare2/shlr/sdb/src
 	- node a.js /mnt/a/master/master/realworld_simplified/radare2.c main
-[opusfile] node a.js /mnt/a/master/projects/opusfile/src/opusfile.c op_open1 /mnt/a/master/projects/opusfile/include
+[opusfile] node a.js ./opusfile/src/opusfile.c op_open1 ./opusfile/include
 	- node a.js /mnt/a/master/master/realworld_simplified/opusfile.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/filters/dmx_m2ts.c m2tsdmx_declare_pid /mnt/a/master/projects/gpac/include
+[gpac] node a.js ./gpac/src/filters/dmx_m2ts.c m2tsdmx_declare_pid ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_2.c main
 [gpac] 
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_3.c main
-[editorconfig-core-c] node a.js /mnt/a/master/projects/editorconfig-core-c/src/lib/ec_glob.c ec_glob /mnt/a/master/projects/editorconfig-core-c/include
+[editorconfig-core-c] node a.js ./editorconfig-core-c/src/lib/ec_glob.c ec_glob ./editorconfig-core-c/include
 	- node a.js /mnt/a/master/master/realworld_simplified/editorconfig-core-c.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/utils/xml_parser.c xml_sax_append_string /mnt/a/master/projects/gpac/include
+[gpac] node a.js ./gpac/src/utils/xml_parser.c xml_sax_append_string ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_4.c main
-[libde265] node a.js /mnt/a/master/projects/libde265/libde265/motion.cc derive_spatial_luma_vector_prediction /mnt/a/master/projects/libde265 /mnt/a/master/projects/libde265/extra
+[libde265] node a.js ./libde265/libde265/motion.cc derive_spatial_luma_vector_prediction ./libde265 ./libde265/extra
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_1.cc main
-[rizin] node a.js /mnt/a/master/projects/rizin/librz/reg/profile.c gdb_to_rz_profile /mnt/a/master/projects/rizin/librz/include /mnt/a/master/projects/rizin/librz/util/sdb/src /mnt/a/master/projects/rizin/build
+[rizin] node a.js ./rizin/librz/reg/profile.c gdb_to_rz_profile ./rizin/librz/include ./rizin/librz/util/sdb/src ./rizin/build
 	- node a.js /mnt/a/master/master/realworld_simplified/rizin.c main
-[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
+[NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c conn_handler ./NanoNNG/include  ./NanoNNG/src
 	- node a.js /mnt/a/master/master/realworld_simplified/NanoNNG.c main
-[sngrep] node a.js /mnt/a/master/projects/sngrep/src/capture.c capture_ws_check_packet
-[gifsicle] node a.js /mnt/a/master/projects/gifsicle/src/clp.c ambiguity_error /mnt/a/master/projects/gifsicle/include
-[vorbis-tools] node a.js /mnt/a/master/projects/vorbis-tools/oggenc/platform.c create_directories /mnt/a/master/projects/vorbis-tools/include
+[sngrep] node a.js ./sngrep/src/capture.c capture_ws_check_packet
+[gifsicle] node a.js ./gifsicle/src/clp.c ambiguity_error ./gifsicle/include
+[vorbis-tools] node a.js ./vorbis-tools/oggenc/platform.c create_directories ./vorbis-tools/include
 	- node a.js /mnt/a/master/master/realworld_simplified/vorbis-tools.cc main
-[FFmpeg] node a.js /mnt/a/master/projects/FFmpeg/libavcodec/evc_ps.c ref_pic_list_struct /mnt/a/master/projects/FFmpeg
-[gpac] node a.js /mnt/a/master/projects/gpac/src/media_tools/av_parsers.c hevc_parse_vps_extension /mnt/a/master/projects/gpac/include
+[FFmpeg] node a.js ./FFmpeg/libavcodec/evc_ps.c ref_pic_list_struct ./FFmpeg
+[gpac] node a.js ./gpac/src/media_tools/av_parsers.c hevc_parse_vps_extension ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_5.c main
-[ZenLib] node a.js /mnt/a/master/projects/ZenLib/Source/ZenLib/Ztring.cpp Date_From_Seconds_1970_Local /mnt/a/master/projects/ZenLib/Source
+[ZenLib] node a.js ./ZenLib/Source/ZenLib/Ztring.cpp Date_From_Seconds_1970_Local ./ZenLib/Source
 	- node a.js /mnt/a/master/master/realworld_simplified/ZenLib.cc main
 [6lbr] 
 	- node a.js /mnt/a/master/master/realworld_simplified/6lbr.c main
 [MPD]
 	- node a.js /mnt/a/master/master/realworld_simplified/MPD.cc main
-[opencv_contrib] node a.js /mnt/a/master/projects/opencv_contrib/modules/wechat_qrcode/src/zxing/qrcode/decoder/decoded_bit_stream_parser.cpp decodeByteSegment
-[crasm] node a.js /mnt/a/master/projects/crasm/src/pseudos.c Xasc
+[opencv_contrib] node a.js ./opencv_contrib/modules/wechat_qrcode/src/zxing/qrcode/decoder/decoded_bit_stream_parser.cpp decodeByteSegment
+[crasm] node a.js ./crasm/src/pseudos.c Xasc
 	- node a.js /mnt/a/master/master/realworld_simplified/crasm.c main
-[libyang] node a.js /mnt/a/master/projects/libyang/src/parser_common.c lysp_stmt_validate_value /mnt/a/master/projects/libyang/src /mnt/a/master/projects/libyang/compat
-[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_utf8_str /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
-[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_unsubinfo_decode /mnt/a/master/projects/NanoNNG/include  /mnt/a/master/projects/NanoNNG/src
-[sofia-sip] node a.js /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attr_error_code /mnt/a/master/projects/sofia-sip /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/su /mnt/a/master/projects/sofia-sip/libsofia-sip-ua/stun
+[libyang] node a.js ./libyang/src/parser_common.c lysp_stmt_validate_value ./libyang/src ./libyang/compat
+[NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_utf8_str ./NanoNNG/include  ./NanoNNG/src
+[NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_unsubinfo_decode ./NanoNNG/include  ./NanoNNG/src
+[sofia-sip] node a.js ./sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attr_error_code ./sofia-sip ./sofia-sip/libsofia-sip-ua/su ./sofia-sip/libsofia-sip-ua/stun
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip_1.c main
-[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_subinfo_decode /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
-[NanoNNG] node a.js /mnt/a/master/projects/NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_str /mnt/a/master/projects/NanoNNG/include /mnt/a/master/projects/NanoNNG/src
-[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_prec_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
-[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/ndlz/ndlz8x8.c ndlz8_decompress /mnt/a/master/projects/c-blosc2/include
-[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_acc_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
-[c-blosc2] node a.js /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_rate_decompress /mnt/a/master/projects/c-blosc2/include /mnt/a/master/projects/c-blosc2/blosc /mnt/a/master/projects/c-blosc2/plugins/codecs/zfp/include
-[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c preauthenticated
+[NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_subinfo_decode ./NanoNNG/include ./NanoNNG/src
+[NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_str ./NanoNNG/include ./NanoNNG/src
+[c-blosc2] node a.js ./c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_prec_decompress ./c-blosc2/include ./c-blosc2/blosc ./c-blosc2/plugins/codecs/zfp/include
+[c-blosc2] node a.js ./c-blosc2/plugins/codecs/ndlz/ndlz8x8.c ndlz8_decompress ./c-blosc2/include
+[c-blosc2] node a.js ./c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_acc_decompress ./c-blosc2/include ./c-blosc2/blosc ./c-blosc2/plugins/codecs/zfp/include
+[c-blosc2] node a.js ./c-blosc2/plugins/codecs/zfp/blosc2-zfp.c zfp_rate_decompress ./c-blosc2/include ./c-blosc2/blosc ./c-blosc2/plugins/codecs/zfp/include
+[openNDS] node a.js ./openNDS/src/http_microhttpd.c preauthenticated
 	- node a.js /mnt/a/master/master/realworld_simplified/openNDS.c main
-[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c try_to_authenticate
-[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c show_preauthpage
-[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c do_binauth
-[xHTTP] node a.js /mnt/a/master/projects/xHTTP/xhttp.c xhttp
+[openNDS] node a.js ./openNDS/src/http_microhttpd.c try_to_authenticate
+[openNDS] node a.js ./openNDS/src/http_microhttpd.c show_preauthpage
+[openNDS] node a.js ./openNDS/src/http_microhttpd.c do_binauth
+[xHTTP] node a.js ./xHTTP/xhttp.c xhttp
 	- node a.js /mnt/a/master/master/realworld_simplified/xHTTP.c main
-[NTSC-CRT] node a.js /mnt/a/master/projects/NTSC-CRT/bmp_rw.c loadBMP
+[NTSC-CRT] node a.js ./NTSC-CRT/bmp_rw.c loadBMP
 	- node a.js /mnt/a/master/master/realworld_simplified/NTSC-CRT.c main
-[FreeRDP] node a.js /mnt/a/master/projects/FreeRDP/libfreerdp/codec/rfx.c rfx_process_message /mnt/a/master/projects/FreeRDP/include /mnt/a/master/projects/FreeRDP/winpr/include
+[FreeRDP] node a.js ./FreeRDP/libfreerdp/codec/rfx.c rfx_process_message ./FreeRDP/include ./FreeRDP/winpr/include
 	- node a.js /mnt/a/master/master/realworld_simplified/FreeRDP.c main
-[async-sockets-cpp] node a.js /mnt/a/master/projects/async-sockets-cpp/examples/udp-client.cpp main /mnt/a/master/projects/async-sockets-cpp/async-sockets/include
+[async-sockets-cpp] node a.js ./async-sockets-cpp/examples/udp-client.cpp main ./async-sockets-cpp/async-sockets/include
 	- node a.js /mnt/a/master/master/realworld_simplified/async-sockets-cpp.cc main
-[radare2] node a.js /mnt/a/master/projects/radare2/libr/bin/p/bin_xnu_kernelcache.c process_constructors /mnt/a/master/projects/radare2/libr/include
+[radare2] node a.js ./radare2/libr/bin/p/bin_xnu_kernelcache.c process_constructors ./radare2/libr/include
 	- node a.js /mnt/a/master/master/realworld_simplified/radare2_1.c main
-[wasm-micro-runtime] node a.js /mnt/a/master/projects/wasm-micro-runtime/core/iwasm/interpreter/wasm_loader.c wasm_loader_prepare_bytecode /mnt/a/master/projects/wasm-micro-runtime/core/shared/utils /mnt/a/master/projects/wasm-micro-runtime/core/shared/platform/darwin
+[wasm-micro-runtime] node a.js ./wasm-micro-runtime/core/iwasm/interpreter/wasm_loader.c wasm_loader_prepare_bytecode ./wasm-micro-runtime/core/shared/utils ./wasm-micro-runtime/core/shared/platform/darwin
 	- node a.js /mnt/a/master/master/realworld_simplified/wasm-micro-runtime.c main
-[jq] node a.js /mnt/a/master/projects/jq/src/decNumber/decNumber.c decToString
+[jq] node a.js ./jq/src/decNumber/decNumber.c decToString
 	- node a.js /mnt/a/master/master/realworld_simplified/jq.c main
-[cups] node a.js /mnt/a/master/projects/cups/cups/raster-interpret.c scan_ps /mnt/a/master/projects/cups/
+[cups] node a.js ./cups/cups/raster-interpret.c scan_ps ./cups/
 	- node a.js /mnt/a/master/master/realworld_simplified/cups.c main
-[libpe] node a.js /mnt/a/master/projects/libpe/exports.c pe_exports /mnt/a/master/projects/libpe/include
+[libpe] node a.js ./libpe/exports.c pe_exports ./libpe/include
 	- node a.js /mnt/a/master/master/realworld_simplified/libpe.c main
-[netatalk] node a.js /mnt/a/master/projects/netatalk/libatalk/dsi/dsi_write.c dsi_writeinit /mnt/a/master/projects/netatalk/include
+[netatalk] node a.js ./netatalk/libatalk/dsi/dsi_write.c dsi_writeinit ./netatalk/include
 	- node a.js /mnt/a/master/master/realworld_simplified/netatalk.c main
-[openNDS] node a.js /mnt/a/master/projects/openNDS/src/http_microhttpd.c get_query
+[openNDS] node a.js ./openNDS/src/http_microhttpd.c get_query
 	- node a.js /mnt/a/master/master/realworld_simplified/openNDS_1.c main
-[plutovg] node a.js /mnt/a/master/projects/plutovg/source/plutovg.c plutovg_surface_create /mnt/a/master/projects/plutovg/include /mnt/a/master/projects/plutovg/3rdparty/stb
+[plutovg] node a.js ./plutovg/source/plutovg.c plutovg_surface_create ./plutovg/include ./plutovg/3rdparty/stb
 	- node a.js /mnt/a/master/master/realworld_simplified/plutovg.c main
-[tinydir] node a.js /mnt/a/master/projects/tinydir/samples/file_open_sample.c main /mnt/a/master/projects/tinydir
+[tinydir] node a.js ./tinydir/samples/file_open_sample.c main ./tinydir
 	- node a.js /mnt/a/master/master/realworld_simplified/tinydir.c main
-[MicroHttpServer] node a.js /mnt/a/master/projects/MicroHttpServer/c-version/lib/server.c _ParseHeader
+[MicroHttpServer] node a.js ./MicroHttpServer/c-version/lib/server.c _ParseHeader
 	- node a.js /mnt/a/master/master/realworld_simplified/MicroHttpServer_1.c main
-[mongoose] node a.js /mnt/a/master/projects/mongoose/src/mg_resolv.c mg_resolve_from_hosts_file /mnt/a/master/projects/mongoose/src
+[mongoose] node a.js ./mongoose/src/mg_resolv.c mg_resolve_from_hosts_file ./mongoose/src
 	- node a.js /mnt/a/master/master/realworld_simplified/mongoose_1.c main
-[admesh] node a.js /mnt/a/master/projects/admesh/src/normals.c stl_fix_normal_directions
+[admesh] node a.js ./admesh/src/normals.c stl_fix_normal_directions
 	- node a.js /mnt/a/master/master/realworld_simplified/admesh.c main
-[gpac] node a.js /mnt/a/master/projects/gpac/src/filters/reframe_mp3.c mp3_dmx_process /mnt/a/master/projects/gpac/include
-[workflow] node a.js /mnt/a/master/projects/workflow/src/util/URIParser.cc parse
+[gpac] node a.js ./gpac/src/filters/reframe_mp3.c mp3_dmx_process ./gpac/include
+[workflow] node a.js ./workflow/src/util/URIParser.cc parse
 	- node a.js /mnt/a/master/master/realworld_simplified/workflow.cc main
-[libming] node a.js /mnt/a/master/projects/libming/util/parser.c parseSWF_DEFINEFONTINFO /mnt/a/master/projects/libming/src
+[libming] node a.js ./libming/util/parser.c parseSWF_DEFINEFONTINFO ./libming/src
 	- node a.js /mnt/a/master/master/realworld_simplified/libming.c main
-[moonlight-common-c CONFIG!] node a.js /mnt/a/master/projects/moonlight-common-c/src/RtspConnection.c performRtspHandshake /mnt/a/master/projects/moonlight-common-c/reedsolomon /mnt/a/master/projects/moonlight-common-c/enet/include
+[moonlight-common-c CONFIG!] node a.js ./moonlight-common-c/src/RtspConnection.c performRtspHandshake ./moonlight-common-c/reedsolomon ./moonlight-common-c/enet/include
 [asterisk CONFIG!] node a.js asterisk/res/res_pjsip_header_funcs.c update_header asterisk/third-party/pjproject/source/pjsip/include asterisk/include asterisk/third-party/pjproject/source/pjlib/include asterisk/third-party/pjproject/source/pjlib-util/include asterisk/third-party/pjproject/source/pjmedia/include
 	- node a.js /mnt/a/master/master/realworld_simplified/asterisk.c main
-[ayttm] node a.js /mnt/a/master/projects/ayttm/libproxy/proxy.c http_connect /mnt/a/master/projects/ayttm/src /usr/include/glib-2.0
+[ayttm] node a.js ./ayttm/libproxy/proxy.c http_connect ./ayttm/src /usr/include/glib-2.0
 	- node a.js /mnt/a/master/master/realworld_simplified/ayttm.c main
 
 
