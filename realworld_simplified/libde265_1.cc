@@ -19,9 +19,9 @@ typedef struct {
   char LongTermRefPic[2][16];
 } slice_segment_header;
 
-int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int X) {
+int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int X, int argc) {
   PBMotion vi;
-  vi.refIdx[X] = getAnInt(20);
+  vi.refIdx[X] = argc;
 
   if (shdr->LongTermRefPic[X][vi.refIdx[X]] == 'a') // Problem: in case random number is greater then 15 subarray will be accessed out of bound
     return -1;
@@ -29,8 +29,8 @@ int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int 
   return 0;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   srand(time(0));
   slice_segment_header shdr = {0};
-  derive_spatial_luma_vector_prediction(&shdr, 1);
+  derive_spatial_luma_vector_prediction(&shdr, 1, argc);
 }

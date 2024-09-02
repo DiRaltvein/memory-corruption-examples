@@ -1,7 +1,7 @@
 // https://www.cvedetails.com/cve/CVE-2022-47659/
 // repository: https://github.com/gpac/gpac
 // commit: 2bcc36b
-// extract of: src/filters/reframe_latm.c (function: latm_dmx_process)
+// extract of: src/utils/bitstream.c (function: gf_bs_read_data)
 
 #include <stdlib.h>
 #include <string.h>

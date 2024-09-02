@@ -94,13 +94,13 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/htmldoc.cc main
 [radare2]	node a.js ./radare2/libr/bin/format/pyc/marshal.c get_object ./radare2/libr/include ./radare2/shlr/sdb/src
 	- node a.js /mnt/a/master/master/realworld_simplified/radare2.c main
-[opusfile] node a.js ./opusfile/src/opusfile.c op_open1 ./opusfile/include
+[opusfile] node a.js ./opusfile/src/opusfile.c op_open1 ./opusfile/include ./opus/include
 	- node a.js /mnt/a/master/master/realworld_simplified/opusfile.c main
 [gpac] node a.js ./gpac/src/filters/dmx_m2ts.c m2tsdmx_declare_pid ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_2.c main
-[gpac] 
+[gpac] node a.js ./gpac/src/utils/bitstream.c gf_bs_read_data ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_3.c main
-[editorconfig-core-c] node a.js ./editorconfig-core-c/src/lib/ec_glob.c ec_glob ./editorconfig-core-c/include
+[editorconfig-core-c] node a.js ./editorconfig-core-c/src/lib/ec_glob.c ec_glob ./editorconfig-core-c/include ./editorconfig-core-c/src/auto
 	- node a.js /mnt/a/master/master/realworld_simplified/editorconfig-core-c.c main
 [gpac] node a.js ./gpac/src/utils/xml_parser.c xml_sax_append_string ./gpac/include
 	- node a.js /mnt/a/master/master/realworld_simplified/gpac_4.c main
