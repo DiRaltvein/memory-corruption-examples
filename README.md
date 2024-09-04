@@ -205,20 +205,16 @@ Vulnerability types:
 | 44  |      CVE-2023-47470       |    AOOB    |       FFmpeg        |    5c635b7    |          evc_ps.c (ref_pic_list_struct)           |     409     | 0/20/0(✖/✖) | 0/0/0(✖/✖)  |  0/37/0(✓/✖)  | 0/0/0(✖/✖)  | 0/5/0(✖/✖)      | ✖          |        |
 | 45  |      CVE-2023-48014       |    AOOB    |        gpac         |    cd8a95c    |      av_parsers.c (hevc_parse_vps_extension)      |    12426    | 0/23/0(✖/✖) | 2/5/14(✖/✖) | 0/635/0(✓/✖)  | 33/0/0(✓/✖) | 0/74/25(✖/✖)    | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |      -      | 0/1/0(✓/✓)  | 0/1/2(✓/✓)  |  0/1/0(✓/✓)   | 1/0/0(✓/✓)  | 0/2/0(✖/✖)      | 0/0/0(✖/✖) |        |
-
-| 46 | CVE-2020-36646 | ND | ZenLib | 14b165e | Ztring.cpp (Date_From_Seconds_1970_Local ) | 2475 | - | - | - | - | - | ✖ | |
-| | Extracted (not sanitized) | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/7/0(✓/✓) | 1/0/0(✓/✓) | 0/1/0(✖/✖) | ✖ | |
-
-| 47 | CVE-2021-46901 | AOOB | 6lbr | c3092a1 | httpd.c (httpd_is_file) | 293 | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/5/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | |
-
-| 48 | CVE-2022-46449 | AOOB | MPD | c2d0f35 | Error.hxx (FormatLastError) | - | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/1/0(✓/✓) | 0/0/0(✖/✖) | 0/1/1(✖/✖) | 1/0/0(✓/✓) | |
-
-| 49 | CVE-2023-2617 | ND | opencv_contrib | 960b3f6 | decoded_bit_stream_parser.cpp (decodeByteSegment) | 490 | - | - | - | - | - | ✖ | |
-
-| 50 | CVE-2023-23108 | ND | crasm | 932f329 | pseudos.c (Xasc) | 543 | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0//4/0(✓/✓) | 0/0/0(✖/✖) | 0/1/0(✖/✖) | 1/0/0(✓/✓) | |
+| 46  |      CVE-2020-36646       |     ND     |       ZenLib        |    14b165e    |    Ztring.cpp (Date_From_Seconds_1970_Local )     |    2475     | 0/2/0(✖/✖)  | 4/2/4(✓/✓)  |  0/96/0(✓/✖)  | 4/0/0(✖/✖)  | 0/15/0(✖/✖)     | ✖          | b\*    |
+|     | Extracted (not sanitized) |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/5/0(✓/✓)   | 1/0/0(✓/✓)  | 0/1/0(✖/✖)      | 0/0/0(✖/✖) |        |
+| 47  |      CVE-2021-46901       |    AOOB    |        6lbr         |    c3092a1    |              httpd.c (httpd_is_file)              |     293     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/4/0(✖/✖)   | 1/0/0(✖/✖)  | 0/1/22(✖/✖)     | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/5/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
+| 48  |      CVE-2022-46449       |    AOOB    |         MPD         |    c2d0f35    |            Error.hxx (FormatLastError)            |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |       ✖       | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          | c\*    |
+|     |         Extracted         |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/1/0(✓/✓)   | 0/0/0(✖/✖)  | 0/1/1(✖/✖)      | 1/0/0(✓/✓) |        |
+| 49  |       CVE-2023-2617       |     ND     |   opencv_contrib    |    960b3f6    | decoded_bit_stream_parser.cpp (decodeByteSegment) |     490     | 0/3/0(✖/✖)  | 0/0/0(✖/✖)  |  0/5/0(✖/✖)   | 9/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
+|     | Extracted (not sanitized) |            |                     |               |                         -                         |      -      | 0/1/0(✖/✖)  | 0/0/0(✖/✖)  |  0/3/0(✓/✓)   | 0/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) |        |
+| 50  |      CVE-2023-23108       |     ND     |        crasm        |    932f329    |                 pseudos.c (Xasc)                  |     543     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/17/0(✓/✓)  | 1/0/0(✖/✖)  | 0/49/0(✖/✖)     | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) |        |
 
 | 51 | CVE-2023-26917 | ND | libyang | 7572486 | parser_common.c (lysp_stmt_validate_value) | 3574 | - | - | - | - | - | ✖ | |
 
@@ -362,6 +358,10 @@ Notes:
 
 - a\*
   - strange false positive of clang on simple case
+- b\*
+  - in order to analyze using ikos function had to be a little bit changed. Function was changed from method to a function and all references to 'this' were removed.
+- c\*
+  - modifications to haeder file were made to make it possible to analyze it. Vulnerable method that changed to not use any windows api constructs as well as was extracted to not be between #ifdef \_WIN directives
 - 1\*
   - udp-client.cpp file was analyzed in the examples folder but only notes from udpsocket.hpp file were recorded. udp-server file was analyzed because static code analyzers like ikos and symbiotic can not analyze whole file and need and entry point
 - 2\*

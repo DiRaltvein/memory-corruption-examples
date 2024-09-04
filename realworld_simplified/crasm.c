@@ -3,8 +3,15 @@
 // commit: 932f329
 // extract of: src/pseudos.c (function: Xasc)
 
-int main(int argc, char *argv[]) {
-  char delimiter = *argv[1]; // Problem: potential null pointer dereference as well as access out of bound
-  if (delimiter == '/')
+int Xasc(char *oper) {
+  register char *s = oper;
+
+  if (*s == '/') { // Potential dereference of NULL pointer
     return 1;
+  }
+  return 0;
+}
+
+int main(int argc, char *argv[]) {
+  return Xasc(argv[1]); // potential read out of bound
 }
