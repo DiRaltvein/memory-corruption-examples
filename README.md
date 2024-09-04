@@ -215,36 +215,22 @@ Vulnerability types:
 |     | Extracted (not sanitized) |            |                     |               |                         -                         |      -      | 0/1/0(✖/✖)  | 0/0/0(✖/✖)  |  0/3/0(✓/✓)   | 0/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) |        |
 | 50  |      CVE-2023-23108       |     ND     |        crasm        |    932f329    |                 pseudos.c (Xasc)                  |     543     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/17/0(✓/✓)  | 1/0/0(✖/✖)  | 0/49/0(✖/✖)     | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) |        |
-
-| 51 | CVE-2023-26917 | ND | libyang | 7572486 | parser_common.c (lysp_stmt_validate_value) | 3574 | - | - | - | - | - | ✖ | |
-
-| 52 | CVE-2023-29995 | AOOB | NanoNNG | 1d2a611 | mqtt_parser.c (copyn_utf8_str) | 1847 | - | - | - | - | - | ✖ | |
-
-| 53 | CVE-2023-29996 | ND | NanoNNG | f2a4dac0 | mqtt_parser.c (nmq_unsubinfo_decode) | 1812 | - | - | - | - | - | ✖ | |
-
-| 54 | CVE-2023-32307 | AOOB | sofia-sip | 3f17604 | stun_common.c (stun_parse_attr_error_code) | 841 | - | - | - | - | - | ✖ | |
-| | Extracted (not sanitized) | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/4/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | |
-
-| 55 | CVE-2023-33659 | AOOB | NanoNNG | d9792f5 | mqtt_parser.c (nmq_subinfo_decode) | 1871 | - | - | - | - | - | ✖ | |
-
-| 56 | CVE-2023-33660 | AOOB | NanoNNG | d9792f5 | mqtt_parser.c (copyn_str) | 1871 | - | - | - | - | - | ✖ | |
-
-| 57 | CVE-2023-37185 | ND | c-blosc2 | 144ed29 | blosc2-zfp.c (zfp_prec_decompress) | 877 | - | - | - | - | - | ✖ | |
-
-| 58 | CVE-2023-37186 | ND | c-blosc2 | 425e8a9 | ndlz8x8.c (ndlz8_decompress) | 577 | - | - | - | - | - | ✖ | |
-
-| 59 | CVE-2023-37187 | ND | c-blosc2 | 144ed29 | blosc2-zfp.c (zfp_acc_decompress) | 877 | - | - | - | - | - | ✖ | |
-
-| 60 | CVE-2023-37188 | ND | c-blosc2 | 144ed29 | blosc2-zfp.c (zfp_rate_decompress) | 877 | - | - | - | - | - | ✖ | |
-
-| 61 | CVE-2023-38313 | ND | OpenNDS | 8214525 | http_microhttpd.c (preauthenticated) | 2102 | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/1/0(✓/✓) | 1/0/0(✓/✓) | 0/2/0(✓/✓) | 1/0/0(✓/✓) | |
-
-| 62 | CVE-2023-38315 | ND | OpenNDS | 8214525 | http_microhttpd.c (try_to_authenticate) | 2102 | - | - | - | - | - | ✖ | |
-
-| 63 | CVE-2023-38320 | ND | OpenNDS | 99ef4e0 | http_microhttpd.c (show_preauthpage) | 2114 | - | - | - | - | - | ✖ | |
-
-| 64 | CVE-2023-38322 | ND | OpenNDS | 99ef4e0 | http_microhttpd.c (do_binauth) | 2114 | - | - | - | - | - | ✖ | |
+| 51  |      CVE-2023-26917       |     ND     |       libyang       |    7572486    |    parser_common.c (lysp_stmt_validate_value)     |    3574     | 0/45/0(✖/✖) | 38/1/0(✖/✖) |  0/41/0(✓/✓)  | 28/0/0(✖/✖) | 0/3/111(✖/✖)    | ✖          |        |
+| 52  |      CVE-2023-29995       |    AOOB    |       NanoNNG       |    1d2a611    |          mqtt_parser.c (copyn_utf8_str)           |    1847     | 0/12/0(✖/✖) | 0/5/2(✖/✖)  | 0/100/0(✓/✖)  | 4/0/0(✖/✖)  | 0/4/2(✖/✖)      | ✖          |        |
+| 53  |      CVE-2023-29996       |     ND     |       NanoNNG       |   f2a4dac0    |       mqtt_parser.c (nmq_unsubinfo_decode)        |    1812     | 0/12/0(✖/✖) | 0/5/2(✖/✖)  |  0/81/0(✓/✖)  | 4/0/0(✖/✖)  | 0/4/2(✖/✖)      | ✖          |        |
+| 54  |      CVE-2023-32307       |    AOOB    |      sofia-sip      |    3f17604    |    stun_common.c (stun_parse_attr_error_code)     |     841     | 0/3/0(✖/✖)  | 1/0/0(✖/✖)  |  0/29/0(✖/✖)  | 5/0/0(✖/✖)  | 0/21/4(✖/✖)     | ✖          |        |
+|     | Extracted (not sanitized) |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/4/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
+| 55  |      CVE-2023-33659       |    AOOB    |       NanoNNG       |    d9792f5    |        mqtt_parser.c (nmq_subinfo_decode)         |    1871     | 0/11/0(✖/✖) | 0/5/2(✖/✖)  | 0/137/0(✓/✖)  | 4/0/0(✖/✖)  | 0/4/2(✖/✖)      | ✖          |        |
+| 56  |      CVE-2023-33660       |    AOOB    |       NanoNNG       |    d9792f5    |             mqtt_parser.c (copyn_str)             |    1871     | 0/11/0(✖/✖) | 0/5/2(✖/✖)  |  0/55/0(✓/✖)  | 4/0/0(✖/✖)  | 0/4/2(✖/✖)      | ✖          |        |
+| 57  |      CVE-2023-37185       |     ND     |      c-blosc2       |    144ed29    |        blosc2-zfp.c (zfp_prec_decompress)         |     877     | 0/2/0(✖/✖)  | 8/0/0(✖/✖)  |  1/21/0(✓/✖)  | 2/0/0(✖/✖)  | 0/1/30(✖/✖)     | ✖          |        |
+| 58  |      CVE-2023-37186       |     ND     |      c-blosc2       |    425e8a9    |           ndlz8x8.c (ndlz8_decompress)            |     577     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  | 0/136/0(✓/✖)  | 0/0/0(✖/✖)  | 0/6/6(✖/✖)      | ✖          |        |
+| 59  |      CVE-2023-37187       |     ND     |      c-blosc2       |    144ed29    |         blosc2-zfp.c (zfp_acc_decompress)         |     877     | 0/2/0(✖/✖)  | 8/0/0(✖/✖)  |  1/33/0(✓/✖)  | 2/0/0(✖/✖)  | 0/1/30(✖/✖)     | ✖          |        |
+| 60  |      CVE-2023-37188       |     ND     |      c-blosc2       |    144ed29    |        blosc2-zfp.c (zfp_rate_decompress)         |     877     | 0/2/0(✖/✖)  | 8/0/0(✖/✖)  |  1/27/0(✓/✖)  | 2/0/0(✖/✖)  | 0/1/30(✖/✖)     | ✖          |        |
+| 61  |      CVE-2023-38313       |     ND     |       OpenNDS       |    8214525    |       http_microhttpd.c (preauthenticated)        |    2102     | 0/3/0(✖/✖)  | 0/2/4(✖/✖)  | 2/1001/0(✓/✖) | 3/0/0(✖/✖)  | 0/24/4(✖/✖)     | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |      -      | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/1/0(✓/✓)   | 1/0/0(✓/✓)  | 0/2/0(✓/✓)      | 1/0/0(✓/✓) |        |
+| 62  |      CVE-2023-38315       |     ND     |       OpenNDS       |    8214525    |      http_microhttpd.c (try_to_authenticate)      |    2102     | 0/3/0(✖/✖)  | 0/2/4(✓/✓)  |  0/48/0(✓/✖)  | 3/0/0(✖/✖)  | 0/24/4(✖/✖)     | ✖          |        |
+| 63  |      CVE-2023-38320       |     ND     |       OpenNDS       |    99ef4e0    |       http_microhttpd.c (show_preauthpage)        |    2114     | 0/3/0(✖/✖)  | 0/2/4(✖/✖)  | 0/126/0(✓/✖)  | 3/0/0(✖/✖)  | 0/24/4(✖/✖)     | ✖          |        |
+| 64  |      CVE-2023-38322       |     ND     |       OpenNDS       |    99ef4e0    |          http_microhttpd.c (do_binauth)           |    2114     | 0/3/0(✖/✖)  | 0/2/4(✖/✖)  |  1/52/0(✓/✖)  | 3/0/0(✖/✖)  | 0/24/4(✖/✖)     | ✖          |        |
 
 | 65 | CVE-2023-38434 | UAF | xhttp | 72f812d | xhttp.c (xhttp) | 1869 | - | - | - | - | - | ✖ | |
 | | Extracted | | | | - | - | 0/1/0(✓/✓) | 0/0/0(✖/✖) | 1/0/0(✓/✓) | 1/0/0(✓/✓) | 0/1/0(✓/✓) | 0/0/0(✖/✖) | |

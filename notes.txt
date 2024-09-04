@@ -127,7 +127,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/opencv_contrib.cc main
 [crasm] node a.js ./crasm/src/pseudos.c Xasc
 	- node a.js /mnt/a/master/master/realworld_simplified/crasm.c main
-[libyang] node a.js ./libyang/src/parser_common.c lysp_stmt_validate_value ./libyang/src ./libyang/compat
+[libyang] node a.js ./libyang/src/parser_common.c lysp_stmt_validate_value ./libyang/src ./libyang/compat ./libyang/build2/src ./libyang/build2/compat
 [NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c copyn_utf8_str ./NanoNNG/include  ./NanoNNG/src
 [NanoNNG] node a.js ./NanoNNG/src/sp/protocol/mqtt/mqtt_parser.c nmq_unsubinfo_decode ./NanoNNG/include  ./NanoNNG/src
 [sofia-sip] node a.js ./sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attr_error_code ./sofia-sip ./sofia-sip/libsofia-sip-ua/su ./sofia-sip/libsofia-sip-ua/stun
