@@ -259,25 +259,19 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/6/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 78  |      CVE-2023-51771       |    AOOB    |   MicroHttpServer   |    a8ab029    |             server.c (\_ParseHeader)              |   469    | 0/2/0(✖/✖)  | 0/0/0(✖/✖)  | 0/139/0(✓/✖)  | 1/0/0(✖/✖)  | 0/3/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/17/0(✓/✓)  | 1/0/0(✖/✖)  | 0/2/0(✖/✖)      | 1/0/0(✖/✖) |        |
-| 79  |      CVE-2020-25887       |    AOOB    |      mongoose       |   9fe1c93c    |     mg_resolv.c (mg_resolve_from_hosts_file)      |   288    |      -      |      -      |       -       |      -      | -               | ✖          | 5\*    |
+| 79  |      CVE-2020-25887       |    AOOB    |      mongoose       |   9fe1c93c    |     mg_resolv.c (mg_resolve_from_hosts_file)      |   288    | 0/1/0(✖/✖)  | 0/1/0(✖/✖)  |  1/6/0(✖/✖)   | 1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 1/0/0(✖/✖)  |  0/6/0(✖/✖)   | 0/0/0(✖/✖)  | 0/1/0(✖/✖)      | ✖          |        |
-
-| 80 | CVE-2022-38072 | AOOB | admesh | 767a105 | normals.c (stl_fix_normal_directions) | 332 | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/16/0(✓/✖) | 1/0/0(✖/✖) | 0/0/0(✖/✖) | 1/0/0(✓/✓) | |
-
-| 81 | CVE-2023-0841 | AOOB | gpac | ea7395f | reframe_mp3.c (mp3_dmx_process) | 913 | - | - | - | - | - | ✖ | |
-
-| 82 | CVE-2023-33457 | AOOB | workflow | 1601c8b | URIParser.cc (parse) | 507 | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖ | 0/0/0(✖/✖) | 0/0/0(✖/✖) | ✖ | |
-| | Extracted | | | | - | - | 0/3/0(✓/✓) | 0/0/0(✖/✖) | 0/64/0(✓/✖) | 1/0/0(✖/✖) | 0/7/0(✖/✖) | ✖ | |
-
-| 83 | CVE-2023-36239 | DOS | libming | 5aa3470 | parser.c (parseSWF_DEFINEFONTINFO) | 3411 | 0/53/0(✓/✓) | 0/0/0(✖/✖) | 0/60/0(✓/✖) | 85/0/0(✖/✖) | 0/86/74(✖/✖) | ✖ | |
-| | Extracted | | | | - | - | 0/2/0(✓/✓) | 0/0/0(✖/✖) | 0/7/0(✓/✖) | 2/0/0(✓/✓) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | |
-
-| 84 | CVE-2023-37457 | AOOB | asterisk | 39760d1 | res_pjsip_header_funcs.c (update_header) | 1294 | - | - | - | - | - | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/8/0(✓/✓) | 0/0/0(✖/✖) | 0/4/1(✓/✓) | 3/0/0(✓/✓) | |
-
-| 85 | CVE-2015-10088 | AOOB | ayttm | da8940c | proxy.c (http_connect) | 373 | 0/4/0(✖/✖) | 0/1/2(✖/✖) | 1/35/0(✖/✖) | 3/0/0(✖/✖) | 0/10/2(✓/✓) | ✖ | |
-| | Extracted | | | | - | - | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/0/0(✖/✖) | 0/2/1(✓/✓) | 0/0/0(✖/✖) | |
+| 80  |      CVE-2022-38072       |    AOOB    |       admesh        |    767a105    |       normals.c (stl_fix_normal_directions)       |   332    | 0/4/0(✖/✖)  | 0/3/6(✖/✖)  |       ✖       | 2/0/0(✖/✖)  | 0/3/0(✖/✖)      | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/16/0(✓/✖)  | 1/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
+| 81  |       CVE-2023-0841       |    AOOB    |        gpac         |    ea7395f    |          reframe_mp3.c (mp3_dmx_process)          |   913    | 0/1/0(✖/✖)  | 0/2/4(✖/✖)  | 0/961/0(✖/✖)  | 1/0/0(✖/✖)  | 0/13/6(✖/✖)     | ✖          |        |
+| 82  |      CVE-2023-33457       |    AOOB    |      workflow       |    1601c8b    |               URIParser.cc (parse)                |   507    | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/3/0(✓/✓)  | 0/0/0(✖/✖)  |  0/64/0(✓/✖)  | 1/0/0(✖/✖)  | 0/7/0(✖/✖)      | ✖          |        |
+| 83  |      CVE-2023-36239       |    DOS     |       libming       |    5aa3470    |        parser.c (parseSWF_DEFINEFONTINFO)         |   3411   | 0/53/0(✓/✖) | 0/0/0(✖/✖)  |  0/60/0(✓/✖)  | 85/0/0(✖/✖) | 0/86/74(✖/✖)    | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/2/0(✓/✓)  | 0/0/0(✖/✖)  |  0/7/0(✓/✖)   | 2/0/0(✓/✓)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
+| 84  |      CVE-2023-37457       |    AOOB    |      asterisk       |    39760d1    |     res_pjsip_header_funcs.c (update_header)      |   1294   |      -      |      -      |       -       |      -      | -               | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/8/0(✓/✓)   | 0/0/0(✖/✖)  | 0/4/1(✓/✓)      | 3/0/0(✓/✓) |        |
+| 85  |      CVE-2015-10088       |    AOOB    |        ayttm        |    da8940c    |              proxy.c (http_connect)               |   373    | 0/4/0(✖/✖)  | 0/1/2(✖/✖)  |  1/35/0(✖/✖)  | 3/0/0(✖/✖)  | 0/10/2(✓/✓)     | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  | 0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 0/0/0(✖/✖)  | 0/2/1(✓/✓)      | 0/0/0(✖/✖) |        |
 
 | 86 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
 | | Extracted | | | | - | - | - | - | - | - | - | - | |
@@ -339,5 +333,3 @@ Notes:
   - while loop where is vulnerability takes 2812 code rows WOW.
 - 4\*
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
-- 5\*
-  - analyzed function mg_resolve_from_hosts_file was isolated
