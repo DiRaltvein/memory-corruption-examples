@@ -1,6 +1,6 @@
 // https://www.cvedetails.com/cve/CVE-2023-47016/
 // repository: https://github.com/radareorg/radare2
-// commit: 386d9486a1
+// commit: 386d948
 // extract of: libr/bin/p/bin_xnu_kernelcache.c (function: process_constructors)
 
 #include <stdint.h>

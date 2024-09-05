@@ -31,7 +31,5 @@ int main(int argc, char *argv[]) {
     rfx_message_get_tile(&message, i);
   }
 
-  if (message.tiles != NULL) {
-    free(message.tiles);
-  }
+  free(message.tiles);
 }
