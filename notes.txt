@@ -1,3 +1,11 @@
+wsl --export masters A:\WSL\masters-snapshot
+wsl --unregister masters
+wsl --import masters A:\WSL\masters A:\WSL\latest-ubuntu-22-master-with-ndi
+netsh winsock reset
+
+wsl --distribution masters --user raltvein
+	cd /home/raltvein/projects
+
 // ---------------------------------- LLVM ---------------------------------- \\
 
 SETUP (https://clang.llvm.org/get_started.html)
@@ -16,6 +24,26 @@ find . -type f -print0 | xargs -0 -n 1 -P 4 dos2unix
 autoconf for configure.ac files
 
 cp -r ./<file> /mnt/a/master/projects
+
+// ---------------------------------- Non-Distinguishable Inconsistencies ---------------------------------- \\
+
+clone repo (https://github.com/umnsec/ndi) into /usr/ndi
+clone LLVM repo (https://github.com/llvm/llvm-project) into /usr/ndi/llvm/llvm-project
+git checkout to LLVM version 15 (https://github.com/llvm/llvm-project/releases?page=5, git commit: 8dfdcc7)
+execute /usr/ndi/llvm/build.sh
+execute usr/ndi/analyzer/Makefiles
+now the executable to analyze is availible at /usr/ndi/analyzer/build/lib/kanalyzer
+
+to analyze any file it first needs to be compiled into a bit code (.bc file)
+/usr/llvm-project/build/bin/clang -emit-llvm -c   program.c -o ndi.bc
+/usr/llvm-project/build/bin/clang++ -emit-llvm -c program.c -o ndi.bc
+
+// ---------------------------------- Detecting Missed Security Operations (IPPO) (NOT USED)  ---------------------------------- \\
+
+clone repo (https://github.com/dinghaoliu/IPPO) into /usr
+execute /usr/IPPO/llvm/build-llvm.sh
+execute usr/IPPO/src/CMakeLists.txt (make command)
+now the executable to analyze is availible at /usr/IPPO/src
 
 // ---------------------------------- Options used ---------------------------------- \\
 
@@ -187,8 +215,10 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/ayttm.c main
 [libde265] node a.js ./libde265/libde265/pps.cc dump ./libde265 ./libde265/extra
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_2.cc main
-
-
+[jhead] node a.js ./jhead/jpgfile.c process_COM
+	- node a.js /mnt/a/master/master/realworld_simplified/jhead_1.c main
+[flatcc] node a.js ./flatcc/src/compiler/parser.c error_ref_sym
+	- node a.js /mnt/a/master/master/realworld_simplified/flatcc.c main
 
 
 

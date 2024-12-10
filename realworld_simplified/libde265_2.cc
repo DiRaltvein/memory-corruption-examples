@@ -17,7 +17,7 @@ pic_parameter_set *initializePicParameterSetObject(int argc) {
   pic_parameter_set *obj = (pic_parameter_set *)malloc(sizeof(pic_parameter_set));
   obj->num_tile_columns = argc;
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < DE265_MAX_TILE_COLUMNS; i++) {
     obj->colBd[i] = i;
   }
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
   bool error = read(obj);
   if (!error) {
     for (int i = 0; i <= obj->num_tile_columns; i++) {
-      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow. num_tile_columns is greater than 9
+      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow. num_tile_columns is just argc and when argc is greater than 10 then overflow happens
     }
     free(obj);
     return 1;

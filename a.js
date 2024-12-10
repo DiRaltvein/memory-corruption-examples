@@ -59,6 +59,9 @@ const oaf = (name, command) => {
   console.log(`${c(name)}: ${command}\n`);
 };
 
+// ------------------------------------ COMMANDS ------------------------------------ \\
+
+// Clang
 oaf(
   '[ubuntu 22] CLANG',
   `clang${isCFile ? '' : '++'} --analyze` +
@@ -71,6 +74,15 @@ oaf(
     }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
+if (entryPoint === 'main') {
+  console.log(
+    ` ${c('Verify', true)}: ${
+      `clang${isCFile ? '' : '++'}`
+    } ${getIncludes()}${fileToAnalyze} -o memory.out -fsanitize=memory -g -fno-omit-frame-pointer\n`
+  );
+}
+// Clang
+
 // oaf(
 //   'CLANG-TIDY',
 //   `clang-tidy -checks="*,-clang-analyzer-*" -extra-arg=-ferror-limit=0 ${
@@ -78,23 +90,30 @@ oaf(
 //   }${fileToAnalyze}`
 // );
 
+// CPPCHECK
 oaf(
   '[ubuntu 22*] CPPCHECK',
   `cppcheck --enable=warning,portability --force --inconclusive ${getIncludes()}${fileToAnalyze}`
 );
+// CPPCHECK
 
+// IKOS
 oaf(
   '[ubuntu 22*] IKOS',
   `ikos -w --globals-init=all ` +
     `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
     `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
-); //  --status-filter="error,warning" PROBABLY NOT NEEDED
+); //
+// IKOS
 
+// INFER
 oaf(
   '[ubuntu 22] INFER',
   `infer run --default-checkers --headers --biabduction --biabduction-unsafe-malloc --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze}`
 );
+// INFER
 
+// gcc
 oaf(
   '[ubuntu 22] GCC',
   `${
@@ -106,10 +125,20 @@ if (entryPoint === 'main') {
   console.log(
     ` ${c('Verify', true)}: ${
       isCFile ? 'gcc' : 'g++'
-    } ${getIncludes()}${fileToAnalyze} -o memory.out -fsanitize=address -static-libasan -g -fno-omit-frame-pointer\n`
+    } ${getIncludes()}${fileToAnalyze} -o address.out -fsanitize=address -static-libasan -g -fno-omit-frame-pointer\n`
   );
 }
+// gcc
 
+// Non-Distinguishable Inconsistencies
+oaf(
+  '[ubuntu 22] NDI',
+  `/usr/ndi/llvm/llvm-project/build/bin/clang${!isCFile ? '++' : ''} -emit-llvm -c ${fileToAnalyze} ${getIncludes()}-o ndi.bc && ` +
+  '/usr/ndi/analyzer/build/lib/kanalyzer ./ndi.bc'
+);
+// Non-Distinguishable Inconsistencies
+
+// symbiotic
 const headersKey = isCFile ? 'CFLAGS' : 'CPPFLAGS';
 oaf(
   '[ubuntu 20] SYMBIOTIC',
@@ -117,6 +146,7 @@ oaf(
     !showHeaders ? '' : `${headersKey}='${getIncludes().trim()}' `
   }symbiotic --prp=memsafety --malloc-never-fails ${fileToAnalyze}`
 );
+// symbiotic
 
 // greps
 for (const noteType of ['error', 'warning', 'note']) {
@@ -132,3 +162,4 @@ console.log(
     fileToAnalyze
   )}:[0-9]+:([0-9]+:)? (error|warning|note):"\n`
 );
+// greps
