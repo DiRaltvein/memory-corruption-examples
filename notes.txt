@@ -217,9 +217,10 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_2.cc main
 [jhead] node a.js ./jhead/jpgfile.c process_COM
 	- node a.js /mnt/a/master/master/realworld_simplified/jhead_1.c main
-[flatcc] node a.js ./flatcc/src/compiler/parser.c error_ref_sym
+[flatcc] node a.js ./flatcc/src/compiler/parser.c error_ref_sym ./flatcc/include ./flatcc/config ./flatcc/external
 	- node a.js /mnt/a/master/master/realworld_simplified/flatcc.c main
-
+[libsndfile] node a.js ./libsndfile/src/mat4.c mat4_read_header ./libsndfile/include
+	- node a.js /mnt/a/master/master/realworld_simplified/libsndfile.c main
 
 
 
