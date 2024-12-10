@@ -64,7 +64,7 @@ const oaf = (name, command) => {
 // Clang
 oaf(
   '[ubuntu 22] CLANG',
-  `clang${isCFile ? '' : '++'} --analyze` +
+  `/usr/llvm-project/build/bin/clang${isCFile ? '' : '++'} --analyze` +
     ` -Xclang -analyzer-checker=core,alpha.core,security,alpha.security,optin,unix,alpha.unix,nullability${
       isCFile ? '' : ',cplusplus,alpha.cplusplus'
     } -Xclang -analyzer-disable-checker=security.insecureAPI ${
@@ -74,13 +74,13 @@ oaf(
     }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
 
-if (entryPoint === 'main') {
-  console.log(
-    ` ${c('Verify', true)}: ${
-      `clang${isCFile ? '' : '++'}`
-    } ${getIncludes()}${fileToAnalyze} -o memory.out -fsanitize=memory -g -fno-omit-frame-pointer\n`
-  );
-}
+// if (entryPoint === 'main') {
+//   console.log(
+//     ` ${c('Verify', true)}: /usr/llvm-project/build/bin/${
+//       `clang${isCFile ? '' : '++'}`
+//     } ${getIncludes()}${fileToAnalyze} -o memory.out -fsanitize=memory -g -fno-omit-frame-pointer\n`
+//   );
+// }
 // Clang
 
 // oaf(
@@ -100,7 +100,7 @@ oaf(
 // IKOS
 oaf(
   '[ubuntu 22*] IKOS',
-  `ikos -w --globals-init=all ` +
+  `/home/linuxbrew/.linuxbrew/bin/ikos -w --globals-init=all ` +
     `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
     `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
 ); //
@@ -109,21 +109,21 @@ oaf(
 // INFER
 oaf(
   '[ubuntu 22] INFER',
-  `infer run --default-checkers --headers --biabduction --biabduction-unsafe-malloc --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze}`
+  `/home/raltvein/infer-linux-x86_64-v1.2.0/bin/infer run --default-checkers --headers --biabduction --biabduction-unsafe-malloc --bufferoverrun --pulse-unsafe-malloc --keep-going -- gcc -c ${getIncludes()}${fileToAnalyze}`
 );
 // INFER
 
 // gcc
 oaf(
   '[ubuntu 22] GCC',
-  `${
+  `/usr/local/gcc-14.2.0/bin/${
     isCFile ? 'gcc' : 'g++'
   } -fanalyzer -Wall -Wextra -Wformat=2 -c ${getIncludes()}${fileToAnalyze}`
 ); // -c analyze but do not link. We are not building the file we are only analyzing it so only compiling the file is enough
 
 if (entryPoint === 'main') {
   console.log(
-    ` ${c('Verify', true)}: ${
+    ` ${c('Verify', true)}: /usr/local/gcc-14.2.0/bin/${
       isCFile ? 'gcc' : 'g++'
     } ${getIncludes()}${fileToAnalyze} -o address.out -fsanitize=address -static-libasan -g -fno-omit-frame-pointer\n`
   );
@@ -133,8 +133,10 @@ if (entryPoint === 'main') {
 // Non-Distinguishable Inconsistencies
 oaf(
   '[ubuntu 22] NDI',
-  `/usr/ndi/llvm/llvm-project/build/bin/clang${!isCFile ? '++' : ''} -emit-llvm -c ${fileToAnalyze} ${getIncludes()}-o ndi.bc && ` +
-  '/usr/ndi/analyzer/build/lib/kanalyzer ./ndi.bc'
+  `/usr/ndi/llvm/llvm-project/build/bin/clang${
+    !isCFile ? '++' : ''
+  } -emit-llvm -c ${fileToAnalyze} ${getIncludes()}-o ndi.bc && ` +
+    '/usr/ndi/analyzer/build/lib/kanalyzer ./ndi.bc'
 );
 // Non-Distinguishable Inconsistencies
 

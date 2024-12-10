@@ -3786,12 +3786,12 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47087/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-47088/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
@@ -3851,8 +3851,8 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0051/",
-    "reason": -1,
-    "notes": ""
+    "reason": 3,
+    "notes": "Vim"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-0288/",
