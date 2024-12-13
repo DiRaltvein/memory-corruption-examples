@@ -1,10 +1,10 @@
-// CVE-2022-47087
+// https://www.cvedetails.com/cve/CVE-2022-47087/
 // repository: https://github.com/gpac/gpac
 // commit: 73a8c42
 // extract of: src/media_tools/av_parsers.c (function: gf_vvc_read_pps_bs_internal)
 
 #include <stdint.h>
-#include <stdio.h> // printf
+#include <stdio.h>
 
 #define MAX_TILE_COLS 10
 
