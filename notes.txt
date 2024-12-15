@@ -231,6 +231,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_8.c main
 [gpac] node a.js ./gpac/src/media_tools/av_parsers.c hevc_parse_vps_extension ./gpac/include
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_9.c main
+[gpac] node a.js ./gpac/src/media_tools/av_parsers.c eac3_update_channels ./gpac/include
+- node a.js /mnt/a/master/master/realworld_simplified/gpac_10.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
