@@ -3,7 +3,7 @@ wsl --unregister masters
 wsl --import masters A:\WSL\masters A:\WSL\latest-ubuntu-22-master-with-ndi
 netsh winsock reset
 
-wsl --distribution masters --user raltvein
+wsl --distribution masters --user root
 	cd /home/raltvein/trash
 	cd /home/raltvein/projects
 
@@ -235,6 +235,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_10.c main
 [gpac] node a.js ./gpac/src/media_tools/av_parsers.c gf_hevc_read_sps_bs_internal ./gpac/include
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_11.c main
+[gpac] node a.js ./gpac/src/media_tools/av_parsers.c gf_hevc_read_sps_bs_internal ./gpac/include
+- node a.js /mnt/a/master/master/realworld_simplified/gpac_12.c main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
