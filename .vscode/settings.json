@@ -4,6 +4,9 @@
     "stdint.h": "c",
     "stdio.h": "c",
     "string.h": "c",
-    "limits.h": "c"
+    "limits.h": "c",
+    "array": "c",
+    "initializer_list": "c",
+    "utility": "c"
   }
 }

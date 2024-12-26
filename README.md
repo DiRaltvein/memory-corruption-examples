@@ -301,11 +301,9 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/17/0(✓/✖)  | 3/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
 | 100 |      CVE-2022-47660       |     IO     |        gpac         |    55c8b3a    |      isom_write.c (gf_isom_shift_cts_offset)      |   8864   | 0/7/0(✖/✖)  | 6/11/19(✖/✖) |  0/93/0(✓/✖)  | 14/0/0(✖/✖) | 0/28/0(✖/✖)     | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/1/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
+| 101 |      CVE-2022-47663       |    AOOB    |        gpac         |    080a627    |         reframe_h263.c (h263dmx_process)          |   759    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/784/0(✓/✖)  | 0/0/0(✖/✖)  | 0/8/1(✖/✖)      | ✖          | 5      |
+| 102 |       CVE-2023-0866       |    AOOB    |        gpac         |    be9f8d3    |         reframe_adts.c (adts_dmx_process)         |   1040   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/1513/0(✓/✖) | 0/0/0(✖/✖)  | 0/5/0(✖/✖)      | ✖          | 5      |
 
-| 101 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
-| | Extracted | | | | - | - | - | - | - | - | - | - | |
-| 102 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
-| | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 103 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
 | | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 104 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
@@ -333,3 +331,5 @@ Notes:
   - while loop where is vulnerability takes 2812 code rows WOW.
 - 4\*
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
+- 5\*
+  - I know the line where vulnerability happens but because it happens at the end of a complex logic it is hard to reproduce the error.
