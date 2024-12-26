@@ -247,7 +247,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - MAYBE RETURN BUT HARD BUSINESS LOGIC OF PARSING A AUTIO BIT STREAM
 [gpac] node a.js ./gpac/src/filters/reframe_adts.c adts_dmx_process ./gpac/include
 - MAYBE RETURN BUT HARD BUSINESS LOGIC OF PARSING A AUTIO BIT STREAM
-
+[libheif] node a.js ./libheif/a.cc strided_copy
+- node a.js /mnt/a/master/master/realworld_simplified/libheif.cc main
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\

@@ -303,9 +303,9 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/1/0(✓/✓)   | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 101 |      CVE-2022-47663       |    AOOB    |        gpac         |    080a627    |         reframe_h263.c (h263dmx_process)          |   759    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/784/0(✓/✖)  | 0/0/0(✖/✖)  | 0/8/1(✖/✖)      | ✖          | 5      |
 | 102 |       CVE-2023-0866       |    AOOB    |        gpac         |    be9f8d3    |         reframe_adts.c (adts_dmx_process)         |   1040   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/1513/0(✓/✖) | 0/0/0(✖/✖)  | 0/5/0(✖/✖)      | ✖          | 5      |
+| 103 |       CVE-2023-0996       |    AOOB    |       libheif       |    f61fe73    |         heif_emscripten.h (strided_copy)          |   304    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/25/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          | 6      |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 1/0/0(✓/✓)  |  0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/2/2(✓/✓)      | 1/0/0(✓/✓) |        |
 
-| 103 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
-| | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 104 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
 | | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 105 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
@@ -333,3 +333,5 @@ Notes:
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
 - 5\*
   - I know the line where vulnerability happens but because it happens at the end of a complex logic it is hard to reproduce the error.
+- 6\*
+  - Function strided_copy was tested in isolation mainly because header files can not be directly analyzed by some static code analyzers
