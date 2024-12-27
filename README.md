@@ -305,9 +305,9 @@ Vulnerability types:
 | 102 |       CVE-2023-0866       |    AOOB    |        gpac         |    be9f8d3    |         reframe_adts.c (adts_dmx_process)         |   1040   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/1513/0(✓/✖) | 0/0/0(✖/✖)  | 0/5/0(✖/✖)      | ✖          | 5      |
 | 103 |       CVE-2023-0996       |    AOOB    |       libheif       |    f61fe73    |         heif_emscripten.h (strided_copy)          |   304    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/25/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          | 6      |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 1/0/0(✓/✓)  |  0/0/0(✖/✖)  |  0/4/0(✓/✓)   | 0/0/0(✖/✖)  | 0/2/2(✓/✓)      | 1/0/0(✓/✓) |        |
+| 104 |       CVE-2023-1190       |    AOOB    |      imageinfo      |    ea3eb17    |           imageinfo.hpp (IIProcessFunc)           |   1468   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/0/0(✖/✖)   | 1/0/0(✖/✖)  | 0/26/0(✖/✖)     | ✖          | 7      |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/56/0(✖/✖)  | 0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
 
-| 104 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
-| | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 105 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
 | | Extracted | | | | - | - | - | - | - | - | - | - | |
 | 106 | CVE-000 | | | | - | - | - | - | - | - | - | - | |
@@ -335,3 +335,7 @@ Notes:
   - I know the line where vulnerability happens but because it happens at the end of a complex logic it is hard to reproduce the error.
 - 6\*
   - Function strided_copy was tested in isolation mainly because header files can not be directly analyzed by some static code analyzers
+- 7\*
+  - ikos analyzed main.cpp that references the header file with implementations (imageinfo.hpp) but only errors/warnings/notes from header file were recorded.
+    Other analyzers analyzed imageinfo.hpp file directly.
+    Also strange observation when infer analyzes hpp file directly it finds only 1 error but when analyzing main.cpp file 3 errors are found and 2 additional errors are completly valid.

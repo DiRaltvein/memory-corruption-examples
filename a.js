@@ -98,12 +98,13 @@ oaf(
 // CPPCHECK
 
 // IKOS
-oaf(
-  '[ubuntu 22*] IKOS',
-  `/home/linuxbrew/.linuxbrew/bin/ikos -w --globals-init=all ` +
-    `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
-    `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
-); //
+entryPoint &&
+  oaf(
+    '[ubuntu 22*] IKOS',
+    `/home/linuxbrew/.linuxbrew/bin/ikos -w --globals-init=all ` +
+      `-a "boa, dbz, nullity, prover, uva, sio, uio, poa, shc, pcmp, sound, fca, dfa" ` +
+      `-f text --rm-db --entry-points=${entryPoint} ${getIncludes()}${fileToAnalyze}`
+  ); //
 // IKOS
 
 // INFER
