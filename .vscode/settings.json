@@ -56,6 +56,7 @@
     "map": "cpp",
     "regex": "cpp",
     "set": "cpp",
-    "cassert": "cpp"
+    "cassert": "cpp",
+    "stdbool.h": "c"
   }
 }
