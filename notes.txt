@@ -258,6 +258,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_17.c main
 [gpac] node a.js ./gpac/src/media_tools/av_parsers.c avc_parse_slice ./gpac/include
 - node a.js /mnt/a/master/master/realworld_simplified/gpac_18.c main
+[tinytiff] node a.js ./TinyTIFF/src/tinytiffreader.c TinyTIFFReader_readNextFrame
+- node a.js /mnt/a/master/master/realworld_simplified/tinytiff.c main
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
