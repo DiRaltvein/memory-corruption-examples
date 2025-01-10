@@ -262,6 +262,9 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/tinytiff.c main
 [cmix] node a.js cmix/src/models/paq8.cpp ConvertUTF8
 - node a.js /mnt/a/master/master/realworld_simplified/cmix.cc main
+[sysstat] node a.js sysstat/common.c check_overflow
+- node a.js /mnt/a/master/master/realworld_simplified/sysstat.c main
+
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
