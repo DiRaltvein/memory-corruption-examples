@@ -3,7 +3,7 @@
     {
       "type": "cppbuild",
       "label": "C/C++: gcc.exe build active file",
-      "command": "gcc",
+      "command": "g++",
       "args": [
         "-fdiagnostics-color=always",
         "-g",
