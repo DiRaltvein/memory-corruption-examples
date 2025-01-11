@@ -268,6 +268,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/openImageIO.cc main
 [flvmeta] node a.js flvmeta/src/dump_xml.c xml_on_metadata_tag_only
 - node a.js /mnt/a/master/master/realworld_simplified/flvmeta.c main
+[stb] node a.js stb/stb_vorbis.c start_decoder
+- node a.js /mnt/a/master/master/realworld_simplified/stb.c main
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
