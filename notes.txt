@@ -272,6 +272,9 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/stb.c main
 [zchunk] node a.js zchunk/src/lib/comp/comp.c comp_add_to_data zchunk/test/abi/stable zchunk/src/lib
 - node a.js /mnt/a/master/master/realworld_simplified/zchunk.c main
+[moonlight-common-c] node a.js moonlight-common-c/src/Misc.c extractVersionQuadFromString moonlight-common-c/reedsolomon moonlight-common-c/enet/include
+- node a.js /mnt/a/master/master/realworld_simplified/moonlight-common-c.c main
+
 
 
 

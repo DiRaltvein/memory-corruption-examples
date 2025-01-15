@@ -150,7 +150,7 @@ Vulnerability types:
 | 15  |      CVE-2023-25076       |    AOOB    |      sniproxy       |    822bb80    |              address.c (new_address)              |   492    | 0/6/0(✖/✖)  |  0/1/2(✖/✖)  |  1/68/0(✓/✖)  |  0/0/0(✖/✖)  | 0/2/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/12/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 16  |      CVE-2023-41361       |    AOOB    |         frr         |    c2b0d6a    |   bgp_open.c (bgp_capability_software_version)    |   1973   | 0/1/0(✖/✖)  |  0/0/0(✖/✖)  |  0/44/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/116(✖/✖)    | ✖          |        |
-|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/8/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/10/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 17  |      CVE-2023-50965       |    AOOB    |   MicroHttpServer   |    4398570    |         middleware.c (\_ReadStaticFiles)          |   144    | 0/3/0(✖/✖)  |  0/0/0(✖/✖)  |  0/48/0(✓/✖)  |  0/0/0(✖/✖)  | 0/1/0(✖/✖)      | ✖          | a\*    |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/6/0(✓/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 18  |       CVE-2023-2905       |    AOOB    |      mongoose       |    8114443    |          mqtt.c (decode_variable_length)          |   540    | 0/1/0(✖/✖)  |  0/0/0(✖/✖)  |  0/11/0(✓/✓)  |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
@@ -328,8 +328,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/34/0(✓/✖)  |  2/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
 | 114 |      CVE-2023-46228       |  IO/AOOB   |       zchunk        |    67f921e    |             comp.c (comp_add_to_data)             |   750    | 0/4/0(✖/✖)  |  0/2/4(✖/✖)  |  0/55/0(✓/✖)  |  1/0/0(✖/✖)  | 0/12/0(✖/✖)     | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/3/0(✖/✖)  |  0/0/0(✖/✖)  |  0/30/0(✓/✖)  |  4/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
-| 115 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
+| 115 |      CVE-2023-42801       |    AOOB    | moonlight-common-c  |    8b84d17    |       Misc.c (extractVersionQuadFromString)       |   161    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/13/0(✖/✖)  |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/4/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) | 8      |
 | 116 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 | 117 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
@@ -395,3 +395,5 @@ Notes:
   - ikos analyzed main.cpp that references the header file with implementations (imageinfo.hpp) but only errors/warnings/notes from header file were recorded.
     Other analyzers analyzed imageinfo.hpp file directly.
     Also strange observation when infer analyzes hpp file directly it finds only 1 error but when analyzing main.cpp file 3 errors are found and 2 additional errors are completly valid.
+- 8\*
+  - it is fashinating how no one can detect such a basic problem. Same goes to frr.c file
