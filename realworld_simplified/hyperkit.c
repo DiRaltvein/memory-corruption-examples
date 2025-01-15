@@ -3,14 +3,14 @@
 // commit: 451558f
 // extract of: src/lib/pci_virtio_rnd.c (function: pci_vtrnd_notify)
 
-#include <fcntl.h>
+#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 
 struct iovec {
-  void *iov_base;
-  size_t iov_len;
+  uint32_t *iov_base;
+  int iov_len;
 };
 
 int vq_getchain(struct iovec *iov) {
@@ -23,23 +23,33 @@ int vq_getchain(struct iovec *iov) {
   }
   //
 
-  iov->iov_base = calloc(10, sizeof(char));
-  iov->iov_len = 10;
-
+  iov->iov_base = calloc(iov->iov_len, sizeof(uint32_t));
+  if (iov->iov_base == NULL) {
+    return -1;
+  }
+  iov->iov_base[0] = 0;
+  iov->iov_base[1] = 1;
   return 0;
 }
 
 int main(int argc, char *argv[]) {
-  struct iovec iov;
-
-  int file = open("text.txt", O_RDONLY);
-  if (file < 0) {
+  if (argc > 28 || argc < 0) {
     return 1;
   }
+  struct iovec iov;
+  iov.iov_len = argc + 2;
 
   vq_getchain(&iov); // in case this function 'fails' for any reason iov struct will not be initialized and its further use is dangerous
 
-  read(file, iov.iov_base, iov.iov_len); // Problem: trying to read contents of a file using buffer and length from potentially uninitialized struct
+  for (int i = 2; i < iov.iov_len; i++) {
+    iov.iov_base[i] = iov.iov_base[i - 1] + iov.iov_base[i - 2]; // Problem: trying to assign value to a buffer that may not be initialized
+  }
+
+  int sum = 0;
+  for (int i = 0; i < iov.iov_len; i++) {
+    sum += iov.iov_base[i];
+  }
+  printf("Sum of fibonachi sequence of length %d: %d\n", iov.iov_len, sum);
 
   if (iov.iov_base != NULL) {
     free(iov.iov_base);

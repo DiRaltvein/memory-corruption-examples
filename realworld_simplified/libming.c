@@ -26,6 +26,11 @@ int main() {
   int length = readUInt32(f);
 
   UI16 *data = (UI16 *)malloc(length * sizeof(UI16)); // Problem: length read from file may be bigger then allowed allocation size
+  if (data == NULL) {
+    printf("Out of memory!");
+    fclose(f);
+    return -1;
+  }
 
   free(data);
   fclose(f);
