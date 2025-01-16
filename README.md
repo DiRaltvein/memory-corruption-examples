@@ -330,8 +330,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/3/0(✖/✖)  |  0/0/0(✖/✖)  |  0/30/0(✓/✖)  |  4/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
 | 115 |      CVE-2023-42801       |    AOOB    | moonlight-common-c  |    8b84d17    |       Misc.c (extractVersionQuadFromString)       |   161    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/13/0(✖/✖)  |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/4/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) | 8      |
-| 116 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
+| 116 |      CVE-2020-20335       |  IO/AOOB   |        kilo         |    0099562    |             kilo.c (editorUpdateRow)              |   1299   | 0/7/0(✖/✖)  |  0/0/0(✖/✖)  |  4/94/0(✖/✖)  |  9/0/0(✖/✖)  | 0/8/0(✖/✖)      | 0/0/0(✖/✖) | 9      |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/4/0(✖/✖)  |  0/0/0(✖/✖)  |  0/36/0(✓/✖)  |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✖/✖) |        |
 | 117 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 | 118 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
@@ -397,3 +397,5 @@ Notes:
     Also strange observation when infer analyzes hpp file directly it finds only 1 error but when analyzing main.cpp file 3 errors are found and 2 additional errors are completly valid.
 - 8\*
   - it is fashinating how no one can detect such a basic problem. Same goes to frr.c file
+- 9\*
+  - analyzed was entry point eg. main function (one file project)
