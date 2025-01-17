@@ -3,13 +3,13 @@
 // commit: d361b2c
 // extract of: gpssim.c (function: main)
 
-// file can be executes as ./a.out -e <some value that if greater than 100 characters
+// file can be executes as ./a.out -e <some value that if greater than 100 characters program buffer overflows>
 
 #include <string.h>
+#include <getopt.h>
+
 #define MAX_CHAR (100)
 
-int getopt(int nargc, char *const nargv[], const char *ostr);
-char *optarg;
 
 int main(int argc, char *argv[]) {
   int result;

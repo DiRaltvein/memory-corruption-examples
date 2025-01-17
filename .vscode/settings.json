@@ -57,6 +57,7 @@
     "regex": "cpp",
     "set": "cpp",
     "cassert": "cpp",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "getopt.h": "c"
   }
 }
