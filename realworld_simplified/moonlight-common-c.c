@@ -4,6 +4,7 @@
 // extract of: src/Misc.c (function: extractVersionQuadFromString)
 
 // same vulnerability as https://www.cvedetails.com/cve/CVE-2023-26767/
+// same vulnerability as https://www.cvedetails.com/cve/CVE-2023-26769/
 
 #include <string.h>
 #include <stdio.h>
