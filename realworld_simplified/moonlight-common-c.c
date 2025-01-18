@@ -3,6 +3,8 @@
 // commit: 8b84d17
 // extract of: src/Misc.c (function: extractVersionQuadFromString)
 
+// same vulnerability as https://www.cvedetails.com/cve/CVE-2023-26767/
+
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>

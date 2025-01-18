@@ -4041,52 +4041,52 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-38725/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-41409/",
-    "reason": -1,
-    "notes": ""
+    "reason": 2,
+    "notes": "Endless loop in pcre tool if given negative length but this is not a memory corruption"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-44232/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2022-46527/",
-    "reason": -1,
+    "reason": 1,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-22895/",
-    "reason": -1,
+    "reason": 2,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-25563/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-25662/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-25667/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-26767/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-26768/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {

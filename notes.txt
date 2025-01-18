@@ -280,7 +280,9 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/px4-autopilot.cc main
 [zstd] node a.js zstd/programs/util.c mallocAndJoin2Dir
 - node a.js /mnt/a/master/master/realworld_simplified/zstd.c main
-
+[liblouis] node a.js liblouis/liblouis/compileTranslationTable.c lou_setDataPath
+[liblouis] node a.js liblouis/liblouis/logging.c lou_logFile
+- node a.js /mnt/a/master/master/realworld_simplified/liblouis.c main
 
 
 
@@ -364,3 +366,9 @@ Such checks may be possible to some extend with fixed sized buffers and whole pr
 Static analysis is not suitable for discovery of memory corruptions because most of the time it is impossible to prevent memory corruption judging by the code alone. A lot of the time there is another variable that shows length of an array or something that
 can not be checked for statically. Only strings are null byte terminated and theirs length can be checked. Same can not be done with any other arrays. In addition, even this convention that strings are null byte terminated not always hold true.
 
+
+
+rizin
+sofia-sip1
+podofo
+plutovg
