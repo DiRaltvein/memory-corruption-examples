@@ -340,8 +340,8 @@ Vulnerability types:
 | 120 |      CVE-2023-26768       |    AOOB    |      liblouis       |    517f6f1    |              logging.c (lou_logFile)              |   160    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/12/0(✖/✖)  |  0/0/0(✖/✖)  | 0/3/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/23/0(✖/✖)  |  0/0/0(✖/✖)  | 0/2/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 121 |      CVE-2023-26769       |    AOOB    |      liblouis       |    21a2ee7    |    compileTranslationTable.c (resolveSubtable)    |   5340   | 0/80/0(✖/✖) | 0/15/26(✖/✖) |  0/36/0(✖/✖)  | 62/0/0(✖/✖)  | 0/13/6(✖/✖)     | ✖          |        |
-| 122 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
+| 122 |      CVE-2023-27585       |    AOOB    |      pjproject      |    5e2d564    |                 dns.c (parse_rr)                  |   772    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/274/0(✖/✖)  |  7/0/0(✖/✖)  | 0/1/0(✖/✖)      | ✖          |        |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 0/3/0(✓/✓)  |  0/0/0(✖/✖)  |  0/33/0(✓/✖)  |  1/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) | 10     |
 | 123 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 | 124 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
@@ -397,3 +397,5 @@ Notes:
   - it is fashinating how no one can detect such a basic problem. Same goes to frr.c file
 - 9\*
   - analyzed was entry point eg. main function (one file project)
+- 10\*
+  - Extremly confusing infer error on extracted version. Infer also threw confusion errors on other occasions but this is the pinnacle of confusion

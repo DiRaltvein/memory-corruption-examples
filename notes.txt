@@ -284,6 +284,10 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 [liblouis] node a.js liblouis/liblouis/logging.c lou_logFile
 - node a.js /mnt/a/master/master/realworld_simplified/liblouis.c main
 [liblouis] node a.js liblouis/liblouis/compileTranslationTable.c resolveSubtable
+[pjproject] node a.js pjproject/pjlib-util/src/pjlib-util/dns.c parse_rr pjproject/pjlib-util/include pjproject/pjlib/include
+- node a.js /mnt/a/master/master/realworld_simplified/pjproject.c main
+
+
 
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
