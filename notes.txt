@@ -292,6 +292,20 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 [FreeRDP] node a.js FreeRDP/libfreerdp/codec/ncrush.c ncrush_decompress ./FreeRDP/include ./FreeRDP/winpr/include
 [memcached] node a.js memcached/proto_proxy.c proxy_process_command memcached/vendor/lua/src
 - node a.js /mnt/a/master/master/realworld_simplified/memcached.c main
+[gpac] node a.js ./gpac/src/media_tools/av_parsers.c gf_hevc_read_sps_bs_internal ./gpac/include
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
@@ -373,7 +387,8 @@ Such checks may be possible to some extend with fixed sized buffers and whole pr
 Static analysis is not suitable for discovery of memory corruptions because most of the time it is impossible to prevent memory corruption judging by the code alone. A lot of the time there is another variable that shows length of an array or something that
 can not be checked for statically. Only strings are null byte terminated and theirs length can be checked. Same can not be done with any other arrays. In addition, even this convention that strings are null byte terminated not always hold true.
 
-
+cppcheck can find errors if there is an if condition or any other hint as to what the value can be as with CVE-2022-47092 where cppcheck can find some instances of integer overflow in a file where bit shift count if checked before/after the operation.
+In case bit shift count is not checked no error is produced.
 
 rizin
 sofia-sip1
