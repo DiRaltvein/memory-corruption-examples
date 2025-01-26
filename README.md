@@ -349,8 +349,8 @@ Vulnerability types:
 | 126 |      CVE-2023-46852       |    AOOB    |      memcached      |    bc11696    |       proto_proxy.c (proxy_process_command)       |   1051   | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/850/0(✓/✖)  |  5/0/0(✖/✖)  | 0/2/0(✖/✖)      | ✖          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/79/0(✓/✖)  |  0/0/0(✖/✖)  | 0/2/0(✖/✖)      | 0/0/0(✖/✖) |        |
 | 127 |      CVE-2022-47092       |     IO     |        gpac         |    1918a58    |    av_parsers.c (gf_hevc_read_sps_bs_internal)    |  12341   | 0/22/0(✖/✖) |   2/7/18()   | 0/760/0(✓/✖)  | 35/0/0(✖/✖)  | 0/75/25(✖/✖)    | ✖          |        |
-| 128 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
+| 128 |       CVE-2023-2977       |    AOOB    |       OpenSC        |   tfe7cb49    |  pkcs15-cardos.c (cardos_have_verifyrc_package)   |   942    |      -      |      -       |       -       |      -       | -               | -          | 11     |
+|     |         Extracted         |            |                     |               |                         -                         |    -     | 1/0/0(✓/✓)  |  0/0/0(✖/✖)  |  4/33/0(✓/✓)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |        |
 | 129 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
 | 130 |          CVE-000          |            |                     |               |                         -                         |    -     |      -      |      -       |       -       |      -       | -               | -          |        |
@@ -396,3 +396,5 @@ Notes:
   - analyzed was entry point eg. main function (one file project)
 - 10\*
   - Extremly confusing infer error on extracted version. Infer also threw confusion errors on other occasions but this is the pinnacle of confusion
+- 11\*
+  - this vulnerability requires CTU because function with flaw in its logic does not access pointer memory and only passes pointer with incorrect length to another function located in a different file...
