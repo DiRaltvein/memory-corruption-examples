@@ -289,8 +289,9 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 [dlt-daemon] node a.js dlt-daemon/src/shared/dlt_common.c dlt_file_message dlt-daemon/include/dlt
 - node a.js /mnt/a/master/master/realworld_simplified/dlt-daemon.c main
 [iperf] node a.js iperf/src/iperf_api.c JSON_read
-[FreeRDP] node a.js FreeRDP/libfreerdp/codec/ncrush.c ncrush_decompress
-
+[FreeRDP] node a.js FreeRDP/libfreerdp/codec/ncrush.c ncrush_decompress ./FreeRDP/include ./FreeRDP/winpr/include
+[memcached] node a.js memcached/proto_proxy.c proxy_process_command memcached/vendor/lua/src
+- node a.js /mnt/a/master/master/realworld_simplified/memcached.c main
 
 // ---------------------------------- CLANG TIDY ---------------------------------- \\
 
