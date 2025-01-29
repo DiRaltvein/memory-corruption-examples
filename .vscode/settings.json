@@ -59,6 +59,7 @@
     "cassert": "cpp",
     "stdbool.h": "c",
     "getopt.h": "c",
-    "time.h": "c"
+    "time.h": "c",
+    "json.h": "c"
   }
 }
