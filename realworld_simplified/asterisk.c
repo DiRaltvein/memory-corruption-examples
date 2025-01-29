@@ -7,13 +7,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define NUMBER_OF_HEADERS 3
+
 typedef struct _header {
   char *value;
   char *key;
 } Header;
 
 Header *findAHeader(Header *headers, char *header) {
-  for (int i = 0; i < 3; i++) { // hardcode the number of headers for simplicity
+  for (int i = 0; i < NUMBER_OF_HEADERS; i++) { // hardcode the number of headers for simplicity
     if (strcmp(headers[i].key, header) == 0) {
       return &headers[i];
     }
@@ -24,13 +26,18 @@ Header *findAHeader(Header *headers, char *header) {
 void update_header(Header *headers, char *header, char *newValue) {
   Header *foundHeader = findAHeader(headers, header);
   if (foundHeader == NULL) {
+    printf("Could not find header to update\n");
     exit(1);
   }
   memcpy(foundHeader->value, newValue, strlen(newValue)); // Problem: when updating header value new value is longer then the initial value and during update new value is just copied into existing buffer causing buffer overflow
 }
 
 Header *initializeHeaders() {
-  Header *headers = malloc(sizeof(Header) * 3);
+  Header *headers = calloc(NUMBER_OF_HEADERS, sizeof(Header));
+  if (headers == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
   headers[0].key = strdup("Content-Type");
   headers[0].value = strdup("application/json");
   headers[1].key = strdup("Authorization");
@@ -42,11 +49,11 @@ Header *initializeHeaders() {
 
 int main() {
   Header *headers = initializeHeaders();
-  char *headerToUpdate = "Content-Length";
-  char *newHeaderValue = "Over 999";
-  update_header(headers, headerToUpdate, newHeaderValue);
+  char headerToUpdate[] = "Content-Length";
+  char newHeaderValue[] = "Over 999";
+  update_header(headers, (char *)headerToUpdate, (char *)newHeaderValue);
 
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < NUMBER_OF_HEADERS; i++) {
     printf("[%s] - %s\n", headers[i].key, headers[i].value);
     free(headers[i].key);
     free(headers[i].value);

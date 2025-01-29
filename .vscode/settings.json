@@ -58,6 +58,7 @@
     "set": "cpp",
     "cassert": "cpp",
     "stdbool.h": "c",
-    "getopt.h": "c"
+    "getopt.h": "c",
+    "time.h": "c"
   }
 }

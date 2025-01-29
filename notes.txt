@@ -101,7 +101,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/libeconf.c main
 [podofo] node a.js ./podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 ./podofo/src/podofo ./podofo/src
 	- node a.js /mnt/a/master/master/realworld_simplified/podofo.cc main
-[krb5] node a.js ./krb5/src/kdc/do_tgs_req.c process_tgs_req ./krb5/src/include
+[krb5] node a.js ./krb5/src/kdc/do_tgs_req.c process_tgs_req ./krb5/src/include krb5/src/util/verto
 	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c main
 [libcue] node a.js ./libcue/cd.c track_set_index
 	- node a.js /mnt/a/master/master/realworld_simplified/libcue.c main
@@ -210,7 +210,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 [libming] node a.js ./libming/util/parser.c parseSWF_DEFINEFONTINFO ./libming/src
 	- node a.js /mnt/a/master/master/realworld_simplified/libming.c main
 [moonlight-common-c CONFIG!] node a.js ./moonlight-common-c/src/RtspConnection.c performRtspHandshake ./moonlight-common-c/reedsolomon ./moonlight-common-c/enet/include
-[asterisk CONFIG!] node a.js asterisk/res/res_pjsip_header_funcs.c update_header asterisk/third-party/pjproject/source/pjsip/include asterisk/include asterisk/third-party/pjproject/source/pjlib/include asterisk/third-party/pjproject/source/pjlib-util/include asterisk/third-party/pjproject/source/pjmedia/include
+[asterisk] node a.js asterisk/res/res_pjsip_header_funcs.c update_header asterisk/third-party/pjproject/source/pjsip/include asterisk/include asterisk/third-party/pjproject/source/pjlib/include asterisk/third-party/pjproject/source/pjlib-util/include asterisk/third-party/pjproject/source/pjmedia/include
 	- node a.js /mnt/a/master/master/realworld_simplified/asterisk.c main
 [ayttm] node a.js ./ayttm/libproxy/proxy.c http_connect ./ayttm/src /usr/include/glib-2.0
 	- node a.js /mnt/a/master/master/realworld_simplified/ayttm.c main
