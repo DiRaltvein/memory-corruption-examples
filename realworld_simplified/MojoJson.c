@@ -50,7 +50,7 @@ void ParseString(const char **jsonPtr) {
 }
 
 // to break application pass any string as a first parametr that starts with " and where is no closing "
-// for example \"123\"
+// for example \"123
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     return 1;
