@@ -3,10 +3,6 @@
 // commit: 9991fc6
 // extract of: driver/razerchromacommon.c (function: razer_chroma_standard_matrix_set_custom_frame)
 
-// similar CVE's are:
-// - https://www.cvedetails.com/cve/CVE-2022-29022/
-// - https://www.cvedetails.com/cve/CVE-2022-29023/
-
 #include <stdlib.h>
 #include <string.h>
 

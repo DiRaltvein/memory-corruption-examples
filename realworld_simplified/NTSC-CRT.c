@@ -3,6 +3,9 @@
 // commit: 4dd4272
 // extract of: bmp_rw.c (function: loadBMP)
 
+// Similar issues:
+// - CVE-2023-42295
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
