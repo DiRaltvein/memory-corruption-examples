@@ -7,9 +7,12 @@ import cves from './cves.json' assert { type: 'json' };
 // 2 - error is not valid (not memory corruption/not C or C++)
 // 3 - could not determine cause
 
-(function() {
-  console.log(cves.reduce((acc, cve) => {
-    acc[cve.reason] = (acc[cve.reason] ?? 0) + 1;
-    return acc;
-  }, {}));
-})()
+(function () {
+  console.log('total: ' + cves.length);
+  console.log(
+    cves.reduce((acc, cve) => {
+      acc[cve.reason] = (acc[cve.reason] ?? 0) + 1;
+      return acc;
+    }, {})
+  );
+})();

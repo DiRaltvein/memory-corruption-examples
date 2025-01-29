@@ -5,9 +5,10 @@
 
 #include <stdio.h>
 
-int main() {
-  char *rest;
-  char *record = "Hello";
-  rest = record + 6; // Problem: rest is pointing to the memory behind \0 because record can hold only 6 characters including null terminator.
-  printf("%s", rest);
+int main(int argc, char *argv[]) {
+  if (argc == 1) {
+    return 0;
+  }
+  char *rest = argv[1] + 2; // Problem: rest may be pointing to a memory after first argument effectively leading to a read out of bound in the next line
+  printf("%s\n", rest);
 }
