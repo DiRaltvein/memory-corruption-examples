@@ -359,8 +359,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/19/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
 | 132 |       CVE-2023-4322       |    AOOB    |       radare2       |    78fafcb    |                 plugin.c (decode)                 |   333    |   123    | 0/2/0(✖/✖)  |  0/4/8(✖/✖)  | 0/196/0(✓/✖)  |  1/0/0(✖/✖)  | 0/7/2(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/10/0(✓/✓)  |  0/0/0(✖/✖)  | 0/3/0(✖/✖)      | 1/0/0(✓/✓) |     |
-| 133 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
+| 133 |      CVE-2023-23088       |    AOOB    |     json-parser     |    fc599bf    |      json_parser.c (\_\_parse_json_members)       |   1075   |    58    | 0/55/0(✖/✖) |  0/0/0(✖/✖)  | 1/316/0(✓/✖)  |  4/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
+|     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 134 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 | 135 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
@@ -402,3 +402,6 @@ Notes:
   - Extremly confusing infer error on extracted version. Infer also threw confusion errors on other occasions but this is the pinnacle of confusion
 - 128\*
   - this vulnerability requires CTU because function with flaw in its logic does not access pointer memory and only passes pointer with incorrect length to another function located in a different file...
+- 133\*
+  - analyzed was main entry point function json_value_parse rather then \_\_parse_json_members that contains the vulnerable logic. This was done because actual dereference of a out of bound pointer happens in json_value_parse
+    function and loginc in \_\_parse_json_members only makes this pointer out of bound.

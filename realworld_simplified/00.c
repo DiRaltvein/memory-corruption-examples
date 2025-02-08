@@ -37,6 +37,4 @@ int main(int argc, char *argv[]) {
   }
 
   printFileAsHexArray(argv[1]);
-
-  return 0;
 }
