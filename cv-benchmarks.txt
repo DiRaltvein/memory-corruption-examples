@@ -1,0 +1,21 @@
+BitVectors - verification tasks where bit-operations are necassary
+- 32bit
+
+heap.set
+
+linkedLists.set
+
+loops.set
+
+Function:
+extern char __VERIFIER_nondet_char(void);
+(signed) char a = __VERIFIER_nondet_char();
+
+extern int __VERIFIER_nondet_int(void);
+int a = __VERIFIER_nondet_char();
+
+
+https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks/-/tree/main/c/properties
+- no-overflow.prp
+- def-behaviour.prp
+- valid-memsafety.prp

@@ -300,7 +300,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/sofia-sip_2.c main
 [MojoJson] node a.js MojoJson/Json.c SkipString
 - node a.js /mnt/a/master/master/realworld_simplified/MojoJson.c main
-
+[radare2] node a.js ./radare2/libr/arch/p/bf/plugin.c decode ./radare2/libr/include
+- node a.js /mnt/a/master/master/realworld_simplified/radare2_2.c main
 
 
 

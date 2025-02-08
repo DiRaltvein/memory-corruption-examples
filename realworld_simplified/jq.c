@@ -3,6 +3,7 @@
 // commit: 88f01a7
 // extract of: src/decNumber/decNumber.c (function: decToString)
 
+#include <stdio.h>
 #include <string.h>
 
 void decToString(char *input, char *string) {
@@ -20,7 +21,12 @@ void decToString(char *input, char *string) {
   }
 }
 
+// to cause an overflow pass as an argument a string that consists of more than 50 characters or has a lot of characters 'a' in it
 int main(int argc, char *argv[]) {
-  char string[10];
-  decToString(argv[0], (char *)&string);
+  if (argc < 2) {
+    return 1;
+  }
+  char string[50] = {0};
+  decToString(argv[1], (char *)&string);
+  printf("%s\n", string);
 }

@@ -124,6 +124,13 @@ oaf(
 
 if (entryPoint === 'main') {
   console.log(
+    ` ${c('Preprocess', true)}: /usr/local/gcc-14.2.0/bin/${
+      isCFile ? 'gcc' : 'g++'
+    } -E ${getIncludes()}${fileToAnalyze} -o ${
+      file.split('.').slice(0, -1).join('.') + '.i'
+    } -m32\n`
+  );
+  console.log(
     ` ${c('Verify', true)}: /usr/local/gcc-14.2.0/bin/${
       isCFile ? 'gcc' : 'g++'
     } ${getIncludes()}${fileToAnalyze} -o address.out -fsanitize=address -static-libasan -g -fno-omit-frame-pointer\n`
