@@ -406,7 +406,7 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-28116/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
@@ -1896,12 +1896,12 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-49468/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-42459/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
@@ -1916,7 +1916,7 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-23609/",
-    "reason": 0,
+    "reason": 3,
     "notes": ""
   },
   {
@@ -1926,12 +1926,12 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-39946/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-39947/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
@@ -1941,7 +1941,7 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-2512/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {

@@ -138,15 +138,25 @@ if (entryPoint === 'main') {
 }
 // gcc
 
-// Non-Distinguishable Inconsistencies
-oaf(
-  '[ubuntu 22] NDI',
-  `/usr/ndi/llvm/llvm-project/build/bin/clang${
-    !isCFile ? '++' : ''
-  } -emit-llvm -c ${fileToAnalyze} ${getIncludes()}-o ndi.bc && ` +
-    '/usr/ndi/analyzer/build/lib/kanalyzer ./ndi.bc'
-);
-// Non-Distinguishable Inconsistencies
+// // Non-Distinguishable Inconsistencies
+// oaf(
+//   '[ubuntu 22] NDI',
+//   `/usr/ndi/llvm/llvm-project/build/bin/clang${
+//     !isCFile ? '++' : ''
+//   } -emit-llvm -c ${fileToAnalyze} ${getIncludes()}-o ndi.bc && ` +
+//     '/usr/ndi/analyzer/build/lib/kanalyzer ./ndi.bc'
+// );
+// // Non-Distinguishable Inconsistencies
+
+// // Detecting Missed Security Operations Through Differential Checking of Object-based Similar Paths
+// oaf(
+//   '[ubuntu 20] IPPO',
+//   `/usr/IPPO/llvm/build/bin/clang${
+//     !isCFile ? '++' : ''
+//   } -fno-inline -g -O2 ${fileToAnalyze} ${getIncludes()}-o ippo.bc && ` +
+//     '/usr/IPPO/build/lib/analyzer ./ippo.bc'
+// );
+// // Detecting Missed Security Operations Through Differential Checking of Object-based Similar Paths
 
 // symbiotic
 const headersKey = isCFile ? 'CFLAGS' : 'CPPFLAGS';

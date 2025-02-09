@@ -60,6 +60,7 @@
     "stdbool.h": "c",
     "getopt.h": "c",
     "time.h": "c",
-    "json.h": "c"
+    "json.h": "c",
+    "unistd.h": "c"
   }
 }

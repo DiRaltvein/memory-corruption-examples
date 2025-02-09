@@ -3,7 +3,7 @@ wsl --unregister masters
 wsl --import masters A:\WSL\masters A:\WSL\latest-ubuntu-22-master-with-ndi
 netsh winsock reset
 
-wsl --distribution masters --user root
+wsl -distribution masters --user root
 	cd /home/raltvein/trash
 	cd /home/raltvein/projects
 
@@ -111,8 +111,6 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng.c main
 [minizip-ng] node a.js ./minizip-ng/mz_os.c mz_path_has_slash
 	- node a.js /mnt/a/master/master/realworld_simplified/minizip-ng_1.c main
-[contiki-ng] node a.js ./contiki-ng/os/net/mac/ble/ble-l2cap.c input_l2cap_frame_flow_channel ./contiki-ng/os/ ./contiki-ng/arch/platform/native/ ./contiki-ng/arch/cpu/native
-	- node a.js /mnt/a/master/master/realworld_simplified/contiki-ng.c main
 [gss-ntlmssp] node a.js ./gss-ntlmssp/src/ntlm.c ntlm_decode_u16l_str_hdr
 	- node a.js /mnt/a/master/master/realworld_simplified/gss-ntlmssp.c main
 [hyperkit] node a.js ./hyperkit/src/lib/pci_virtio_rnd.c pci_vtrnd_notify ./hyperkit/src/include
@@ -304,8 +302,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/radare2_2.c main
 [json-parser] node a.js ./json-parser/json_parser.c json_value_parse
 - node a.js /mnt/a/master/master/realworld_simplified/json-parser.c main
-
-
+[libde265] node a.js ./libde265/libde265/slice.cc read_coding_unit ./libde265 ./libde265/extra
+	- node a.js /mnt/a/master/master/realworld_simplified/libde265_3.cc main
 
 
 
