@@ -361,8 +361,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/10/0(✓/✓)  |  0/0/0(✖/✖)  | 0/3/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 133 |      CVE-2023-23088       |    AOOB    |     json-parser     |    fc599bf    |      json_parser.c (\_\_parse_json_members)       |   1075   |    58    | 0/55/0(✖/✖) |  0/0/0(✖/✖)  | 1/316/0(✓/✖)  |  4/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
-| 134 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
+| 134 |      CVE-2023-45664       |    UAF     |         stb         |    5736b15    |        stb_image.h (stbi\_\_load_gif_main)        |   7987   |    84    | 0/14/0(✖/✖) |  2/0/3(✖/✖)  | 0/326/0(✖/✖)  | 0/22/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
+|     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/19/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
 | 135 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 
@@ -405,3 +405,5 @@ Notes:
 - 133\*
   - analyzed was main entry point function json_value_parse rather then \_\_parse_json_members that contains the vulnerable logic. This was done because actual dereference of a out of bound pointer happens in json_value_parse
     function and loginc in \_\_parse_json_members only makes this pointer out of bound.
+- 134\*
+  - an entry point file was created with contents that would trigger vulnerability that is provided in [this](https://securitylab.github.com/advisories/GHSL-2023-145_GHSL-2023-151_stb_image_h/) article under issue 4
