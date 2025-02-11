@@ -306,7 +306,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_3.cc main
 [stb] node a.js stb/test.c main
 	- node a.js /mnt/a/master/master/realworld_simplified/stb_1.c main
-
+[libredwg] node a.js libredwg/src/bits.c bit_calc_CRC
+- node a.js /mnt/a/master/master/realworld_simplified/libredwg.c main
 
 
 

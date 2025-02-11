@@ -363,8 +363,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 134 |      CVE-2023-45664       |    UAF     |         stb         |    5736b15    |        stb_image.h (stbi\_\_load_gif_main)        |   7987   |    84    | 0/14/0(✖/✖) |  2/0/3(✖/✖)  | 0/326/0(✖/✖)  | 0/22/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 |     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/19/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
-| 135 |          CVE-000          |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                         -                         |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
+| 135 |      CVE-2023-36273       |    AOOB    |      libredwg       |    77a8562    |               bits.c (bit_calc_CRC)               |   3561   |    46    |      -      |      -       |       -       |      -       | -               | -          |     |
+|     |         Extracted         |            |                     |               |                         -                         |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 
 No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it.
 
@@ -372,7 +372,7 @@ Notes:
 
 - 8, 84, 117, 128\*
   - Config
-- 11, 22, 86\*
+- 11, 22, 86, 135\*
   - CTU
 - 17\*
   - strange false positive of clang on simple case
