@@ -3,13 +3,12 @@
 // commit: a050853
 // extract of: libde265/motion.cc (function: derive_spatial_luma_vector_prediction)
 
-#include <ctime>    // time
-#include <stdio.h>  // printf
-#include <stdlib.h> // rand
+// same issue as:
+// - https://www.cvedetails.com/cve/CVE-2023-49465/
+// - https://www.cvedetails.com/cve/CVE-2023-49467/
 
-int getAnInt(int max) {
-  return rand() % (max + 1);
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct {
   int refIdx[2]; // index into LongTermRefPic
@@ -20,7 +19,7 @@ typedef struct {
 } slice_segment_header;
 
 int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int X, int argc) {
-  PBMotion vi;
+  PBMotion vi = {0};
   vi.refIdx[X] = argc;
 
   if (shdr->LongTermRefPic[X][vi.refIdx[X]] == 'a') // Problem: in case random number is greater then 15 subarray will be accessed out of bound
@@ -30,7 +29,6 @@ int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int 
 }
 
 int main(int argc, char *argv[]) {
-  srand(time(0));
   slice_segment_header shdr = {0};
-  derive_spatial_luma_vector_prediction(&shdr, 1, argc);
+  derive_spatial_luma_vector_prediction(&shdr, argc > 5 ? 0 : 1, argc);
 }

@@ -3,6 +3,9 @@
 // commit: 77a8562
 // extract of: src/bits.c (function: bit_calc_CRC)
 
+// same issue as https://www.cvedetails.com/cve/CVE-2023-36274/
+// iteration over buffer with invalid length retrieved/calculated based on untrusted source
+
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
