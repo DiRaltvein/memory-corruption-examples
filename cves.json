@@ -1966,7 +1966,7 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2020-18831/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {
@@ -1976,12 +1976,12 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-3674/",
-    "reason": -1,
+    "reason": 3,
     "notes": ""
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2021-32142/",
-    "reason": -1,
+    "reason": 0,
     "notes": ""
   },
   {

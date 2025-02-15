@@ -15,6 +15,11 @@ const headerDirectories = process.argv.slice(4).map((d) =>
     .map((a) => (a.includes(' ') ? `'${a}'` : a))
     .join('/')
 );
+const fileNameWithoutExtension = file.split('.').slice(0, -1).join('.');
+const filePath = fileToAnalyze
+  .split('/')
+  .splice(0, fileToAnalyze.split('/').length - 1)
+  .join('/');
 
 // // windows header files
 // headerDirectories.push(
@@ -126,8 +131,8 @@ if (entryPoint === 'main') {
   console.log(
     ` ${c('Preprocess', true)}: /usr/local/gcc-14.2.0/bin/${
       isCFile ? 'gcc' : 'g++'
-    } -E ${getIncludes()}${fileToAnalyze} -o ${
-      file.split('.').slice(0, -1).join('.') + '.i'
+    } -E -P ${getIncludes()}${fileToAnalyze} -o ${
+      filePath + '/' + fileNameWithoutExtension + '.i'
     } -m32\n`
   );
   console.log(
