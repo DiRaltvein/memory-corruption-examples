@@ -316,7 +316,8 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/libRaw.cc main
 [netconsd] node a.js ./netconsd/ncrx/libncrx.c ncrx_queue_payload
 -	node a.js /mnt/a/master/master/realworld_simplified/netconsd.c main
-
+[smartdns] node a.js ./smartdns/src/dns.c _dns_encode_domain ./smartdns/src/include
+- node a.js /mnt/a/master/master/realworld_simplified/smartdns.c main
 
 
 
