@@ -239,7 +239,7 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/6/0(✖/✖)  |  0/0/0(✖/✖)  |  0/14/0(✓/✓)  |  0/0/0(✖/✖)  | 0/2/1(✓/✓)      | 0/0/0(✖/✖) |     |
 | 67  |      CVE-2023-39351       |     ND     |       FreeRDP       |    63a2f65    |              rfx.c (rfx_process_message)               |   2121   |    31    | 0/5/0(✖/✖)  |  0/2/4(✖/✖)  | 0/1435/0(✓/✖) |  1/0/0(✖/✖)  | 1/4/0(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/1/0(✓/✓)  |  0/0/0(✖/✖)  |  0/4/0(✓/✓)   |  1/0/0(✓/✓)  | 0/2/0(✓/✓)      | 0/0/0(✖/✖) |     |
-| 68  |      CVE-2023-40296       |    AOOB    |  async-sockets-cpp  |    d66588d    |                udpsocket.hpp (Receive)                 |   170    |    15    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |       ✖       |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
+| 68  |      CVE-2023-40296       |    AOOB    |  async-sockets-cpp  |    d66588d    |                udpsocket.hpp (Receive)                 |   170    |    15    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/54/0(✖/✖)  |  4/0/0(✖/✖)  | 0/1/0(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/21/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
 | 69  |      CVE-2023-47016       |    AOOB    |       radare2       |    386d948    |      bin_xnu_kernelcache.c (process_constructors)      |   2219   |    57    | 0/8/0(✖/✖)  |  0/9/3(✖/✖)  |  0/85/0(✓/✖)  |  5/0/0(✖/✖)  | 0/20/3(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/9/0(✓/✓)   |  0/0/0(✖/✖)  | 0/1/0(✖/✖)      | 1/0/0(✓/✓) |     |
@@ -375,9 +375,9 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  1/25/0(✓/✖)  |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
 | 141 |      CVE-2023-31470       |    AOOB    |      smartdns       |    e38d5ea    |              dns.c (\_dns_encode_domain)               |   2650   |    51    | 0/19/0(✖/✖) |  1/0/0(✖/✖)  | 0/203/0(✖/✖)  |  0/0/0(✖/✖)  | 10/0/0(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/73/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
-| 142 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
-| 143 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
+| 142 |      CVE-2023-46256       |    AOOB    |    PX4-Autopilot    |    3c129ae    |             parser.cpp (lightware_parser)              |   155    |    95    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/128/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
+|     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/22/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
+| 143 |      CVE-2023-38632       |    AOOB    |  async-sockets-cpp  |    d66588d    |                tcpsocket.hpp (Receive)                 |   129    |    22    | 0/0/0(✖/✖)  |  0/1/2(✖/✖)  |  0/59/0(✖/✖)  |  6/0/0(✖/✖)  | 0/1/0(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 | 144 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
@@ -408,6 +408,8 @@ Notes:
   - in order to analyze using ikos function had to be a little bit changed. Function was changed from method to a function and all references to 'this' were removed.
 - 48\*
   - modifications to haeder file were made to make it possible to analyze it. Vulnerable method that changed to not use any windows api constructs as well as was extracted to not be between #ifdef \_WIN directives
+- 69, 143\*
+  - analyzed were tcp-client.cpp and udp-client.cpp and only telemetry from .hpp files were recorded
 - 69\*
   - static code analyzer notifications were counter from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
 - 70\*

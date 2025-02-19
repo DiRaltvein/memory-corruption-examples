@@ -3,6 +3,8 @@
 // commit: d66588d
 // extract of: async-sockets/include/udpsocket.hpp (function: Receive)
 
+// Same problem as: https://www.cvedetails.com/cve/CVE-2023-38632/
+
 #if defined(__linux__) || defined(__APPLE__)
 #include <arpa/inet.h>
 #include <netdb.h>
