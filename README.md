@@ -362,7 +362,7 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 134 |      CVE-2023-45664       |    UAF     |         stb         |    5736b15    |          stb_image.h (stbi\_\_load_gif_main)           |   7987   |    84    | 0/14/0(✖/✖) |  2/0/3(✖/✖)  | 0/326/0(✖/✖)  | 0/22/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/19/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
-| 135 |      CVE-2023-36273       |    AOOB    |      libredwg       |    77a8562    |                 bits.c (bit_calc_CRC)                  |   3561   |    46    |      -      |      -       |       -       |      -       | -               | -          |     |
+| 135 |      CVE-2023-36273       |    AOOB    |      libredwg       |    77a8562    |                 bits.c (bit_calc_CRC)                  |   3639   |    46    |      -      |      -       |       -       |      -       | -               | -          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 136 |      CVE-2023-49465       |    AOOB    |      libde265       |    7065a53    |   motion.cc (derive_spatial_luma_vector_prediction)    |   2204   |   334    | 8/0/0(✖/✖)  |  0/0/3(✖/✖)  | 0/614/0(✖/✖)  | 10/0/0(✖/✖)  | 0/7/0(✖/✖)      | ✖          |     |
 | 137 |      CVE-2023-49467       |    AOOB    |      libde265       |    7065a53    |     motion.cc (derive_combined_bipredictive\_...)      |   2204   |    65    | 8/0/0(✖/✖)  |  0/0/3(✖/✖)  | 0/140/0(✓/✖)  | 10/0/0(✖/✖)  | 0/7/0(✖/✖)      | ✖          |     |
@@ -387,8 +387,8 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/0/0(✖/✖)   |  1/0/0(✖/✖)  | 0/0/0(✖/✖)      | ✖          |     |
 | 148 |      CVE-2023-31976       |    AOOB    |       libming       |    04aee52    |             makeswf.c (makeswf_preprocess)             |   311    |    25    | 0/3/0(✖/✖)  |  0/0/0(✖/✖)  |  0/7/0(✖/✖)   |  0/0/0(✖/✖)  | 0/2/1(✓/✓)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/5/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
-| 149 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
+| 149 |      CVE-2023-36272       |    AOOB    |      libredwg       |    77a8562    |                bits.c (bit_utf8_to_TU)                 |   3639   |    78    | 0/12/0(✖/✖) | 10/0/4(✖/✖)  | 0/103/0(✓/✖)  |  7/0/0(✓/✓)  | 0/5/0(✖/✖)      | ✖          |     |
+|     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/1/0(✖/✖)  |  0/0/0(✖/✖)  |  0/37/0(✓/✓)  |  2/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
 | 150 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
 
@@ -435,3 +435,5 @@ Notes:
     function and loginc in \_\_parse_json_members only makes this pointer out of bound.
 - 134\*
   - an entry point file was created with contents that would trigger vulnerability that is provided in [this](https://securitylab.github.com/advisories/GHSL-2023-145_GHSL-2023-151_stb_image_h/) article under issue 4
+- 149\*
+  - ikos reports impossible warning like 'if (len > 0) len--' such statement can not cause unsigned integer overflow.

@@ -136,7 +136,6 @@ int _dns_encode_domain(struct dns_context *context, const char *domain) {
   return total_len;
 }
 
-// UTILITY FUNCTION FOR PRINTING
 void hexPrint(unsigned char *arr) {
   unsigned char *ptr = arr;
   while (*ptr) {
