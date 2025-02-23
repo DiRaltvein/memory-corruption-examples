@@ -332,6 +332,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 - node a.js /mnt/a/master/master/realworld_simplified/libming_1.c main
 [libredwg] node a.js ./libredwg/src/bits.c bit_utf8_to_TU libredwg/include
 - node a.js /mnt/a/master/master/realworld_simplified/libredwg_1.c main
+[libredwg] node a.js ./libredwg/src/bits.c bit_write_TF libredwg/include
 
 
 

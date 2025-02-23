@@ -389,8 +389,7 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/5/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)      | 0/0/0(✖/✖) |     |
 | 149 |      CVE-2023-36272       |    AOOB    |      libredwg       |    77a8562    |                bits.c (bit_utf8_to_TU)                 |   3639   |    78    | 0/12/0(✖/✖) | 10/0/4(✖/✖)  | 0/103/0(✓/✖)  |  7/0/0(✓/✓)  | 0/5/0(✖/✖)      | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    -     |          | 0/1/0(✖/✖)  |  0/0/0(✖/✖)  |  0/37/0(✓/✓)  |  2/0/0(✓/✓)  | 0/0/0(✖/✖)      | 1/0/0(✓/✓) |     |
-| 150 |             -             |     -      |          -          |       -       |                           -                            |    -     |    -     |      -      |      -       |       -       |      -       | -               | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |    -     |          |      -      |      -       |       -       |      -       | -               | -          |     |
+| 150 |      CVE-2023-36274       |    AOOB    |      libredwg       |    77a8562    |                 bits.c (bit_write_TF)                  |   3639   |    26    | 0/12/0(✖/✖) | 10/0/4(✖/✖)  | 0/280/0(✓/✖)  |  7/0/0(✖/✖)  | 0/5/0(✖/✖)      | ✖          |     |
 
 No cross Cross Translation Unit (CTU) analysis was performed because not all static code analyzers support it.
 
