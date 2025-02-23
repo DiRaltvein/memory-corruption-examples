@@ -1816,8 +1816,8 @@
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-36271/",
-    "reason": -1,
-    "notes": ""
+    "reason": 2,
+    "notes": "Error caused by 36272 that has been analyzed"
   },
   {
     "url": "https://www.cvedetails.com/cve/CVE-2023-36272/",

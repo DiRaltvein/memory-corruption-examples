@@ -56,6 +56,34 @@ now the executable to analyze is availible at /usr/IPPO/src
 [ubuntu 20]
 	- symbiotic - /usr/symbiotic/scripts/symbiotic
 
+// ---------------------------------- CV-COMP SETUP ---------------------------------- \\
+
+sudo su -
+apt update
+apt install python3-pip build-essential unzip cmake
+
+sudo add-apt-repository ppa:sosy-lab/benchmarking
+sudo apt install benchexec
+OR (I did currently through pip)
+pip install --user benchexec
+export PATH=$HOME/.local/bin:$PATH
+
+mkdir /usr/sv-comp && cd /usr/sv-comp
+git clone https://github.com/staticafi/symbiotic.git && cd ./symbiotic && ./build.sh && export PATH=$(pwd)/install/bin:$PATH
+
+rm -rf ./results && benchexec --read-only-dir / --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/symbiotic.xml
+
+
+
+
+
+
+
+
+
+
+
+
 // ---------------------------------- Local notes ---------------------------------- \\
 
 

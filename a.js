@@ -78,6 +78,20 @@ oaf(
         : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
     }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
+if (entryPoint === 'main') {
+  const cvCompTestsPath = filePath.replace(
+    'realworld_simplified',
+    'sv-comp_tests'
+  );
+  console.log(
+    ` ${c('Preprocess', true)}: /usr/llvm-project/build/bin/clang${
+      isCFile ? '' : '++'
+    } -E -P ${getIncludes()}${fileToAnalyze.replace(
+      'realworld_simplified',
+      'sv-comp_tests'
+    )} -o ${cvCompTestsPath + '/' + fileNameWithoutExtension + '.i'} -m32\n`
+  );
+}
 
 // if (entryPoint === 'main') {
 //   console.log(
@@ -128,13 +142,6 @@ oaf(
 ); // -c analyze but do not link. We are not building the file we are only analyzing it so only compiling the file is enough
 
 if (entryPoint === 'main') {
-  console.log(
-    ` ${c('Preprocess', true)}: /usr/local/gcc-14.2.0/bin/${
-      isCFile ? 'gcc' : 'g++'
-    } -E -P ${getIncludes()}${fileToAnalyze} -o ${
-      filePath + '/' + fileNameWithoutExtension + '.i'
-    } -m32\n`
-  );
   console.log(
     ` ${c('Verify', true)}: /usr/local/gcc-14.2.0/bin/${
       isCFile ? 'gcc' : 'g++'
