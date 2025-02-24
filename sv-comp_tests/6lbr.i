@@ -665,12 +665,28 @@ extern char *crypt (const char *__key, const char *__salt)
 int getentropy (void *__buffer, size_t __length)
                                           ;
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int size) {
+  char *userInput = calloc(size + 1, sizeof(char));
+  for (int i = 0; i < size; i++) {
+    userInput[i] = __VERIFIER_nondet_char();
   }
+  return userInput;
+}
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+int main() {
+  int size = getNumberInRange(5, 100);
+  char *userInput = getRandomString(size);
   char filepath[100];
   strcpy(filepath, "/static/");
-  strcat(filepath, argv[1]);
-  return access(filepath, 4) == 0;
+  strcat(filepath, userInput);
+  printf("%s\n", filepath);
+  free(userInput);
 }

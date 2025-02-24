@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <benchmark tool="symbiotic" timelimit="30 s" hardtimelimit="35 s" memlimit="4 GB" cpuCores="1">
 
-  <option name="--prp">memory-safety</option>
-  <option name="--malloc-never-fails"/>
-
-  <resultfiles></resultfiles>
-
-  <rundefinition name="testing">
+  <rundefinition>
+    <option name="--sv-comp"></option>
   </rundefinition>
 
   <tasks>
     <includesfile>../MemSafety.set</includesfile>
     <propertyfile>../properties/valid-memsafety.prp</propertyfile>
-    <propertyfile>../properties/no-overflow.prp</propertyfile>
   </tasks>
 </benchmark>
