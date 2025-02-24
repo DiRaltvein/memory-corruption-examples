@@ -21,12 +21,6 @@ const filePath = fileToAnalyze
   .splice(0, fileToAnalyze.split('/').length - 1)
   .join('/');
 
-// // windows header files
-// headerDirectories.push(
-//   "/mnt/c/'Program Files (x86)'/'Windows Kits'/10/Include/10.0.22621.0/shared",
-//   "/mnt/c/'Program Files (x86)'/'Windows Kits'/10/Include/10.0.22621.0/um",
-//   "/mnt/c/'Program Files'/'Microsoft Visual Studio'/2022/Enterprise/VC/Tools/MSVC/14.40.33807/include"
-// );
 console.clear();
 const showHeaders = headerDirectories.length > 0;
 
