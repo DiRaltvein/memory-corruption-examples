@@ -439,5 +439,3 @@ gpac_2.c
 gpac_3.c
 gpac_4.c
 plutovg.c
-rizin.c
-xhttp.c
