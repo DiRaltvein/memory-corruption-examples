@@ -5,10 +5,29 @@
 
 #include <stdio.h>
 
+// input like ./a.out 'c' will produce unexpected result
 int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
+  if (argc < 2) {
+    printf("Usage: %s <string to parse>\n", argv[0]);
+    return 1;
   }
-  char *rest = argv[1] + 2; // Problem: rest may be pointing to a memory after first argument effectively leading to a read out of bound in the next line
-  printf("%s\n", rest);
+
+  char *record = argv[1];
+  char field = record[0];
+  char *rest = record + 2; // Problem: rest may be pointing to a memory after first argument effectively leading to a read out of bound in the next line
+
+  switch (field) {
+  case 'o':
+  case 's':
+  case 'i':
+    printf("option o, value: %s", rest); // Problem: potentiall read out of bound or rest
+    break;
+  case 'c':
+    while (*rest) {
+      printf("%c", *rest); // Problem: potentiall read out of bound or rest
+      rest++;
+    }
+  }
+
+  printf("\n");
 }

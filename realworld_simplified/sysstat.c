@@ -9,20 +9,26 @@
 
 #define UINT_MAX (__INT_MAX__ * 2U + 1U)
 
-// check overflow function does not cover all edge cases and the hardcoded values still overflow and pass function validation
-void check_overflow(unsigned int val1, unsigned int val2,
-                    unsigned int val3) {
-  if ((unsigned long long)val1 * (unsigned long long)val2 *
-          (unsigned long long)val3 >
-      UINT_MAX) {
+// check overflow function does not cover all edge cases and some values can still pass this function while overflowing 4 byte unsigned int type
+void check_overflow(unsigned int val1, unsigned int val2, unsigned int val3) {
+  if ((unsigned long long)val1 * (unsigned long long)val2 * (unsigned long long)val3 > UINT_MAX) { // Problem: due to integer overflow function may pass
     printf("Overflow detected\n");
     exit(1);
   }
 }
 
-int main() {
-  unsigned int val1 = UINT_MAX - 100;
-  unsigned int val2 = UINT_MAX - 5;
-  unsigned int val3 = 2849931574;
+// Example of input that will overflow: 4294967195 4294967290 2849931574
+int main(int argc, char *argv[]) {
+  if (argc < 4) {
+    printf("Usage: %s <number1> <number2> <number3>\n", argv[0]);
+    return 1;
+  }
+  unsigned int val1 = strtoul(argv[1], NULL, 0);
+  unsigned int val2 = strtoul(argv[2], NULL, 0);
+  unsigned int val3 = strtoul(argv[3], NULL, 0);
+  // printf("%u, %u, %u\n", val1, val2, val3);
+
   check_overflow(val1, val2, val3);
+
+  printf("Apparently there is not unsigned integer overflow %u\n", val1 * val2 * val3); // Problem: potential integer overflow
 }

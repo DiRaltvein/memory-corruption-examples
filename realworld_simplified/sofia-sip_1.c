@@ -3,16 +3,52 @@
 // commit: 3f17604
 // extract of: libsofia-sip-ua/stun/stun_common.c (function: stun_parse_attr_error_code)
 
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
-typedef unsigned int uint32_t;
+#define STUN_A_LAST_MANDATORY 0x0023
+#define STUN_A_OPTIONAL 0x7fff
+#define get16(b, offset)      \
+  (((b)[(offset) + 0] << 8) | \
+   ((b)[(offset) + 1] << 0))
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
+void stun_parse_attr_error_code(const unsigned char *p) {
+  uint32_t tmp;
+
+  memcpy(&tmp, p, sizeof(uint32_t)); // Problem: access out of bound of pointer p as remaining length is not checked
+  printf("Parsed value: %u\n", tmp);
+}
+
+int stun_parse_attribute(unsigned char *p, size_t left_len) {
+  int len;
+  uint16_t attr_type;
+
+  attr_type = get16(p, 0);
+  len = get16(p, 2);
+
+  if ((left_len - 4) < len) // make sure we have enough space for attribute
+  {
+    printf("Error STUN attr len is too big.\n");
+    return -1;
   }
 
-  uint32_t tmp;
-  memcpy(&tmp, argv[1], sizeof(uint32_t)); // Problem: access out of bound if command line arguments length is less than 3 characters
+  if (attr_type > STUN_A_LAST_MANDATORY && attr_type < STUN_A_OPTIONAL) {
+    return -1;
+  }
+
+  p += 4;
+  if (attr_type == 0x0009) {
+    stun_parse_attr_error_code(p);
+    return 0;
+  }
+  return 1;
+}
+
+int main() {
+  unsigned char data[] = {
+      0x00, 0x09, 0x00, 0x00, 0x00};
+  size_t length = sizeof(data) / sizeof(data[0]);
+
+  return stun_parse_attribute((unsigned char *)&data, length);
 }
