@@ -444,9 +444,6 @@ mongoose
 minizip-ng_1
 libde265
 libcue
-jhead_1
-frr
-FiND
 
 
 COPY INTO BUFFER OF PATH
