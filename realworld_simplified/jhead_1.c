@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   for (int a = 0; a < length; a++) {
     int ch = Data[a];
 
-    if (ch == 'a' && Data[a + 1] == 'a') // Problem: in case a is the last character in a string then Data[a+1] will result in a one byte read past enf of the string
+    if (ch == 'a' && Data[a + 1] == 'a') // Problem: in case a is the last character in a string then Data[a+1] will result in a one byte read past end of the string
       continue;
 
     Comment[nch++] = (char)ch;
