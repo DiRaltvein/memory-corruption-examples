@@ -3,19 +3,20 @@
 // commit: 198715e
 // extract of: src/shared/dlt_common.c (function: dlt_file_message)
 
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
+// Similar vulnerabilty with negative index buffer access after atoi of user input: https://www.cvedetails.com/cve/CVE-2023-43641/
 
-typedef struct sDltFile
-{
-  FILE *handle;      /**< file handle of opened file */
-  long *index;       /**< file positions of all messages for fast access to file, only filtered messages */
-  int32_t counter;       /**< number of messages in file */
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct sDltFile {
+  FILE *handle;    /**< file handle of opened file */
+  long *index;     /**< file positions of all messages for fast access to file, only filtered messages */
+  int32_t counter; /**< number of messages in file */
 } DltFile;
 
-void readMessageFromFile(DltFile *file, char** message) {
+void readMessageFromFile(DltFile *file, char **message) {
   if (file == NULL || feof(file->handle)) {
     exit(1);
   }
@@ -59,7 +60,7 @@ void initializeDltFile(DltFile *file) {
   int i = 0;
   while (!feof(file->handle) && i < messageCount) {
     file->counter++;
-    char* message;
+    char *message;
     file->index[i++] = ftell(file->handle);
     readMessageFromFile(file, &message);
     free(message);
@@ -82,7 +83,7 @@ void dlt_file_message(DltFile *file, int index) {
     return;
   }
 
-  char* message;
+  char *message;
   readMessageFromFile(file, &message);
 
   printf("Message at position [%d] is %s\n", index, message);
@@ -102,7 +103,7 @@ int main() {
   printf("Input a number that would correspond to an index of a message in hex file to see the message on that position. Alternatively input 'q' to stop the program.\n");
   while (1) {
     char userValue[5] = {0};
-    scanf("%4s", (char*)&userValue);
+    scanf("%4s", (char *)&userValue);
     if (userValue[0] == 'q') {
       break;
     }

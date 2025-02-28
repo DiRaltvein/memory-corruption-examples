@@ -440,10 +440,6 @@ gpac_2.c
 gpac_3.c
 gpac_4.c
 moonlight-common-c
-mongoose
-minizip-ng_1
-libde265
-libcue
 
 
 COPY INTO BUFFER OF PATH
