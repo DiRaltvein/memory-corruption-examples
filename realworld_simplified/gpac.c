@@ -23,13 +23,12 @@ s32 lsr_translate_coords(s32 val, u32 nb_bits) {
   return 0;
 }
 
+// to cause an undefined behaviour value 2147483647 and 31 can be passed and number1 and number2 respectively
 int main(int argc, char *argv[]) {
   if (argc < 3) {
-    printf("Provide 2 parameters\n");
-    exit(1);
+    printf("Usage: %s <number1> <number2>\n", argv[0]);
+    return 1;
   }
-  u32 val = atoi(argv[1]);     // 2147483647
-  u32 nb_bits = atoi(argv[2]); // 31
-  s32 result = lsr_translate_coords(val, nb_bits);
-  printf("Translated number: %d\n", result);
+
+  printf("Translated number: %d\n", lsr_translate_coords(atoi(argv[1]), atoi(argv[2])));
 }
