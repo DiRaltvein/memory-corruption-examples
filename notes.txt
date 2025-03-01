@@ -435,7 +435,6 @@ can not be checked for statically. Only strings are null byte terminated and the
 cppcheck can find errors if there is an if condition or any other hint as to what the value can be as with CVE-2022-47092 where cppcheck can find some instances of integer overflow in a file where bit shift count if checked before/after the operation.
 In case bit shift count is not checked no error is produced.
 
-gpac_6.c
 moonlight-common-c
 
 
