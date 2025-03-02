@@ -61,6 +61,7 @@
     "getopt.h": "c",
     "time.h": "c",
     "json.h": "c",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "libgen.h": "c"
   }
 }
