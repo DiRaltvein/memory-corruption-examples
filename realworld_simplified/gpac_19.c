@@ -30,7 +30,7 @@ static uint32_t avi_read(avi_t *AVI, char *buf, uint32_t len) {
 }
 
 static uint32_t str2ulong(unsigned char *str) {
-  return ((uint32_t)str[0] | ((uint32_t)str[1] << 8) | ((uint32_t)str[2] << 16) | ((uint32_t)str[3] << 24)); // Problem: buffer overflow parsed str function is shorter than 4 bytes
+  return ((uint32_t)str[0] | ((uint32_t)str[1] << 8) | ((uint32_t)str[2] << 16) | ((uint32_t)str[3] << 24)); // Problem: buffer overflow passed str is shorter than 4 bytes
 }
 
 int avi_parse_input_file(avi_t *AVI) {

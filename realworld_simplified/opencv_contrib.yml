@@ -1,0 +1,14 @@
+format_version: '2.0'
+
+input_files: 'opencv_contrib.cc'
+
+properties:
+  - property_file: ../properties/valid-memsafety.prp
+    expected_verdict: false
+  - property_file: ../properties/no-overflow.prp
+    expected_verdict: false
+
+options:
+  language: C++
+  data_model: ILP32
+  

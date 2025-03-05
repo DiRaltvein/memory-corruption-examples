@@ -4,7 +4,7 @@
 // extract of: src/mat4.c (function: mat4_read_header)
 
 #include <stdint.h>
-#include <stdio.h> // printf
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 

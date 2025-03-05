@@ -13,7 +13,7 @@ char *Xasc(char *oper) {
   register char delimiter;
 
   s = oper;
-  delimiter = *s; // Potential dereference of null pointer
+  delimiter = *s; // Problem: Potential dereference of null pointer
   size_t operLength = strlen(oper);
 
   size_t processedIndex = 0;
