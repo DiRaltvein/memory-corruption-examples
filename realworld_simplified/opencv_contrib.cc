@@ -1,27 +1,62 @@
 // https://www.cvedetails.com/cve/CVE-2023-2617/
 // repository: https://github.com/opencv/opencv_contrib
-// commit: <commit hash where vulnerability exists>
+// commit: 960b3f6
 // extract of: modules/wechat_qrcode/src/zxing/qrcode/decoder/decoded_bit_stream_parser.cpp (function: decodeByteSegment)
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 #include <string.h>
 
-int main(int argc, char *argv[]) {
-  int available = argc - 1;
+typedef char byte;
+typedef std::string string;
+typedef struct {
+  byte* bytes_;
+  size_t size_;
+  size_t byteOffset_;
 
-  char *bytes_ = (char *)malloc(sizeof(char) * available);
-  if (bytes_ == NULL) {
-    return -1;
+  byte readByte() {
+    if (byteOffset_ >= size_) return 0;
+    return bytes_[byteOffset_++];
+  };
+  size_t availableBits() { return 8 * (size_ - byteOffset_); };
+} ByteSource;
+
+// in case count is non zero but availible is 0 then count will be updated to 0 but nBytes will remain non zero
+void decodeByteSegment(ByteSource* bytes, string* result, size_t count) {
+  size_t nBytes = count;
+  size_t available = bytes->availableBits();
+  if (count * 8 > available) {
+    count = (available + 7) / 8;
   }
 
-  memset(bytes_, 'a', available);
+  byte* readBytes = (byte*)calloc(count, sizeof(byte));
+  if (readBytes == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (size_t i = 0; i < count; i++) {
+    readBytes[i] = (char)bytes->readByte();
+  }
 
-  char *readBytes = &(bytes_)[0];
+  result->append((const char*)readBytes, nBytes); // Problem: overflow of readBytes because nBytes may be greater than readBytes
+  free(readBytes);
+}
 
-  // Problem: if available is 0 then malloc returns either NULL pointer or a pointer to memory that is allocated 0 bytes.
-  // Code executes further only if pointer returned is not NULL so dereferencing of variable readBytes could potentially result in a read out of bound
-  printf("%c\n", *readBytes);
+int main() {
+  byte data[] = "\x12\x00Some random string\x1d\x00 and some other random string\x05\x00";
+  ByteSource bytes = {
+    .bytes_ = (byte*) data,
+    .size_ = sizeof(data) / sizeof(data[0]),
+    .byteOffset_ = 0
+  };
 
-  free(bytes_);
+  while (bytes.availableBits() >= sizeof(unsigned short)) {
+    unsigned short length = 0;
+    memcpy(&length, bytes.bytes_ + bytes.byteOffset_, sizeof(unsigned short));
+    bytes.byteOffset_ += sizeof(unsigned short);
+    string str;
+    decodeByteSegment(&bytes, &str, length);
+    printf("decoded string with length of %d: %s\n", length, str.c_str());
+  }
 }

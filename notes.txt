@@ -436,7 +436,6 @@ cppcheck can find errors if there is an if condition or any other hint as to wha
 In case bit shift count is not checked no error is produced.
 
 
-opencv_contrib.cc
 openNDS.c
 sysstat.c
 
