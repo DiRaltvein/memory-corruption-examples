@@ -392,22 +392,6 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int size) {
-  char *userInput = calloc(size + 1, sizeof(char));
-  for (int i = 0; i < size; i++) {
-    userInput[i] = __VERIFIER_nondet_char();
-  }
-  return userInput;
-}
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 void decToString(char *input, char *string) {
   char *c = string;
   char *b = input;
@@ -422,12 +406,11 @@ void decToString(char *input, char *string) {
     b++;
   }
 }
-int main() {
-  int size = __VERIFIER_nondet_int();
-  char *userInput = getRandomString(size);
-  char *stringToPutDecodedValueTo = calloc(size + 1, sizeof(char));
-  decToString(userInput, stringToPutDecodedValueTo);
-  printf("%s\n", stringToPutDecodedValueTo);
-  free(userInput);
-  free(stringToPutDecodedValueTo);
+int main(int argc, char *argv[]) {
+  if (argc < 2) {
+    return 1;
+  }
+  char string[50] = {0};
+  decToString(argv[1], (char *)&string);
+  printf("%s\n", string);
 }

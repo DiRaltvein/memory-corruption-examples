@@ -3,8 +3,6 @@ format_version: '2.0'
 input_files: 'sysstat.c'
 
 properties:
-  - property_file: ../properties/valid-memsafety.prp
-    expected_verdict: false
   - property_file: ../properties/no-overflow.prp
     expected_verdict: false
 

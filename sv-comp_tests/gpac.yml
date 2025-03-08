@@ -1,0 +1,12 @@
+format_version: '2.0'
+
+input_files: 'gpac.i
+
+properties:
+  - property_file: ../properties/def-behavior.prp
+    expected_verdict: false
+
+options:
+  language: C
+  data_model: ILP32
+  

@@ -3,36 +3,8 @@
 // commit: 88f01a7
 // extract of: src/decNumber/decNumber.c (function: decToString)
 
-// For now without a licence but because each one of test cases originates from an open source software I will probably have to add a separate licence for each test case
-// This is yet to be decided, for not without a licence, but licence can be found from jq project, link in above
-
 #include <stdio.h>
 #include <string.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int size) {
-  char *userInput = calloc(size + 1, sizeof(char));
-  for (int i = 0; i < size; i++) {
-    userInput[i] = __VERIFIER_nondet_char();
-  }
-  return userInput;
-}
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 
 void decToString(char *input, char *string) {
   char *c = string;
@@ -49,15 +21,12 @@ void decToString(char *input, char *string) {
   }
 }
 
-int main() {
-  int size = getNumberInRange(5, 1000);
-  char *userInput = getRandomString(size);
-  char *stringToPutDecodedValueTo = calloc(size + 1, sizeof(char));
-
-  decToString(userInput, stringToPutDecodedValueTo);
-
-  printf("%s\n", stringToPutDecodedValueTo);
-
-  free(userInput);
-  free(stringToPutDecodedValueTo);
+// to cause an overflow pass as an argument a string that consists of more than 50 characters or has a lot of characters 'a' in it
+int main(int argc, char *argv[]) {
+  if (argc < 2) {
+    return 1;
+  }
+  char string[50] = {0};
+  decToString(argv[1], (char *)&string);
+  printf("%s\n", string);
 }

@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "stdlib.h": "c",
+    "bitset": "c",
+    "*.tcc": "c",
+    "ratio": "c",
+    "system_error": "c",
+    "array": "c",
+    "functional": "c",
+    "regex": "c",
+    "tuple": "c",
+    "type_traits": "c",
+    "utility": "c",
+    "initializer_list": "c",
+    "string": "c",
+    "string.h": "c"
+  }
+}
