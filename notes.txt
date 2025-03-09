@@ -385,10 +385,11 @@ clang --analyze --analyzer-no-default-checks -Xanalyzer -analyzer-checker="core.
 # Nevertheless, as they were analyzed before the main work they are also included into this analysis.
 https://www.cvedetails.com/cve/CVE-2022-4603/
 https://www.cvedetails.com/cve/CVE-2019-25078/
+https://www.cvedetails.com/cve/CVE-2022-4202/
+https://www.cvedetails.com/cve/CVE-2024-0321/
 https://www.cvedetails.com/cve/CVE-2021-37778/
 https://www.cvedetails.com/cve/CVE-2022-29021/
 https://www.cvedetails.com/cve/CVE-2022-31003/
-https://www.cvedetails.com/cve/CVE-2024-0321/
 
 
 
