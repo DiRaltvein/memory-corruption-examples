@@ -874,6 +874,22 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 int32_t mz_path_has_slash(const char *path) {
   int32_t path_len = (int32_t)strlen(path);
   if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
@@ -888,12 +904,8 @@ int32_t mz_path_convert_slashes(char *path, char slash) {
   }
   return 0;
 }
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage %s <file system path>\n", argv[0]);
-    return 1;
-  }
-  const char *path = argv[1];
+int main() {
+  const char *path = getRandomString(0, 500);
   size_t path_length = strlen(path);
   char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
   if (pathwfs == ((void*)0)) {

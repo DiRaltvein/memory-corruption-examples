@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
 struct iovec {
   int iov_len;
 };
@@ -12,7 +14,7 @@ struct iovec {
 int vq_getchain(struct iovec *iov) {
   int i = 0;
   for (; i < 32; i++) {
-    int iov_len = rand() % 10;
+    int iov_len = __VERIFIER_nondet_int();
     if (iov_len == 9) {
       return -1; // some error because of what not all iovec structs could be generated
     }

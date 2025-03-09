@@ -9,10 +9,34 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct r_anal_op_t {
   int size;
   uint8_t *bytes;
 } RAnalOp;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 size_t countChar(const uint8_t *buf, int len, char ch) {
   size_t i;
@@ -67,14 +91,16 @@ int decode(RAnalOp *op) {
 
 int main() {
   RAnalOp op = {0};
-  op.size = 400; // overflow happens if value is greater then 255
-  op.bytes = calloc(op.size, sizeof(uint8_t));
-  if (op.bytes == NULL) {
-    printf("Out of memory!\n");
-    return 1;
-  }
-  memset(op.bytes, 'A', op.size - 1);
-  op.bytes[0] = '[';
+  op.bytes = (uint8_t*)getRandomString(5, 1000);
+  op.size = strlen(op.bytes);
+  // op.size = 400; // overflow happens if value is greater then 255
+  // op.bytes = calloc(op.size, sizeof(uint8_t));
+  // if (op.bytes == NULL) {
+  //   printf("Out of memory!\n");
+  //   return 1;
+  // }
+  // memset(op.bytes, 'A', op.size - 1);
+  // op.bytes[0] = '[';
 
   int size = decode(&op);
   printf("Decoded size: %d\n", size);

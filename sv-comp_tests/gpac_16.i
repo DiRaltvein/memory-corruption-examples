@@ -852,6 +852,24 @@ extern char *stpncpy (char *__restrict __dest,
 
 typedef unsigned char u8;
 typedef unsigned int u32;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
   u32 pos = 0;
   while (pos < data_size) {
@@ -908,25 +926,7 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
   }
 }
 int main() {
-  u8 sdt_data[] = {
-      0x00, 0x00,
-      0xfe,
-      0x50,
-      0x0f,
-      0x48,
-      0x0f,
-      0x01,
-      0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f,
-      0x05, 0x77, 0x6F, 0x72, 0x6C, 0x64,
-      0x00, 0x01,
-      0xfe,
-      0x50,
-      0xff,
-      0x48,
-      0x17,
-      0x02,
-      0x0d, 0x76, 0x75, 0x6c, 0x6e, 0x65, 0x72, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79,
-      0x05, 0x66, 0x6f, 0x75, 0x6e, 0x64,
-  };
-  gf_m2ts_process_sdt(sdt_data, sizeof(sdt_data));
+  u8 *sdt_data = (u8*)getRandomString(5, 1000);
+  size_t len = strlen(sdt_data);
+  gf_m2ts_process_sdt(sdt_data, len);
 }

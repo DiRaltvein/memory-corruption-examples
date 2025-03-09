@@ -9,6 +9,30 @@
 
 #define QUERYMAXLEN 80
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 /**
  * Elements are query key value pairs. Example: foo=bar
  * element_counter shows how many elements is inside elements array or eg many query key value pairs there is
@@ -63,12 +87,12 @@ static int get_query(char **elements, int element_counter, char *query, const ch
 int main() {
   char query[QUERYMAXLEN];
   char **elements = (char **)malloc(5 * sizeof(char *));
-  elements[0] = strdup("key=value");
-  elements[1] = strdup("hello=there");
-  elements[2] = strdup("this=is");
-  elements[3] = strdup("a=test");
-  elements[4] = strdup("andNowSomethingReallyLong=ThatWouldBeLongerThenTheQueryMaxLengthToOverflowTheQueryBufferThatIsNotCheckedBeforeStrncpyMethod");
+  elements[0] = getRandomString(5, 100);
+  elements[1] = getRandomString(5, 100);
+  elements[2] = getRandomString(5, 100);
+  elements[3] = getRandomString(5, 100);
+  elements[4] = getRandomString(5, 100);
 
-  get_query((char **)elements, 5, (char *)&query, '&');
+  get_query(elements, 5, (char *)&query, '&');
   printf("%s\n", query);
 }

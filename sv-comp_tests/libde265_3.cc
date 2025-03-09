@@ -31,6 +31,19 @@ typedef struct _MetaDataArray {
   int height_in_units;
 } MetaDataArray;
 
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
 enum IntraPredMode get_IntraPredMode(MetaDataArray *data, int x,int y)
 {
 
@@ -87,12 +100,12 @@ void read_coding_unit(MetaDataArray *data, int x0, int y0) {
   printf("IntraPredModeC: %d\n", IntraPredModeC);
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    printf("Please, provide 2 numbers in range 0 - 5 that would be used to access a matrix of values\n");
-    printf("Malicious input if 4 and 4\n");
-    return 1;
-  }
+int main() {
+  // if (argc < 3) {
+  //   printf("Please, provide 2 numbers in range 0 - 5 that would be used to access a matrix of values\n");
+  //   printf("Malicious input if 4 and 4\n");
+  //   return 1;
+  // }
   unsigned char data[] = {
     0x04, 0x02,
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
@@ -108,5 +121,5 @@ int main(int argc, char *argv[]) {
   dataObj.height_in_units = 6;
   dataObj.width_in_units = 6;
   dataObj.log2unitSize = 8;
-  read_coding_unit(&dataObj, atoi(argv[1]), atoi(argv[2]));
+  read_coding_unit(&dataObj, getNumberInRange(0, 5), getNumberInRange(0, 5));
 }

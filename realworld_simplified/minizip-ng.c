@@ -3,6 +3,8 @@
 // commit: 97d8e65
 // extract of: mz_os.c (function: mz_path_resolve)
 
+#include <stdio.h>
+
 // mz_path_resolve function can write out of bound of the memory segment where output pointer points. The write out of bound is only 1 byte before the buffer.
 // eg if output points to 0x000020 then 0x000019 can be overwritten
 
@@ -69,5 +71,9 @@ int mz_path_resolve(const char *path, char *output, int max_output) {
 
 int main() {
   char output[256];
-  mz_path_resolve("x/../y", output, sizeof(output));
+  if (mz_path_resolve("x/../y", output, sizeof(output)) == 0) {
+    printf("Resolved path: %s\n", output);
+  } else {
+    printf("Could not resolve path\n");
+  }
 }

@@ -6,6 +6,31 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdlib.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 FILE *logFile = NULL;
 char initialLogFileName[256] = "";
@@ -43,12 +68,10 @@ void lou_logEnd(void) {
 	logFile = NULL;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
-  }
-
-  lou_logFile(argv[1]);
+int main() {
+	char* randomString = getRandomString(5, 300);
+  lou_logFile(randomString);
   lou_logPrint("Error: buffer overflow of buffer %s if passed logFile is %d characters or longer", initialLogFileName, 256);
   lou_logEnd();
+	free(randomString);
 }

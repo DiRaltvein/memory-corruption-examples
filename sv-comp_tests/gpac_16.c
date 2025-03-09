@@ -10,6 +10,30 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 // function that processes a services from Service Description Table (SDT) that is part of part of the MPEG-TS.
 void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
   u32 pos = 0;
@@ -78,33 +102,37 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
 }
 
 int main() {
-  u8 sdt_data[] = {
-      // service 1 completly valid
-      0x00, 0x00, // service id
-      0xfe,       // 6 reserved bits + EIT schedule flag  + EIT present/following flag
-      0x50,       // 3 bits running status + free CA mode flag + 4 bits descriptors loop length
-      0x0f,       // 8 additional bits of descriptors loop length
+  // u8 sdt_data[] = {
+  //     // service 1 completly valid
+  //     0x00, 0x00, // service id
+  //     0xfe,       // 6 reserved bits + EIT schedule flag  + EIT present/following flag
+  //     0x50,       // 3 bits running status + free CA mode flag + 4 bits descriptors loop length
+  //     0x0f,       // 8 additional bits of descriptors loop length
 
-      // descriptor 1
-      0x48,                               // descriptor tag
-      0x0f,                               // descriptor length
-      0x01,                               // service_type
-      0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, // provider with 1 first byte showing its length
-      0x05, 0x77, 0x6F, 0x72, 0x6C, 0x64, // service with 1 first byte showing its length
+  //     // descriptor 1
+  //     0x48,                               // descriptor tag
+  //     0x0f,                               // descriptor length
+  //     0x01,                               // service_type
+  //     0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, // provider with 1 first byte showing its length
+  //     0x05, 0x77, 0x6F, 0x72, 0x6C, 0x64, // service with 1 first byte showing its length
 
-      // service 2 with vulnerability (descriptors length is set to 255 (0x0ff) while it is really only 23 bytes long that causes stack buffer overflow)
-      0x00, 0x01, // service id
-      0xfe,       // 6 reserved bits + EIT schedule flag  + EIT present/following flag
-      0x50,       // 3 bits running status + free CA mode flag + 4 bits descriptors loop length
-      0xff,       // 8 additional bits of descriptors loop length
+  //     // service 2 with vulnerability (descriptors length is set to 255 (0x0ff) while it is really only 23 bytes long that causes stack buffer overflow)
+  //     0x00, 0x01, // service id
+  //     0xfe,       // 6 reserved bits + EIT schedule flag  + EIT present/following flag
+  //     0x50,       // 3 bits running status + free CA mode flag + 4 bits descriptors loop length
+  //     0xff,       // 8 additional bits of descriptors loop length
 
-      // descriptor 2
-      0x48,                                                                               // descriptor tag
-      0x17,                                                                               // descriptor length
-      0x02,                                                                               // service_type
-      0x0d, 0x76, 0x75, 0x6c, 0x6e, 0x65, 0x72, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, // provider with 1 first byte showing its length
-      0x05, 0x66, 0x6f, 0x75, 0x6e, 0x64,                                                 // service with 1 first byte showing its length
-  };
+  //     // descriptor 2
+  //     0x48,                                                                               // descriptor tag
+  //     0x17,                                                                               // descriptor length
+  //     0x02,                                                                               // service_type
+  //     0x0d, 0x76, 0x75, 0x6c, 0x6e, 0x65, 0x72, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, // provider with 1 first byte showing its length
+  //     0x05, 0x66, 0x6f, 0x75, 0x6e, 0x64,                                                 // service with 1 first byte showing its length
+  // };
+  // size_t len = sizeof(sdt_data);
 
-  gf_m2ts_process_sdt(sdt_data, sizeof(sdt_data));
+  u8 *sdt_data = (u8*)getRandomString(5, 1000);
+  size_t len = strlen(sdt_data);
+
+  gf_m2ts_process_sdt(sdt_data, len);
 }

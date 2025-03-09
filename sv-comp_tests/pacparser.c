@@ -3,10 +3,34 @@
 // commit: f013613
 // extract of: src/pacparser.c (function: pacparser_find_proxy)
 
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-// -------------------------- COPIED --------------------------
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 char *str_replace(const char *orig, char *rep, char *with) {
   char *result;  // the return string
   char *ins;     // the next insert point
@@ -41,10 +65,10 @@ char *str_replace(const char *orig, char *rep, char *with) {
   strcpy(tmp, orig);
   return result;
 }
-// -------------------------- COPIED --------------------------
 
 int main() {
-  char url[] = "and I''''''''' am url";
+  // char url[] = "and I''''''''' am url";
+  char* url = getRandomString(5, 500);
   // URL-encode "'" as we use single quotes to stick the URL into a temporary script.
   char *sanitized_url = str_replace(url, "'", "%27");
 
@@ -54,7 +78,8 @@ int main() {
   strcat(script, sanitized_url); // Problem: memory of script is allocated considering length of variable 'url' but variable 'sanitized_url' longer can be greater then of url variable due to str_replace.
   strcat(script, "', '");
   strcat(script, "')");
+  printf("script: %s\n", script);
   free(script);
   free(sanitized_url);
-  return 0;
+  free(url);
 }

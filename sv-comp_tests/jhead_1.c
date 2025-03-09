@@ -9,7 +9,23 @@
 
 typedef unsigned char uchar;
 #define MAX_COMMENT_SIZE 16000
-#define EXAMPLE_LENGTH 17
+
+extern char __VERIFIER_nondet_char(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size that is not zero terminated
+ */
+char *getRandomStringNotZeroTerminated(int size) {
+  char *randomString = (char*)calloc(size, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 
 static void process_COM(uchar *Data, int length) {
   int ch;
@@ -41,14 +57,8 @@ static void process_COM(uchar *Data, int length) {
 }
 
 int main() {
-  uchar *data = calloc(EXAMPLE_LENGTH, sizeof(uchar));
-  if (data == NULL) {
-    printf("Out of memory\n");
-    return 1;
-  }
-  // memcpy such that data buffer is not null terminated. Is needed for memory sanitizers to detect 1 read out of bound.
-  // Otherwise, if string is null terminated zero byte is read and no error is outputted
-  memcpy(data, "Some random data\r", EXAMPLE_LENGTH);
-  process_COM(data, EXAMPLE_LENGTH);
+  char* data = getRandomStringNotZeroTerminated(MAX_COMMENT_SIZE);
+  size_t dataSize = MAX_COMMENT_SIZE;
+  process_COM(data, dataSize);
   free(data);
 }

@@ -1,7 +1,7 @@
-// https://www.cvedetails.com/cve/CVE-2024-0321/
+// https://www.cvedetails.com/cve/CVE-2023-1452
 // repository: https://github.com/gpac/gpac
 // commit: 7460cb3
-// extract of: src/filters/load_text.c (function: gf_text_get_u8_line)
+// extract of: src/filters/load_text.c (function: gf_text_get_UTF8_line)
 
 #include <stdint.h>
 #include <stdio.h>

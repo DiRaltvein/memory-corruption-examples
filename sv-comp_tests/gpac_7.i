@@ -766,12 +766,12 @@ int readUInt8(FILE *f) {
 u32 readUInt32(FILE *f) {
   return readUInt8(f) + (readUInt8(f) << 8) + (readUInt8(f) << 16) + (readUInt8(f) << 24);
 }
-int main(int argc, char *argv[]) {
+int main() {
   FILE *f = fopen("gpac_7.hex", "r");
   if (f == ((void*)0))
     return -1;
   byte rps[2][64];
-  u32 sps_rpl1_same_as_rpl0 = argc > 1 ? 2 : 1;
+  u32 sps_rpl1_same_as_rpl0 = readUInt8(f) ? 2 : 1;
   for (u32 i = 0; i < sps_rpl1_same_as_rpl0; i++) {
     u32 num_ref_pic_lists = readUInt32(f);
     u32 j;

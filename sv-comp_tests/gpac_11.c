@@ -11,6 +11,8 @@
 #define MAX_LAYERS 16
 #define gf_bs_read_int_log(_bs, _nBits) gf_bs_read_int(_bs, _nBits)
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   FILE *stream;
   uint8_t current;
@@ -39,6 +41,17 @@ uint8_t gf_bs_read_bit(GF_BitStream *bs) {
   uint8_t ret = (bs->current >> (bs->nbBits - 1)) & 1;
   bs->nbBits--;
   return ret;
+}
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
 }
 
 uint32_t gf_bs_read_int(GF_BitStream *bs, uint32_t nBits) {
@@ -81,7 +94,7 @@ int32_t gf_hevc_read_sps_bs_internal(GF_BitStream *bs, HEVC_SPS *sps, HEVC_VPS *
   return 1;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   HEVC_VPS vps;
   HEVC_SPS sps;
   GF_BitStream bs = initializeStream("./gpac_11.hex");
@@ -90,6 +103,6 @@ int main(int argc, char *argv[]) {
     vps.rep_format_idx[i] = i;
   }
 
-  gf_hevc_read_sps_bs_internal(&bs, &sps, &vps, argc);
+  gf_hevc_read_sps_bs_internal(&bs, &sps, &vps, getNumberInRange(0, 20));
   fclose(bs.stream);
 }

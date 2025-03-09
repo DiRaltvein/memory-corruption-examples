@@ -3,16 +3,36 @@
 // commit: 5f18366
 // extract of: libsofia-sip-ua/sdp/sdp_parse.c (function: parse_message)
 
+#include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-// input like ./a.out 'c' will produce unexpected result
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage: %s <string to parse>\n", argv[0]);
-    return 1;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
   }
 
-  char *record = argv[1];
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
+int main() {
+  char *record = getRandomString(0, 500);
   char field = record[0];
   char *rest = record + 2; // Problem: rest may be pointing to a memory after first argument effectively leading to a read out of bound in the next line
 
@@ -28,6 +48,8 @@ int main(int argc, char *argv[]) {
       rest++;
     }
   }
+
+  free(record);
 
   printf("\n");
 }

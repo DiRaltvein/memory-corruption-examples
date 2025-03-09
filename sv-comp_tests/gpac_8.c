@@ -10,12 +10,33 @@
 
 typedef uint32_t u32;
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 int main() {
-  // if (argc < 2) {
-  //   exit(0);
-  // }
-  // char *szLine = argv[1]; // when malicious input is not hardcoded than some static code analyzers can not find the overflow
-  char szLine[] = "{200}{500 Function processes subtitles in the .SUB format but it does not expect subtitle to be malformed. When looking for closing } it overflows";
+  // char szLine[] = "{200}{500 Function processes subtitles in the .SUB format but it does not expect subtitle to be malformed. When looking for closing } it overflows";
+  char* szLine = getRandomString(5, 500);
   int start, end;
   char szTime[20], szText[2048];
   u32 len = (u32)strlen(szLine);
@@ -23,6 +44,7 @@ int main() {
   u32 j = 0;
   if (szLine[i] != '{') {
     printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
   while (szLine[i + 1] && szLine[i + 1] != '}') {
@@ -38,6 +60,7 @@ int main() {
   i = 0;
   if (szLine[j] != '{') {
     printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
   while (szLine[i + 1 + j] && szLine[i + 1 + j] != '}') {
@@ -49,7 +72,8 @@ int main() {
   j += i + 2;
 
   if (start > end) {
-    printf("Bad SUB file"); // when using hardcoded subtitle this if statement gets executed because overflow changes start value and it gets bigger than 200
+    printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
 
@@ -63,4 +87,5 @@ int main() {
 
   szText[i - j] = 0;
   printf("Final subtitle - %s\n", szText);
+  free(szLine);
 }

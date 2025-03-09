@@ -10,6 +10,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
 typedef struct {
   int refIdx[2]; // index into LongTermRefPic
 } PBMotion;
@@ -28,7 +41,7 @@ int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int 
   return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   slice_segment_header shdr = {0};
-  derive_spatial_luma_vector_prediction(&shdr, argc > 5 ? 0 : 1, argc);
+  derive_spatial_luma_vector_prediction(&shdr, __VERIFIER_nondet_int() > 0 ? 1 : 0, getNumberInRange(0, 16));
 }

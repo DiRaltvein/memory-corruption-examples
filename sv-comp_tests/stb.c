@@ -14,6 +14,30 @@ typedef struct _stb_vorbis {
   unsigned int currect_stream_position;
 } vorb;
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 int get32_packet(vorb *f) {
   if (f->currect_stream_position + 3 >= f->stream_size) {
     exit(1);
@@ -76,24 +100,26 @@ cleanup:
 }
 
 int main() {
-  unsigned char fileMock[] = {
-      0x01, 0x00, 0x00, 0x40,                                                                               // number of comments overall. Currently set to 1073741825 to cause an integer overflow. Set to 9 to see the program working correctly
-      0x0B, 0x00, 0x00, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x3d, 0x57, 0x6f, 0x72, 0x6c, 0x64,             // a single comment (first 4 bytes show comment length)
-      0x0D, 0x00, 0x00, 0x00, 0x63, 0x68, 0x61, 0x72, 0x3d, 0x6f, 0x6e, 0x65, 0x20, 0x62, 0x79, 0x74, 0x65, // second comment
-      0x01, 0x00, 0x00, 0x00, 0x61,                                                                         // third comment
-      0x01, 0x00, 0x00, 0x00, 0x61,                                                                         // ...
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61}; // comment which causes overflow
+  // unsigned char fileMock[] = {
+  //     0x01, 0x00, 0x00, 0x40,                                                                               // number of comments overall. Currently set to 1073741825 to cause an integer overflow. Set to 9 to see the program working correctly
+  //     0x0B, 0x00, 0x00, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x3d, 0x57, 0x6f, 0x72, 0x6c, 0x64,             // a single comment (first 4 bytes show comment length)
+  //     0x0D, 0x00, 0x00, 0x00, 0x63, 0x68, 0x61, 0x72, 0x3d, 0x6f, 0x6e, 0x65, 0x20, 0x62, 0x79, 0x74, 0x65, // second comment
+  //     0x01, 0x00, 0x00, 0x00, 0x61,                                                                         // third comment
+  //     0x01, 0x00, 0x00, 0x00, 0x61,                                                                         // ...
+  //     0x01, 0x00, 0x00, 0x00, 0x61,
+  //     0x01, 0x00, 0x00, 0x00, 0x61,
+  //     0x01, 0x00, 0x00, 0x00, 0x61,
+  //     0x01, 0x00, 0x00, 0x00, 0x61,
+  //     0x01, 0x00, 0x00, 0x00, 0x61}; // comment which causes overflow
   vorb f = {0};
-  f.stream = calloc(1, sizeof(fileMock));
-  if (f.stream == NULL)
-    return 1;
-  memcpy(f.stream, fileMock, sizeof(fileMock));
+  f.stream = (unsigned char *)getRandomString(5, 500);
+  f.stream_size = strlen(f.stream);
+  // f.stream = calloc(1, sizeof(fileMock));
+  // if (f.stream == NULL)
+  //   return 1;
+  // memcpy(f.stream, fileMock, sizeof(fileMock));
+  // f.stream_size = sizeof(fileMock);
   f.currect_stream_position = 0;
-  f.stream_size = sizeof(fileMock);
 
   start_decoder(&f);
   free(f.stream);

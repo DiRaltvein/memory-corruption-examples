@@ -851,6 +851,18 @@ extern char *stpncpy (char *__restrict __dest,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
 typedef unsigned char uchar;
+extern char __VERIFIER_nondet_char(void);
+char *getRandomStringNotZeroTerminated(int size) {
+  char *randomString = (char*)calloc(size, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 static void process_COM(uchar *Data, int length) {
   int ch;
   char Comment[16000 + 1];
@@ -873,12 +885,8 @@ static void process_COM(uchar *Data, int length) {
   printf("COM marker comment: %s\n", Comment);
 }
 int main() {
-  uchar *data = calloc(17, sizeof(uchar));
-  if (data == ((void*)0)) {
-    printf("Out of memory\n");
-    return 1;
-  }
-  memcpy(data, "Some random data\r", 17);
-  process_COM(data, 17);
+  char* data = getRandomStringNotZeroTerminated(16000);
+  size_t dataSize = 16000;
+  process_COM(data, dataSize);
   free(data);
 }

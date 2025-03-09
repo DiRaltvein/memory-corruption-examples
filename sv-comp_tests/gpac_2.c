@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   uint32_t size;
   char *descriptor;
@@ -36,6 +39,27 @@ int gf_list_count(GF_List *ptr) {
   if (!ptr)
     return 0;
   return ptr->size;
+}
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
 }
 
 static int parseStream(GF_M2TS_PES *stream, unsigned char *data, size_t dataSize) {
@@ -113,8 +137,10 @@ void freeStream(GF_M2TS_PES *stream) {
 }
 
 int main() {
-  unsigned char data[] = "\x12\x00\x00\x00hello some random string\xf0\x15";
-  size_t dataSize = 31;
+  // unsigned char data[] = "\x12\x00\x00\x00hello some random string\xf0\x15";
+  // size_t dataSize = 31;
+
+  unsigned char* data = (unsigned char*)getRandomString(5, 500);
 
   GF_M2TS_PES stream = {0};
   stream.program = calloc(1, sizeof(GF_M2TS_Program));
@@ -123,7 +149,7 @@ int main() {
     return 1;
   }
 
-  if (parseStream(&stream, (unsigned char *)data, dataSize) == 0) {
+  if (parseStream(&stream, (unsigned char *)data, strlen(data)) == 0) {
     m2tsdmx_declare_pid(&stream);
   }
 

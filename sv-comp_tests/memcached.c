@@ -13,6 +13,9 @@
 #define KEY_MAX_LENGTH 250
 #define VALUE_MAX_LENGTH 1024
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct key_value {
   char key[KEY_MAX_LENGTH];
   char value[VALUE_MAX_LENGTH];
@@ -36,6 +39,27 @@ const key_value mockCache[] = {
     {"to", "value3"},
     {"test", "value4"},
 };
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 const char *findValueByKey(const char *key) {
   size_t cacheSize = sizeof(mockCache) / sizeof(mockCache[0]);
@@ -247,8 +271,10 @@ void proxy_process_command(char *command, size_t cmdlen, bool multiget) {
 // in get <key> is given when key does not exist then a message that key is not found is returned
 // the whole logic is vulnerable if keytoken index is very far meaning that between command token and key token is a lot of spaces
 int main() {
-  char command[] = "get                                                                                                    \
-                                                                                                    \
-                                                                                                    mock cache to test\n";
-  proxy_process_command((char *)command, sizeof(command) / sizeof(command[0]), false);
+  // char command[] = "get                                                                                                    \
+  //                                                                                                   \
+  //                                                                                                   mock cache to test\n";
+  char* command = getRandomString(50, 500);
+
+  proxy_process_command(command, strlen(command), false);
 }

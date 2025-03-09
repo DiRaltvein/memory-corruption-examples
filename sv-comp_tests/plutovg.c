@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   unsigned char *data;
   int width;
@@ -29,14 +31,8 @@ plutovg_surface_t *plutovg_surface_create(int width, int height) {
   return surface;
 }
 
-// to cause an integer overflow pass for example 23171 number 2 times
-// eg: ./a.out 32768 32768
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    printf("Usage: %s <surface width> <surface height>\n", argv[0]);
-    return 1;
-  }
-  plutovg_surface_t *surface = plutovg_surface_create(atoi(argv[1]), atoi(argv[2]));
+int main() {
+  plutovg_surface_t *surface = plutovg_surface_create(__VERIFIER_nondet_int(), __VERIFIER_nondet_int());
   if (surface == NULL) {
     return 1;
   }

@@ -732,11 +732,19 @@ extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
 typedef unsigned long long uint64_t;
 typedef unsigned short uint16_t;
+extern int __VERIFIER_nondet_int(void);
 typedef struct pe_ctx {
   int NumberOfFunctions;
   int NumberOfNames;
   void *map_addr;
 } pe_ctx_t;
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 void initCtxMapAddr(pe_ctx_t *ctx) {
   ctx->map_addr = malloc(ctx->NumberOfNames * sizeof(uint16_t));
   for (int i = 0; i < ctx->NumberOfNames; i++) {
@@ -744,10 +752,10 @@ void initCtxMapAddr(pe_ctx_t *ctx) {
     *entry_ordinal_list = i;
   }
 }
-int main(int argc, char *argv[]) {
+int main() {
   pe_ctx_t ctx = {0};
-  ctx.NumberOfFunctions = argc;
-  ctx.NumberOfNames = argc * 5;
+  ctx.NumberOfFunctions = getNumberInRange(5, 50);
+  ctx.NumberOfNames = ctx.NumberOfFunctions * 2;
   initCtxMapAddr(&ctx);
   uint16_t *offsets_to_Names = malloc(ctx.NumberOfFunctions * sizeof(uint16_t));
   for (int i = 0; i < ctx.NumberOfNames; i++) {

@@ -6,6 +6,31 @@
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 #define CPP "cpp -xc++ -P -Wall"
 #define DEFSWFVERSION 6
@@ -20,16 +45,17 @@ static void makeswf_preprocess(const char *file, const char *out) {
   printf("Formatted buffer: %s\n", buf);
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage: %s <filename1> <filename2> ...\n", argv[0]);
-    return 1;
+int main() {
+  char *files[5];
+
+  for (int i = 0; i < 5; i++) {
+    files[i] = getRandomString(0, 150);
   }
 
-  for (int i = 1; i < argc; i++) {
-    char *filename = argv[i];
+  for (int i = 0; i < files; i++) {
     char ppfile[PATH_MAX];
     sprintf(ppfile, "%s.frame%d.pp", outputfile, i);
-    makeswf_preprocess(filename, ppfile);
+    makeswf_preprocess(files[i], ppfile);
+    free(files[i]);
   }
 }

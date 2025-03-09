@@ -731,6 +731,7 @@ extern int getsubopt (char **__restrict __optionp,
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
 
+extern int __VERIFIER_nondet_int(void);
 typedef struct {
   unsigned char *data;
   int width;
@@ -752,12 +753,8 @@ plutovg_surface_t *plutovg_surface_create(int width, int height) {
   surface->height = height;
   return surface;
 }
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    printf("Usage: %s <surface width> <surface height>\n", argv[0]);
-    return 1;
-  }
-  plutovg_surface_t *surface = plutovg_surface_create(atoi(argv[1]), atoi(argv[2]));
+int main() {
+  plutovg_surface_t *surface = plutovg_surface_create(__VERIFIER_nondet_int(), __VERIFIER_nondet_int());
   if (surface == ((void*)0)) {
     return 1;
   }

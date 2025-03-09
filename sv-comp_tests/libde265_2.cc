@@ -8,14 +8,27 @@
 
 #define DE265_MAX_TILE_COLUMNS 10
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   int num_tile_columns;
   int colBd[DE265_MAX_TILE_COLUMNS];
 } pic_parameter_set;
 
-pic_parameter_set *initializePicParameterSetObject(int argc) {
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
+pic_parameter_set *initializePicParameterSetObject() {
   pic_parameter_set *obj = (pic_parameter_set *)malloc(sizeof(pic_parameter_set));
-  obj->num_tile_columns = argc;
+  obj->num_tile_columns = getNumberInRange(0, 15);
 
   for (int i = 0; i < DE265_MAX_TILE_COLUMNS; i++) {
     obj->colBd[i] = i;
@@ -39,12 +52,13 @@ bool read(pic_parameter_set *obj) {
   return true;
 }
 
-int main(int argc, char *argv[]) {
-  pic_parameter_set *obj = initializePicParameterSetObject(argc);
+int main() {
+
+  pic_parameter_set *obj = initializePicParameterSetObject();
   bool error = read(obj);
   if (!error) {
     for (int i = 0; i <= obj->num_tile_columns; i++) {
-      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow. num_tile_columns is just argc and when argc is greater than 10 then overflow happens
+      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow. num_tile_columns is just random number in range [0, 15] and when it is greater than 10 then overflow happens
     }
     free(obj);
     return 1;

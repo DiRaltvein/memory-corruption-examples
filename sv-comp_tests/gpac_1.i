@@ -875,10 +875,28 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 typedef uint32_t u32;
 typedef uint8_t u8;
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 void gf_text_get_UTF8_line(char *szLine) {
-  char szLineConv[2048];
+  char szLineConv[2048] = {0};
   u32 j = 0;
   u32 len = (u32)strlen(szLine);
   for (u32 i = 0; i < len; i++) {
@@ -923,20 +941,8 @@ void gf_text_get_UTF8_line(char *szLine) {
   strcpy(szLine, szLineConv);
 }
 int main() {
-  char line[] = {
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xE2, 0x82, 0xAC,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0x00};
+  char *line = getRandomString(5, 1000);
   gf_text_get_UTF8_line(line);
   printf("%s\n", line);
+  free(line);
 }

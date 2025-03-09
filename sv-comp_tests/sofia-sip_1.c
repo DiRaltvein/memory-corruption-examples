@@ -6,12 +6,37 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 #define STUN_A_LAST_MANDATORY 0x0023
 #define STUN_A_OPTIONAL 0x7fff
 #define get16(b, offset)      \
   (((b)[(offset) + 0] << 8) | \
    ((b)[(offset) + 1] << 0))
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 void stun_parse_attr_error_code(const unsigned char *p) {
   uint32_t tmp;
@@ -46,9 +71,10 @@ int stun_parse_attribute(unsigned char *p, size_t left_len) {
 }
 
 int main() {
-  unsigned char data[] = {
-      0x00, 0x09, 0x00, 0x00, 0x00};
-  size_t length = sizeof(data) / sizeof(data[0]);
+  // unsigned char data[] = {
+  //     0x00, 0x09, 0x00, 0x00, 0x00};
+  // size_t length = sizeof(data) / sizeof(data[0]);
+  char* data = getRandomString(4, 100);
 
-  return stun_parse_attribute((unsigned char *)&data, length);
+  return stun_parse_attribute((unsigned char *)data, strlen(data));
 }

@@ -8,7 +8,31 @@
 #include <assert.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 #define PATH_SEP '/'
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 char* mallocAndJoin2Dir(const char *dir1, const char *dir2)
 {
@@ -42,13 +66,12 @@ char* mallocAndJoin2Dir(const char *dir1, const char *dir2)
   return outDirBuffer;
 }
 
-// vulnerability can be triggered by: ./a.out '' some/random/dir/path
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    return 0;
-  }
-
-  char* joinedDirs = mallocAndJoin2Dir(argv[1], argv[2]);
+int main() {
+  char *dir1 = getRandomString(0, 100);
+  char* dir2 = getRandomString(0, 100);
+  char* joinedDirs = mallocAndJoin2Dir(dir1, dir2);
   printf("%s\n", joinedDirs);
+  free(dir1);
+  free(dir2);
   free(joinedDirs);
 }

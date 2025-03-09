@@ -763,10 +763,28 @@ typedef struct pb_istream_s {
   void *state;
   size_t bytes_left;
 } pb_istream_t;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 static _Bool buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)
 {
   if (stream->bytes_left < count) {
-    printf("try to read more data then remaining in stream buffer");
+    printf("try to read more data then remaining in stream buffer\n");
     return 0;
   }
   uint8_t *source = (uint8_t*)stream->state;
@@ -802,16 +820,8 @@ _Bool pb_dec_string(pb_istream_t *stream, void **dest) {
   return status;
 }
 int main() {
-  unsigned char data[] = {
-    0xff, 0xff, 0xff, 0xff,
-    0x54, 0x68, 0x69, 0x73, 0x20, 0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x20, 0x6c,
-    0x65, 0x6e, 0x67, 0x74, 0x68, 0x20, 0x69, 0x73, 0x20, 0x6d, 0x61, 0x6c, 0x69,
-    0x63, 0x69, 0x6f, 0x75, 0x73, 0x20, 0x61, 0x6e, 0x64, 0x20, 0x63, 0x61, 0x75,
-    0x73, 0x65, 0x73, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x20,
-    0x6f, 0x66, 0x20, 0x73, 0x69, 0x7a, 0x65, 0x5f, 0x74, 0x20, 0x76, 0x61, 0x72,
-    0x69, 0x61, 0x62, 0x6c, 0x65
-  };
-  pb_istream_t stream = pb_istream_from_buffer(data, sizeof(data) / sizeof(data[0]));
+  char* data = getRandomString(50, 500);
+  pb_istream_t stream = pb_istream_from_buffer((uint8_t *)data, strlen(data));
   char* dest = ((void*)0);
   if (!pb_dec_string(&stream, (void**)&dest)){
     printf("Decoding failed\n");

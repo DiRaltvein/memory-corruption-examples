@@ -857,9 +857,28 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 char* mallocAndJoin2Dir(const char *dir1, const char *dir2)
 {
-  ((void) sizeof ((dir1 != ((void*)0) && dir2 != ((void*)0)) ? 1 : 0), __extension__ ({ if (dir1 != ((void*)0) && dir2 != ((void*)0)) ; else __assert_fail ("dir1 != NULL && dir2 != NULL", "/mnt/a/master/master/sv-comp_tests/zstd.c", 15, __extension__ __PRETTY_FUNCTION__); }));
+  ((void) sizeof ((dir1 != ((void*)0) && dir2 != ((void*)0)) ? 1 : 0), __extension__ ({ if (dir1 != ((void*)0) && dir2 != ((void*)0)) ; else __assert_fail ("dir1 != NULL && dir2 != NULL", "/mnt/a/master/master/sv-comp_tests/zstd.c", 39, __extension__ __PRETTY_FUNCTION__); }));
   const size_t dir1Size = strlen(dir1);
   const size_t dir2Size = strlen(dir2);
   char *outDirBuffer, *buffer, trailingChar;
@@ -882,11 +901,12 @@ char* mallocAndJoin2Dir(const char *dir1, const char *dir2)
   buffer[dir2Size] = '\0';
   return outDirBuffer;
 }
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    return 0;
-  }
-  char* joinedDirs = mallocAndJoin2Dir(argv[1], argv[2]);
+int main() {
+  char *dir1 = getRandomString(0, 100);
+  char* dir2 = getRandomString(0, 100);
+  char* joinedDirs = mallocAndJoin2Dir(dir1, dir2);
   printf("%s\n", joinedDirs);
+  free(dir1);
+  free(dir2);
   free(joinedDirs);
 }

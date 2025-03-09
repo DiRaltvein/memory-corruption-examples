@@ -1062,6 +1062,14 @@ using std::system;
 using std::wcstombs;
 using std::wctomb;
 
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 typedef struct {
   int refIdx[2];
 } PBMotion;
@@ -1075,7 +1083,7 @@ int derive_spatial_luma_vector_prediction(const slice_segment_header *shdr, int 
     return -1;
   return 0;
 }
-int main(int argc, char *argv[]) {
+int main() {
   slice_segment_header shdr = {0};
-  derive_spatial_luma_vector_prediction(&shdr, argc > 5 ? 0 : 1, argc);
+  derive_spatial_luma_vector_prediction(&shdr, __VERIFIER_nondet_int() > 0 ? 1 : 0, getNumberInRange(0, 16));
 }

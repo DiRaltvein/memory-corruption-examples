@@ -874,6 +874,9 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 typedef struct stun_buffer_s {
   unsigned char *data;
   unsigned size;
@@ -881,6 +884,22 @@ typedef struct stun_buffer_s {
 typedef struct stun_attr_s {
   stun_buffer_t enc_buf;
 } stun_attr_t;
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   uint16_t attr_type = (((p)[(0) + 0] << 8) | ((p)[(0) + 1] << 0));
   int len = (((p)[(2) + 0] << 8) | ((p)[(2) + 1] << 0));
@@ -902,15 +921,14 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   }
   memcpy((*attr)->enc_buf.data, p, len);
 }
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
-  }
+int main() {
+  char* data = getRandomString(5, 1000);
   stun_attr_t *attr = {0};
-  stun_parse_attribute((unsigned char *)argv[1], &attr);
+  stun_parse_attribute((unsigned char *)data, &attr);
   if (attr) {
     printf("data: %s\n", attr->enc_buf.data);
     free(attr->enc_buf.data);
     free(attr);
   }
+  free(data);
 }

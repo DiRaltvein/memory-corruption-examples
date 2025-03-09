@@ -3,6 +3,34 @@
 // commit: 97d8e65
 // extract of: mz_os.c (function: mz_path_resolve)
 
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 // mz_path_resolve function can write out of bound of the memory segment where output pointer points. The write out of bound is only 1 byte before the buffer.
 // eg if output points to 0x000020 then 0x000019 can be overwritten
 
@@ -69,5 +97,11 @@ int mz_path_resolve(const char *path, char *output, int max_output) {
 
 int main() {
   char output[256];
-  mz_path_resolve("x/../y", output, sizeof(output));
+  char input = getRandomString(5, 200);
+  if (mz_path_resolve(input, output, sizeof(output)) == 0) {
+    printf("Resolved path: %s\n", output);
+  } else {
+    printf("Could not resolve path\n");
+  }
+  free(input);
 }

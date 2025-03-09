@@ -532,6 +532,14 @@ typedef struct {
   int numTiles;
   int *tiles;
 } RFX_MESSAGE;
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 void rfx_allocate_tiles(RFX_MESSAGE *message, size_t count) {
   int *tmpTiles = calloc(count, sizeof(int));
   if (tmpTiles == ((void*)0))
@@ -541,9 +549,9 @@ void rfx_allocate_tiles(RFX_MESSAGE *message, size_t count) {
 int rfx_message_get_tile(RFX_MESSAGE *message, int index) {
   return message->tiles[index];
 }
-int main(int argc, char *argv[]) {
+int main() {
   RFX_MESSAGE message = {0};
-  message.numTiles = argc;
+  message.numTiles = getNumberInRange(0, 2147483647);
   rfx_allocate_tiles(&message, message.numTiles);
   for (int i = 0; i < message.numTiles; i++) {
     rfx_message_get_tile(&message, i);

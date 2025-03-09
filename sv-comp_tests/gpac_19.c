@@ -19,6 +19,30 @@ typedef struct {
   size_t pos;
 } avi_t;
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 static uint32_t avi_read(avi_t *AVI, char *buf, uint32_t len) {
   size_t r = 0;
 
@@ -121,33 +145,37 @@ int avi_parse_input_file(avi_t *AVI) {
 }
 
 int main() {
-  unsigned char data[] = {
-      0x52, 0x49, 0x46, 0x46, // RIFF (is used to determine that file is AVI file)
-      0x00, 0x00, 0x00, 0x00,
-      0x41, 0x56, 0x49, 0x20, // AVI (is used to determine that file is AVI file)
+  // unsigned char data[] = {
+  //     0x52, 0x49, 0x46, 0x46, // RIFF (is used to determine that file is AVI file)
+  //     0x00, 0x00, 0x00, 0x00,
+  //     0x41, 0x56, 0x49, 0x20, // AVI (is used to determine that file is AVI file)
 
-      0x4C, 0x49, 0x53, 0x54, // LIST
-      0x38, 0x00, 0x00, 0x00, // section length (malicious correct is 0x36)
-      0x68, 0x64, 0x72, 0x6C, // hdrl
+  //     0x4C, 0x49, 0x53, 0x54, // LIST
+  //     0x38, 0x00, 0x00, 0x00, // section length (malicious correct is 0x36)
+  //     0x68, 0x64, 0x72, 0x6C, // hdrl
 
-      0x61, 0x76, 0x69, 0x68,             // avih (subheader in hdrl section)
-      0x06, 0x00, 0x00, 0x00,             // avih section size
-      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
+  //     0x61, 0x76, 0x69, 0x68,             // avih (subheader in hdrl section)
+  //     0x06, 0x00, 0x00, 0x00,             // avih section size
+  //     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
 
-      0x73, 0x74, 0x72, 0x68,                         // strh (subheader in hdrl section)
-      0x08, 0x00, 0x00, 0x00,                         // strh section size
-      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
+  //     0x73, 0x74, 0x72, 0x68,                         // strh (subheader in hdrl section)
+  //     0x08, 0x00, 0x00, 0x00,                         // strh section size
+  //     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
 
-      0x76, 0x69, 0x64, 0x73,                                                 // vids (subheader in hdrl section)
-      0x0C, 0x00, 0x00, 0x00,                                                 // vids section size
-      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
+  //     0x76, 0x69, 0x64, 0x73,                                                 // vids (subheader in hdrl section)
+  //     0x0C, 0x00, 0x00, 0x00,                                                 // vids section size
+  //     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // random data
 
-      0x00, 0x00 // random data that is not part of hdrl section
-  };
+  //     0x00, 0x00 // random data that is not part of hdrl section
+  // };
+  // size_t dataSize = sizeof(data) / sizeof(data[0]);
+
+  unsigned char *data = getRandomString(5, 1000);
+  size_t dataSize = strlen(data);
 
   avi_t AVI = {0};
   AVI.data = (unsigned char *)data;
-  AVI.data_size = sizeof(data) / sizeof(data[0]);
+  AVI.data_size = dataSize;
   AVI.pos = 0;
 
   return avi_parse_input_file(&AVI);

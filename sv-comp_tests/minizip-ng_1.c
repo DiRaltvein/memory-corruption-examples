@@ -10,6 +10,27 @@
 
 #define MZ_PATH_SLASH_UNIX ('/')
 
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 int32_t mz_path_has_slash(const char *path) {
   int32_t path_len = (int32_t)strlen(path);
   if (path[path_len - 1] != '\\' && path[path_len - 1] != '/') // Problem: in case path is an empty string 0 - 1 will result in access out of bound on index -1
@@ -29,12 +50,15 @@ int32_t mz_path_convert_slashes(char *path, char slash) {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage %s <file system path>\n", argv[0]);
-    return 1;
-  }
-  const char *path = argv[1];
+int main() {
+  // if (argc < 2) {
+  //   printf("Usage %s <file system path>\n", argv[0]);
+  //   return 1;
+  // }
+  // const char *path = argv[1];
+  // size_t path_length = strlen(path);
+
+  const char *path = getRandomString(0, 500);
   size_t path_length = strlen(path);
 
   char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));

@@ -8,14 +8,38 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef uint32_t u32;
 typedef uint8_t u8;
 
 #define GF_ARRAY_LENGTH(a) (sizeof(a) / sizeof((a)[0]))
 
-// initial function as also modified and i constraints have been added to only leave 1 vulnerability on line 69
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
+// initial function also modified and i constraints has been added to only leave 1 vulnerability on line 93
 void gf_text_get_UTF8_line(char *szLine) {
-  char szLineConv[2048];
+  char szLineConv[2048] = {0};
 
   u32 j = 0;
   u32 len = (u32)strlen(szLine);
@@ -70,22 +94,26 @@ void gf_text_get_UTF8_line(char *szLine) {
 }
 
 int main() {
-  char line[] = {
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xE2, 0x82, 0xAC,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0x00};
+  // char line[] = {
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xC2, 0x41,
+  //     0xE2, 0x82, 0xAC,
+  //     0xf0, 0x9f, 0x98, 0x85,
+  //     0xf0, 0x9f, 0x98, 0x85,
+  //     0xf0, 0x9f, 0x9a, 0x80,
+  //     0xf0, 0x9f, 0x9a, 0x80,
+  //     0x00};
+
+  char *line = getRandomString(5, 1000);
 
   gf_text_get_UTF8_line(line);
 
   printf("%s\n", line);
+
+  free(line);
 }

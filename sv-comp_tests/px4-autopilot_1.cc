@@ -3,8 +3,12 @@
 // commit: 3c129ae
 // extract of: src/drivers/distance_sensor/lightware_laser_serial/parser.cpp (function: lightware_parser)
 
-#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 enum LW_PARSE_STATE {
 	LW_PARSE_STATE0_UNSYNC = 0,
@@ -15,6 +19,27 @@ enum LW_PARSE_STATE {
 	LW_PARSE_STATE5_GOT_DIGIT2,
 	LW_PARSE_STATE6_GOT_CARRIAGE_RETURN
 };
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 // function parses float with 2 values after point.
 int lightware_parser(char c, char *parserbuf, unsigned *parserbuf_index, enum LW_PARSE_STATE *state)
@@ -102,7 +127,8 @@ int lightware_parser(char c, char *parserbuf, unsigned *parserbuf_index, enum LW
 }
 
 int main() {
-  char stringToParse[] = "some random data\n951.23\r\nand some random data af\n543331443.32\r\nter\n";
+  // char stringToParse[] = "some random data\n951.23\r\nand some random data af\n543331443.32\r\nter\n";
+	char *stringToParse = getRandomString(5, 500);
 
   // buffer for result
   char parserbuf[10];

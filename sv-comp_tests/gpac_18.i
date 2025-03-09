@@ -731,6 +731,7 @@ extern int getsubopt (char **__restrict __optionp,
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
 
+extern int __VERIFIER_nondet_int(void);
 typedef struct
 {
   int profile_idc;
@@ -748,18 +749,25 @@ typedef struct
   AVC_SPS *sps;
   AVC_PPS *pps;
 } AVCSliceInfo;
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 void avc_parse_slice(AVCSliceInfo *si, AVCState *avc) {
   if (si->pps->sps_id >= 255)
     return;
   si->sps = &avc->sps[si->pps->sps_id];
   printf("Prodile idc: %d\n", si->sps->profile_idc);
 }
-int main(int argc, char *argv[]) {
+int main() {
   AVCSliceInfo si = {0};
   si.pps = calloc(1, sizeof(AVC_PPS));
   if (si.pps == ((void*)0))
     return 1;
-  si.pps->sps_id = argc * 5;
+  si.pps->sps_id = getNumberInRange(0, 35);
   AVCState avc = {0};
   for (int i = 0; i < 32; i++) {
     avc.sps[i].profile_idc = i;

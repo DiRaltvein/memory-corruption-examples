@@ -4,11 +4,25 @@
 // extract of: libfreerdp/codec/rfx.c (function: rfx_process_message)
 
 #include <stdlib.h>
+#include <limits.h>
 
 typedef struct {
   int numTiles;
   int *tiles;
 } RFX_MESSAGE;
+
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 
 void rfx_allocate_tiles(RFX_MESSAGE *message, size_t count) {
   int *tmpTiles = calloc(count, sizeof(int));
@@ -21,9 +35,9 @@ int rfx_message_get_tile(RFX_MESSAGE *message, int index) {
   return message->tiles[index]; // Problem: potential null pointer dereference
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   RFX_MESSAGE message = {0};
-  message.numTiles = argc;
+  message.numTiles = getNumberInRange(0, INT_MAX);
 
   rfx_allocate_tiles(&message, message.numTiles);
 

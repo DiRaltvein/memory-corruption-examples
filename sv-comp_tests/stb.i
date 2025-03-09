@@ -880,6 +880,24 @@ typedef struct _stb_vorbis {
   unsigned int stream_size;
   unsigned int currect_stream_position;
 } vorb;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 int get32_packet(vorb *f) {
   if (f->currect_stream_position + 3 >= f->stream_size) {
     exit(1);
@@ -934,24 +952,10 @@ cleanup:
   }
 }
 int main() {
-  unsigned char fileMock[] = {
-      0x01, 0x00, 0x00, 0x40,
-      0x0B, 0x00, 0x00, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x3d, 0x57, 0x6f, 0x72, 0x6c, 0x64,
-      0x0D, 0x00, 0x00, 0x00, 0x63, 0x68, 0x61, 0x72, 0x3d, 0x6f, 0x6e, 0x65, 0x20, 0x62, 0x79, 0x74, 0x65,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61,
-      0x01, 0x00, 0x00, 0x00, 0x61};
   vorb f = {0};
-  f.stream = calloc(1, sizeof(fileMock));
-  if (f.stream == ((void*)0))
-    return 1;
-  memcpy(f.stream, fileMock, sizeof(fileMock));
+  f.stream = (unsigned char *)getRandomString(5, 500);
+  f.stream_size = strlen(f.stream);
   f.currect_stream_position = 0;
-  f.stream_size = sizeof(fileMock);
   start_decoder(&f);
   free(f.stream);
 }

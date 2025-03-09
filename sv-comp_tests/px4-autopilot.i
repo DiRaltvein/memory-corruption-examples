@@ -371,13 +371,22 @@ struct trajectory_waypoint_s {
 struct vehicle_trajectory_waypoint_s {
   struct trajectory_waypoint_s waypoints[5];
 };
-int main(int argc, char *argv[]) {
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+int main() {
   vehicle_trajectory_waypoint_s trajectory_waypoint{};
-  for (int i = 0; i < argc; ++i) {
+  int waypointsMax = getNumberInRange(0, 10);
+  for (int i = 0; i < waypointsMax; ++i) {
     trajectory_waypoint.waypoints[i].number = i;
  }
   int32_t sum = 0;
-  for (int i = 0; i < argc; ++i) {
+  for (int i = 0; i < waypointsMax; ++i) {
     sum += trajectory_waypoint.waypoints[i].number;
  }
   printf("Sum of numbers is: %d\n", sum);

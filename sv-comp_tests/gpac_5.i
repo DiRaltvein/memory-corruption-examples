@@ -119,8 +119,16 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-int main(int argc, char *argv[]) {
-  int num_scalability_types = argc;
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+int main() {
+  int num_scalability_types = getNumberInRange(0, 16);
   char dim_bit_offset[16];
   if (num_scalability_types >= 16) {
     num_scalability_types = 16;

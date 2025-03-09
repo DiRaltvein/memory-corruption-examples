@@ -10,9 +10,34 @@
 #include <libgen.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 #define _TINYDIR_PATH_MAX 4096
 #define _TINYDIR_FILENAME_MAX 256
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 int tinydir_file_open(const char *path) {
   char dir_name_buf[_TINYDIR_PATH_MAX];
@@ -38,13 +63,11 @@ int tinydir_file_open(const char *path) {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    printf("Usage: %s <file path>\n", argv[0]);
-    return 1;
-  }
-  if (tinydir_file_open(argv[1]) == -1) {
+int main() {
+  char* path = getRandomString(5, 500);
+  if (tinydir_file_open(path) == -1) {
     printf("Error");
     return 1;
   }
+  free(path);
 }

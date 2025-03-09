@@ -7,8 +7,32 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 int main() {
-  char *cur = "(Hello\\";
+  char *cur = getRandomString(5, 500);
   size_t curSize = strlen(cur);
   char *decoded = calloc(curSize, sizeof(char));
   if (decoded == NULL) {
@@ -39,5 +63,6 @@ int main() {
     *decodedp++ = *cur;
   }
   printf("Decoded value: %s\n", decoded);
+  free(cur);
   free(decoded);
 }

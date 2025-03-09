@@ -5,6 +5,19 @@
 
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
 struct pico_frame {
   int someValue;
 };
@@ -25,9 +38,9 @@ int pico_transport_receive(struct pico_frame *full, int proto) {
   return ret;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   struct pico_frame *full = (struct pico_frame *)malloc(sizeof(struct pico_frame));
-  if (pico_transport_receive(full, argc) == -1) {
+  if (pico_transport_receive(full, getNumberInRange(0, 100)) == -1) {
     free(full); // Problem: double free because if pico_transport_receive returns -1 full pointer is freed inside it
   }
   if (full != NULL) {

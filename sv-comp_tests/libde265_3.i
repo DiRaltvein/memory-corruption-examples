@@ -1120,12 +1120,20 @@ typedef struct _MetaDataArray {
   int width_in_units;
   int height_in_units;
 } MetaDataArray;
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 enum IntraPredMode get_IntraPredMode(MetaDataArray *data, int x,int y)
 {
-  (static_cast <bool> (x >= 0 && x < data->width_in_units) ? void (0) : __assert_fail ("x >= 0 && x < data->width_in_units", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 37, __extension__ __PRETTY_FUNCTION__));
-  (static_cast <bool> (y >= 0 && y < data->height_in_units) ? void (0) : __assert_fail ("y >= 0 && y < data->height_in_units", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 38, __extension__ __PRETTY_FUNCTION__));
+  (static_cast <bool> (x >= 0 && x < data->width_in_units) ? void (0) : __assert_fail ("x >= 0 && x < data->width_in_units", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 50, __extension__ __PRETTY_FUNCTION__));
+  (static_cast <bool> (y >= 0 && y < data->height_in_units) ? void (0) : __assert_fail ("y >= 0 && y < data->height_in_units", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 51, __extension__ __PRETTY_FUNCTION__));
   int byteIndex = 2 + x + y*data->width_in_units;
-  (static_cast <bool> (byteIndex < data->data_size) ? void (0) : __assert_fail ("byteIndex < data->data_size", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 42, __extension__ __PRETTY_FUNCTION__));
+  (static_cast <bool> (byteIndex < data->data_size) ? void (0) : __assert_fail ("byteIndex < data->data_size", "/mnt/a/master/master/sv-comp_tests/libde265_3.cc", 55, __extension__ __PRETTY_FUNCTION__));
   return (enum IntraPredMode)data->data[ byteIndex ];
 }
 int map_chroma_pred_mode(int intra_chroma_pred_mode, int IntraPredMode)
@@ -1167,12 +1175,7 @@ void read_coding_unit(MetaDataArray *data, int x0, int y0) {
   }
   printf("IntraPredModeC: %d\n", IntraPredModeC);
 }
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    printf("Please, provide 2 numbers in range 0 - 5 that would be used to access a matrix of values\n");
-    printf("Malicious input if 4 and 4\n");
-    return 1;
-  }
+int main() {
   unsigned char data[] = {
     0x04, 0x02,
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
@@ -1188,5 +1191,5 @@ int main(int argc, char *argv[]) {
   dataObj.height_in_units = 6;
   dataObj.width_in_units = 6;
   dataObj.log2unitSize = 8;
-  read_coding_unit(&dataObj, atoi(argv[1]), atoi(argv[2]));
+  read_coding_unit(&dataObj, getNumberInRange(0, 5), getNumberInRange(0, 5));
 }

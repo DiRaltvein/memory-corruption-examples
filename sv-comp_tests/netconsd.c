@@ -10,6 +10,9 @@
 
 #define NCRX_LINE_MAX 8192
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 struct ncrx_msg {
   /* public fields */
   uint64_t seq;     /* printk sequence number */
@@ -28,6 +31,27 @@ struct ncrx_msg {
 
   unsigned emg : 1; /* emergency transmission */
 };
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 int parse_packet(const char *payload, struct ncrx_msg *msg) {
   char buf[1024];
@@ -125,7 +149,8 @@ char *copy_msg(struct ncrx_msg *src) {
 }
 
 int main() {
-  char data[] = "4,101,1700000001,c,ncfrag=4294967277/1000;Some random message";
+  // char data[] = "4,101,1700000001,c,ncfrag=4294967277/1000;Some random message";
+  char *data = getRandomString(50, 500);
   struct ncrx_msg msg = {0};
 
   if (parse_packet(data, &msg) == 0) {
@@ -137,5 +162,5 @@ int main() {
     }
   }
 
-  return 0;
+  free(data);
 }

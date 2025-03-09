@@ -1061,13 +1061,21 @@ using std::strtoul;
 using std::system;
 using std::wcstombs;
 using std::wctomb;
+extern int __VERIFIER_nondet_int(void);
 typedef struct {
   int num_tile_columns;
   int colBd[10];
 } pic_parameter_set;
-pic_parameter_set *initializePicParameterSetObject(int argc) {
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+pic_parameter_set *initializePicParameterSetObject() {
   pic_parameter_set *obj = (pic_parameter_set *)malloc(sizeof(pic_parameter_set));
-  obj->num_tile_columns = argc;
+  obj->num_tile_columns = getNumberInRange(0, 15);
   for (int i = 0; i < 10; i++) {
     obj->colBd[i] = i;
   }
@@ -1085,8 +1093,8 @@ bool read(pic_parameter_set *obj) {
   printf("sum of all the numbers in colBd array is : %d\n", sum);
   return true;
 }
-int main(int argc, char *argv[]) {
-  pic_parameter_set *obj = initializePicParameterSetObject(argc);
+int main() {
+  pic_parameter_set *obj = initializePicParameterSetObject();
   bool error = read(obj);
   if (!error) {
     for (int i = 0; i <= obj->num_tile_columns; i++) {

@@ -874,6 +874,8 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 typedef struct key_value {
   char key[250];
   char value[1024];
@@ -895,6 +897,22 @@ const key_value mockCache[] = {
     {"to", "value3"},
     {"test", "value4"},
 };
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 const char *findValueByKey(const char *key) {
   size_t cacheSize = sizeof(mockCache) / sizeof(mockCache[0]);
   for (size_t i = 0; i < cacheSize; i++) {
@@ -1054,6 +1072,6 @@ void proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
   free(key);
 }
 int main() {
-  char command[] = "get                                                                                                                                                                                                                                                                                                            mock cache to test\n";
-  proxy_process_command((char *)command, sizeof(command) / sizeof(command[0]), 0);
+  char* command = getRandomString(50, 500);
+  proxy_process_command(command, strlen(command), 0);
 }

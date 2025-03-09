@@ -10,8 +10,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef int32_t s32;
 typedef uint32_t u32;
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 
 s32 lsr_translate_coords(s32 val, u32 nb_bits) {
   if (!nb_bits)
@@ -24,11 +37,6 @@ s32 lsr_translate_coords(s32 val, u32 nb_bits) {
 }
 
 // to cause an undefined behaviour value 2147483647 and 31 can be passed and number1 and number2 respectively
-int main(int argc, char *argv[]) {
-  if (argc < 3) {
-    printf("Usage: %s <number1> <number2>\n", argv[0]);
-    return 1;
-  }
-
-  printf("Translated number: %d\n", lsr_translate_coords(atoi(argv[1]), atoi(argv[2])));
+int main() {
+  printf("Translated number: %d\n", lsr_translate_coords(__VERIFIER_nondet_int(), getNumberInRange(0, 31)));
 }

@@ -13,6 +13,30 @@
 #define AMF_TYPE_STRING ((byte)0x02)
 typedef unsigned char byte;
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 typedef struct __flv_parser {
   byte *stream;
   unsigned int stream_size;
@@ -112,15 +136,17 @@ amf_data *amf_data_read(flv_parser *parser) {
 
 // Parsing of a simplified FLV (Flash Video) files.
 int main() {
-  byte flvFileMock[] = {
-      0x12,                                                             // tag
-      0x02,                                                             // data type of tag value (in this case a string)
-      0x0A, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, // string data that equals to onMetaData (1 byte shows the string length)
+  // byte flvFileMock[] = {
+  //     0x12,                                                             // tag
+  //     0x02,                                                             // data type of tag value (in this case a string)
+  //     0x0A, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, // string data that equals to onMetaData (1 byte shows the string length)
 
-      0x12, // tag
-      0x00, // data type of tag value (in this case a number)
-      0x48  // number 72
-  };
+  //     0x12, // tag
+  //     0x00, // data type of tag value (in this case a number)
+  //     0x48  // number 72
+  // };
+
+  byte *flvFileMock = getRandomString(5, 500);
 
   flv_parser parser = {0};
   parser.stream = calloc(1, sizeof(flvFileMock));
@@ -137,6 +163,7 @@ int main() {
     name = amf_data_read(&parser);
     if (name == NULL) {
       free(parser.stream);
+      free(flvFileMock);
       return 1;
     }
     if (tag == 0x12) {
@@ -147,4 +174,5 @@ int main() {
     free(name);
   }
   free(parser.stream);
+  free(flvFileMock);
 }

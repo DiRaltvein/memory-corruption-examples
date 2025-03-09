@@ -876,8 +876,26 @@ extern char *stpncpy (char *__restrict __dest,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
 typedef uint32_t u32;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 int main() {
-  char szLine[] = "{200}{500 Function processes subtitles in the .SUB format but it does not expect subtitle to be malformed. When looking for closing } it overflows";
+  char* szLine = getRandomString(5, 500);
   int start, end;
   char szTime[20], szText[2048];
   u32 len = (u32)strlen(szLine);
@@ -885,6 +903,7 @@ int main() {
   u32 j = 0;
   if (szLine[i] != '{') {
     printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
   while (szLine[i + 1] && szLine[i + 1] != '}') {
@@ -900,6 +919,7 @@ int main() {
   i = 0;
   if (szLine[j] != '{') {
     printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
   while (szLine[i + 1 + j] && szLine[i + 1 + j] != '}') {
@@ -911,6 +931,7 @@ int main() {
   j += i + 2;
   if (start > end) {
     printf("Bad SUB file");
+    free(szLine);
     exit(1);
   }
   for (i = j; i < len; i++) {
@@ -922,4 +943,5 @@ int main() {
   }
   szText[i - j] = 0;
   printf("Final subtitle - %s\n", szText);
+  free(szLine);
 }

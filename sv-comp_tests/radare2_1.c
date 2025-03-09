@@ -5,8 +5,35 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #define UT32_MAX 0xFFFFFFFFU
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 
 uint32_t r_read_le32(const void *src) {
   if (!src) {
@@ -31,11 +58,11 @@ uint64_t r_read_le64(const void *src) {
   return val;
 }
 
-int main(int argc, char *argv[]) {
-  uint8_t *buf = calloc(argc, 1);
+int main() {
+  char *buf = getRandomString(5, 1000);
   int j;
-  for (j = 0; j < argc; j += 8) {
-    r_read_le64(buf + j); // if argc is 1 then buf is 1 byte long and later try to read 8 bytes from it will result in an access out of bound problem
+  for (j = 0; j < strlen(buf); j += 8) {
+    r_read_le64(buf + j); // if buf is less than 8 bytes long than later try to read 8 bytes from it will result in an access out of bound problem
   }
   free(buf);
 }

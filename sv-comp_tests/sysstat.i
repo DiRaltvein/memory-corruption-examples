@@ -849,20 +849,18 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern int __VERIFIER_nondet_int(void);
 void check_overflow(unsigned int val1, unsigned int val2, unsigned int val3) {
   if ((unsigned long long)val1 * (unsigned long long)val2 * (unsigned long long)val3 > (2147483647 * 2U + 1U)) {
     printf("Overflow detected\n");
     exit(1);
   }
 }
-int main(int argc, char *argv[]) {
-  if (argc < 4) {
-    printf("Usage: %s <number1> <number2> <number3>\n", argv[0]);
-    return 1;
-  }
-  unsigned int val1 = strtoul(argv[1], ((void*)0), 0);
-  unsigned int val2 = strtoul(argv[2], ((void*)0), 0);
-  unsigned int val3 = strtoul(argv[3], ((void*)0), 0);
+int main() {
+  unsigned int val1 = (unsigned int) __VERIFIER_nondet_int();
+  unsigned int val2 = (unsigned int) __VERIFIER_nondet_int();
+  unsigned int val3 = (unsigned int) __VERIFIER_nondet_int();
   check_overflow(val1, val2, val3);
   printf("Apparently there is not unsigned integer overflow %u\n", val1 * val2 * val3);
 }

@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 #define STUN_A_LAST_MANDATORY 0x2020
 #define STUN_A_OPTIONAL 0x7fff
 #define MAPPED_ADDRESS 0x0001
@@ -25,6 +28,27 @@ typedef struct stun_buffer_s {
 typedef struct stun_attr_s {
   stun_buffer_t enc_buf;
 } stun_attr_t;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
 
@@ -51,14 +75,7 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   memcpy((*attr)->enc_buf.data, p, len); // Problem: reading data from p of length that was read from p. p may be smaller then len leading to buffer overflow
 }
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    return 0;
-  }
-
-  // This data causes an overflow
-  // function can be invoked as stun_parse_attribute((unsigned char *)data, &attr);
-  // to make it a little bit difficult for static code analyzers use user provided input
+int main() {
   // unsigned char data[] = {
   //     0x00, 0x00, // attr_type that is not used in this program
   //     0x00, 0x20, // length of data that is bigger than actual data length (by 1)
@@ -67,11 +84,14 @@ int main(int argc, char *argv[]) {
   //     0x66, 0x6c, 0x6f, 0x77, 0x20, 0x68, 0x61, 0x70,
   //     0x70, 0x65, 0x6e, 0x65, 0x64, 0x21, 0x00};
 
+  char* data = getRandomString(5, 1000);
+
   stun_attr_t *attr = {0};
-  stun_parse_attribute((unsigned char *)argv[1], &attr); // with command line arguments pretty much any value will produce an overflow if value starts with "    " (4 spaces). For example ./a.out "    Hello this is my value"
+  stun_parse_attribute((unsigned char *)data, &attr);
   if (attr) {
     printf("data: %s\n", attr->enc_buf.data);
     free(attr->enc_buf.data);
     free(attr);
   }
+  free(data);
 }

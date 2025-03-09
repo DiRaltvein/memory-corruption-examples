@@ -10,6 +10,30 @@
 #include <map>
 #include <stdio.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 unsigned char m_oValue[49] = {0};
 unsigned char m_uValue[49] = {0};
 unsigned char m_rValue[49] = {0};
@@ -31,7 +55,8 @@ void freeMap(std::map<char, char*> *m_Map) {
 
 int main() {
   std::map<char, char*> m_Map;
-  char data[] = "/O <hZvCeqRm57TSnkKQdVAztxbyGfEXjP6HWUw2B9pNc3sL4aJ8>/U <RFHS6P8zUteEX7svmfhCwjxkKQbLG4dyJM92ZYDWNnq3pVB5>/R <Some random value>";
+  // char data[] = "/O <hZvCeqRm57TSnkKQdVAztxbyGfEXjP6HWUw2B9pNc3sL4aJ8>/U <RFHS6P8zUteEX7svmfhCwjxkKQbLG4dyJM92ZYDWNnq3pVB5>/R <Some random value>";
+  char *data = getRandomString(50, 5000);
   char* datap = (char*)data;
   size_t dataSize = strlen(datap);
   char* dataEnd = data + dataSize;
@@ -39,6 +64,7 @@ int main() {
   while(datap < dataEnd) {
     if (datap + 3 >= dataEnd) {
       printf("malformed data\n");
+      free(data);
       freeMap(&m_Map);
       return 1;
     }
@@ -46,6 +72,7 @@ int main() {
     datap += 3;
     if (*datap != '<') {
       printf("malformed data\n");
+      free(data);
       freeMap(&m_Map);
       return 1;
     }
@@ -82,4 +109,5 @@ int main() {
   }
 
   freeMap(&m_Map);
+  free(data);
 }

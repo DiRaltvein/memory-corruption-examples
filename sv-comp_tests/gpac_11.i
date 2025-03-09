@@ -755,6 +755,7 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern int __VERIFIER_nondet_int(void);
 typedef struct {
   FILE *stream;
   uint8_t current;
@@ -780,6 +781,13 @@ uint8_t gf_bs_read_bit(GF_BitStream *bs) {
   uint8_t ret = (bs->current >> (bs->nbBits - 1)) & 1;
   bs->nbBits--;
   return ret;
+}
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
 }
 uint32_t gf_bs_read_int(GF_BitStream *bs, uint32_t nBits) {
   uint32_t ret = 0;
@@ -817,13 +825,13 @@ int32_t gf_hevc_read_sps_bs_internal(GF_BitStream *bs, HEVC_SPS *sps, HEVC_VPS *
   }
   return 1;
 }
-int main(int argc, char *argv[]) {
+int main() {
   HEVC_VPS vps;
   HEVC_SPS sps;
   GF_BitStream bs = initializeStream("./gpac_11.hex");
   for (int i = 0; i < 16; i++) {
     vps.rep_format_idx[i] = i;
   }
-  gf_hevc_read_sps_bs_internal(&bs, &sps, &vps, argc);
+  gf_hevc_read_sps_bs_internal(&bs, &sps, &vps, getNumberInRange(0, 20));
   fclose(bs.stream);
 }

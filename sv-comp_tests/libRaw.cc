@@ -3,14 +3,39 @@
 // commit: 1dbed6b
 // extract of: src/libraw_datastream.cpp (function: LibRaw_buffer_datastream::gets)
 
-#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define fgets(str,n,stream)       stream->gets(str,n)
 #define fget(str,n,stream)       stream->get(str,n)
 
 typedef unsigned short int ushort;
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 class LibRaw_buffer_datastream {
   public:
@@ -113,21 +138,25 @@ int parse_exif(LibRaw_buffer_datastream *ds) {
 }
 
 int main() {
-  unsigned char data[] = {
-    0x00, 0x02, // 2 entries
+  // unsigned char data[] = {
+  //   0x00, 0x02, // 2 entries
   
-    0x00, 0x00, // tag
-    0x00, 0x00, // data type
-    0x00, 0x00, 0x00, 0x01, // length
-    0x00, 0x00, 0x02, 0x00, // value
+  //   0x00, 0x00, // tag
+  //   0x00, 0x00, // data type
+  //   0x00, 0x00, 0x00, 0x01, // length
+  //   0x00, 0x00, 0x02, 0x00, // value
 
-    0x92, 0x7c, // tag
-    0x00, 0x00, // data type
-    0x00, 0x00, 0x00, 0x00, // length
-    0x41, 0x42, 0x43, 0x00, // value
-  };
+  //   0x92, 0x7c, // tag
+  //   0x00, 0x00, // data type
+  //   0x00, 0x00, 0x00, 0x00, // length
+  //   0x41, 0x42, 0x43, 0x00, // value
+  // };
 
-  LibRaw_buffer_datastream ds(data, sizeof(data));
+  char* randomString = getRandomString(5, 500);
 
-  return parse_exif(&ds);
+  LibRaw_buffer_datastream ds((unsigned char*)randomString, strlen(randomString));
+
+  int re = parse_exif(&ds);
+  free(randomString);
+  return re;
 }

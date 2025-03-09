@@ -875,6 +875,24 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 uint16_t *bit_utf8_to_TU(char *restrict str) {
   uint16_t *wstr;
   size_t i = 0;
@@ -916,12 +934,13 @@ uint16_t *bit_utf8_to_TU(char *restrict str) {
   return wstr;
 }
 int main() {
-  char test_str[] = "=~[\xB4\xE8";
-  uint16_t *converted = bit_utf8_to_TU(test_str);
+  char* randomString = getRandomString(5, 500);
+  uint16_t *converted = bit_utf8_to_TU(randomString);
   if (converted) {
     printf("String converted\n");
     free(converted);
   } else {
     printf("Conversion failed\n");
   }
+  free(randomString);
 }

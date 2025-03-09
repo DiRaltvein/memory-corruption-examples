@@ -1,7 +1,7 @@
 // https://www.cvedetails.com/cve/CVE-2024-0321/
 // repository: https://github.com/gpac/gpac
 // commit: d2de8b5
-// extract of: src/filters/load_text.c (function: gf_text_get_utf8_line)
+// extract of: src/filters/load_text.c (function: gf_text_get_UTF8_line)
 
 #include <stdint.h>
 #include <stdio.h>
@@ -15,7 +15,7 @@ typedef uint8_t u8;
 
 // initial function as also modified and i constraints have been added to only leave 1 vulnerability on line 69
 void gf_text_get_UTF8_line(char *szLine) {
-  char szLineConv[2048];
+  char szLineConv[2048] = {0};
 
   u32 j = 0;
   u32 len = (u32)strlen(szLine);

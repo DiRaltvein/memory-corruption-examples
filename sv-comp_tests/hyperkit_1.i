@@ -528,13 +528,14 @@ extern int getsubopt (char **__restrict __optionp,
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
 
+extern int __VERIFIER_nondet_int(void);
 struct iovec {
   int iov_len;
 };
 int vq_getchain(struct iovec *iov) {
   int i = 0;
   for (; i < 32; i++) {
-    int iov_len = rand() % 10;
+    int iov_len = __VERIFIER_nondet_int();
     if (iov_len == 9) {
       return -1;
     }

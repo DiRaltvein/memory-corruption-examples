@@ -3,8 +3,33 @@
 // commit: 88f01a7
 // extract of: src/decNumber/decNumber.c (function: decToString)
 
-#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 void decToString(char *input, char *string) {
   char *c = string;
@@ -21,12 +46,16 @@ void decToString(char *input, char *string) {
   }
 }
 
-// to cause an overflow pass as an argument a string that consists of more than 50 characters or has a lot of characters 'a' in it
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    return 1;
+int main() {
+  char* randomString = getRandomString(50, 500);
+  char* converted = calloc(strlen(randomString) + 1, sizeof(char));
+  if (converted == NULL) {
+    printf("Out of memory\n");
+    free(randomString);
+    exit(1);
   }
-  char string[50] = {0};
-  decToString(argv[1], (char *)&string);
-  printf("%s\n", string);
+  decToString(randomString, converted);
+  printf("%s\n", converted);
+  free(converted);
+  free(randomString);
 }

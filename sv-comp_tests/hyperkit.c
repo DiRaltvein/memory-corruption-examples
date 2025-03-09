@@ -6,20 +6,29 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
+extern int __VERIFIER_nondet_int(void);
 
 struct iovec {
   uint32_t *iov_base;
   int iov_len;
 };
 
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
 int vq_getchain(struct iovec *iov) {
   // Random reason why function may exit early
-  time_t now = time(NULL);
-  struct tm *tm = localtime(&now);
-
-  if (tm->tm_hour > 5) {
-    return -1; // In case it is 6 hours or more do not initialze iov struct
+  if (__VERIFIER_nondet_int() > 100000) {
+    return -1;
   }
   //
 
@@ -32,12 +41,9 @@ int vq_getchain(struct iovec *iov) {
   return 0;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc > 28 || argc < 0) {
-    return 1;
-  }
+int main() {
   struct iovec iov;
-  iov.iov_len = argc + 2;
+  iov.iov_len = getNumberInRange(5, 20);
 
   vq_getchain(&iov); // in case this function 'fails' for any reason iov struct will not be initialized and its further use is dangerous
 

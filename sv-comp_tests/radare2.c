@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   void *data;
   int type;
@@ -13,6 +15,17 @@ typedef struct {
 typedef struct r_list_iter_t {
   void *data;
 } RListIter;
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 
 RListIter *r_list_append(void *data) {
   RListIter *item = malloc(sizeof(RListIter));
@@ -26,7 +39,7 @@ pyc_object *copy_object(pyc_object *object) {
   return copy;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   pyc_object *ret = NULL;
   RListIter *ref_idx = NULL;
 
@@ -34,7 +47,7 @@ int main(int argc, char *argv[]) {
   ret->type = 5;
   ref_idx = r_list_append(ret);
 
-  switch (argc) {
+  switch (getNumberInRange(1, 5)) {
   case 1:
   case 2:
     // nop

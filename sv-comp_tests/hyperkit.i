@@ -755,102 +755,21 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-struct tm
-{
-  int tm_sec;
-  int tm_min;
-  int tm_hour;
-  int tm_mday;
-  int tm_mon;
-  int tm_year;
-  int tm_wday;
-  int tm_yday;
-  int tm_isdst;
-  long int tm_gmtoff;
-  const char *tm_zone;
-};
-struct itimerspec
-  {
-    struct timespec it_interval;
-    struct timespec it_value;
-  };
-struct sigevent;
-struct __locale_struct
-{
-  struct __locale_data *__locales[13];
-  const unsigned short int *__ctype_b;
-  const int *__ctype_tolower;
-  const int *__ctype_toupper;
-  const char *__names[13];
-};
-typedef struct __locale_struct *__locale_t;
 
-typedef __locale_t locale_t;
-extern clock_t clock (void) __attribute__ ((__nothrow__ ));
-extern time_t time (time_t *__timer) __attribute__ ((__nothrow__ ));
-extern double difftime (time_t __time1, time_t __time0)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
-extern time_t mktime (struct tm *__tp) __attribute__ ((__nothrow__ ));
-extern size_t strftime (char *__restrict __s, size_t __maxsize,
-   const char *__restrict __format,
-   const struct tm *__restrict __tp) __attribute__ ((__nothrow__ ));
-extern size_t strftime_l (char *__restrict __s, size_t __maxsize,
-     const char *__restrict __format,
-     const struct tm *__restrict __tp,
-     locale_t __loc) __attribute__ ((__nothrow__ ));
-extern struct tm *gmtime (const time_t *__timer) __attribute__ ((__nothrow__ ));
-extern struct tm *localtime (const time_t *__timer) __attribute__ ((__nothrow__ ));
-extern struct tm *gmtime_r (const time_t *__restrict __timer,
-       struct tm *__restrict __tp) __attribute__ ((__nothrow__ ));
-extern struct tm *localtime_r (const time_t *__restrict __timer,
-          struct tm *__restrict __tp) __attribute__ ((__nothrow__ ));
-extern char *asctime (const struct tm *__tp) __attribute__ ((__nothrow__ ));
-extern char *ctime (const time_t *__timer) __attribute__ ((__nothrow__ ));
-extern char *asctime_r (const struct tm *__restrict __tp,
-   char *__restrict __buf) __attribute__ ((__nothrow__ ));
-extern char *ctime_r (const time_t *__restrict __timer,
-        char *__restrict __buf) __attribute__ ((__nothrow__ ));
-extern char *__tzname[2];
-extern int __daylight;
-extern long int __timezone;
-extern char *tzname[2];
-extern void tzset (void) __attribute__ ((__nothrow__ ));
-extern int daylight;
-extern long int timezone;
-extern time_t timegm (struct tm *__tp) __attribute__ ((__nothrow__ ));
-extern time_t timelocal (struct tm *__tp) __attribute__ ((__nothrow__ ));
-extern int dysize (int __year) __attribute__ ((__nothrow__ )) __attribute__ ((__const__));
-extern int nanosleep (const struct timespec *__requested_time,
-        struct timespec *__remaining);
-extern int clock_getres (clockid_t __clock_id, struct timespec *__res) __attribute__ ((__nothrow__ ));
-extern int clock_gettime (clockid_t __clock_id, struct timespec *__tp) __attribute__ ((__nothrow__ ));
-extern int clock_settime (clockid_t __clock_id, const struct timespec *__tp)
-     __attribute__ ((__nothrow__ ));
-extern int clock_nanosleep (clockid_t __clock_id, int __flags,
-       const struct timespec *__req,
-       struct timespec *__rem);
-extern int clock_getcpuclockid (pid_t __pid, clockid_t *__clock_id) __attribute__ ((__nothrow__ ));
-extern int timer_create (clockid_t __clock_id,
-    struct sigevent *__restrict __evp,
-    timer_t *__restrict __timerid) __attribute__ ((__nothrow__ ));
-extern int timer_delete (timer_t __timerid) __attribute__ ((__nothrow__ ));
-extern int timer_settime (timer_t __timerid, int __flags,
-     const struct itimerspec *__restrict __value,
-     struct itimerspec *__restrict __ovalue) __attribute__ ((__nothrow__ ));
-extern int timer_gettime (timer_t __timerid, struct itimerspec *__value)
-     __attribute__ ((__nothrow__ ));
-extern int timer_getoverrun (timer_t __timerid) __attribute__ ((__nothrow__ ));
-extern int timespec_get (struct timespec *__ts, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-
+extern int __VERIFIER_nondet_int(void);
 struct iovec {
   uint32_t *iov_base;
   int iov_len;
 };
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 int vq_getchain(struct iovec *iov) {
-  time_t now = time(((void*)0));
-  struct tm *tm = localtime(&now);
-  if (tm->tm_hour > 5) {
+  if (__VERIFIER_nondet_int() > 100000) {
     return -1;
   }
   iov->iov_base = calloc(iov->iov_len, sizeof(uint32_t));
@@ -861,12 +780,9 @@ int vq_getchain(struct iovec *iov) {
   iov->iov_base[1] = 1;
   return 0;
 }
-int main(int argc, char *argv[]) {
-  if (argc > 28 || argc < 0) {
-    return 1;
-  }
+int main() {
   struct iovec iov;
-  iov.iov_len = argc + 2;
+  iov.iov_len = getNumberInRange(5, 20);
   vq_getchain(&iov);
   for (int i = 2; i < iov.iov_len; i++) {
     iov.iov_base[i] = iov.iov_base[i - 1] + iov.iov_base[i - 2];

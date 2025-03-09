@@ -7,6 +7,30 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
 int SkipString(const char **jsonPtr, const char **outStrStart) {
   // skip '"'
   const char *json = ++(*jsonPtr);
@@ -51,9 +75,8 @@ void ParseString(const char **jsonPtr) {
 
 // to break application pass any string as a first parametr that starts with " and where is no closing "
 // for example \"123
-int main(int argc, char *argv[]) {
-  if (argc < 2) {
-    return 1;
-  };
-  ParseString((const char **)&argv[1]);
+int main() {
+  char* randomString = getRandomString(5, 500);
+  ParseString(&randomString);
+  free(randomString);
 }

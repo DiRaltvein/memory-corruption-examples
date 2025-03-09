@@ -8,7 +8,32 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 uint16_t
 bit_calc_CRC(const uint16_t seed, unsigned char *addr, int len) {
@@ -55,11 +80,13 @@ bit_calc_CRC(const uint16_t seed, unsigned char *addr, int len) {
 }
 
 int main() {
-  unsigned char data[] = {
-      0x40, 0x00, 0x00, 0x00, // length Valid length is (0x2f, 0x00, 0x00, 0x00) but maliciously big length will lead to overflow
-      0x57, 0x68, 0x79, 0x20, 0x64, 0x6f, 0x20, 0x74, 0x68, 0x65, 0x73, 0x65, 0x20, 0x62, 0x75, 0x66,
-      0x66, 0x65, 0x72, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x20, 0x61, 0x6c, 0x77,
-      0x61, 0x79, 0x73, 0x20, 0x68, 0x61, 0x70, 0x70, 0x65, 0x6e, 0x3f};
+  // unsigned char data[] = {
+  //     0x40, 0x00, 0x00, 0x00, // length Valid length is (0x2f, 0x00, 0x00, 0x00) but maliciously big length will lead to overflow
+  //     0x57, 0x68, 0x79, 0x20, 0x64, 0x6f, 0x20, 0x74, 0x68, 0x65, 0x73, 0x65, 0x20, 0x62, 0x75, 0x66,
+  //     0x66, 0x65, 0x72, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x20, 0x61, 0x6c, 0x77,
+  //     0x61, 0x79, 0x73, 0x20, 0x68, 0x61, 0x70, 0x70, 0x65, 0x6e, 0x3f};
+
+  char* data = getRandomString(50, 1000);
   int dataSize = 0;
 
   memcpy(&dataSize, data, sizeof(int));
@@ -71,4 +98,5 @@ int main() {
   );
 
   printf("CRC of message is %d\n", crc);
+  free(data);
 }

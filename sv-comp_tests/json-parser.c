@@ -3,9 +3,33 @@
 // commit: fc599bf
 // extract of: json_parser.c (function: __parse_json_members)
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 static int __json_string_length(const char *cursor) {
   int len = 0;
@@ -80,8 +104,9 @@ int __parse_json_members(const char *cursor, const char **end) {
 // logic is pretty much the same as with json where you have one object {...} and nothing can follow after it otherwise json input is invalid
 int main() {
   // char doc[] = "{\"Hello\",\"World\",\"!\"}"; // valid input
-  char doc[] = "{\""; // input that breaks everything
-  const char *docp = doc;
+  // char doc[] = "{\""; // input that breaks everything
+  char *randomString = getRandomString(5, 500);
+  const char *docp = randomString;
 
   int ret = __parse_json_members(docp, &docp);
   if (ret >= 0) {
@@ -94,4 +119,5 @@ int main() {
       printf("Invalid input\n");
     }
   }
+  free(randomString);
 }

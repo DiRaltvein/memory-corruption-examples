@@ -301,6 +301,7 @@ extern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ )) ;
 extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
 extern int __uflow (FILE *);
 extern int __overflow (FILE *, int);
+extern int __VERIFIER_nondet_int(void);
 typedef struct
 {
   int32_t decodingOffset;
@@ -313,11 +314,10 @@ void gf_isom_shift_cts_offset(GF_DttsEntry *entries, int nb_entries, int32_t off
 }
 int main() {
   GF_DttsEntry entries[5];
-  entries[0].decodingOffset = 1;
-  entries[1].decodingOffset = 5;
-  entries[2].decodingOffset = 213;
-  entries[3].decodingOffset = 23;
-  entries[4].decodingOffset = 1852736474;
-  int32_t offset_shift = -1953749291;
-  gf_isom_shift_cts_offset(entries, 5, offset_shift);
+  entries[0].decodingOffset = __VERIFIER_nondet_int();
+  entries[1].decodingOffset = __VERIFIER_nondet_int();
+  entries[2].decodingOffset = __VERIFIER_nondet_int();
+  entries[3].decodingOffset = __VERIFIER_nondet_int();
+  entries[4].decodingOffset = __VERIFIER_nondet_int();
+  gf_isom_shift_cts_offset(entries, 5, __VERIFIER_nondet_int());
 }

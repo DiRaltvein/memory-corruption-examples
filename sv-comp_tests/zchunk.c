@@ -8,12 +8,36 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 #define bool _Bool
 
 typedef struct {
   unsigned char *data;
   size_t data_size;
 } zckComp;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 size_t readUInt32(const unsigned char *ptr, size_t offset) {
   size_t value = ((size_t)ptr[offset + 3]) << 24;
@@ -40,11 +64,14 @@ bool comp_add_to_data(zckComp *comp, const unsigned char *src, size_t src_size) 
 // Program reads entries from file in form: (tag 1 byte), (length 4 byte), null terminated string
 // if tag is not 0x50 it is skipped. Values of tags with value 0x50 tags are concatinated togeather and printed at the end of function
 int main() {
-  unsigned char data[] = {
-      0x50, 0x06, 0x00, 0x00, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x20,  // first message with tag 0x50 and length of 6
-      0x10, 0x04, 0x00, 0x00, 0x00, 0x73, 0x6b, 0x69, 0x70,              // second message that is skipped with tag 0x10
-      0x50, 0xff, 0xff, 0xff, 0xff, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21}; // third message with tag 0x50
-  size_t data_length = sizeof(data);
+  // unsigned char data[] = {
+  //     0x50, 0x06, 0x00, 0x00, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x20,  // first message with tag 0x50 and length of 6
+  //     0x10, 0x04, 0x00, 0x00, 0x00, 0x73, 0x6b, 0x69, 0x70,              // second message that is skipped with tag 0x10
+  //     0x50, 0xff, 0xff, 0xff, 0xff, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21}; // third message with tag 0x50
+  // size_t data_length = sizeof(data);
+  char* data = getRandomString(5, 1000);
+  size_t data_length = strlen(data);
+
   size_t offset = 0;
 
   zckComp comp = {0};
@@ -74,4 +101,5 @@ int main() {
   comp_add_to_data(&comp, (unsigned char *)&zeroByteArray, 1);
   printf("concatinated value of tag x50: %s\n", comp.data);
   free(comp.data);
+  free(data);
 }

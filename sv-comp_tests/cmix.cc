@@ -3,16 +3,41 @@
 // commit: 24bf476
 // extract of: src/models/paq8.cpp (function: ConvertUTF8)
 
-#include <stdio.h> // printf
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_WORD_SIZE 64
 typedef unsigned char u8;
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 typedef struct _Word {
   u8 Letters[MAX_WORD_SIZE];
   u8 Start, End;
 } Word;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 bool IsVowel(const u8 c) {
   int NUM_VOWELS = 6;
@@ -41,21 +66,24 @@ void ConvertUTF8(Word *W) {
 
 int main() {
   Word word = {0};
-  u8 input[] = {
-      0x68,
-      0xC3, 0x05, // e
-      0x6c,
-      0x6c,
-      0xC3, 0x0F, // o
-      0x20,
-      0x77,
-      0xC3, 0x0F, // o
-      0x72,
-      0x6c,
-      0x64,
-      0x21,
-      '\0'};
-  memcpy(word.Letters, input, sizeof(input));
+  // u8 input[] = {
+  //     0x68,
+  //     0xC3, 0x05, // e
+  //     0x6c,
+  //     0x6c,
+  //     0xC3, 0x0F, // o
+  //     0x20,
+  //     0x77,
+  //     0xC3, 0x0F, // o
+  //     0x72,
+  //     0x6c,
+  //     0x64,
+  //     0x21,
+  //     '\0'};
+  // memcpy(word.Letters, input, sizeof(input));
+  u8 *randomString = (u8*)getRandomString(5, 50);
+  memcpy(word.Letters, randomString, sizeof(randomString));
+  free(randomString);
   word.Start = 0;
   word.End = strlen((char *)word.Letters);
 

@@ -1,20 +1,44 @@
-// https://www.cvedetails.com/cve/CVE-2024-0321/
+// https://www.cvedetails.com/cve/CVE-2023-1452
 // repository: https://github.com/gpac/gpac
 // commit: 7460cb3
-// extract of: src/filters/load_text.c (function: gf_text_get_u8_line)
+// extract of: src/filters/load_text.c (function: gf_text_get_UTF8_line)
 
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef uint32_t u32;
 typedef uint8_t u8;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 // Problem: because szLineConv has a fixed length big szLine can cause a stack buffer overflow
 // this problem can happen in multiple places such as line number 25, 30, 34, 35, 39, 40, 41, 47, 49
 void gf_text_get_UTF8_line(char *szLine) {
-  char szLineConv[34];
+  char szLineConv[2048] = {0};
 
   u32 j = 0;
   u32 len = (u32)strlen(szLine);
@@ -51,22 +75,11 @@ void gf_text_get_UTF8_line(char *szLine) {
 }
 
 int main() {
-  char line[] = {
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xC2, 0x41,
-      0xE2, 0x82, 0xAC,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x98, 0x85,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0xf0, 0x9f, 0x9a, 0x80,
-      0x00};
+  char *line = getRandomString(5, 3000);
 
   gf_text_get_UTF8_line(line);
 
   printf("%s\n", line);
+
+  free(line);
 }

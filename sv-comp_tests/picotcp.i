@@ -528,6 +528,14 @@ extern int getsubopt (char **__restrict __optionp,
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
 
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 struct pico_frame {
   int someValue;
 };
@@ -546,9 +554,9 @@ int pico_transport_receive(struct pico_frame *full, int proto) {
   }
   return ret;
 }
-int main(int argc, char *argv[]) {
+int main() {
   struct pico_frame *full = (struct pico_frame *)malloc(sizeof(struct pico_frame));
-  if (pico_transport_receive(full, argc) == -1) {
+  if (pico_transport_receive(full, getNumberInRange(0, 100)) == -1) {
     free(full);
   }
   if (full != ((void*)0)) {

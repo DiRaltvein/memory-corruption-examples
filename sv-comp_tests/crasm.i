@@ -850,6 +850,24 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 char *Xasc(char *oper) {
   register char *s;
   register char r;
@@ -901,9 +919,10 @@ char *Xasc(char *oper) {
   return processed;
 }
 int main() {
-  char string[] = "Test string \n\t Some value";
+  char *string = getRandomString(5, 500);
   char *oper = strchr(string, '\'');
   char *processed = Xasc(oper);
   printf("Processed string: %s\n", processed);
   free(processed);
+  free(string);
 }

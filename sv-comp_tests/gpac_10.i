@@ -213,6 +213,7 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern int __VERIFIER_nondet_int(void);
 typedef struct {
   uint32_t acmod;
 } GF_AC3StreamInfo;
@@ -220,9 +221,16 @@ typedef struct {
   uint32_t nb_streams;
   GF_AC3StreamInfo streams[8];
 } GF_AC3Config;
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 int main() {
   GF_AC3Config hdr;
-  hdr.nb_streams = 10;
+  hdr.nb_streams = getNumberInRange(0, 20);
   for (uint32_t i = 0; i < hdr.nb_streams; i++) {
     hdr.streams[i].acmod = i;
   }

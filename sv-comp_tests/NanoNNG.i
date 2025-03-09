@@ -874,12 +874,31 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 static uint64_t power(uint64_t x, uint32_t n) {
   uint64_t val = 1;
   for (uint32_t i = 0; i <= n; ++i) {
     val = x * val;
   }
   return val / x;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
 }
 uint32_t get_var_integer(const uint8_t *buf, uint32_t *pos) {
   uint8_t temp;
@@ -917,18 +936,8 @@ uint8_t *copyn_utf8_str(const uint8_t *src, uint32_t *pos, int *str_len, int lim
   return dest;
 }
 int main() {
-  uint8_t packet[] = {
-  0x10,
-  0xFF, 0xFF, 0x03,
-  0x00, 0x2e,
-  0x43, 0x20, 0x70, 0x72, 0x6F, 0x67, 0x72, 0x61,
-  0x6D, 0x6D, 0x69, 0x6E, 0x67, 0x20, 0x69, 0x73,
-  0x20, 0x66, 0x75, 0x6E, 0x20, 0x61, 0x6E, 0x64,
-  0x20, 0x63, 0x68, 0x61, 0x6C, 0x6C, 0x65, 0x6E,
-  0x67, 0x69, 0x6E, 0x67, 0x20, 0x74, 0x6F, 0x20,
-  0x6C, 0x65, 0x61, 0x72, 0x6E, 0x2E
-  };
-  size_t max = sizeof(packet) / sizeof(packet[0]);
+  char* packet = getRandomString(50, 500);
+  size_t max = strlen(packet);
   uint32_t pos = 0, len_of_var = 0;
   int len_of_str = 0;
   if (packet[pos] != 0x10) {

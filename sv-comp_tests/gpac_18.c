@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct
 {
   int profile_idc;
@@ -27,6 +29,17 @@ typedef struct
   AVC_PPS *pps;
 } AVCSliceInfo;
 
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
 void avc_parse_slice(AVCSliceInfo *si, AVCState *avc) {
   if (si->pps->sps_id >= 255)
     return;
@@ -34,12 +47,12 @@ void avc_parse_slice(AVCSliceInfo *si, AVCState *avc) {
   printf("Prodile idc: %d\n", si->sps->profile_idc);
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   AVCSliceInfo si = {0};
   si.pps = calloc(1, sizeof(AVC_PPS));
   if (si.pps == NULL)
     return 1;
-  si.pps->sps_id = argc * 5; // value >= 32 will cause a buffer overflow later in program
+  si.pps->sps_id = getNumberInRange(0, 35); // value >= 32 will cause a buffer overflow later in program
 
   AVCState avc = {0};
   for (int i = 0; i < 32; i++) {
