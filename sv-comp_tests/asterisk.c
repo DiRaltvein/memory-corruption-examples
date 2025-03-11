@@ -3,9 +3,12 @@
 // commit: 39760d1
 // extract of: res/res_pjsip_header_funcs.c (function: update_header)
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 #define NUMBER_OF_HEADERS 3
 
@@ -13,6 +16,27 @@ typedef struct _header {
   char *value;
   char *key;
 } Header;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 Header *findAHeader(Header *headers, char *header) {
   for (int i = 0; i < NUMBER_OF_HEADERS; i++) { // hardcode the number of headers for simplicity
@@ -43,20 +67,21 @@ Header *initializeHeaders() {
   headers[1].key = strdup("Authorization");
   headers[1].value = strdup("Bearer ...");
   headers[2].key = strdup("Content-Length");
-  headers[2].value = strdup("12");
+  headers[2].value = strdup("1234567");
   return headers;
 }
 
 int main() {
   Header *headers = initializeHeaders();
   char headerToUpdate[] = "Content-Length";
-  char newHeaderValue[] = "Over 999";
-  update_header(headers, (char *)headerToUpdate, (char *)newHeaderValue);
+  char *newHeaderValue = getRandomString(2, 10);
+  update_header(headers, (char *)headerToUpdate, newHeaderValue);
 
   for (int i = 0; i < NUMBER_OF_HEADERS; i++) {
     printf("[%s] - %s\n", headers[i].key, headers[i].value);
     free(headers[i].key);
     free(headers[i].value);
   }
+  free(newHeaderValue);
   free(headers);
 }

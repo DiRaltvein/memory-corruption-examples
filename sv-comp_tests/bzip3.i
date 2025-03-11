@@ -875,9 +875,27 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 typedef uint8_t u8;
 typedef uint32_t u32;
 typedef int32_t s32;
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 size_t bz3_bound(size_t input_size) { return input_size + input_size / 50 + 32; }
 static s32 read_neutral_s32(const u8 *data) {
   return ((u32)data[0]) | (((u32)data[1]) << 8) | (((u32)data[2]) << 16) | (((u32)data[3]) << 24);
@@ -917,16 +935,16 @@ s32 bz3_decode_block(unsigned char *datap, unsigned char *decoded_data, s32 data
   return decodedDataFinalSize;
 }
 int main() {
-  unsigned char data[] = {
-      0x0C, 0x00, 0x00, 0x00,
-      0xFF,
-      0x26, 0x00, 0x00, 0x00,
-      0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x41, 0x42, 0x42, 0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42};
-  size_t in_size = sizeof(data) / sizeof(data[0]);
+  unsigned char* data = (unsigned char*)getRandomString(10, 1000);
+  size_t in_size = strlen(data);
   unsigned char *datap = data;
   if (in_size < 4)
     return 1;
   u32 orig_size = read_neutral_s32(datap);
+  if(orig_size > 10000) {
+    printf("Invalid decoded data size\n");
+    return 1;
+  }
   in_size -= 4;
   datap += 4;
   unsigned char *decoded_data = malloc(orig_size);

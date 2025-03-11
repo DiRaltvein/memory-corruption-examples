@@ -8,9 +8,33 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef uint8_t u8;
 typedef uint32_t u32;
 typedef int32_t s32;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 size_t bz3_bound(size_t input_size) { return input_size + input_size / 50 + 32; }
 
@@ -61,17 +85,25 @@ s32 bz3_decode_block(unsigned char *datap, unsigned char *decoded_data, s32 data
 }
 
 int main() {
-  unsigned char data[] = {
-      0x0C, 0x00, 0x00, 0x00, // decoded data size
-      0xFF,                   // decoding flag
-      0x26, 0x00, 0x00, 0x00, // actual decoded size
-      0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x41, 0x42, 0x42, 0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42};
-  size_t in_size = sizeof(data) / sizeof(data[0]);
+  // unsigned char data[] = {
+  //     0x0C, 0x00, 0x00, 0x00, // decoded data size
+  //     0xFF,                   // decoding flag
+  //     0x26, 0x00, 0x00, 0x00, // actual decoded size
+  //     0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x41, 0x42, 0x42, 0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42};
+  // size_t in_size = sizeof(data) / sizeof(data[0]);
+
+  unsigned char* data = (unsigned char*)getRandomString(10, 1000);
+  size_t in_size = strlen(data);
+
   unsigned char *datap = data;
 
   if (in_size < 4)
     return 1;
   u32 orig_size = read_neutral_s32(datap);
+  if(orig_size > 10000) {
+    printf("Invalid decoded data size\n");
+    return 1;
+  }
   in_size -= 4;
   datap += 4;
 
