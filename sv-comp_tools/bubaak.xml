@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="bubaak" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+
+  <option name="--sv-comp"></option>
+  <option name="-timeout">30</option>
+  <option name="-sv-comp-witness">witness.graphml</option>
+
+  <rundefinition>
+    <tasks>
+      <includesfile>../MemSafetySvCompTest.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
+  </rundefinition>
+</benchmark>

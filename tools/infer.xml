@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="infer" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+
+  <option name="--default-checkers"></option>
+  <option name="--headers"></option>
+  <option name="--biabduction"></option>
+  <option name="--biabduction-unsafe-malloc"></option>
+  <option name="--bufferoverrun"></option>
+  <option name="--pulse-unsafe-malloc"></option>
+  <option name="--keep-going"></option>
+
+  <rundefinition>
+    <tasks>
+      <includesfile>../MemSafety.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
+  </rundefinition>
+</benchmark>

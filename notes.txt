@@ -38,8 +38,45 @@ sudo apt install benchexec
 mkdir /usr/sv-comp && cd /usr/sv-comp
 git clone https://github.com/staticafi/symbiotic.git && cd ./symbiotic && ./build.sh && export PATH=$(pwd)/install/bin:$PATH
 
-rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/symbiotic.xml
 
+Add all folders to PATH
+
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/symbiotic.xml
+- sudo apt install python3-clang (was used to make symbiotic binary work)
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/predatorHP.xml
+- apt-get install cmake git g++-11-multilib gcc-11-plugin-dev libboost-dev make python2.7
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/uautomizer.xml
+- sudo apt install openjdk-21-jdk
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/esbmc-kind.xml
+- sudo apt-get install -y clang-14 llvm-14 clang-tidy-14 python-is-python3 python3 git ccache unzip wget curl bison flex g++-multilib linux-libc-dev libboost-all-dev libz3-dev libclang-14-dev libclang-cpp-dev cmake
+!! benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/cpa-bam-smg.xml --tool-directory=/usr/svcomp/tools/cpa-bam-smg
+- execute separately
+- scripts/cpa.sh -default /mnt/a/master/master/sv-comp_tests_valid/add_last_unsafe.i
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/utaipan.xml
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/bubaak.xml
+!! benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/cpachecker.xml --tool-directory=/usr/svcomp/tools/CPAchecker-4.0-unix
+- execute separately
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/ukojak.xml
+
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/cbmc.xml
+
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 4 \
+/mnt/a/master/master/sv-comp_tools/symbiotic.xml \
+/mnt/a/master/master/sv-comp_tools/predatorHP.xml \
+/mnt/a/master/master/sv-comp_tools/uautomizer.xml \
+/mnt/a/master/master/sv-comp_tools/esbmc-kind.xml \
+/mnt/a/master/master/sv-comp_tools/utaipan.xml \
+/mnt/a/master/master/sv-comp_tools/bubaak.xml \
+/mnt/a/master/master/sv-comp_tools/ukojak.xml \
+/mnt/a/master/master/sv-comp_tools/cbmc.xml \
+&& benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/sv-comp_tools/cpa-bam-smg.xml --tool-directory=/usr/svcomp/tools/cpa-bam-smg \
+&& benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/sv-comp_tools/cpachecker.xml --tool-directory=/usr/svcomp/tools/CPAchecker-4.0-unix \
+&& table-generator -o ./results/merged_results ./results/*.xml.bz2
+
+
+
+
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/tools/infer.xml --tool-directory=/home/raltvein/infer-linux-x86_64-v1.2.0/bin
 
 // ---------------------------------- Local notes ---------------------------------- \\
 

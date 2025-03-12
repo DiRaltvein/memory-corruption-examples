@@ -1,4 +1,5 @@
 typedef unsigned int size_t;
+typedef __builtin_va_list va_list;
 typedef __builtin_va_list __gnuc_va_list;
 
 typedef unsigned char __u_char;
@@ -189,10 +190,6 @@ extern int fscanf (FILE *__restrict __stream,
 extern int scanf (const char *__restrict __format, ...) ;
 extern int sscanf (const char *__restrict __s,
      const char *__restrict __format, ...) __attribute__ ((__nothrow__ ));
-typedef float _Float32;
-typedef double _Float64;
-typedef double _Float32x;
-typedef long double _Float64x;
 extern int fscanf (FILE *__restrict __stream, const char *__restrict __format, ...) __asm__ ("" "__isoc99_fscanf") ;
 extern int scanf (const char *__restrict __format, ...) __asm__ ("" "__isoc99_scanf") ;
 extern int sscanf (const char *__restrict __s, const char *__restrict __format, ...) __asm__ ("" "__isoc99_sscanf") __attribute__ ((__nothrow__ ));
@@ -865,12 +862,12 @@ char *getRandomStringNotZeroTerminated(int size) {
 }
 static void process_COM(uchar *Data, int length) {
   int ch;
-  char Comment[16000 + 1];
+  char Comment[200 + 1];
   int nch;
   int a;
   nch = 0;
-  if (length > 16000)
-    length = 16000;
+  if (length > 200)
+    length = 200;
   for (a = 2; a < length; a++) {
     ch = Data[a];
     if (ch == '\r' && Data[a + 1] == '\n')
@@ -885,8 +882,8 @@ static void process_COM(uchar *Data, int length) {
   printf("COM marker comment: %s\n", Comment);
 }
 int main() {
-  char* data = getRandomStringNotZeroTerminated(16000);
-  size_t dataSize = 16000;
-  process_COM(data, dataSize);
+  char* data = getRandomStringNotZeroTerminated(200);
+  size_t dataSize = 200;
+  process_COM((uchar*)data, dataSize);
   free(data);
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="symbiotic" timelimit="30 s" hardtimelimit="35 s" memlimit="4 GB" cpuCores="1">
+<benchmark tool="symbiotic" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+
+  <option name="--sv-comp"></option>
 
   <rundefinition>
-    <option name="--sv-comp"></option>
+    <tasks>
+      <includesfile>../MemSafetySvCompTest.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
   </rundefinition>
-
-  <tasks>
-    <includesfile>../MemSafetySvComp.set</includesfile>
-    <propertyfile>../properties/valid-memsafety.prp</propertyfile>
-  </tasks>
 </benchmark>

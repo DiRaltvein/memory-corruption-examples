@@ -1,9 +1,5 @@
 typedef unsigned int size_t;
 typedef int wchar_t;
-typedef float _Float32;
-typedef double _Float64;
-typedef double _Float32x;
-typedef long double _Float64x;
 typedef struct
   {
     int quot;

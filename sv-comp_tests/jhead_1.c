@@ -8,7 +8,7 @@
 #include <string.h>
 
 typedef unsigned char uchar;
-#define MAX_COMMENT_SIZE 16000
+#define MAX_COMMENT_SIZE 200
 
 extern char __VERIFIER_nondet_char(void);
 
@@ -59,6 +59,6 @@ static void process_COM(uchar *Data, int length) {
 int main() {
   char* data = getRandomStringNotZeroTerminated(MAX_COMMENT_SIZE);
   size_t dataSize = MAX_COMMENT_SIZE;
-  process_COM(data, dataSize);
+  process_COM((uchar*)data, dataSize);
   free(data);
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<benchmark tool="cpachecker" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+
+  <option name="-svcomp24"></option>
+  <option name="-benchmark"></option>
+  <option name="-heap">10000m</option>
+  <option name="-timelimit">30 s</option>
+
+  <rundefinition>
+    <tasks>
+      <includesfile>../MemSafetySvCompTest.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
+  </rundefinition>
+</benchmark>

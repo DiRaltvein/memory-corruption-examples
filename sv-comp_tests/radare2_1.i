@@ -94,10 +94,6 @@ typedef __intmax_t intmax_t;
 typedef __uintmax_t uintmax_t;
 typedef unsigned int size_t;
 typedef int wchar_t;
-typedef float _Float32;
-typedef double _Float64;
-typedef double _Float32x;
-typedef long double _Float64x;
 typedef struct
   {
     int quot;
@@ -553,6 +549,7 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+typedef __builtin_va_list va_list;
 typedef __builtin_va_list __gnuc_va_list;
 typedef struct
 {
