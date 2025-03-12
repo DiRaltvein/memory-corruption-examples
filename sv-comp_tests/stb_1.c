@@ -3,9 +3,41 @@
 // commit: 5736b15
 // extract of: stb_image.h (function: stbi__load_gif_main)
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 int getNumberOfNumbersInAString(char *string) {
   int i = 0;
@@ -21,16 +53,18 @@ int getNumberOfNumbersInAString(char *string) {
   return i;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc == 1) {
-    printf("The program sums numbers given that are separated by a coma\n");
-    printf("Example input could be 9,5,3,1,12,6 8,4,2,8,1 and the response would be 36 and 23\n");
-    printf("Program limitations: Numbers only in range: [1, 255]\n");
-    return 0;
-  }
+int main() {
+  // if (argc == 1) {
+  //   printf("The program sums numbers given that are separated by a coma\n");
+  //   printf("Example input could be 9,5,3,1,12,6 8,4,2,8,1 and the response would be 36 and 23\n");
+  //   printf("Program limitations: Numbers only in range: [1, 255]\n");
+  //   return 0;
+  // }
+
   unsigned char *out = NULL;
-  for (int i = 1; i < argc; i++) {
-    int NumberOfNumbers = getNumberOfNumbersInAString(argv[i]);
+  for (int i = 0; i < getNumberInRange(0, 10); i++) {
+    char* randomString = getRandomString(5, 500);
+    int NumberOfNumbers = getNumberOfNumbersInAString(randomString);
     if (!out) {
       out = calloc(NumberOfNumbers, sizeof(unsigned char));
       if (!out) {
@@ -44,12 +78,13 @@ int main(int argc, char *argv[]) {
         // Problem: in case realloc was given a size of 0 it may free pointer given to it and return a null pointer
         // such condition would result in a double free
         free(out);
+        free(randomString);
         return 1;
       }
       out = tmp;
     }
 
-    char *duplicate = strdup(argv[i]);
+    char *duplicate = strdup(randomString);
     char *ptr = duplicate;
     for (int j = 0; j < NumberOfNumbers; j++) {
       char *numberAsString = strsep(&ptr, ",");
@@ -72,7 +107,8 @@ int main(int argc, char *argv[]) {
       sum += out[j];
     }
 
-    printf("Sum of string %s is %d\n", argv[i], sum);
+    printf("Sum of string %s is %d\n", randomString, sum);
+    free(randomString);
   }
 
   if (out) {

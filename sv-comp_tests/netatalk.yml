@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'netatalk.i
+input_files: 'netatalk.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp

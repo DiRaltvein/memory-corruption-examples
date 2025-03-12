@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'gpac_18.i
+input_files: 'gpac_18.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp

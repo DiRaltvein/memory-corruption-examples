@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'flvmeta.i
+input_files: 'flvmeta.i'
 
 properties:
   - property_file: ../properties/no-null-deref.prp

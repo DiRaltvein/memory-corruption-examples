@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'ppp.i
+input_files: 'ppp.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp

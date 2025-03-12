@@ -26,36 +26,6 @@ autoconf for configure.ac files
 
 cp -r ./<file> /mnt/a/master/projects
 
-// ---------------------------------- Non-Distinguishable Inconsistencies ---------------------------------- \\
-
-clone repo (https://github.com/umnsec/ndi) into /usr/ndi
-clone LLVM repo (https://github.com/llvm/llvm-project) into /usr/ndi/llvm/llvm-project
-git checkout to LLVM version 15 (https://github.com/llvm/llvm-project/releases?page=5, git commit: 8dfdcc7)
-execute /usr/ndi/llvm/build.sh
-execute usr/ndi/analyzer/Makefiles
-now the executable to analyze is availible at /usr/ndi/analyzer/build/lib/kanalyzer
-
-to analyze any file it first needs to be compiled into a bit code (.bc file)
-/usr/llvm-project/build/bin/clang -emit-llvm -c   program.c -o ndi.bc
-/usr/llvm-project/build/bin/clang++ -emit-llvm -c program.c -o ndi.bc
-
-// ---------------------------------- Detecting Missed Security Operations (IPPO) (NOT USED)  ---------------------------------- \\
-
-clone repo (https://github.com/dinghaoliu/IPPO) into /usr
-execute /usr/IPPO/llvm/build-llvm.sh
-execute usr/IPPO/src/CMakeLists.txt (make command)
-now the executable to analyze is availible at /usr/IPPO/src
-
-// ---------------------------------- Options used ---------------------------------- \\
-
-[ubuntu 22]
-	- LLVM - /usr/llvm-project/build/bin/clang
-	- gcc
-	- cppcheck
-	- ikos
-[ubuntu 20]
-	- symbiotic - /usr/symbiotic/scripts/symbiotic
-
 // ---------------------------------- CV-COMP SETUP ---------------------------------- \\
 
 sudo su -

@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'sysstat.i
+input_files: 'sysstat.i'
 
 properties:
   - property_file: ../properties/no-overflow.prp

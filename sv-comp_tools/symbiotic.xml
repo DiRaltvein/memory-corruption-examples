@@ -6,7 +6,7 @@
   </rundefinition>
 
   <tasks>
-    <includesfile>../MemSafety.set</includesfile>
+    <includesfile>../MemSafetySvComp.set</includesfile>
     <propertyfile>../properties/valid-memsafety.prp</propertyfile>
   </tasks>
 </benchmark>

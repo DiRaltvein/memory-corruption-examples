@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'stb_1.i
+input_files: 'stb_1.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp

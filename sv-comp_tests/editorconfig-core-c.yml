@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'editorconfig-core-c.i
+input_files: 'editorconfig-core-c.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp

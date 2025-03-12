@@ -1,6 +1,6 @@
 format_version: '2.0'
 
-input_files: 'liblouis.i
+input_files: 'liblouis.i'
 
 properties:
   - property_file: ../properties/valid-memsafety.prp
