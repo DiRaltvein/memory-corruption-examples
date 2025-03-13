@@ -5,8 +5,7 @@ input_files: 'cups.c'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
-  - property_file: ../properties/no-overflow.prp
-    expected_verdict: false
+    subproperty: valid-deref
 
 options:
   language: C

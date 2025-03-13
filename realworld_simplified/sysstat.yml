@@ -5,6 +5,7 @@ input_files: 'sysstat.c'
 properties:
   - property_file: ../properties/no-overflow.prp
     expected_verdict: false
+    subproperty: unsigned-overflow
 
 options:
   language: C

@@ -3,9 +3,16 @@
 
   <option name="--full-output" />
 
-  <rundefinition>
-    <tasks>
+  <rundefinition name="sv-comp tests">
+    <tasks name="sv-comp">
       <includesfile>../MemSafetySvCompTest.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
+  </rundefinition>
+
+  <rundefinition name="Custom">
+    <tasks name="custom">
+      <includesfile>../MemSafetySvComp.set</includesfile>
       <propertyfile>../properties/valid-memsafety.prp</propertyfile>
     </tasks>
   </rundefinition>

@@ -48,7 +48,13 @@ int main(int argc, char *argv[]) {
   if (argc == 1)
     return 0;
 
+  char *data = argv[1];
   char fix[256];
-  icFixXml(fix, argv[1]);
+
+  if (strlen(data) > 256) {
+    printf("Input truncated\n");
+    data[256] = '\0';
+  }
+  icFixXml(fix, data);
   printf("Fixed string: %s\n", fix);
 }

@@ -18,7 +18,7 @@ s32 lsr_translate_coords(s32 val, u32 nb_bits) {
     return 0;
 
   if (val >> (nb_bits - 1)) {
-    return (s32)val - (1 << nb_bits); // Problem: left shift of 1 by 31 places cannot be represented in type 'int'. Signed number will overflow leading to 'undefined behaviour' as per C standard
+    return (s32)val - (1 << nb_bits); // Problem: left shift of 1 by 31 places cannot be represented in type 'int'
   }
   return 0;
 }

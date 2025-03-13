@@ -11,10 +11,6 @@
 typedef uint32_t u32;
 
 int main() {
-  // if (argc < 2) {
-  //   exit(0);
-  // }
-  // char *szLine = argv[1]; // when malicious input is not hardcoded than some static code analyzers can not find the overflow
   char szLine[] = "{200}{500 Function processes subtitles in the .SUB format but it does not expect subtitle to be malformed. When looking for closing } it overflows";
   int start, end;
   char szTime[20], szText[2048];

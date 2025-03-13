@@ -223,7 +223,7 @@ bool avifDetector(size_t length, IIReadInterface &ri) {
     uint32_t boxSize = buffer.readU32BE(offset); // Problem: if offset is greater than file length (length variable) this call will result in a buffer overflow
     if (buffer.cmpAnyOf(offset + 4, 4, {"iprp", "ipco"})) {
       // end is assumed to be the end of boxSize but if boxSize length is malformed then end can be greater than file overal length
-      // if boxSize if large than it can cause read out of bounds of a buffer
+      // if boxSize is large than it can cause read out of bounds of a buffer
       end = offset + boxSize;
       offset += 8;
     } else if (buffer.cmp(offset + 4, 4, "ispe")) {

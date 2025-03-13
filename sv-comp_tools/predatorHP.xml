@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <benchmark tool="predatorhp" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
 
-  <rundefinition>
-    <tasks>
+  <rundefinition name="sv-comp tests">
+    <tasks name="sv-comp">
       <includesfile>../MemSafetySvCompTest.set</includesfile>
+      <propertyfile>../properties/valid-memsafety.prp</propertyfile>
+    </tasks>
+  </rundefinition>
+
+  <rundefinition name="Custom">
+    <tasks name="custom">
+      <includesfile>../MemSafetySvComp.set</includesfile>
       <propertyfile>../properties/valid-memsafety.prp</propertyfile>
     </tasks>
   </rundefinition>

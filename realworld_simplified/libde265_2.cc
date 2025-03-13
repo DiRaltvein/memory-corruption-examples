@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
   bool error = read(obj);
   if (!error) {
     for (int i = 0; i <= obj->num_tile_columns; i++) {
-      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow. num_tile_columns is just argc and when argc is greater than 10 then overflow happens
+      printf("%d\n", obj->colBd[i]); // Problem: heap buffer overflow num_tile_columns is just argc and when argc is greater than 10 then overflow happens
     }
     free(obj);
     return 1;

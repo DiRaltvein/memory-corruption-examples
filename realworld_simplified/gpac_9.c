@@ -21,7 +21,7 @@ int main() {
     num_scalability_types += atoi(&scalability_mask[i]);
   }
   if (num_scalability_types >= 16) {
-    num_scalability_types = 16;
+    num_scalability_types = 15;
   }
   dimension_id_len[0] = 0;
   sum = 0;

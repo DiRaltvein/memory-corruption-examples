@@ -35,6 +35,10 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
     exit(1);
   }
 
+  if (len > 0xffff) {
+    exit(1);
+  }
+
   *attr = (stun_attr_t *)calloc(1, sizeof(stun_attr_t));
   if (!(*attr)) {
     printf("Out of memory!\n");

@@ -3,8 +3,9 @@ format_version: '2.0'
 input_files: 'gpac.c'
 
 properties:
-  - property_file: ../properties/def-behavior.prp
+  - property_file: ../properties/no-overflow.prp
     expected_verdict: false
+    subproperty: signed-overflow
 
 options:
   language: C

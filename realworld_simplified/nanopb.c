@@ -53,7 +53,7 @@ bool pb_dec_string(pb_istream_t *stream, void **dest) {
     return false;
 
   /* Space for null terminator */
-  alloc_size = size + 1; // Problem: in case read data is 0xff, 0xff, 0xff, 0xff adding 1 to it will cause signed integer overflow
+  alloc_size = size + 1; // Problem: in case read data is 0xff, 0xff, 0xff, 0xff adding 1 to it will cause unsigned integer overflow
 
   *dest = calloc(alloc_size, sizeof(char));
   if (*dest == NULL) {
