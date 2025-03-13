@@ -3,9 +3,7 @@ format_version: '2.0'
 input_files: 'libming.i'
 
 properties:
-  - property_file: ../properties/valid-memsafety.prp
-    expected_verdict: false
-  - property_file: ../properties/no-overflow.prp
+  - property_file: ../properties/no-null-deref.prp
     expected_verdict: false
 
 options:

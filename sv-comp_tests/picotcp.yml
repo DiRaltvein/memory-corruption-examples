@@ -5,6 +5,7 @@ input_files: 'picotcp.i'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
+    subproperty: valid-free
 
 options:
   language: C

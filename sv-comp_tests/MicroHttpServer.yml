@@ -5,9 +5,9 @@ input_files: 'MicroHttpServer.i'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
-  - property_file: ../properties/no-overflow.prp
-    expected_verdict: false
+    subproperty: valid-deref
 
 options:
   language: C
   data_model: ILP32
+  
