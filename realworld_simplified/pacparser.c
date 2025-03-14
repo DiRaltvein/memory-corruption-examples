@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// -------------------------- COPIED --------------------------
 char *str_replace(const char *orig, char *rep, char *with) {
   char *result;  // the return string
   char *ins;     // the next insert point
@@ -41,7 +40,6 @@ char *str_replace(const char *orig, char *rep, char *with) {
   strcpy(tmp, orig);
   return result;
 }
-// -------------------------- COPIED --------------------------
 
 int main() {
   char url[] = "and I''''''''' am url";

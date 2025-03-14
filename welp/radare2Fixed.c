@@ -192,7 +192,9 @@ static pyc_object *get_object(RBuffer *buffer) {
 	}
 
 	if (flag && ref_idx) {
-		free_object (ref_idx->data); // Problem: free of ret object that is returned from function
+		if (ref_idx->data != ret) {
+			free_object ((pyc_object*)ref_idx->data);
+		}
 		ref_idx->data = get_none_object();
 	}
 
@@ -215,7 +217,7 @@ int main() {
 	
 	pyc_object* obj = get_object(&buffer);
 	if (obj != NULL) {
-		printf("Object type: 0x%x\n", obj->type); // Problem: potential use of freed pointer
+		printf("Object type: 0x%x\n", obj->type);
 		if (obj->type == TYPE_INT) {
 			printf("Extracted number: %s\n", (char*)obj->data);
 		}
