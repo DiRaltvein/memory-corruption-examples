@@ -18,6 +18,11 @@ const analyzersToUse = [
   ...(calculateForTestSuit ? ['symbiotic'] : []),
 ]
 
+const getCveNumber = (cve) => {
+  if (cve.id) return cve.CVE;
+  return cves[cves.indexOf(cve) - 1].CVE;
+}
+
 const allFileLengths = [];
 const allVulnFunctionsLengths = [];
 
@@ -81,7 +86,7 @@ const fileLenChart = new Chart(
   {
     type: 'bar',
     data: {
-      labels: cvesToAnalyze.map(c => c.CVE),
+      labels: cvesToAnalyze.map(getCveNumber),
       datasets: [{
         data: cvesToAnalyze.map(c => parseInt(c['file len'])),
         borderWidth: 1,
@@ -112,7 +117,7 @@ const funcChart = new Chart(
   {
     type: 'bar',
     data: {
-      labels: cvesToAnalyze.map(c => c.CVE),
+      labels: cvesToAnalyze.map(getCveNumber),
       datasets: [{
         data: cvesToAnalyze.map(c => parseInt(c['func len'])),
         borderWidth: 1,
@@ -193,39 +198,38 @@ await fsp.writeFile(`charts/detectedVulnsRatioByFuncLen${calculateForTestSuit ? 
 detectedVulnsRatioByFuncLen.destroy();
 //
 
-
-//
-const detectedVulnsRatioByFuncLenIkos = new Chart(
-  canvas,
-  {
-    type: 'line',
-    data: {
-      yLabels: '%',
-      labels: buckets.map(bucket => `${bucket[0]['func len']} - ${bucket[bucket.length - 1]['func len']}`),
-      datasets: [{
-        data: buckets.map(b => getDetectionRateInBucket(b, ['ikos']))
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: '% of vulnerabilities detected'
-          }
-        },
-        x: {
-          title: {
-            display: true,
-            text: 'Length of function containing vulnerability'
+if (!calculateForTestSuit) {
+  const detectedVulnsRatioByFuncLenIkos = new Chart(
+    canvas,
+    {
+      type: 'line',
+      data: {
+        yLabels: '%',
+        labels: buckets.map(bucket => `${bucket[0]['func len']} - ${bucket[bucket.length - 1]['func len']}`),
+        datasets: [{
+          data: buckets.map(b => getDetectionRateInBucket(b, ['ikos']))
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: '% of vulnerabilities detected'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Length of function containing vulnerability'
+            }
           }
         }
       }
     }
-  }
-);
+  );
 
-const detectedVulnsIkosPngBuffer = await canvas.toBuffer('png', {matte: 'white'});
-await fsp.writeFile(`charts/detectedVulnsRatioByFuncLenIkos${calculateForTestSuit ? '-suit' : ''}.png`, detectedVulnsIkosPngBuffer);
-detectedVulnsRatioByFuncLenIkos.destroy();
-//
+  const detectedVulnsIkosPngBuffer = await canvas.toBuffer('png', {matte: 'white'});
+  await fsp.writeFile(`charts/detectedVulnsRatioByFuncLenIkos${calculateForTestSuit ? '-suit' : ''}.png`, detectedVulnsIkosPngBuffer);
+  detectedVulnsRatioByFuncLenIkos.destroy();
+}
