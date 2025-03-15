@@ -13,6 +13,35 @@
 #define SC_ASN1_TAG_CLASS 0xC0
 #define SC_ASN1_TAG_CONSTRUCTED 0x20
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
+/**
+ * Just a utility function in test creation that generates random string of specified size that is not zero terminated
+ */
+char *getRandomStringNotZeroTerminated(int size) {
+  char *randomString = (char*)calloc(size, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+
 int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out,
                      unsigned int *tag_out, size_t *taglen) {
   const uint8_t *p = *buf;
@@ -129,13 +158,15 @@ const uint8_t *sc_asn1_find_tag(const uint8_t *buf,
 // because of that if there is a valid tag that is not 0xE1 (like 0xE2 in this test case) pointer p will be advances much further than 2 bytes as whole 0xE2 tag will be skipped
 // this desynchronizes length and pointer p that leads to buffer overflow in function sc_asn1_read_tag.
 int main() {
-  uint8_t rbuf[] = {
-      0xE1, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79,
-      0xE2, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79, // completly valid tag that breaks the application
-      0xE1, 0x06, 0x03, 0x04, 0x63, 0x61, 0x6C, 0x6D,
-      0xE1, 0x06, 0x03, 0x04, 0x68, 0x65, 0x61, 0x6C};
+  // uint8_t rbuf[] = {
+  //     0xE1, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79,
+  //     0xE2, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79, // completly valid tag that breaks the application
+  //     0xE1, 0x06, 0x03, 0x04, 0x63, 0x61, 0x6C, 0x6D,
+  //     0xE1, 0x06, 0x03, 0x04, 0x68, 0x65, 0x61, 0x6C};
+  size_t len = getNumberInRange(1, 1000);
+  uint8_t *rbuf = getRandomStringNotZeroTerminated(len);
   const uint8_t *p = rbuf, *q;
-  size_t len = sizeof(rbuf), tlen = 0, ilen = 0;
+  size_t tlen = 0, ilen = 0;
 
   while (len != 0) {
     p = sc_asn1_find_tag(p, len, 0xE1, &tlen);

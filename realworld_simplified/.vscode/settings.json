@@ -13,6 +13,7 @@
     "utility": "c",
     "initializer_list": "c",
     "string": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "cstring": "cpp"
   }
 }

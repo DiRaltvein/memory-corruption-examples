@@ -60,7 +60,7 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 
 rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 2 /mnt/a/master/master/sv-comp_tools/cbmc.xml
 
-rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 4 \
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 16 \
 /mnt/a/master/master/sv-comp_tools/symbiotic.xml \
 /mnt/a/master/master/sv-comp_tools/predatorHP.xml \
 /mnt/a/master/master/sv-comp_tools/uautomizer.xml \
@@ -69,14 +69,11 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 /mnt/a/master/master/sv-comp_tools/bubaak.xml \
 /mnt/a/master/master/sv-comp_tools/ukojak.xml \
 /mnt/a/master/master/sv-comp_tools/cbmc.xml \
-&& benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/sv-comp_tools/cpa-bam-smg.xml --tool-directory=/usr/svcomp/tools/cpa-bam-smg \
-&& benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/sv-comp_tools/cpachecker.xml --tool-directory=/usr/svcomp/tools/CPAchecker-4.0-unix \
+&& benchexec --no-container --outputpath ./results/ --numOfThreads 16 /mnt/a/master/master/sv-comp_tools/cpa-bam-smg.xml --tool-directory=/usr/svcomp/tools/cpa-bam-smg \
+&& benchexec --no-container --outputpath ./results/ --numOfThreads 16 /mnt/a/master/master/sv-comp_tools/cpachecker.xml --tool-directory=/usr/svcomp/tools/CPAchecker-4.0-unix \
 && table-generator -o ./results/merged_results ./results/*.xml.bz2
 
-
-
-
-rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 4 /mnt/a/master/master/tools/infer.xml --tool-directory=/home/raltvein/infer-linux-x86_64-v1.2.0/bin
+rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThreads 16 /mnt/a/master/master/tools/infer.xml --tool-directory=/home/raltvein/infer-linux-x86_64-v1.2.0/bin
 
 // ---------------------------------- Local notes ---------------------------------- \\
 

@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="ultimatetaipan" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+<benchmark tool="ultimatetaipan" timelimit="120 s" hardtimelimit="150 s" memlimit="4 GB" cpuCores="1">
+
+  <option name="--full-output" />
 
   <rundefinition name="valid-memsafety">
     <tasks name="valid-memsafety">
       <includesfile>../MemSafetySvComp.set</includesfile>
       <propertyfile>../properties/valid-memsafety.prp</propertyfile>
-    </tasks>
-  </rundefinition>
-
-  <rundefinition name="def-behavior">
-    <tasks name="def-behavior">
-      <includesfile>../MemSafetySvComp.set</includesfile>
-      <propertyfile>../properties/def-behavior.prp</propertyfile>
-    </tasks>
-  </rundefinition>
-
-  <rundefinition name="no-null-deref">
-    <tasks name="no-null-deref">
-      <includesfile>../MemSafetySvComp.set</includesfile>
-      <propertyfile>../properties/no-null-deref.prp</propertyfile>
     </tasks>
   </rundefinition>
 

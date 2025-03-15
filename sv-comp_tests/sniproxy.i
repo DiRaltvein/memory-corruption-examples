@@ -864,7 +864,7 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int main(int argc, char *argv[]) {
+int main() {
   char *hostname_or_ip = getRandomString(5, 500);
   char *port;
   char ip_buf[262];

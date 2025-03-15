@@ -8,11 +8,36 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   unsigned char *data;
   size_t position;
   size_t size;
 } GF_BitStream;
+
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
 
 uint8_t gf_bs_read_int(GF_BitStream *bs) {
   return bs->data[bs->position++];
@@ -65,14 +90,17 @@ void latm_dmx_sync_frame_bs(GF_BitStream *bs, uint32_t *nb_bytes, uint8_t *buffe
 }
 
 int main() {
-  unsigned char data[] = "\x58The golden sun dips below the horizon, painting the sky in hues of fire and gentle rose.";
+  // unsigned char data[] = "\x58The golden sun dips below the horizon, painting the sky in hues of fire and gentle rose.";
+  unsigned char* data = getRandomString(5, 5000);
   GF_BitStream bs = {0};
   bs.position = 0;
-  bs.data = (unsigned char *)data;
-  bs.size = sizeof(data) / sizeof(data[0]);
+  bs.data = data;
+  bs.size = strlen(data);
 
   uint8_t latm_buffer[64] = {0};
   uint32_t latm_frame_size = 64;
 
   latm_dmx_sync_frame_bs(&bs, &latm_frame_size, latm_buffer);
+
+  free(data);
 }

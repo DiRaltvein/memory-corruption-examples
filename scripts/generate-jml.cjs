@@ -11,13 +11,15 @@ input_files: '${filename}'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
+    subproperty: valid-deref
   - property_file: ../properties/no-overflow.prp
     expected_verdict: false
+    subproperty: unsigned-overflow
 
 options:
   language: C${filename.endsWith('.cc') ? '++' : ''}
   data_model: ILP32
-  `
+  `;
   fs.writeFileSync(path, content, { flag: 'a' });
 }
 
@@ -25,7 +27,10 @@ fs.readdir(folder, (_, files) => {
   for (const file of files) {
     if (file.endsWith('.c') || file.endsWith('.cc')) {
       const ymlFileName = file.split('.').slice(0, -1).join('.') + '.yml';
-      createFile(path.resolve(__dirname, 'realworld_simplified', ymlFileName), file);
+      createFile(
+        path.resolve(__dirname, 'realworld_simplified', ymlFileName),
+        file
+      );
     }
   }
-})
+});

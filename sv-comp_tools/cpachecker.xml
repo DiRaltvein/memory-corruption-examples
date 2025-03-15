@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<benchmark tool="cpachecker" timelimit="30 s" hardtimelimit="45 s" memlimit="4 GB" cpuCores="1">
+<benchmark tool="cpachecker" timelimit="900 s" hardtimelimit="905 s" memlimit="4 GB" cpuCores="1">
 
-  <option name="-svcomp24"></option>
-  <option name="-benchmark"></option>
-  <option name="-heap">10000m</option>
-  <option name="-timelimit">30 s</option>
+  <option name="--svcomp24"></option>
+  <option name="--benchmark"></option>
+  <option name="--heap">10000m</option>
+  <option name="--timelimit">900 s</option>
 
   <rundefinition name="valid-memsafety">
     <tasks name="valid-memsafety">
       <includesfile>../MemSafetySvComp.set</includesfile>
       <propertyfile>../properties/valid-memsafety.prp</propertyfile>
-    </tasks>
-  </rundefinition>
-
-  <rundefinition name="def-behavior">
-    <tasks name="def-behavior">
-      <includesfile>../MemSafetySvComp.set</includesfile>
-      <propertyfile>../properties/def-behavior.prp</propertyfile>
-    </tasks>
-  </rundefinition>
-
-  <rundefinition name="no-null-deref">
-    <tasks name="no-null-deref">
-      <includesfile>../MemSafetySvComp.set</includesfile>
-      <propertyfile>../properties/no-null-deref.prp</propertyfile>
     </tasks>
   </rundefinition>
 

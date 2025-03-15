@@ -873,7 +873,7 @@ static void makeswf_preprocess(const char *file, const char *out) {
   printf("Formatted buffer: %s\n", buf);
 }
 int main() {
-  char *files[5];
+  char files[5];
   for (int i = 0; i < 5; i++) {
     files[i] = getRandomString(0, 150);
   }

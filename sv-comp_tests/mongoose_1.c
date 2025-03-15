@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(int argc, char *argv[]) {
+int main() {
   FILE *fp;
   char line[1024];
   char *p;
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
       continue;
     }
     for (p = line + len; sscanf(p, "%s%n", alias, &len) == 1; p += len) { // Problem: potential buffer overflow of alias buffer. Reading from a file with sscanf with assumption that alias is less than 60 characters
-      if (strcmp(alias, argv[0]) == 0) {
+      if (strcmp(alias, "foundMe") == 0) {
         fclose(fp);
         return -1;
       }

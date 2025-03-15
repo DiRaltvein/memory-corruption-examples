@@ -64,5 +64,6 @@
     "unistd.h": "c",
     "libgen.h": "c",
     "stat.h": "c"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

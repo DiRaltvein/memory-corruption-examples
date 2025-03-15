@@ -9,12 +9,16 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-cves": "node generate_cves.js"
+    "generate-cves": "node generate_cves.js",
+    "stats": "node scripts/tableStats.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-html-parser": "^6.1.13"
+    "chart.js": "^4.4.8",
+    "lodash": "^4.17.21",
+    "node-html-parser": "^6.1.13",
+    "skia-canvas": "^2.0.2"
   }
 }

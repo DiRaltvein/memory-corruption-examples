@@ -20,7 +20,7 @@ typedef struct pb_istream_s {
 static bool buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)
 {
   if (stream->bytes_left < count) {
-    printf("try to read more data then remaining in stream buffer");
+    printf("try to read more data then remaining in stream buffer\n");
     return false;
   }
   uint8_t *source = (uint8_t*)stream->state;
@@ -38,7 +38,7 @@ static bool buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)
 
 pb_istream_t pb_istream_from_buffer(uint8_t *buf, size_t bufsize)
 {
-  pb_istream_t stream;
+  pb_istream_t stream = {0};
   stream.callback = &buf_read;
   stream.state = buf;
   stream.bytes_left = bufsize;
@@ -55,13 +55,13 @@ bool pb_dec_string(pb_istream_t *stream, void **dest) {
   /* Space for null terminator */
   alloc_size = size + 1; // Problem: in case read data is 0xff, 0xff, 0xff, 0xff adding 1 to it will cause unsigned integer overflow
 
-  *dest = calloc(alloc_size, sizeof(char));
+  *dest = malloc(alloc_size);
   if (*dest == NULL) {
     return false;
   }
 
   bool status = stream->callback(stream, *dest, size);
-  ((char *)(*dest))[size] = '\0'; // buffer overflow
+  ((char *)(*dest))[size] = '\0'; // buffer overflow if calloc returned 0 page pointer
   return status;
 }
 

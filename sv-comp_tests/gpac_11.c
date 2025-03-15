@@ -1,4 +1,4 @@
-// https://www.cvedetails.com/cve/CVE-2022-47653/
+// https://www.cvedetails.com/cve/CVE-2022-47654/
 // repository: https://github.com/gpac/gpac
 // commit: a1e1975
 // extract of: src/media_tools/av_parsers.c (function: gf_hevc_read_sps_bs_internal)

@@ -10,15 +10,16 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 
 typedef struct pb_istream_s {
   bool (*callback)(struct pb_istream_s *stream, uint8_t *buf, size_t count);
   void *state;
   size_t bytes_left;
 } pb_istream_t;
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
 
 /**
  * Just a utility function in test creation that generates random string of specified size
@@ -62,7 +63,7 @@ static bool buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)
 
 pb_istream_t pb_istream_from_buffer(uint8_t *buf, size_t bufsize)
 {
-  pb_istream_t stream;
+  pb_istream_t stream = {0};
   stream.callback = &buf_read;
   stream.state = buf;
   stream.bytes_left = bufsize;
@@ -77,15 +78,15 @@ bool pb_dec_string(pb_istream_t *stream, void **dest) {
     return false;
 
   /* Space for null terminator */
-  alloc_size = size + 1; // Problem: in case read data is 0xff, 0xff, 0xff, 0xff adding 1 to it will cause signed integer overflow
+  alloc_size = size + 1; // Problem: in case read data is 0xff, 0xff, 0xff, 0xff adding 1 to it will cause unsigned integer overflow
 
-  *dest = calloc(alloc_size, sizeof(char));
+  *dest = malloc(alloc_size);
   if (*dest == NULL) {
     return false;
   }
 
   bool status = stream->callback(stream, *dest, size);
-  ((char *)(*dest))[size] = '\0'; // buffer overflow
+  ((char *)(*dest))[size] = '\0'; // buffer overflow if calloc returned 0 page pointer
   return status;
 }
 
@@ -103,9 +104,9 @@ int main() {
   //   0x69, 0x61, 0x62, 0x6c, 0x65
   // };
 
-  char* data = getRandomString(50, 500);
+  unsigned char* data = (unsigned char*)getRandomString(1, 1000);
 
-  pb_istream_t stream = pb_istream_from_buffer((uint8_t *)data, strlen(data));
+  pb_istream_t stream = pb_istream_from_buffer(data, strlen(data));
   char* dest = NULL;
   if (!pb_dec_string(&stream, (void**)&dest)){ 
     printf("Decoding failed\n");
@@ -116,4 +117,6 @@ int main() {
   if (dest) {
     free(dest);
   }
+
+  free(data);
 }

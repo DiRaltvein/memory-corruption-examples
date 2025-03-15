@@ -871,6 +871,26 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+char *getRandomStringNotZeroTerminated(int size) {
+  char *randomString = (char*)calloc(size, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out,
                      unsigned int *tag_out, size_t *taglen) {
   const uint8_t *p = *buf;
@@ -953,13 +973,10 @@ const uint8_t *sc_asn1_find_tag(const uint8_t *buf,
   return ((void*)0);
 }
 int main() {
-  uint8_t rbuf[] = {
-      0xE1, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79,
-      0xE2, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79,
-      0xE1, 0x06, 0x03, 0x04, 0x63, 0x61, 0x6C, 0x6D,
-      0xE1, 0x06, 0x03, 0x04, 0x68, 0x65, 0x61, 0x6C};
+  size_t len = getNumberInRange(1, 1000);
+  uint8_t *rbuf = getRandomStringNotZeroTerminated(len);
   const uint8_t *p = rbuf, *q;
-  size_t len = sizeof(rbuf), tlen = 0, ilen = 0;
+  size_t tlen = 0, ilen = 0;
   while (len != 0) {
     p = sc_asn1_find_tag(p, len, 0xE1, &tlen);
     if (p == ((void*)0)) {

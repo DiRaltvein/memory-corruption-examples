@@ -97,7 +97,7 @@ int mz_path_resolve(const char *path, char *output, int max_output) {
 
 int main() {
   char output[256];
-  char input = getRandomString(5, 200);
+  char *input = getRandomString(5, 200);
   if (mz_path_resolve(input, output, sizeof(output)) == 0) {
     printf("Resolved path: %s\n", output);
   } else {

@@ -1,62 +1,3 @@
-typedef unsigned int size_t;
-typedef int wchar_t;
-typedef struct
-  {
-    int quot;
-    int rem;
-  } div_t;
-typedef struct
-  {
-    long int quot;
-    long int rem;
-  } ldiv_t;
-__extension__ typedef struct
-  {
-    long long int quot;
-    long long int rem;
-  } lldiv_t;
-extern size_t __ctype_get_mb_cur_max (void) __attribute__ ((__nothrow__ )) ;
-extern double atof (const char *__nptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
-extern int atoi (const char *__nptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
-extern long int atol (const char *__nptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
-__extension__ extern long long int atoll (const char *__nptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
-extern double strtod (const char *__restrict __nptr,
-        char **__restrict __endptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-extern float strtof (const char *__restrict __nptr,
-       char **__restrict __endptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-extern long double strtold (const char *__restrict __nptr,
-       char **__restrict __endptr)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-extern long int strtol (const char *__restrict __nptr,
-   char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-extern unsigned long int strtoul (const char *__restrict __nptr,
-      char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-__extension__
-extern long long int strtoq (const char *__restrict __nptr,
-        char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-__extension__
-extern unsigned long long int strtouq (const char *__restrict __nptr,
-           char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-__extension__
-extern long long int strtoll (const char *__restrict __nptr,
-         char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-__extension__
-extern unsigned long long int strtoull (const char *__restrict __nptr,
-     char **__restrict __endptr, int __base)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-extern char *l64a (long int __n) __attribute__ ((__nothrow__ )) ;
-extern long int a64l (const char *__s)
-     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
 typedef unsigned int __u_int;
@@ -121,6 +62,95 @@ __extension__ typedef int __intptr_t;
 __extension__ typedef unsigned int __socklen_t;
 typedef int __sig_atomic_t;
 __extension__ typedef __int64_t __time64_t;
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
+typedef __uint8_t uint8_t;
+typedef __uint16_t uint16_t;
+typedef __uint32_t uint32_t;
+typedef __uint64_t uint64_t;
+typedef __int_least8_t int_least8_t;
+typedef __int_least16_t int_least16_t;
+typedef __int_least32_t int_least32_t;
+typedef __int_least64_t int_least64_t;
+typedef __uint_least8_t uint_least8_t;
+typedef __uint_least16_t uint_least16_t;
+typedef __uint_least32_t uint_least32_t;
+typedef __uint_least64_t uint_least64_t;
+typedef signed char int_fast8_t;
+typedef int int_fast16_t;
+typedef int int_fast32_t;
+__extension__
+typedef long long int int_fast64_t;
+typedef unsigned char uint_fast8_t;
+typedef unsigned int uint_fast16_t;
+typedef unsigned int uint_fast32_t;
+__extension__
+typedef unsigned long long int uint_fast64_t;
+typedef int intptr_t;
+typedef unsigned int uintptr_t;
+typedef __intmax_t intmax_t;
+typedef __uintmax_t uintmax_t;
+typedef unsigned int size_t;
+typedef int wchar_t;
+typedef struct
+  {
+    int quot;
+    int rem;
+  } div_t;
+typedef struct
+  {
+    long int quot;
+    long int rem;
+  } ldiv_t;
+__extension__ typedef struct
+  {
+    long long int quot;
+    long long int rem;
+  } lldiv_t;
+extern size_t __ctype_get_mb_cur_max (void) __attribute__ ((__nothrow__ )) ;
+extern double atof (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
+extern int atoi (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
+extern long int atol (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
+__extension__ extern long long int atoll (const char *__nptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
+extern double strtod (const char *__restrict __nptr,
+        char **__restrict __endptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern float strtof (const char *__restrict __nptr,
+       char **__restrict __endptr) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern long double strtold (const char *__restrict __nptr,
+       char **__restrict __endptr)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern long int strtol (const char *__restrict __nptr,
+   char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern unsigned long int strtoul (const char *__restrict __nptr,
+      char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+__extension__
+extern long long int strtoq (const char *__restrict __nptr,
+        char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+__extension__
+extern unsigned long long int strtouq (const char *__restrict __nptr,
+           char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+__extension__
+extern long long int strtoll (const char *__restrict __nptr,
+         char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+__extension__
+extern unsigned long long int strtoull (const char *__restrict __nptr,
+     char **__restrict __endptr, int __base)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern char *l64a (long int __n) __attribute__ ((__nothrow__ )) ;
+extern long int a64l (const char *__s)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
 typedef __u_char u_char;
 typedef __u_short u_short;
 typedef __u_int u_int;
@@ -150,10 +180,6 @@ typedef __timer_t timer_t;
 typedef unsigned long int ulong;
 typedef unsigned short int ushort;
 typedef unsigned int uint;
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
 typedef __uint8_t u_int8_t;
 typedef __uint16_t u_int16_t;
 typedef __uint32_t u_int32_t;
@@ -523,6 +549,209 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+typedef __builtin_va_list va_list;
+typedef __builtin_va_list __gnuc_va_list;
+typedef struct
+{
+  int __count;
+  union
+  {
+    unsigned int __wch;
+    char __wchb[4];
+  } __value;
+} __mbstate_t;
+typedef struct _G_fpos_t
+{
+  __off_t __pos;
+  __mbstate_t __state;
+} __fpos_t;
+typedef struct _G_fpos64_t
+{
+  __off64_t __pos;
+  __mbstate_t __state;
+} __fpos64_t;
+struct _IO_FILE;
+typedef struct _IO_FILE __FILE;
+struct _IO_FILE;
+typedef struct _IO_FILE FILE;
+struct _IO_FILE;
+struct _IO_marker;
+struct _IO_codecvt;
+struct _IO_wide_data;
+typedef void _IO_lock_t;
+struct _IO_FILE
+{
+  int _flags;
+  char *_IO_read_ptr;
+  char *_IO_read_end;
+  char *_IO_read_base;
+  char *_IO_write_base;
+  char *_IO_write_ptr;
+  char *_IO_write_end;
+  char *_IO_buf_base;
+  char *_IO_buf_end;
+  char *_IO_save_base;
+  char *_IO_backup_base;
+  char *_IO_save_end;
+  struct _IO_marker *_markers;
+  struct _IO_FILE *_chain;
+  int _fileno;
+  int _flags2;
+  __off_t _old_offset;
+  unsigned short _cur_column;
+  signed char _vtable_offset;
+  char _shortbuf[1];
+  _IO_lock_t *_lock;
+  __off64_t _offset;
+  struct _IO_codecvt *_codecvt;
+  struct _IO_wide_data *_wide_data;
+  struct _IO_FILE *_freeres_list;
+  void *_freeres_buf;
+  size_t __pad5;
+  int _mode;
+  char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
+};
+typedef __gnuc_va_list va_list;
+typedef __fpos_t fpos_t;
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+extern int remove (const char *__filename) __attribute__ ((__nothrow__ ));
+extern int rename (const char *__old, const char *__new) __attribute__ ((__nothrow__ ));
+extern int renameat (int __oldfd, const char *__old, int __newfd,
+       const char *__new) __attribute__ ((__nothrow__ ));
+extern int fclose (FILE *__stream);
+extern FILE *tmpfile (void)
+  __attribute__ ((__malloc__)) ;
+extern char *tmpnam (char[20]) __attribute__ ((__nothrow__ )) ;
+extern char *tmpnam_r (char __s[20]) __attribute__ ((__nothrow__ )) ;
+extern char *tempnam (const char *__dir, const char *__pfx)
+   __attribute__ ((__nothrow__ )) __attribute__ ((__malloc__)) ;
+extern int fflush (FILE *__stream);
+extern int fflush_unlocked (FILE *__stream);
+extern FILE *fopen (const char *__restrict __filename,
+      const char *__restrict __modes)
+  __attribute__ ((__malloc__)) ;
+extern FILE *freopen (const char *__restrict __filename,
+        const char *__restrict __modes,
+        FILE *__restrict __stream) ;
+extern FILE *fdopen (int __fd, const char *__modes) __attribute__ ((__nothrow__ ))
+  __attribute__ ((__malloc__)) ;
+extern FILE *fmemopen (void *__s, size_t __len, const char *__modes)
+  __attribute__ ((__nothrow__ )) __attribute__ ((__malloc__)) ;
+extern FILE *open_memstream (char **__bufloc, size_t *__sizeloc) __attribute__ ((__nothrow__ ))
+  __attribute__ ((__malloc__)) ;
+extern void setbuf (FILE *__restrict __stream, char *__restrict __buf) __attribute__ ((__nothrow__ ));
+extern int setvbuf (FILE *__restrict __stream, char *__restrict __buf,
+      int __modes, size_t __n) __attribute__ ((__nothrow__ ));
+extern void setbuffer (FILE *__restrict __stream, char *__restrict __buf,
+         size_t __size) __attribute__ ((__nothrow__ ));
+extern void setlinebuf (FILE *__stream) __attribute__ ((__nothrow__ ));
+extern int fprintf (FILE *__restrict __stream,
+      const char *__restrict __format, ...);
+extern int printf (const char *__restrict __format, ...);
+extern int sprintf (char *__restrict __s,
+      const char *__restrict __format, ...) __attribute__ ((__nothrow__));
+extern int vfprintf (FILE *__restrict __s, const char *__restrict __format,
+       __gnuc_va_list __arg);
+extern int vprintf (const char *__restrict __format, __gnuc_va_list __arg);
+extern int vsprintf (char *__restrict __s, const char *__restrict __format,
+       __gnuc_va_list __arg) __attribute__ ((__nothrow__));
+extern int snprintf (char *__restrict __s, size_t __maxlen,
+       const char *__restrict __format, ...)
+     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 4)));
+extern int vsnprintf (char *__restrict __s, size_t __maxlen,
+        const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__nothrow__)) __attribute__ ((__format__ (__printf__, 3, 0)));
+extern int vdprintf (int __fd, const char *__restrict __fmt,
+       __gnuc_va_list __arg)
+     __attribute__ ((__format__ (__printf__, 2, 0)));
+extern int dprintf (int __fd, const char *__restrict __fmt, ...)
+     __attribute__ ((__format__ (__printf__, 2, 3)));
+extern int fscanf (FILE *__restrict __stream,
+     const char *__restrict __format, ...) ;
+extern int scanf (const char *__restrict __format, ...) ;
+extern int sscanf (const char *__restrict __s,
+     const char *__restrict __format, ...) __attribute__ ((__nothrow__ ));
+extern int fscanf (FILE *__restrict __stream, const char *__restrict __format, ...) __asm__ ("" "__isoc99_fscanf") ;
+extern int scanf (const char *__restrict __format, ...) __asm__ ("" "__isoc99_scanf") ;
+extern int sscanf (const char *__restrict __s, const char *__restrict __format, ...) __asm__ ("" "__isoc99_sscanf") __attribute__ ((__nothrow__ ));
+extern int vfscanf (FILE *__restrict __s, const char *__restrict __format,
+      __gnuc_va_list __arg)
+     __attribute__ ((__format__ (__scanf__, 2, 0))) ;
+extern int vscanf (const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__format__ (__scanf__, 1, 0))) ;
+extern int vsscanf (const char *__restrict __s,
+      const char *__restrict __format, __gnuc_va_list __arg)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__format__ (__scanf__, 2, 0)));
+extern int vfscanf (FILE *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vfscanf")
+     __attribute__ ((__format__ (__scanf__, 2, 0))) ;
+extern int vscanf (const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vscanf")
+     __attribute__ ((__format__ (__scanf__, 1, 0))) ;
+extern int vsscanf (const char *__restrict __s, const char *__restrict __format, __gnuc_va_list __arg) __asm__ ("" "__isoc99_vsscanf") __attribute__ ((__nothrow__ ))
+     __attribute__ ((__format__ (__scanf__, 2, 0)));
+extern int fgetc (FILE *__stream);
+extern int getc (FILE *__stream);
+extern int getchar (void);
+extern int getc_unlocked (FILE *__stream);
+extern int getchar_unlocked (void);
+extern int fgetc_unlocked (FILE *__stream);
+extern int fputc (int __c, FILE *__stream);
+extern int putc (int __c, FILE *__stream);
+extern int putchar (int __c);
+extern int fputc_unlocked (int __c, FILE *__stream);
+extern int putc_unlocked (int __c, FILE *__stream);
+extern int putchar_unlocked (int __c);
+extern int getw (FILE *__stream);
+extern int putw (int __w, FILE *__stream);
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+                                                         ;
+extern __ssize_t __getdelim (char **__restrict __lineptr,
+                             size_t *__restrict __n, int __delimiter,
+                             FILE *__restrict __stream) ;
+extern __ssize_t getdelim (char **__restrict __lineptr,
+                           size_t *__restrict __n, int __delimiter,
+                           FILE *__restrict __stream) ;
+extern __ssize_t getline (char **__restrict __lineptr,
+                          size_t *__restrict __n,
+                          FILE *__restrict __stream) ;
+extern int fputs (const char *__restrict __s, FILE *__restrict __stream);
+extern int puts (const char *__s);
+extern int ungetc (int __c, FILE *__stream);
+extern size_t fread (void *__restrict __ptr, size_t __size,
+       size_t __n, FILE *__restrict __stream) ;
+extern size_t fwrite (const void *__restrict __ptr, size_t __size,
+        size_t __n, FILE *__restrict __s);
+extern size_t fread_unlocked (void *__restrict __ptr, size_t __size,
+         size_t __n, FILE *__restrict __stream) ;
+extern size_t fwrite_unlocked (const void *__restrict __ptr, size_t __size,
+          size_t __n, FILE *__restrict __stream);
+extern int fseek (FILE *__stream, long int __off, int __whence);
+extern long int ftell (FILE *__stream) ;
+extern void rewind (FILE *__stream);
+extern int fseeko (FILE *__stream, __off_t __off, int __whence);
+extern __off_t ftello (FILE *__stream) ;
+extern int fgetpos (FILE *__restrict __stream, fpos_t *__restrict __pos);
+extern int fsetpos (FILE *__stream, const fpos_t *__pos);
+extern void clearerr (FILE *__stream) __attribute__ ((__nothrow__ ));
+extern int feof (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern int ferror (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern void clearerr_unlocked (FILE *__stream) __attribute__ ((__nothrow__ ));
+extern int feof_unlocked (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern int ferror_unlocked (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern void perror (const char *__s);
+extern int fileno (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern int fileno_unlocked (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern int pclose (FILE *__stream);
+extern FILE *popen (const char *__command, const char *__modes)
+  __attribute__ ((__malloc__)) ;
+extern char *ctermid (char *__s) __attribute__ ((__nothrow__ ))
+                                     ;
+extern void flockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
+extern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ )) ;
+extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
+extern int __uflow (FILE *);
+extern int __overflow (FILE *, int);
 extern void *memcpy (void *__restrict __dest, const void *__restrict __src,
        size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 extern void *memmove (void *__dest, const void *__src, size_t __n)
@@ -643,11 +872,72 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-void razer_chroma_standard_matrix_set_custom_frame(unsigned char start_col, unsigned char stop_col) {
-  size_t row_length = (size_t)(((stop_col + 1) - start_col) * 3);
-  unsigned char report_argument[10];
-  memcpy(report_argument, "012345678", row_length);
+extern char __VERIFIER_nondet_char(void);
+struct razer_report {
+  unsigned char data_size;
+  unsigned char command_class;
+  unsigned char arguments[80];
+};
+char *getRandomString(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+struct razer_report get_razer_report(unsigned char command_class, unsigned char data_size) {
+  struct razer_report new_report = {0};
+  memset(&new_report, 0, sizeof(struct razer_report));
+  new_report.command_class = command_class;
+  new_report.data_size = data_size;
+  return new_report;
+}
+struct razer_report razer_chroma_extended_matrix_set_custom_frame2(unsigned char row_index, unsigned char start_col, unsigned char stop_col, unsigned char *rgb_data) {
+  const size_t row_length = (size_t)(((stop_col + 1) - start_col) * 3);
+  struct razer_report report = get_razer_report(0x0F, 0x03);
+  report.arguments[0] = 'R';
+  report.arguments[2] = row_index;
+  report.arguments[3] = start_col;
+  report.arguments[4] = stop_col;
+  memcpy(&report.arguments[5], rgb_data, row_length);
+  return report;
+}
+static void razer_send_payload(struct razer_report *request_report) {
+  printf("rgb data: %s\n", &request_report->arguments[5]);
 }
 int main() {
-  razer_chroma_standard_matrix_set_custom_frame(97, 102);
+  size_t count = 200;
+  const char *buf = getRandomString(count);
+  struct razer_report report = {0};
+  size_t offset = 0;
+  unsigned char row_id;
+  unsigned char start_col;
+  unsigned char stop_col;
+  unsigned char row_length;
+  while (offset < count) {
+    if (offset + 3 > count) {
+      printf("razerkbd: Wrong Amount of data provided: Should be ROW_ID, START_COL, STOP_COL, N_RGB\n");
+      break;
+    }
+    row_id = buf[offset++];
+    start_col = buf[offset++];
+    stop_col = buf[offset++];
+    row_length = ((stop_col + 1) - start_col) * 3;
+    if (start_col > stop_col) {
+      printf("razerkbd: Start column is greater than end column\n");
+      break;
+    }
+    if (offset + row_length > count) {
+      printf("razerkbd: Not enough RGB to fill row\n");
+      break;
+    }
+    report = razer_chroma_extended_matrix_set_custom_frame2(row_id, start_col, stop_col, (unsigned char *)&buf[offset]);
+    razer_send_payload(&report);
+    offset += row_length;
+  }
+  free(buf);
 }

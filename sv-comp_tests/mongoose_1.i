@@ -389,7 +389,7 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-int main(int argc, char *argv[]) {
+int main() {
   FILE *fp;
   char line[1024];
   char *p;
@@ -404,7 +404,7 @@ int main(int argc, char *argv[]) {
       continue;
     }
     for (p = line + len; sscanf(p, "%s%n", alias, &len) == 1; p += len) {
-      if (strcmp(alias, argv[0]) == 0) {
+      if (strcmp(alias, "foundMe") == 0) {
         fclose(fp);
         return -1;
       }
