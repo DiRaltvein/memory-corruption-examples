@@ -341,8 +341,8 @@ Vulnerability types:
 | 126 |      CVE-2023-46852       |    AOOB    |      memcached      |    bc11696    |         proto_proxy.c (proxy_process_command)          |   1051   |   206    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/850/0(✓/✖)  |  5/0/0(✖/✖)  | 0/2/0(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |   254    |    51    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/79/0(✓/✖)  |  0/0/0(✖/✖)  | 0/2/0(✖/✖)     | 0/0/0(✖/✖) |     |
 | 127 |      CVE-2022-47092       |     IO     |        gpac         |    1918a58    |      av_parsers.c (gf_hevc_read_sps_bs_internal)       |  12341   |   272    | 0/22/0(✖/✖) | 2/7/18(✖/✖)  | 0/760/0(✓/✖)  | 35/0/0(✖/✖)  | 0/75/25(✖/✖)   | ✖          |     |
-| 128 |       CVE-2023-2977       |    AOOB    |       OpenSC        |   tfe7cb49    |     pkcs15-cardos.c (cardos_have_verifyrc_package)     |   942    |    49    |      -      |      -       |       -       |      -       | -              | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |   170    |    72    | 1/0/0(✓/✓)  |  0/0/0(✖/✖)  |  4/33/0(✓/✓)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
+| 128 |       CVE-2023-2977       |    AOOB    |       OpenSC        |    fe7cb49    |     pkcs15-cardos.c (cardos_have_verifyrc_package)     |   942    |    49    | 0/0/0(✖/✖)  |  0/1/5(✖/✖)  |  1/0/0(✖/✖)   |  9/0/0(✖/✖)  | 0/2/0(✖/✖)     | ✖          |     |
+|     |         Extracted         |            |                     |               |                           -                            |   150    |    71    | 1/0/0(✓/✓)  |  0/0/0(✖/✖)  |  4/29/0(✓/✓)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 | 129 |      CVE-2023-42295       |     IO     |     OpenImageIO     |    c7f8169    |             bmpinput.cpp (read_rle_image)              |   556    |    81    | 0/0/0(✖/✖)  |      ✖       |       ✖       |  0/0/0(✖/✖)  | 0/0/1(✖/✖)     | ✖          |     |
 | 130 |      CVE-2023-22741       |    AOOB    |      sofia-sip      |    2cb3820    |          stun_common.c (stun_parse_attribute)          |   828    |    85    | 0/3/0(✖/✖)  |  1/0/0(✖/✖)  |  8/92/0(✓/✖)  |  5/0/0(✖/✖)  | 0/18/3(✖/✖)    | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    77    |    24    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/25/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
@@ -354,7 +354,7 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    97    |    17    | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 | 134 |      CVE-2023-45664       |    UAF     |         stb         |    5736b15    |          stb_image.h (stbi\_\_load_gif_main)           |   7987   |    84    | 0/14/0(✖/✖) |  2/0/3(✖/✖)  | 0/326/0(✖/✖)  | 0/22/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 |     |         Extracted         |            |                     |               |                           -                            |    81    |    58    | 0/2/0(✓/✓)  |  0/0/0(✖/✖)  |  0/19/0(✖/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
-| 135 |      CVE-2023-36273       |    AOOB    |      libredwg       |    77a8562    |                 bits.c (bit_calc_CRC)                  |   3639   |    46    |      -      |      -       |       -       |      -       | -              | -          |     |
+| 135 |      CVE-2023-36273       |    AOOB    |      libredwg       |    77a8562    |                 bits.c (bit_calc_CRC)                  |   3639   |    46    | 0/12/0(✖/✖) |      ✖       |       ✖       |      ✖       | ✖              | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    74    |    43    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 | 136 |      CVE-2023-49465       |    AOOB    |      libde265       |    7065a53    |   motion.cc (derive_spatial_luma_vector_prediction)    |   2204   |   334    | 8/0/0(✖/✖)  |  0/0/3(✖/✖)  | 0/614/0(✖/✖)  | 10/0/0(✖/✖)  | 0/7/0(✖/✖)     | ✖          |     |
 | 137 |      CVE-2023-49467       |    AOOB    |      libde265       |    7065a53    |     motion.cc (derive_combined_bipredictive\_...)      |   2204   |    65    | 8/0/0(✖/✖)  |  0/0/3(✖/✖)  | 0/140/0(✓/✖)  | 10/0/0(✖/✖)  | 0/7/0(✖/✖)     | ✖          |     |
@@ -387,9 +387,9 @@ No cross Cross Translation Unit (CTU) analysis was performed because not all sta
 
 Notes:
 
-- 8, 84, 117, 128\*
+- 8, 84, 117\*
   - Config
-- 11, 22, 86, 135\*
+- 11, 22, 86\*
   - CTU
 - 17\*
   - strange false positive of clang on simple case
@@ -420,11 +420,18 @@ Notes:
 - 122(extract)\*
   - Extremly confusing infer error on extracted version. Infer also threw confusion errors on other occasions but this is the pinnacle of confusion
 - 128\*
-  - this vulnerability requires CTU because function with flaw in its logic does not access pointer memory and only passes pointer with incorrect length to another function located in a different file...
+  - analysis was done by adding '#include "libopensc/asn1.c"' to pkcs15-cardos.c function. This vulnerability is a little bit special, because the vulnerable logic is in pkcs15-cardos.c file while invalid dereference occurs in asn1.c file.
+  - because of that while pkcs15-cardos.c file was given as entry point and sc_asn1_find_tag as an entry function diagnostics form asn1.c were recorded. Invalid dereference is happening in sc_asn1_read_tag in asn1.c file.
 - 133\*
   - analyzed was main entry point function json_value_parse rather then \_\_parse_json_members that contains the vulnerable logic. This was done because actual dereference of a out of bound pointer happens in json_value_parse
     function and loginc in \_\_parse_json_members only makes this pointer out of bound.
 - 134\*
   - an entry point file was created with contents that would trigger vulnerability that is provided in [this](https://securitylab.github.com/advisories/GHSL-2023-145_GHSL-2023-151_stb_image_h/) article under issue 4
+- 135\*
+  - as vulnerability requires also data from decode_preR13_auxheader method located in decode.c file to analyze it a preprocessor definition '#include "bits.c"' was added to decode.c file and function decode_preR13_auxheader was analyzed as entry point.
+    Only diagnostics from bits.c file were recorded.
 - 149\*
   - ikos reports impossible warning like 'if (len > 0) len--' such statement can not cause unsigned integer overflow.
+
+
+Vulnerable function is a function where vulnerability even if function has no way of preventing that (for example use after free where function is given a valid pointer that has already been freed once).

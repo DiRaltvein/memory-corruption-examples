@@ -72,20 +72,6 @@ oaf(
         : '-Xclang -analyzer-config -Xclang aggressive-binary-operation-simplification=true '
     }-ferror-limit=0 ${getIncludes()}${fileToAnalyze}`
 );
-if (entryPoint === 'main') {
-  const cvCompTestsPath = filePath.replace(
-    'realworld_simplified',
-    'sv-comp_tests'
-  );
-  console.log(
-    ` ${c('Preprocess', true)}: /usr/llvm-project/build/bin/clang${
-      isCFile ? '' : '++'
-    } -E -P ${getIncludes()}${fileToAnalyze.replace(
-      'realworld_simplified',
-      'sv-comp_tests'
-    )} -o ${cvCompTestsPath + '/' + fileNameWithoutExtension + '.i'} -m32\n`
-  );
-}
 
 // if (entryPoint === 'main') {
 //   console.log(

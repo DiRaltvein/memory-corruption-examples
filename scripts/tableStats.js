@@ -6,7 +6,7 @@ import { Canvas } from 'skia-canvas';
 import fsp from 'node:fs/promises';
 import lodash from 'lodash';
 
-const calculateForTestSuit = false;
+const calculateForTestSuit = true;
 
 const cvesToAnalyze = cves.filter(cve => (calculateForTestSuit && !cve.id) || (!calculateForTestSuit && cve.id));
 const analyzersToUse = [
@@ -64,6 +64,9 @@ for (const analyzer of analyzersToUse) {
   console.log(`\n${analyzer} statistics:`)
   console.log('errors: ', error, ' failed: ', failed, ' success: ', success, ' success in first 5 rows: ', successIn5Rows);
   console.log('total num of notes: ', numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes, ' errors: ', numberOfNotes.errors, 'warnings: ', numberOfNotes.warnings, ' notes: ', numberOfNotes.notes);
+  // failed is FN as tool outputted that file has no error while error was there
+  // success is TP because tool outputted that file has error while error was there
+  console.log('True Positive Rate (TPR): ', (success / (success + failed)).toFixed(4));
 }
 // Simple console log stats
 

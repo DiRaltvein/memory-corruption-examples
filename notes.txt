@@ -309,7 +309,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 [memcached] node a.js memcached/proto_proxy.c proxy_process_command memcached/vendor/lua/src
 - node a.js /mnt/a/master/master/realworld_simplified/memcached.c main
 [gpac] node a.js ./gpac/src/media_tools/av_parsers.c gf_hevc_read_sps_bs_internal ./gpac/include
-[OpenSC] node a.js ./OpenSC/src/pkcs15init/pkcs15-cardos.c cardos_have_verifyrc_package
+! [OpenSC] node a.js ./OpenSC/src/pkcs15init/pkcs15-cardos.c cardos_have_verifyrc_package ./OpenSC ./OpenSC/src
 - node a.js /mnt/a/master/master/realworld_simplified/openSC.c main
 [OpenImageIO] node a.js OpenImageIO/src/bmp.imageio/bmpinput.cpp read_rle_image OpenImageIO/src/include OpenImageIO/include
 [sofia-sip] node a.js sofia-sip/libsofia-sip-ua/stun/stun_common.c stun_parse_attribute ./sofia-sip/libsofia-sip-ua/su ./sofia-sip/open_c sofia-sip/libsofia-sip-ua/stun
@@ -324,7 +324,7 @@ CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reasse
 	- node a.js /mnt/a/master/master/realworld_simplified/libde265_3.cc main
 [stb] node a.js stb/test.c main
 	- node a.js /mnt/a/master/master/realworld_simplified/stb_1.c main
-[libredwg] node a.js libredwg/src/bits.c bit_calc_CRC
+! [libredwg] node a.js libredwg/src/decode.c decode_preR13_auxheader libredwg/include
 - node a.js /mnt/a/master/master/realworld_simplified/libredwg.c main
 [libde265] node a.js libde265/libde265/motion.cc derive_spatial_luma_vector_prediction ./libde265 ./libde265/extra
 [libde265] node a.js libde265/libde265/motion.cc derive_combined_bipredictive_merging_candidates ./libde265 ./libde265/extra

@@ -1,6 +1,6 @@
 // https://www.cvedetails.com/cve/CVE-2023-2977/
 // repository: https://github.com/OpenSC/OpenSC
-// commit: tfe7cb49
+// commit: fe7cb49
 // extract of: src/pkcs15init/pkcs15-cardos.c (function: cardos_have_verifyrc_package)
 
 #include <stdint.h>
@@ -8,42 +8,36 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
 #define SC_ASN1_TAGNUM_SIZE 3
 #define SC_ASN1_TAG_PRIMITIVE 0x1F
 #define SC_ASN1_TAG_CLASS 0xC0
 #define SC_ASN1_TAG_CONSTRUCTED 0x20
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
 /**
- * Just a utility function in test creation that generates random integer in specified range
+ * Just a utility function in test creation that generates random string of specified size
  */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
   }
-  return value;
-}
 
-/**
- * Just a utility function in test creation that generates random string of specified size that is not zero terminated
- */
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < stringSize; i++) {
     randomString[i] = __VERIFIER_nondet_char();
   }
+  randomString[stringSize] = '\0';
   return randomString;
 }
 
-int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out,
-                     unsigned int *tag_out, size_t *taglen) {
+int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out, unsigned int *tag_out, size_t *taglen) {
   const uint8_t *p = *buf;
   size_t left = buflen, len;
   unsigned int cla, tag, i;
@@ -52,7 +46,7 @@ int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out,
 
   if (left == 0 || !p)
     return 1;
-  if (*p == 0xff || *p == 0) { // Problem: read out of bound
+  if (*p == 0xff || *p == 0) { // Problem: pointer p may be out of bounds
     /* end of data reached */
     *taglen = 0;
     *tag_out = 0;
@@ -115,8 +109,7 @@ int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out,
   return 0;
 }
 
-const uint8_t *sc_asn1_find_tag(const uint8_t *buf,
-                                size_t buflen, unsigned int tag_in, size_t *taglen_in) {
+const uint8_t *sc_asn1_find_tag(const uint8_t *buf, size_t buflen, unsigned int tag_in, size_t *taglen_in) {
   size_t left = buflen, taglen;
   const uint8_t *p = buf;
 
@@ -151,51 +144,36 @@ const uint8_t *sc_asn1_find_tag(const uint8_t *buf,
   return NULL;
 }
 
-// the general idea is that each line is a tag where first byte is tag info second byte tag content length and next is tag content
-// tag content can be another tag or just a value
-// code looks for tags 0xE1 and inside them it looks for 0x03 tags where it prints the value after 0x03 tag.
-// The problem is that sc_asn1_find_tag advances p pointer and this can lead to problems if pointer is advances more than 2 bytes (len -= tlen + 2; row assumes that pointer is moved only 2 bytes eg <tag><length>)
-// because of that if there is a valid tag that is not 0xE1 (like 0xE2 in this test case) pointer p will be advances much further than 2 bytes as whole 0xE2 tag will be skipped
-// this desynchronizes length and pointer p that leads to buffer overflow in function sc_asn1_read_tag.
 int main() {
   // uint8_t rbuf[] = {
-  //     0xE1, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79,
-  //     0xE2, 0x06, 0x03, 0x04, 0x53, 0x74, 0x61, 0x79, // completly valid tag that breaks the application
-  //     0xE1, 0x06, 0x03, 0x04, 0x63, 0x61, 0x6C, 0x6D,
-  //     0xE1, 0x06, 0x03, 0x04, 0x68, 0x65, 0x61, 0x6C};
-  size_t len = getNumberInRange(1, 1000);
-  uint8_t *rbuf = getRandomStringNotZeroTerminated(len);
+  //   0xE2, 0x02, 0x00, 0x00,
+  //   0xE1, 0x06, 0x03, 0x04, 0x54, 0x1A, 0x9A, 0xB3,
+  //   0xE1, 0x06, 0x03, 0x04, 0xE9, 0xBA, 0x1B, 0xAA
+  // };
+  uint8_t* rbuf = (uint8_t*) getRandomString();
   const uint8_t *p = rbuf, *q;
-  size_t tlen = 0, ilen = 0;
+  size_t len = strlen(rbuf), tlen = 0, ilen = 0;
 
   while (len != 0) {
     p = sc_asn1_find_tag(p, len, 0xE1, &tlen);
     if (p == NULL) {
       printf("Could not find tag 0xE1\n");
+      free(rbuf);
       return 0;
     }
     q = sc_asn1_find_tag(p, tlen, 0x03, &ilen);
     if (q == NULL || ilen != 4) {
-      printf("Could not find tag 0x03 or tag value length is not equalt to 4\n");
+      printf("Could not find tag 0x03 inside a 0xE1 tag or its length is not 4\n");
+      free(rbuf);
       return 0;
     }
     if (q[0] == 0x02) {
       printf("Found 0x02 byte as a first byte after 0x03 tag\n");
+      free(rbuf);
       return 1;
     }
-
-    // To make code at least somewhat useful print the value of found 0x03 tag.
-    char *tagValue = calloc(ilen + 1, sizeof(char));
-    if (tagValue == NULL) {
-      printf("Out of memory!\n");
-      return 1;
-    }
-    memcpy(tagValue, q, ilen);
-    printf("Tag value: %s\n", tagValue);
-    free(tagValue);
-    //
-
     p += tlen;
-    len -= tlen + 2; // length is substracted assuming pointer p has skipped tag and its length (2 bytes in total) that is a problem because pointer p could skip whole another tag like 0xE2
+    len -= tlen + 2;
   }
+  free(rbuf);
 }
