@@ -1,0 +1,147 @@
+   BENCHMARK INFORMATION
+benchmark definition:    /mnt/a/master/master/sv-comp_tools/cpa-bam-smg.xml
+name:                    cpa-bam-smg
+run sets:                valid-memsafety.valid-memsafety, no-overflow.no-overflow
+date:                    Sat, 2025-03-15 12:45:45 EET
+tool:                    CPAchecker 2.0.1-svn-38892M
+tool executable:         /usr/svcomp/tools/cpa-bam-smg/scripts/cpa.sh
+options:                 -svcomp22-bam-smg -disable-java-assertions -heap 10000m -setprop counterexample.export.graphml=witness.graphml -setprop cpa.arg.proofWitness=witness.graphml -setprop termination.violation.witness=witness.graphml -setprop counterexample.export.compressWitness=false -setprop overflow.config=/usr/svcomp/svcomp25--overflow.properties
+parallel runs:           16
+resource limits:
+- memory:                4000.0 MB
+- time:                  120 s
+- cpu cores:             1
+hardware requirements:
+- cpu cores:             1
+- memory:                4000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    raltvein
+os:                      Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.35
+cpu:                     AMD Ryzen 9 7900X 12-Core Processor
+- cores:                 16
+- max frequency:         4691.11 MHz
+ram:                     8330.231808 MB
+------------------------------------------------------------
+
+
+
+valid-memsafety.valid-memsafety
+Run set 1 of 2 with options '-svcomp22-bam-smg -disable-java-assertions -heap 10000m -setprop counterexample.export.graphml=witness.graphml -setprop cpa.arg.proofWitness=witness.graphml -setprop termination.violation.witness=witness.graphml -setprop counterexample.export.compressWitness=false -setprop overflow.config=/usr/svcomp/svcomp25--overflow.properties' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+MicroHttpServer.yml        false(valid-deref)               7.32        7.97        None
+MojoJson.yml               ERROR                            3.15        3.40        None
+NTSC-CRT.yml               ERROR                            3.00        3.28        None
+NanoNNG.yml                ERROR                            3.05        3.40        None
+admesh.yml                 false(valid-deref)               3.39        3.72        None
+asterisk.yml               ERROR                            3.26        3.52        None
+bzip3.yml                  ERROR                            3.08        3.35        None
+cups.yml                   ERROR                            3.07        3.32        None
+dlt-daemon.yml             ERROR                            3.10        3.38        None
+editorconfig-core-c.yml    ERROR                            3.02        3.25        None
+flatcc.yml                 false(valid-deref)               2.94        3.21        None
+frr.yml                    ERROR                            3.00        3.22        None
+gpac_1.yml                 ERROR                            2.96        3.18        None
+gpac_10.yml                false(valid-deref)             114.24      122.07        None
+gpac_11.yml                TIMEOUT                        121.71      130.06        None
+gpac_12.yml                false(valid-deref)               3.46        3.75        None
+gpac_13.yml                ERROR                            3.35        3.65        None
+gpac_14.yml                false(valid-deref)              62.95       67.26        None
+gpac_16.yml                ERROR                            3.17        3.43        None
+gpac_17.yml                ERROR                            3.00        3.22        None
+gpac_18.yml                TIMEOUT                        121.58      129.65        None
+gpac_19.yml                ERROR                            3.05        3.35        None
+gpac_3.yml                 ERROR                            3.04        3.31        None
+gpac_5.yml                 ERROR                            2.49        2.67        None
+gpac_6.yml                 false(valid-deref)               3.56        3.91        None
+gpac_7.yml                 TIMEOUT                        122.09      130.29        None
+gpac_8.yml                 ERROR                            2.95        3.19        None
+gpac_9.yml                 false(valid-deref)               3.44        3.75        None
+gps-sdr-sim.yml            ERROR                            2.87        3.10        None
+gss-ntlmssp.yml            ERROR                            3.27        3.77        None
+hyperkit_1.yml             false(valid-deref)               5.99        6.49        None
+jhead.yml                  ERROR                            3.07        3.42        None
+jhead_1.yml                TIMEOUT                        122.01      130.22        None
+jq.yml                     ERROR                            3.02        3.42        None
+json-c.yml                 TIMEOUT                        122.34      130.55        None
+json-parser.yml            ERROR                            3.12        3.45        None
+kilo.yml                   ERROR                            3.24        3.56        None
+krb5.yml                   false(valid-deref)               3.03        3.54        None
+libeconf.yml               true                             2.88        3.36        None
+liblouis.yml               ERROR                            3.39        3.69        None
+libming_1.yml              ERROR                            3.35        3.59        None
+libpe.yml                  ERROR                            3.35        3.61        None
+libredwg.yml               ERROR                            3.47        3.71        None
+libredwg_1.yml             ERROR                            3.32        3.56        None
+memcached.yml              ERROR                            3.46        3.72        None
+minizip-ng.yml             ERROR                            3.44        3.73        None
+minizip-ng_1.yml           ERROR                            3.41        3.64        None
+mongoose.yml               ERROR                            3.21        3.47        None
+mongoose_1.yml             true                             2.94        3.17        None
+moonlight-common-c.yml     ERROR                            3.12        3.34        None
+nanopb.yml                 ERROR                            3.29        3.52        None
+netatalk.yml               ERROR                            2.89        3.13        None
+netconsd.yml               ERROR                            3.29        3.53        None
+openNDS_1.yml              ERROR                            3.13        3.37        None
+openSC.yml                 ERROR                            3.45        3.70        None
+openrazer.yml              ERROR                            4.52        4.87        None
+pacparser.yml              ERROR                            3.19        3.44        None
+picotcp.yml                false(valid-free)                4.03        4.31        None
+pjproject.yml              ERROR                            3.19        3.42        None
+plutovg.yml                ERROR                            3.00        3.23        None
+ppp.yml                    false(valid-deref)               2.79        3.03        None
+radare2.yml                ERROR                            3.75        4.03        None
+radare2_1.yml              ERROR                            3.17        3.40        None
+radare2_2.yml              ERROR                            3.30        3.54        None
+rizin.yml                  ERROR                            3.28        3.55        None
+smartdns.yml               ERROR                            3.59        3.85        None
+sniproxy.yml               ERROR                            3.16        3.42        None
+sofia-sip.yml              ERROR                            3.32        3.61        None
+sofia-sip_1.yml            ERROR                            2.89        3.18        None
+sofia-sip_2.yml            ERROR                            3.29        3.63        None
+stb.yml                    ERROR                            3.16        3.44        None
+stb_1.yml                  ERROR                            4.49        4.86        None
+tinydir.yml                ERROR                            3.24        3.49        None
+tinytiff.yml               false(valid-free)                3.38        3.66        None
+wasm-micro-runtime.yml     ERROR                            3.17        3.42        None
+zchunk.yml                 ERROR                            3.06        3.27        None
+zephyr.yml                 ERROR                            2.98        3.19        None
+zstd.yml                   ERROR                            2.93        3.15        None
+----------------------------------------------------------------------------------------
+Run set 1                  done                          1022.29      138.08           -
+
+
+no-overflow.no-overflow
+Run set 2 of 2 with options '-svcomp22-bam-smg -disable-java-assertions -heap 10000m -setprop counterexample.export.graphml=witness.graphml -setprop cpa.arg.proofWitness=witness.graphml -setprop termination.violation.witness=witness.graphml -setprop counterexample.export.compressWitness=false -setprop overflow.config=/usr/svcomp/svcomp25--overflow.properties' and propertyfile 'None'
+
+inputfile               status                       cpu time   wall time        host
+-------------------------------------------------------------------------------------
+NTSC-CRT.yml            unknown                          1.34        1.72        None
+gpac.yml                unknown                          1.29        1.56        None
+gpac_15.yml             unknown                          1.25        1.50        None
+gpac_9.yml              unknown                          1.30        1.61        None
+kilo.yml                unknown                          1.33        1.69        None
+libredwg_1.yml          unknown                          1.32        1.66        None
+libsndfile.yml          unknown                          1.32        1.59        None
+mujs.yml                unknown                          1.29        1.60        None
+nanopb.yml              unknown                          1.47        1.86        None
+netconsd.yml            unknown                          1.39        1.92        None
+plutovg.yml             unknown                          1.48        2.17        None
+stb.yml                 unknown                          1.67        2.37        None
+sysstat.yml             unknown                          1.52        1.93        None
+zchunk.yml              unknown                          1.50        1.71        None
+-------------------------------------------------------------------------------------
+Run set 2               done                            19.42        3.60           -
+
+Statistics:             92 Files
+  correct:              11
+    correct true:        0
+    correct false:      11
+  incorrect:             2
+    incorrect true:      2
+    incorrect false:     0
+  unknown:              79
+  Score:               -53 (max: 92)

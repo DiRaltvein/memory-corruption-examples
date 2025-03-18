@@ -1,0 +1,147 @@
+   BENCHMARK INFORMATION
+benchmark definition:    /mnt/a/master/master/sv-comp_tools/bubaak.xml
+name:                    bubaak
+run sets:                valid-memsafety.valid-memsafety, no-overflow.no-overflow
+date:                    Sat, 2025-03-15 12:27:35 EET
+tool:                    Bubaak 0.9.2-0d2926
+tool executable:         /usr/svcomp/tools/bubaak/bubaak
+options:                 --sv-comp -timeout 120 -sv-comp-witness witness.graphml
+parallel runs:           16
+resource limits:
+- memory:                4000.0 MB
+- time:                  120 s
+- cpu cores:             1
+hardware requirements:
+- cpu cores:             1
+- memory:                4000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    raltvein
+os:                      Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.35
+cpu:                     AMD Ryzen 9 7900X 12-Core Processor
+- cores:                 16
+- max frequency:         4691.11 MHz
+ram:                     8330.231808 MB
+------------------------------------------------------------
+
+
+
+valid-memsafety.valid-memsafety
+Run set 1 of 2 with options '--sv-comp -timeout 120 -sv-comp-witness witness.graphml' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+MicroHttpServer.yml        false(valid-deref)               6.75        7.48        None
+MojoJson.yml               false(valid-free)                2.03        2.41        None
+NTSC-CRT.yml               unknown                          0.92        1.24        None
+NanoNNG.yml                false(valid-memtrack)            8.01        8.70        None
+admesh.yml                 false(valid-deref)               0.32        0.55        None
+asterisk.yml               false(valid-deref)               8.17        8.84        None
+bzip3.yml                  false(valid-memtrack)            1.76        2.07        None
+cups.yml                   false(valid-deref)               1.42        1.72        None
+dlt-daemon.yml             false(valid-deref)               4.28        4.74        None
+editorconfig-core-c.yml    unknown                         40.78       43.51        None
+flatcc.yml                 false(valid-deref)               0.26        0.42        None
+frr.yml                    false(valid-memtrack)            2.12        2.39        None
+gpac_1.yml                 false(valid-deref)              37.67       40.16        None
+gpac_10.yml                false(valid-deref)               0.50        0.69        None
+gpac_11.yml                false(valid-deref)               2.39        2.67        None
+gpac_12.yml                false(valid-deref)               1.98        2.26        None
+gpac_13.yml                false(valid-deref)               2.26        2.44        None
+gpac_14.yml                false(valid-deref)               3.48        3.78        None
+gpac_16.yml                false(valid-memtrack)            1.49        1.68        None
+gpac_17.yml                false(valid-deref)              28.05       29.90        None
+gpac_18.yml                false(valid-deref)               0.67        0.79        None
+gpac_19.yml                false(valid-memtrack)            2.22        2.44        None
+gpac_3.yml                 unknown                         40.79       43.40        None
+gpac_5.yml                 false(valid-deref)               0.38        0.45        None
+gpac_6.yml                 false(valid-deref)               0.38        0.46        None
+gpac_7.yml                 unknown                          0.94        1.06        None
+gpac_8.yml                 unknown                         40.79       43.40        None
+gpac_9.yml                 false(valid-deref)               0.26        0.32        None
+gps-sdr-sim.yml            false(valid-memtrack)            3.52        3.82        None
+gss-ntlmssp.yml            false(valid-memtrack)           15.21       16.26        None
+hyperkit_1.yml             false(valid-deref)               0.33        0.40        None
+jhead.yml                  unknown                         40.05       42.66        None
+jhead_1.yml                OUT OF MEMORY (ERROR (ret None))       29.17       30.80        None
+jq.yml                     false(valid-deref)              10.60       11.31        None
+json-c.yml                 unknown                          0.79        0.90        None
+json-parser.yml            false(valid-deref)               2.93        3.16        None
+kilo.yml                   false(valid-deref)               1.74        1.92        None
+krb5.yml                   false(valid-deref)               3.65        3.93        None
+libeconf.yml               true                             0.28        0.35        None
+liblouis.yml               unknown                         40.26       42.86        None
+libming_1.yml              false(valid-memtrack)            4.65        5.01        None
+libpe.yml                  false(valid-deref)               1.29        1.46        None
+libredwg.yml               unknown                         40.91       43.54        None
+libredwg_1.yml             false(valid-deref)               5.73        6.17        None
+memcached.yml              unknown                         40.37       42.98        None
+minizip-ng.yml             false(valid-deref)              13.31       14.23        None
+minizip-ng_1.yml           false(valid-deref)               1.69        1.87        None
+mongoose.yml               unknown                         40.51       43.13        None
+mongoose_1.yml             unknown                          0.82        0.96        None
+moonlight-common-c.yml     unknown                         40.54       43.16        None
+nanopb.yml                 false(valid-deref)               7.68        8.27        None
+netatalk.yml               unknown                         42.19       44.97        None
+netconsd.yml               false(valid-deref)              21.67       23.09        None
+openNDS_1.yml              unknown                         42.28       45.00        None
+openSC.yml                 false(valid-memtrack)            0.62        0.72        None
+openrazer.yml              false(valid-deref)              22.26       23.82        None
+pacparser.yml              unknown                         40.55       43.18        None
+picotcp.yml                false(valid-free)                0.39        0.47        None
+pjproject.yml              false(valid-deref)               1.15        1.36        None
+plutovg.yml                false(valid-deref)               2.20        2.42        None
+ppp.yml                    false(valid-deref)               0.18        0.23        None
+radare2.yml                false(valid-free)                7.57        8.13        None
+radare2_1.yml              false(valid-deref)               1.49        1.69        None
+radare2_2.yml              unknown                         40.12       42.99        None
+rizin.yml                  unknown                         40.43       43.13        None
+smartdns.yml               false(valid-deref)               0.34        0.41        None
+sniproxy.yml               false(valid-memtrack)            1.13        1.26        None
+sofia-sip.yml              false(valid-deref)               0.64        0.77        None
+sofia-sip_1.yml            false(valid-memtrack)            1.13        1.31        None
+sofia-sip_2.yml            false(valid-deref)               1.89        2.07        None
+stb.yml                    unknown                         40.29       42.97        None
+stb_1.yml                  false(valid-free)                7.59        8.13        None
+tinydir.yml                false(valid-memtrack)            1.02        1.18        None
+tinytiff.yml               unknown                          0.81        0.92        None
+wasm-micro-runtime.yml     false(valid-deref)               0.39        0.46        None
+zchunk.yml                 false(valid-deref)               4.60        4.98        None
+zephyr.yml                 unknown                         42.30       45.17        None
+zstd.yml                   false(valid-deref)               0.91        1.01        None
+----------------------------------------------------------------------------------------
+Run set 1                  done                           642.48       94.73           -
+
+
+no-overflow.no-overflow
+Run set 2 of 2 with options '--sv-comp -timeout 120 -sv-comp-witness witness.graphml' and propertyfile 'None'
+
+inputfile               status                       cpu time   wall time        host
+-------------------------------------------------------------------------------------
+NTSC-CRT.yml            unknown                          0.79        0.91        None
+gpac.yml                false(no-overflow)               1.41        1.57        None
+gpac_15.yml             false(no-overflow)               1.80        1.94        None
+gpac_9.yml              true                             0.88        0.99        None
+kilo.yml                false(no-overflow)               1.74        1.90        None
+libredwg_1.yml          unknown                         40.52       43.11        None
+libsndfile.yml          false(no-overflow)              31.87       33.97        None
+mujs.yml                false(no-overflow)              13.07       13.93        None
+nanopb.yml              unknown                         40.76       43.39        None
+netconsd.yml            unknown                         40.61       43.21        None
+plutovg.yml             false(no-overflow)              43.33       46.12        None
+stb.yml                 unknown                         40.66       43.26        None
+sysstat.yml             true                            40.68       43.27        None
+zchunk.yml              unknown                         40.39       42.98        None
+-------------------------------------------------------------------------------------
+Run set 2               done                           258.25       46.37           -
+
+Statistics:             92 Files
+  correct:              40
+    correct true:        0
+    correct false:      40
+  incorrect:             3
+    incorrect true:      3
+    incorrect false:     0
+  unknown:              49
+  Score:               -56 (max: 92)

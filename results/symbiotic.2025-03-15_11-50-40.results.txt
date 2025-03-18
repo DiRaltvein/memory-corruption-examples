@@ -1,0 +1,147 @@
+   BENCHMARK INFORMATION
+benchmark definition:    /mnt/a/master/master/sv-comp_tools/symbiotic.xml
+name:                    symbiotic
+run sets:                valid-memsafety.valid-memsafety, no-overflow.no-overflow
+date:                    Sat, 2025-03-15 11:50:40 EET
+tool:                    symbiotic 10.0.0-rc1-f6104f53
+tool executable:         /usr/svcomp/tools/symbiotic/bin/symbiotic
+options:                 --sv-comp
+parallel runs:           16
+resource limits:
+- memory:                4000.0 MB
+- time:                  120 s
+- cpu cores:             1
+hardware requirements:
+- cpu cores:             1
+- memory:                4000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    raltvein
+os:                      Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.35
+cpu:                     AMD Ryzen 9 7900X 12-Core Processor
+- cores:                 16
+- max frequency:         4691.11 MHz
+ram:                     8330.231808 MB
+------------------------------------------------------------
+
+
+
+valid-memsafety.valid-memsafety
+Run set 1 of 2 with options '--sv-comp' and propertyfile 'None'
+
+inputfile                  status                       cpu time   wall time        host
+----------------------------------------------------------------------------------------
+MicroHttpServer.yml        false(valid-deref)              13.96       15.72        None
+MojoJson.yml               false(valid-free)                1.94        2.31        None
+NTSC-CRT.yml               true                             0.46        0.76        None
+NanoNNG.yml                false(valid-memtrack)            7.78        8.43        None
+admesh.yml                 false(valid-deref)               0.61        0.90        None
+asterisk.yml               ERROR(returned 1, verification-finished)        0.62        1.37        None
+bzip3.yml                  false(valid-memtrack)            1.88        2.19        None
+cups.yml                   false(valid-deref)               2.56        2.89        None
+dlt-daemon.yml             ERROR(returned 1, verification-finished)        0.78        1.55        None
+editorconfig-core-c.yml    TIMEOUT (verification)         120.57      154.32        None
+flatcc.yml                 false(valid-deref)               0.81        1.06        None
+frr.yml                    false(valid-memtrack)            1.71        1.99        None
+gpac_1.yml                 false(valid-deref)              29.55       31.36        None
+gpac_10.yml                false(valid-deref)               0.85        1.12        None
+gpac_11.yml                ERROR(returned 1, verification-finished)        0.75        1.81        None
+gpac_12.yml                ERROR(returned 1, verification-finished)        0.61        1.40        None
+gpac_13.yml                ERROR(returned 1, verification-finished)        0.60        1.17        None
+gpac_14.yml                ERROR(returned 1, verification-finished)        0.52        1.15        None
+gpac_16.yml                false(valid-memtrack)            1.43        1.55        None
+gpac_17.yml                false(valid-deref)               8.41        8.93        None
+gpac_18.yml                false(valid-deref)               0.73        0.83        None
+gpac_19.yml                false(valid-memtrack)            1.99        2.13        None
+gpac_3.yml                 TIMEOUT (verification)         120.53      168.80        None
+gpac_5.yml                 false(valid-deref)               0.51        0.58        None
+gpac_6.yml                 false(valid-deref)               0.57        0.64        None
+gpac_7.yml                 ERROR(returned 1, verification-finished)        0.61        0.88        None
+gpac_8.yml                 ERROR(returned 1, verification-finished)        2.83        3.42        None
+gpac_9.yml                 false(valid-deref)               0.50        0.55        None
+gps-sdr-sim.yml            ERROR(returned 1, verification-finished)        0.86        1.29        None
+gss-ntlmssp.yml            false(valid-memtrack)           11.28       12.01        None
+hyperkit_1.yml             false(valid-deref)               0.62        0.68        None
+jhead.yml                  TIMEOUT (verification)         117.51      181.09        None
+jhead_1.yml                OUT OF MEMORY (KILLED (signal 9, verification))       19.68       20.66        None
+jq.yml                     false(valid-deref)               7.31        7.77        None
+json-c.yml                 ERROR(unknown, verification-finished)        0.73        0.80        None
+json-parser.yml            false(valid-deref)               2.75        2.95        None
+kilo.yml                   false(valid-deref)               3.03        3.24        None
+krb5.yml                   false(valid-deref)               4.89        5.19        None
+libeconf.yml               true                             0.37        0.43        None
+liblouis.yml               TIMEOUT (verification)         120.80      170.86        None
+libming_1.yml              TIMEOUT (verification)         105.40      181.02        None
+libpe.yml                  false(valid-deref)               1.14        1.25        None
+libredwg.yml               false(valid-deref)              25.25       26.75        None
+libredwg_1.yml             false(valid-deref)               5.14        5.50        None
+memcached.yml              false(valid-memtrack)           26.04       27.57        None
+minizip-ng.yml             false(valid-deref)              21.95       23.27        None
+minizip-ng_1.yml           false(valid-deref)               1.44        1.60        None
+mongoose.yml               TIMEOUT (verification)         120.70      164.36        None
+mongoose_1.yml             true                             0.43        0.50        None
+moonlight-common-c.yml     ERROR(returned 1, verification-finished)        3.43        4.13        None
+nanopb.yml                 false(valid-deref)               4.39        4.75        None
+netatalk.yml               TIMEOUT (verification)         120.98      174.85        None
+netconsd.yml               TIMEOUT (verification)         120.91      164.02        None
+openNDS_1.yml              TIMEOUT (verification)         103.76      181.01        None
+openSC.yml                 false(valid-memtrack)            1.25        1.38        None
+openrazer.yml              false(valid-deref)              15.88       16.73        None
+pacparser.yml              TIMEOUT (verification)         120.77      172.50        None
+picotcp.yml                false(valid-free)                0.63        0.70        None
+pjproject.yml              false(valid-deref)               2.09        2.37        None
+plutovg.yml                false(valid-deref)               2.24        2.42        None
+ppp.yml                    false(valid-deref)               0.43        0.50        None
+radare2.yml                ERROR(returned 1, verification-finished)        1.18        1.67        None
+radare2_1.yml              false(valid-deref)               1.58        1.70        None
+radare2_2.yml              TIMEOUT (verification)         120.97      157.37        None
+rizin.yml                  TIMEOUT (verification)         120.98      154.64        None
+smartdns.yml               false(valid-deref)               2.22        2.37        None
+sniproxy.yml               false(valid-memtrack)            1.12        1.22        None
+sofia-sip.yml              false(valid-deref)               0.87        0.95        None
+sofia-sip_1.yml            false(valid-memtrack)            1.46        1.59        None
+sofia-sip_2.yml            false(valid-deref)               2.52        2.69        None
+stb.yml                    TIMEOUT (verification)         120.61      161.61        None
+stb_1.yml                  ERROR(returned 1, verification-finished)        1.88        2.42        None
+tinydir.yml                false(valid-memtrack)            1.46        1.58        None
+tinytiff.yml               ERROR(unknown, verification-finished)        0.51        0.57        None
+wasm-micro-runtime.yml     false(valid-deref)               0.71        0.78        None
+zchunk.yml                 false(valid-deref)               6.00        6.39        None
+zephyr.yml                 TIMEOUT (verification)         120.70      157.49        None
+zstd.yml                   false(valid-deref)               1.49        1.62        None
+----------------------------------------------------------------------------------------
+Run set 1                  done                           256.34      197.66           -
+
+
+no-overflow.no-overflow
+Run set 2 of 2 with options '--sv-comp' and propertyfile 'None'
+
+inputfile               status                       cpu time   wall time        host
+-------------------------------------------------------------------------------------
+NTSC-CRT.yml            true                             0.46        0.80        None
+gpac.yml                false(no-overflow)               1.25        1.63        None
+gpac_15.yml             false(no-overflow)               2.16        2.58        None
+gpac_9.yml              true                             0.43        0.75        None
+kilo.yml                false(no-overflow)               2.22        2.63        None
+libredwg_1.yml          TIMEOUT (verification)         120.88      128.03        None
+libsndfile.yml          false(no-overflow)              12.00       13.00        None
+mujs.yml                false(no-overflow)               9.83       10.73        None
+nanopb.yml              TIMEOUT (verification)         120.86      128.03        None
+netconsd.yml            TIMEOUT (verification)         120.72      127.86        None
+plutovg.yml             false(no-overflow)              33.02       35.21        None
+stb.yml                 false(no-overflow)               2.02        2.38        None
+sysstat.yml             true                             0.41        0.67        None
+zchunk.yml              TIMEOUT (verification)         120.68      127.83        None
+-------------------------------------------------------------------------------------
+Run set 2               done                            65.37      128.78           -
+
+Statistics:             92 Files
+  correct:              33
+    correct true:        0
+    correct false:      33
+  incorrect:             6
+    incorrect true:      6
+    incorrect false:     0
+  unknown:              53
+  Score:              -159 (max: 92)
