@@ -133,14 +133,14 @@ Vulnerability types:
 |     |         Extracted         |            |                     |               |                           -                            |    84    |    12    | 0/1/0(✓/✓)  |  0/0/0(✖/✖)  |  0/3/0(✓/✓)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 |  7  |      CVE-2022-31003       |    AOOB    |      sofia-sip      |    5f18366    |              sdp_parse.c (parse_message)               |   1943   |   149    | 0/2/0(✖/✖)  |  0/1/2(✖/✖)  | 0/1171/0(✓/✖) |  2/0/0(✖/✖)  | 0/14/7(✖/✖)    | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    33    |    25    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/13/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
-|  8  |       CVE-2023-4260       |    AOOB    |       zephyr        |    14d88c6    |       fuse_fs_access.c (fuse_fs_access_readdir)        |   544    |    90    |      -      |      -       |       -       |      -       | -              | -          |     |
+|  8  |       CVE-2023-4260       |    AOOB    |       zephyr        |  14d88c6dc8b  |       fuse_fs_access.c (fuse_fs_access_readdir)        |   544    |    90    |      -      |      -       |       -       |      -       | -              | -          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    19    |    5     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/0/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
 |  9  |      CVE-2014-125106      |     IO     |       nanopb        |    d0466bd    |              pb_decode.c (pb_dec_string)               |   1159   |    31    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  | 0/113/0(✓/✖)  |  8/0/0(✖/✖)  | 0/0/0(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    93    |    19    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  1/0/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 1/0/0(✓/✓) |     |
 | 10  |      CVE-2021-32292       |    AOOB    |       json-c        |    56a89f9    |                 json_parse.c (parseit)                 |   188    |    66    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/51/0(✓/✖)  |  1/0/0(✖/✖)  | 0/2/1(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |   109    |    24    | 0/2/0(✖/✖)  |  0/0/0(✖/✖)  |  0/28/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | ✖          |     |
-| 11  |      CVE-2021-33304       |    UAF     |       picotcp       |    f336ead    |      pico_fragments.c (pico_fragments_reassemble)      |   589    |    54    |      -      |      -       |       -       |      -       | -              | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |    36    |    9     | 0/1/0(✓/✓)  |  1/0/2(✓/✓)  |  0/3/0(✓/✓)   |  1/0/0(✓/✓)  | 0/2/0(✓/✓)     | 1/0/0(✓/✓) |     |
+| 11  |      CVE-2021-33304       |    UAF     |       picotcp       |    f336ead    |      pico_fragments.c (pico_fragments_reassemble)      |   589    |    54    | 0/10/0(✖/✖) | 1/13/2(✖/✖)  | 0/149/0(✓/✖)  |  3/0/0(✖/✖)  | 0/5/15(✖/✖)    | ✖          |     |
+|     |         Extracted         |            |                     |               |                           -                            |    81    |    16    | 0/1/0(✓/✓)  |  0/0/0(✖/✖)  |  0/16/0(✓/✖)  |  2/0/0(✓/✓)  | 0/2/0(✓/✓)     | 0/0/0(✖/✖) |     |
 | 12  |      CVE-2022-28550       |    AOOB    |        jhead        |    06e8d7a    |                  jhead.c (DoCommand)                   |   1814   |    86    | 0/6/0(✖/✖)  |  1/1/0(✖/✖)  |  1/18/0(✖/✖)  |  2/0/0(✖/✖)  | 0/5/0(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    29    |    16    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/18/0(✓/✖)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
 | 13  |      CVE-2015-10065       |    AOOB    |        FiND         |    3cc9b68    |             my_validator.cpp (init_result)             |   127    |    76    | 0/9/0(✖/✖)  | 12/1/0(✖/✖)  |  0/45/0(✖/✖)  | 11/0/0(✖/✖)  | 0/10/0(✖/✖)    | ✖          |     |
@@ -389,7 +389,11 @@ Notes:
 
 - 8, 84, 117\*
   - Config
-- 11, 22, 86\*
+- 11\*
+  - Vulnerability spanned accross 3 files that are pico_fragments.c, pick_stack.c anbd pico_frame.c. For analysis '#include "pico_stack.c"' was added to pico_fragments.c and '#include "pico_frame.c"' was added to pick_stack.c
+    During analysis pico_fragments_reassemble function from file pico_fragments.c as this is function that ultimately calls a function pico_frame_discard that second frees a pointer
+    Diagnostics from all 3 files are included into analysis
+- 22, 86\*
   - CTU
 - 17\*
   - strange false positive of clang on simple case
@@ -432,6 +436,3 @@ Notes:
     Only diagnostics from bits.c file were recorded.
 - 149\*
   - ikos reports impossible warning like 'if (len > 0) len--' such statement can not cause unsigned integer overflow.
-
-
-Vulnerable function is a function where vulnerability even if function has no way of preventing that (for example use after free where function is given a valid pointer that has already been freed once).

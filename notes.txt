@@ -98,7 +98,7 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 	- node a.js /mnt/a/master/master/realworld_simplified/nanopb.c main
 [json-c] node a.js ./json-c/apps/json_parse.c parseit ./json-c
 	- node a.js /mnt/a/master/master/realworld_simplified/json-c.c main
-CTU [picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reassemble ./picotcp/build/include ./picotcp/modules ./picotcp/include
+[picotcp] node a.js ./picotcp/modules/pico_fragments.c pico_fragments_reassemble ./picotcp/build/include ./picotcp/modules ./picotcp/include ./picotcp/stack
 	- node a.js /mnt/a/master/master/realworld_simplified/picotcp.c main
 [jhead] node a.js ./jhead/jhead.c DoCommand
 	- node a.js /mnt/a/master/master/realworld_simplified/jhead.c main

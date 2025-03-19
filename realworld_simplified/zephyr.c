@@ -1,6 +1,6 @@
 // https://www.cvedetails.com/cve/CVE-2023-4260/
 // repository: https://github.com/zephyrproject-rtos/zephyr
-// commit: 14d88c6
+// commit: 14d88c6dc8b
 // extract of: subsys/fs/fuse_fs_access.c (function: fuse_fs_access_readdir)
 
 #include <stdio.h>
