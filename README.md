@@ -159,8 +159,8 @@ Vulnerability types:
 | 20  |      CVE-2023-30078       |    AOOB    |      libeconf       |    dcfc789    |              libeconf.c (econf_writeFile)              |   772    |    84    | 0/4/0(✖/✖)  |  0/3/0(✖/✖)  | 0/132/0(✖/✖)  |  3/0/0(✖/✖)  | 0/3/3(✖/✖)     | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    22    |    12    | 0/0/0(✖/✖)  |  0/1/0(✓/✓)  |  0/2/0(✖/✖)   |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
 | 21  |      CVE-2023-31568       |    AOOB    |       podofo        |    882e729    |             PdfEncrypt.cpp (PdfEncryptRC4)             |   2002   |    17    | 0/26/3(✖/✖) |  0/7/0(✖/✖)  |       ✖       | 26/0/0(✖/✖)  | 0/0/4(✖/✖)     | ✖          |     |
-| 22  |      CVE-2023-39975       |    UAF     |        krb5         |    0ceab6c    |             do_tgs_req.c (process_tgs_req)             |   1128   |    67    |      -      |      -       |       -       |      -       | -              | -          |     |
-|     |         Extracted         |            |                     |               |                           -                            |    54    |    10    | 0/1/0(✓/✓)  |  0/0/0(✖/✖)  |  0/7/0(✓/✖)   |  2/0/0(✓/✓)  | 0/2/0(✓/✓)     | 1/0/0(✓/✓) |     |
+| 22  |      CVE-2023-39975       |    UAF     |        krb5         |    0ceab6c    |             do_tgs_req.c (process_tgs_req)             |   1128   |    67    | 0/4/0(✖/✖)  |  0/0/0(✖/✖)  | 2/751/0(✖/✖)  |  1/0/0(✖/✖)  | 0/22/0(✖/✖)    | ✖          |     |
+|     |         Extracted         |            |                     |               |                           -                            |   139    |    13    | 0/1/0(✓/✓)  |  0/0/0(✖/✖)  |  0/62/0(✓/✖)  |  1/0/0(✓/✓)  | 0/1/0(✓/✓)     | 0/0/0(✖/✖) |     |
 | 23  |      CVE-2023-43641       |    AOOB    |       libcue        |    78279d0    |                 cd.c (track_set_index)                 |   414    |    9     | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/12/0(✓/✖)  |  0/0/0(✖/✖)  | 0/1/0(✖/✖)     | ✖          |     |
 | 24  |      CVE-2023-46602       |    AOOB    |     DemolccMAX      |    889db62    |               IccUtilXml.cpp (icFixXml)                |   1524   |    34    | 0/12/0(✖/✖) |  0/7/0(✖/✖)  |  0/41/0(✓/✖)  |  5/0/0(✖/✖)  | 0/18/0(✖/✖)    | ✖          |     |
 |     |         Extracted         |            |                     |               |                           -                            |    61    |    34    | 0/0/0(✖/✖)  |  0/0/0(✖/✖)  |  0/26/0(✓/✓)  |  0/0/0(✖/✖)  | 0/0/0(✖/✖)     | 0/0/0(✖/✖) |     |
@@ -393,36 +393,26 @@ Notes:
   - Vulnerability spanned accross 3 files that are pico_fragments.c, pick_stack.c anbd pico_frame.c. For analysis '#include "pico_stack.c"' was added to pico_fragments.c and '#include "pico_frame.c"' was added to pick_stack.c
     During analysis pico_fragments_reassemble function from file pico_fragments.c as this is function that ultimately calls a function pico_frame_discard that second frees a pointer
     Diagnostics from all 3 files are included into analysis
-- 22, 86\*
-  - CTU
-- 17\*
-  - strange false positive of clang on simple case
+- 22\*
+  - Double free happens in kfree.c krb5_free_ticket function but the main vulnerable double free logic is in process_tgs_req and tgs_issue_ticket function that are in do_tgs_req.c file. So to file do_tgs_req.c '#include "kfree.c"' line was added.
+    Diagnostics from both do_tgs_req.c and kfree.c were recorded
 - 46\*
   - in order to analyze using ikos function had to be a little bit changed. Function was changed from method to a function and all references to 'this' were removed.
 - 48\*
-  - modifications to haeder file were made to make it possible to analyze it. Vulnerable method that changed to not use any windows api constructs as well as was extracted to not be between #ifdef \_WIN directives
+  - modifications to header file were made to make it possible to analyze it. Vulnerable method that changed to not use any windows api constructs as well as was extracted to not be between #ifdef \_WIN directives
 - 69, 143\*
   - analyzed were tcp-client.cpp and udp-client.cpp and only telemetry from .hpp files were recorded
 - 69\*
-  - static code analyzer notifications were counter from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
-- 70\*
-  - while loop where is vulnerability takes 2812 code rows WOW.
+  - static code analyzer notifications were counted from file bin_xnu_kernelcache.c as well as from r_endian.h where the out of bound access actually happens
 - 77\*
   - analyzed was not header file itself but rather one of the examples (samples/file_open_sample.c) that directly called vulnerable function. Only error notifications from tinydir.h file were taken into account when composing the table
-- 102,101\*
-  - I know the line where vulnerability happens but because it happens at the end of a complex logic it is hard to reproduce the error.
 - 103\*
   - Function strided_copy was tested in isolation mainly because header files can not be directly analyzed by some static code analyzers
 - 104\*
   - ikos analyzed main.cpp that references the header file with implementations (imageinfo.hpp) but only errors/warnings/notes from header file were recorded.
     Other analyzers analyzed imageinfo.hpp file directly.
-    Also strange observation when infer analyzes hpp file directly it finds only 1 error but when analyzing main.cpp file 3 errors are found and 2 additional errors are completly valid.
-- 115(exract)\*
-  - it is fashinating how no one can detect such a basic problem. Same goes to frr.c file
 - 116\*
   - analyzed was entry point eg. main function (one file project)
-- 122(extract)\*
-  - Extremly confusing infer error on extracted version. Infer also threw confusion errors on other occasions but this is the pinnacle of confusion
 - 128\*
   - analysis was done by adding '#include "libopensc/asn1.c"' to pkcs15-cardos.c function. This vulnerability is a little bit special, because the vulnerable logic is in pkcs15-cardos.c file while invalid dereference occurs in asn1.c file.
   - because of that while pkcs15-cardos.c file was given as entry point and sc_asn1_find_tag as an entry function diagnostics form asn1.c were recorded. Invalid dereference is happening in sc_asn1_read_tag in asn1.c file.
@@ -434,5 +424,3 @@ Notes:
 - 135\*
   - as vulnerability requires also data from decode_preR13_auxheader method located in decode.c file to analyze it a preprocessor definition '#include "bits.c"' was added to decode.c file and function decode_preR13_auxheader was analyzed as entry point.
     Only diagnostics from bits.c file were recorded.
-- 149\*
-  - ikos reports impossible warning like 'if (len > 0) len--' such statement can not cause unsigned integer overflow.

@@ -119,7 +119,7 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 [libeconf] node a.js ./libeconf/lib/libeconf.c econf_writeFile ./libeconf/include
 	- node a.js /mnt/a/master/master/realworld_simplified/libeconf.c main
 [podofo] node a.js ./podofo/src/podofo/main/PdfEncrypt.cpp PdfEncryptRC4 ./podofo/src/podofo ./podofo/src
-[krb5] node a.js ./krb5/src/kdc/do_tgs_req.c process_tgs_req ./krb5/src/include krb5/src/util/verto
+[krb5] node a.js ./krb5/src/kdc/do_tgs_req.c process_tgs_req ./krb5/src/include ./krb5/src/util/verto ./krb5/src/lib/krb5/krb
 	- node a.js /mnt/a/master/master/realworld_simplified/krb5.c main
 [libcue] node a.js ./libcue/cd.c track_set_index
 	- node a.js /mnt/a/master/master/realworld_simplified/libcue.c main
