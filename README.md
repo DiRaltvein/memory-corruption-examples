@@ -388,7 +388,7 @@ No cross Cross Translation Unit (CTU) analysis was performed because not all sta
 Notes:
 
 - 8, 84, 117\*
-  - Config
+  - Config\
 - 11\*
   - Vulnerability spanned accross 3 files that are pico_fragments.c, pick_stack.c anbd pico_frame.c. For analysis '#include "pico_stack.c"' was added to pico_fragments.c and '#include "pico_frame.c"' was added to pick_stack.c
     During analysis pico_fragments_reassemble function from file pico_fragments.c as this is function that ultimately calls a function pico_frame_discard that second frees a pointer

@@ -226,7 +226,7 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 [libming] node a.js ./libming/util/parser.c parseSWF_DEFINEFONTINFO ./libming/src
 	- node a.js /mnt/a/master/master/realworld_simplified/libming.c main
 [moonlight-common-c CONFIG!] node a.js ./moonlight-common-c/src/RtspConnection.c performRtspHandshake ./moonlight-common-c/reedsolomon ./moonlight-common-c/enet/include
-[asterisk] node a.js asterisk/res/res_pjsip_header_funcs.c update_header asterisk/third-party/pjproject/source/pjsip/include asterisk/include asterisk/third-party/pjproject/source/pjlib/include asterisk/third-party/pjproject/source/pjlib-util/include asterisk/third-party/pjproject/source/pjmedia/include
+[asterisk] node a.js asterisk/res/res_pjsip_header_funcs.c update_header
 	- node a.js /mnt/a/master/master/realworld_simplified/asterisk.c main
 [ayttm] node a.js ./ayttm/libproxy/proxy.c http_connect ./ayttm/src /usr/include/glib-2.0
 	- node a.js /mnt/a/master/master/realworld_simplified/ayttm.c main
@@ -292,7 +292,7 @@ rm -rf ./results && benchexec --no-container --outputpath ./results/ --numOfThre
 - node a.js /mnt/a/master/master/realworld_simplified/moonlight-common-c.c main
 [kilo] node a.js kilo/kilo.c main
 - node a.js /mnt/a/master/master/realworld_simplified/kilo.c main
-[PX4-Autopilot] node a.js PX4-Autopilot/src/modules/mavlink/mavlink_receiver.cpp handle_message_trajectory_representation_waypoints PX4-Autopilot/src PX4-Autopilot/src/lib PX4-Autopilot/platforms/common/include PX4-Autopilot/platforms/posix/include PX4-Autopilot/src/lib/matrix PX4Firmware/src/modules
+[PX4-Autopilot] node a.js PX4-Autopilot/src/modules/mavlink/mavlink_receiver.cpp handle_message_trajectory_representation_waypoints
 - node a.js /mnt/a/master/master/realworld_simplified/px4-autopilot.cc main
 [zstd] node a.js zstd/programs/util.c mallocAndJoin2Dir
 - node a.js /mnt/a/master/master/realworld_simplified/zstd.c main

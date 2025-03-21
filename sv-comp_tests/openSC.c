@@ -150,9 +150,9 @@ int main() {
   //   0xE1, 0x06, 0x03, 0x04, 0x54, 0x1A, 0x9A, 0xB3,
   //   0xE1, 0x06, 0x03, 0x04, 0xE9, 0xBA, 0x1B, 0xAA
   // };
-  uint8_t* rbuf = (uint8_t*) getRandomString();
-  const uint8_t *p = rbuf, *q;
+  char* rbuf = getRandomString(5, 500);
   size_t len = strlen(rbuf), tlen = 0, ilen = 0;
+  const uint8_t *p = (uint8_t*)rbuf, *q;
 
   while (len != 0) {
     p = sc_asn1_find_tag(p, len, 0xE1, &tlen);
