@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-cves": "node generate_cves.js",
+    "generate-cves": "node ./scripts/generate_cves.js",
+    "generate-categories": "node ./scripts/generateCategories.js",
     "stats": "node scripts/tableStats.js"
   },
   "keywords": [],
@@ -22,3 +23,4 @@
     "skia-canvas": "^2.0.2"
   }
 }
+

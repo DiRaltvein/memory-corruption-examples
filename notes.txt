@@ -427,9 +427,6 @@ To extract CVE's script was used that queried cvedetails website. Total number o
 
 Static code analyzers do not model methods that are not poplar like rizin.c example where no analyzer could detect problem with sscanf method althrough it is a default method that is included in stdio.h.
 
-
-Maybe revisit 33551, 33552, 2020-22218
-
 Not all problems can be prevented uzing static code analyzer. When a buffer gets passed to a function it is impossible to check wheather the buffer acccess is valid or not.
 Such checks may be possible to some extend with fixed sized buffers and whole program analysis but even then dynamic length buffers are impossible to check (example nanonng.c).
 
@@ -439,7 +436,3 @@ can not be checked for statically. Only strings are null byte terminated and the
 
 cppcheck can find errors if there is an if condition or any other hint as to what the value can be as with CVE-2022-47092 where cppcheck can find some instances of integer overflow in a file where bit shift count if checked before/after the operation.
 In case bit shift count is not checked no error is produced.
-
-htmldoc.cc
-vorbis-tools.cc
-wasm-micro-runtime.c
