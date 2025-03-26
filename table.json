@@ -829,7 +829,23 @@
     "ikos": "0/24/0(✓/✖)",
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
-    "symbiotic": "1/0/0(✖/✖)"
+    "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/23/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "26",
@@ -862,6 +878,22 @@
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "0/0/0(✖/✖)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/20/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "27",
@@ -926,6 +958,22 @@
     "infer": "1/0/0(✓/✓)",
     "gcc": "0/4/0(✓/✓)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/29/0(✓)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/2/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "29",
@@ -1198,6 +1246,22 @@
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/10/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "37",
@@ -4336,3 +4400,4 @@
     "symbiotic": "✖"
   }
 ]
+

@@ -16,6 +16,13 @@
     p += string_len;                    \
   } while (0)
 
+#define ADD_CHAR(string, new_chr, end) \
+  do {                                 \
+    if (string + 1 >= end)             \
+      return -1;                       \
+    *(string++) = new_chr;             \
+  } while (0)
+
 #define PATTERN_MAX 40
 
 int ec_glob(char *pattern) {
@@ -33,7 +40,7 @@ int ec_glob(char *pattern) {
       STRING_CAT(p_pcre, "[^/]", pcre_str_end);
       break;
     default:
-      *(p_pcre++) = *c; // Problem: copy of pattern characters into pcre_str without bound checking leads to overflow of pcre_str buffer
+      ADD_CHAR(p_pcre, *c, pcre_str_end);
     }
   }
 
@@ -42,7 +49,6 @@ int ec_glob(char *pattern) {
   return 0;
 }
 
-// the idea is that provided pattern quickly fills pcre_str by utilizing 'case ?' and after that writes out of bound by uzing default case where bound is not checked
 int main() {
-  ec_glob("???????????????????aaaaaaaaaaa");
+  return ec_glob("???????????????????aaaaaaaaaaa");
 }
