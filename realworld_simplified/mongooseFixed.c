@@ -5,10 +5,10 @@
 
 #include <stdio.h>
 
-static int decode_variable_length(const char *buf, int *bytes_consumed) {
+static int decode_variable_length(const char *buf, int *bytes_consumed, int bufSize) {
   int value = 0, multiplier = 1, offset;
 
-  for (offset = 0; offset < 4; offset++) {
+  for (offset = 0; offset < 4 && offset < bufSize; offset++) {
     char encoded_byte = buf[offset]; // Problem: reading from a buffer (buf) which length is smaller than 4
     value += encoded_byte * multiplier;
     multiplier *= 128;
@@ -27,6 +27,6 @@ static int decode_variable_length(const char *buf, int *bytes_consumed) {
 int main() {
   char buf[] = {0x1A, 0x1B, 0x1C};
   int bytes_consumed = 0;
-  int decodedValue = decode_variable_length((char *)buf, &bytes_consumed);
+  int decodedValue = decode_variable_length((char *)buf, &bytes_consumed, sizeof(buf));
   printf("Value: %d, bytes consumed: %d\n", decodedValue, bytes_consumed);
 }

@@ -17,7 +17,7 @@ async function getAPage(url) {
 
 async function main() {
   for (const cve of cves) {
-    if (!cve.id) continue;
+    if (cve.id === 'Vuln' || cve.id === 'Fix') continue;
     const page = await getAPage(`${base}${cve.CVE}`);
     cve['vuln. type'] = Array.from(
       page.querySelectorAll('a[title$="- CWE definition"]')

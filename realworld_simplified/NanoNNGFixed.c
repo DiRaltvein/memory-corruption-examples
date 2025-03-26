@@ -64,6 +64,8 @@ uint8_t *copyn_utf8_str(const uint8_t *src, uint32_t *pos, int *str_len, int lim
   if (limit < 2)
     return NULL;
 
+  uint32_t max = limit + *pos;
+
   NNI_GET16(src + (*pos), *str_len);
   *pos = (*pos) + 2;
   if (*str_len > (limit - 2)) {
@@ -78,7 +80,13 @@ uint8_t *copyn_utf8_str(const uint8_t *src, uint32_t *pos, int *str_len, int lim
     }
     memcpy(dest, src + (*pos), *str_len);
     dest[*str_len] = '\0';
-    *pos = (*pos) + (*str_len); // pos index goes out of bound of packet buffer
+    *pos = (*pos) + (*str_len);
+
+    if (*pos >= max) {
+      free(dest);
+      *str_len = -1;
+      return NULL;
+    }
   }
   return dest;
 }
@@ -110,13 +118,13 @@ int main() {
   printf("Decoded length: %u\n", len);
   pos += len_of_var;
 
-  char *body = (char *)copyn_utf8_str(packet, &pos, &len_of_str, max - pos);
+  char *body = (char*)copyn_utf8_str(packet, &pos, &len_of_str, max - pos);
   if (body == NULL) {
     return 1;
   }
 	printf("Decoded sentence: %s\n", body);
 
-	printf("Some out of bound memory access byte: %u", packet[pos]); // Problem: access of packet out of bound
+	printf("Some out of bound memory access byte: %u", packet[pos]);
 
   free(body);
 }

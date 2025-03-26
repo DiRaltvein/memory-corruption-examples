@@ -139,6 +139,9 @@ int main() {
   pos += len_of_var;
 
   char *body = (char *)copyn_utf8_str(packet, &pos, &len_of_str, max - pos);
+  if (body == NULL) {
+    return 1;
+  }
 	printf("Decoded sentence: %s\n", body);
 
 	printf("Some out of bound memory access byte: %u", packet[pos]); // Problem: access of packet out of bound

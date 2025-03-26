@@ -16,7 +16,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -48,7 +48,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -80,7 +80,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted (not sanitized)",
     "vuln. type": "",
     "Project": "",
@@ -112,7 +112,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -144,7 +144,7 @@
     "symbiotic": "0/0/0(✖/✖)"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -176,7 +176,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -190,6 +190,22 @@
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/2/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "7",
@@ -208,7 +224,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -228,7 +244,7 @@
     "CVE": "CVE-2023-4260",
     "vuln. type": "CWE-120/CWE-193",
     "Project": "zephyr",
-    "Commit (hash)": "14d88c6",
+    "Commit (hash)": "14d88c6dc8b",
     "file (function)": "fuse_fs_access.c (fuse_fs_access_readdir)",
     "file len": "544",
     "func len": "90",
@@ -240,7 +256,7 @@
     "symbiotic": "-"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -272,7 +288,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -304,7 +320,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -328,28 +344,44 @@
     "file (function)": "pico_fragments.c (pico_fragments_reassemble)",
     "file len": "589",
     "func len": "54",
-    "clang": "-",
-    "cppcheck": "-",
-    "ikos": "-",
-    "infer": "-",
-    "gcc": "-",
-    "symbiotic": "-"
+    "clang": "0/10/0(✖/✖)",
+    "cppcheck": "1/13/2(✖/✖)",
+    "ikos": "0/149/0(✓/✖)",
+    "infer": "3/0/0(✖/✖)",
+    "gcc": "0/5/15(✖/✖)",
+    "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
     "Commit (hash)": "",
     "file (function)": "-",
-    "file len": "36",
-    "func len": "9",
+    "file len": "81",
+    "func len": "16",
     "clang": "0/1/0(✓/✓)",
-    "cppcheck": "1/0/2(✓/✓)",
-    "ikos": "0/3/0(✓/✓)",
-    "infer": "1/0/0(✓/✓)",
+    "cppcheck": "0/0/0(✖/✖)",
+    "ikos": "0/16/0(✓/✖)",
+    "infer": "2/0/0(✓/✓)",
     "gcc": "0/2/0(✓/✓)",
-    "symbiotic": "1/0/0(✓/✓)"
+    "symbiotic": "0/0/0(✖/✖)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/10/0(✓)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/1/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "12",
@@ -368,7 +400,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -400,7 +432,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -432,7 +464,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -464,7 +496,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -496,7 +528,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -510,6 +542,22 @@
     "infer": "2/0/0(✓/✓)",
     "gcc": "0/2/4(✓/✓)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/1/0(✓)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "17",
@@ -544,7 +592,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -558,6 +606,22 @@
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/8/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "19",
@@ -576,7 +640,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -608,7 +672,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -648,28 +712,44 @@
     "file (function)": "do_tgs_req.c (process_tgs_req)",
     "file len": "1128",
     "func len": "67",
-    "clang": "-",
-    "cppcheck": "-",
-    "ikos": "-",
-    "infer": "-",
-    "gcc": "-",
-    "symbiotic": "-"
+    "clang": "0/4/0(✖/✖)",
+    "cppcheck": "0/0/0(✖/✖)",
+    "ikos": "2/751/0(✖/✖)",
+    "infer": "1/0/0(✖/✖)",
+    "gcc": "0/22/0(✖/✖)",
+    "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
     "Commit (hash)": "",
     "file (function)": "-",
-    "file len": "54",
-    "func len": "10",
+    "file len": "139",
+    "func len": "13",
     "clang": "0/1/0(✓/✓)",
     "cppcheck": "0/0/0(✖/✖)",
-    "ikos": "0/7/0(✓/✖)",
-    "infer": "2/0/0(✓/✓)",
-    "gcc": "0/2/0(✓/✓)",
-    "symbiotic": "1/0/0(✓/✓)"
+    "ikos": "0/62/0(✓/✖)",
+    "infer": "1/0/0(✓/✓)",
+    "gcc": "0/1/0(✓/✓)",
+    "symbiotic": "0/0/0(✖/✖)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/58/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "23",
@@ -704,7 +784,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -736,7 +816,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -768,7 +848,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -800,7 +880,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -832,7 +912,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -864,7 +944,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -878,6 +958,22 @@
     "infer": "3/0/0(✓/✓)",
     "gcc": "0/4/0(✓/✓)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/20/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/1/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "30",
@@ -896,7 +992,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -928,7 +1024,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -960,7 +1056,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -974,6 +1070,22 @@
     "infer": "2/0/0(✓/✓)",
     "gcc": "0/1/0(✓/✓)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/45/0(✓)",
+    "infer": "2/0/0(✖)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "33",
@@ -1008,7 +1120,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1040,7 +1152,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1072,7 +1184,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1104,7 +1216,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1136,7 +1248,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1168,7 +1280,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1200,7 +1312,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1214,6 +1326,22 @@
     "infer": "2/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/17/0(✖)",
+    "infer": "2/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "41",
@@ -1264,7 +1392,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1312,7 +1440,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1376,7 +1504,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1408,7 +1536,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1440,7 +1568,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1520,7 +1648,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1728,7 +1856,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1760,7 +1888,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1792,7 +1920,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1824,7 +1952,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1856,7 +1984,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1888,7 +2016,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1920,7 +2048,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1952,7 +2080,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -1984,7 +2112,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2016,7 +2144,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2048,7 +2176,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2080,7 +2208,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2112,7 +2240,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2144,7 +2272,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2176,7 +2304,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2224,7 +2352,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2256,7 +2384,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2288,7 +2416,7 @@
     "symbiotic": "-"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2320,7 +2448,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2352,7 +2480,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2384,7 +2512,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2416,7 +2544,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2448,7 +2576,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted (not sanitized)",
     "vuln. type": "",
     "Project": "",
@@ -2496,7 +2624,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2528,7 +2656,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2560,7 +2688,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2592,7 +2720,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2624,7 +2752,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2656,7 +2784,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2688,7 +2816,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2720,7 +2848,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2752,7 +2880,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2784,7 +2912,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2848,7 +2976,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2880,7 +3008,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2912,7 +3040,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2944,7 +3072,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -2976,7 +3104,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3008,7 +3136,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3040,7 +3168,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3072,7 +3200,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted (not sanitized)",
     "vuln. type": "",
     "Project": "",
@@ -3104,7 +3232,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3136,7 +3264,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3168,7 +3296,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3200,7 +3328,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3232,7 +3360,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3264,7 +3392,7 @@
     "symbiotic": "0/0/0(✖/✖)"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3296,7 +3424,7 @@
     "symbiotic": "-"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3328,7 +3456,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3376,7 +3504,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3424,7 +3552,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3456,7 +3584,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3520,7 +3648,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3556,29 +3684,29 @@
     "CVE": "CVE-2023-2977",
     "vuln. type": "CWE-119/CWE-125",
     "Project": "OpenSC",
-    "Commit (hash)": "tfe7cb49",
+    "Commit (hash)": "fe7cb49",
     "file (function)": "pkcs15-cardos.c (cardos_have_verifyrc_package)",
     "file len": "942",
-    "func len": "49",
-    "clang": "-",
-    "cppcheck": "-",
-    "ikos": "-",
-    "infer": "-",
-    "gcc": "-",
-    "symbiotic": "-"
+    "func len": "73",
+    "clang": "0/0/0(✖/✖)",
+    "cppcheck": "0/1/5(✖/✖)",
+    "ikos": "1/0/0(✖/✖)",
+    "infer": "9/0/0(✖/✖)",
+    "gcc": "0/2/0(✖/✖)",
+    "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
     "Commit (hash)": "",
     "file (function)": "-",
-    "file len": "170",
-    "func len": "72",
+    "file len": "150",
+    "func len": "71",
     "clang": "1/0/0(✓/✓)",
     "cppcheck": "0/0/0(✖/✖)",
-    "ikos": "4/33/0(✓/✓)",
+    "ikos": "4/29/0(✓/✓)",
     "infer": "0/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
@@ -3616,7 +3744,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3648,7 +3776,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3680,7 +3808,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3712,7 +3840,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3744,7 +3872,7 @@
     "symbiotic": "1/0/0(✓/✓)"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3768,15 +3896,15 @@
     "file (function)": "bits.c (bit_calc_CRC)",
     "file len": "3639",
     "func len": "46",
-    "clang": "-",
-    "cppcheck": "-",
-    "ikos": "-",
-    "infer": "-",
-    "gcc": "-",
-    "symbiotic": "-"
+    "clang": "0/12/0(✖/✖)",
+    "cppcheck": "✖",
+    "ikos": "✖",
+    "infer": "✖",
+    "gcc": "✖",
+    "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3840,7 +3968,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3872,7 +4000,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3904,7 +4032,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3936,7 +4064,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -3968,7 +4096,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4016,7 +4144,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4048,7 +4176,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4080,7 +4208,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4112,7 +4240,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4144,7 +4272,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4176,7 +4304,7 @@
     "symbiotic": "✖"
   },
   {
-    "id": "",
+    "id": "Vuln",
     "CVE": "Extracted",
     "vuln. type": "",
     "Project": "",
@@ -4208,4 +4336,3 @@
     "symbiotic": "✖"
   }
 ]
-

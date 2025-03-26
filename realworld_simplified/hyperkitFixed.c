@@ -30,13 +30,15 @@ int main(int argc, char *argv[]) {
   if (argc > 28 || argc < 0) {
     return 1;
   }
-  struct iovec iov = {0};
+  struct iovec iov= {0};
   iov.iov_len = argc + 2;
 
-  vq_getchain(&iov); // in case this function 'fails' for any reason iov struct will not be initialized and its further use is dangerous
+  if (vq_getchain(&iov) == - 1) {
+    return 1;
+  }
 
   for (int i = 2; i < iov.iov_len; i++) {
-    iov.iov_base[i] = iov.iov_base[i - 1] + iov.iov_base[i - 2]; // Problem: trying to assign value to a buffer that may not be initialized
+    iov.iov_base[i] = iov.iov_base[i - 1] + iov.iov_base[i - 2];
   }
 
   int sum = 0;

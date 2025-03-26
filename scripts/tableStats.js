@@ -20,8 +20,13 @@ const calculateForTestSuit = true;
 
 const cvesToAnalyze = cves.filter(
   (cve) =>
-    (calculateForTestSuit && !cve.id) || (!calculateForTestSuit && cve.id)
+    (calculateForTestSuit && cve.id === 'Vuln') ||
+    (!calculateForTestSuit && cve.id !== 'Vuln' && cve.id !== 'Fix')
 );
+const patchedCves = !calculateForTestSuit
+  ? []
+  : cves.filter((cve) => cve.id === 'Fix');
+
 const analyzersToUse = [
   'clang',
   'cppcheck',
@@ -32,13 +37,17 @@ const analyzersToUse = [
 ];
 
 const getCveNumber = (cve) => {
-  if (cve.id) return cve.CVE;
-  return cves[cves.indexOf(cve) - 1].CVE;
+  if (cve.id !== 'Vuln' && cve.id !== 'Fix') return cve.CVE;
+  if (cve.id === 'Vuln') return cves[cves.indexOf(cve) - 1].CVE;
+  return cves[cves.indexOf(cve) - 2].CVE;
 };
 
 const getCategories = (cve) => {
-  if (cve.id) return cve['vuln. type'].split('/');
-  return cves[cves.indexOf(cve) - 1]['vuln. type'].split('/');
+  if (cve.id !== 'Vuln' && cve.id !== 'Fix')
+    return cve['vuln. type'].split('/');
+  if (cve.id === 'Vuln')
+    return cves[cves.indexOf(cve) - 1]['vuln. type'].split('/');
+  return cves[cves.indexOf(cve) - 2]['vuln. type'].split('/');
 };
 
 const allFileLengths = [];
@@ -118,9 +127,9 @@ for (const analyzer of analyzersToUse) {
   console.log(
     'errors: ',
     error,
-    ' failed: ',
+    ' failed (FN): ',
     failed,
-    ' success: ',
+    ' success (TP): ',
     success,
     ' success in first 5 rows: ',
     successIn5Rows
@@ -135,6 +144,21 @@ for (const analyzer of analyzersToUse) {
     ' notes: ',
     numberOfNotes.notes
   );
+  if (patchedCves.length > 0) {
+    const falsePositives = patchedCves.filter((cve) =>
+      cve[analyzer].includes('✖')
+    ).length;
+    const trueNegative = patchedCves.filter((cve) =>
+      cve[analyzer].includes('✓')
+    ).length;
+    console.log(
+      'False Positive (FP): ',
+      falsePositives,
+      ' True Negative (TN): ',
+      trueNegative
+    );
+  }
+
   // failed is FN as tool outputted that file has no error while error was there
   // success is TP because tool outputted that file has error while error was there
   console.log(

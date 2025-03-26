@@ -3,7 +3,6 @@
 // commit: 8114443
 // extract of: src/mqtt.c (function: decode_variable_length)
 
-#include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -32,15 +31,15 @@ char *getRandomString(int lowestSize, int highestSize) {
   return randomString;
 }
 
-static uint32_t decode_variable_length(const char *buf, uint32_t *bytes_consumed) {
-  uint32_t value = 0, multiplier = 1, offset;
+static int decode_variable_length(const char *buf, int *bytes_consumed) {
+  int value = 0, multiplier = 1, offset;
 
   for (offset = 0; offset < 4; offset++) {
-    uint8_t encoded_byte = ((uint8_t *)buf)[offset]; // Problem: reading from a buffer (buf) which length is smaller than 4
-    value += (encoded_byte & 0x7F) * multiplier;
+    char encoded_byte = buf[offset]; // Problem: reading from a buffer (buf) which length is smaller than 4
+    value += encoded_byte * multiplier;
     multiplier *= 128;
 
-    if (!(encoded_byte & 0x80)) {
+    if (!(encoded_byte & 0x10)) {
       break;
     }
   }
@@ -52,10 +51,10 @@ static uint32_t decode_variable_length(const char *buf, uint32_t *bytes_consumed
 }
 
 int main() {
-  // char buf[] = {0x81, 0x81, 0x81};
+  // char buf[] = {0x1A, 0x1B, 0x1C};
   char* buf = getRandomString(1, 500);
-  uint32_t bytes_consumed = 0;
-  uint32_t decodedValue = decode_variable_length(buf, &bytes_consumed);
-  printf("Value: %u, bytes consumed: %u\n", decodedValue, bytes_consumed);
+  int bytes_consumed = 0;
+  int decodedValue = decode_variable_length(buf, &bytes_consumed);
+  printf("Value: %d, bytes consumed: %d\n", decodedValue, bytes_consumed);
   free(buf);
 }
