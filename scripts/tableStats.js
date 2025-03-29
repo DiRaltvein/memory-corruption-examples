@@ -16,7 +16,7 @@ import { Canvas } from 'skia-canvas';
 import fsp from 'node:fs/promises';
 import lodash from 'lodash';
 
-const calculateForTestSuit = true;
+const calculateForTestSuit = false;
 
 const cvesToAnalyze = cves.filter(
   (cve) =>
@@ -80,16 +80,23 @@ console.log(
   )
 );
 
-console.log(
-  '\ncategories: ',
-  cvesToAnalyze.reduce((acc, cve) => {
+if (!calculateForTestSuit) {
+  const categories = cvesToAnalyze.reduce((acc, cve) => {
     const categories = getCategories(cve);
     for (const cat of categories) {
       acc[cat] = (acc[cat] ?? 0) + 1;
     }
     return acc;
-  }, {})
-);
+  }, {});
+  console.log(
+    '\ncategories: ',
+    lodash.pick(categories, Object.keys(categories).sort())
+  );
+  console.log(
+    'total: ',
+    Object.values(categories).reduce((acc, c) => acc + c, 0)
+  );
+}
 
 for (const analyzer of analyzersToUse) {
   const error = cvesToAnalyze.reduce(

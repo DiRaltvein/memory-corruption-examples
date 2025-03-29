@@ -50,6 +50,8 @@ static void gf_xml_sax_parse_intern(GF_SAXParser *parser) {
   uint32_t count = parser->entryCount;
   for (size_t i = 0; i < count; i++) {
     XML_Entity ent = parser->entities[i];
+    if (ent.value == NULL)
+      continue;
     if (xml_sax_append_string(parser, ent.value) != 0) { // ent.value may be null in case pair value is not given
       break;
     }
