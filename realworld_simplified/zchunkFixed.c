@@ -25,14 +25,17 @@ uint32_t readUInt32(const unsigned char *ptr, uint32_t offset) {
 }
 
 bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size) {
-  unsigned char *temp = (unsigned char *)realloc(comp->data, comp->data_size + src_size); // Problem: integer overflow
+
+  if ((comp->data_size > comp->data_size + src_size) || (src_size > comp->data_size + src_size)) {
+    return false;
+  }
+
+  unsigned char *temp = (unsigned char *)realloc(comp->data, comp->data_size + src_size);
   if (!temp) {
     printf("Reallocation failed\n");
     return false;
   }
   comp->data = temp;
-  // Problem: if during realloc integer overflow happened then this memcpy will result in a buffer overflow
-  // In addition, because src array is not validated memcpy may result in src buffer overflow if src buffer has no data
   memcpy(comp->data + comp->data_size, src, src_size);
   comp->data_size += src_size;
   return true;
@@ -63,7 +66,7 @@ int main() {
     tag = data[offset++];
     length = readUInt32(data, offset);
     offset += 4;
-    if (offset + length > data_length || length == 0) { // Problem: integer overflow
+    if (offset + length > data_length || length == 0) { // Still integer overflow
       break;
     }
     if (tag == 0x50) {

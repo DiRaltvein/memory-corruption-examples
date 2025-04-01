@@ -2064,6 +2064,22 @@
     "symbiotic": "0/0/0(✖/✖)"
   },
   {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/4/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/1/0(✓)",
+    "symbiotic": "0/0/0(✓)"
+  },
+  {
     "id": "68",
     "CVE": "CVE-2023-40296",
     "vuln. type": "CWE-787",
@@ -2128,6 +2144,22 @@
     "symbiotic": "1/0/0(✓/✓)"
   },
   {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/10/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/1/0(✓)",
+    "symbiotic": "0/0/0(✓)"
+  },
+  {
     "id": "70",
     "CVE": "CVE-2023-48105",
     "vuln. type": "CWE-787",
@@ -2158,6 +2190,22 @@
     "infer": "1/0/0(✓/✓)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/0/0(✓)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "71",
@@ -3512,12 +3560,28 @@
     "file (function)": "-",
     "file len": "77",
     "func len": "13",
-    "clang": "0/3/0(✖/✖)",
+    "clang": "0/1/0(✓/✓)",
     "cppcheck": "0/0/0(✖/✖)",
-    "ikos": "0/30/0(✓/✖)",
-    "infer": "4/0/0(✓/✓)",
+    "ikos": "0/25/0(✓/✖)",
+    "infer": "4/0/0(✖/✖)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/30/0(✖)",
+    "infer": "4/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "115",
