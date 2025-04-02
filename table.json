@@ -2368,6 +2368,22 @@
     "symbiotic": "3/0/0(✓/✓)"
   },
   {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/10/0(✓)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/2/0(✓)",
+    "symbiotic": "0/0/0(✓)"
+  },
+  {
     "id": "76",
     "CVE": "CVE-2023-44709",
     "vuln. type": "CWE-190",
@@ -2622,6 +2638,22 @@
     "infer": "5/0/0(✓/✓)",
     "gcc": "0/8/0(✓/✖)",
     "symbiotic": "0/0/0(✖/✖)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/1/0(✖)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "0/75/0(✖)",
+    "infer": "4/0/0(✖)",
+    "gcc": "0/8/0(✖)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "84",
@@ -3968,6 +4000,22 @@
     "symbiotic": "1/0/0(✓/✓)"
   },
   {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/0/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "4/29/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
+  },
+  {
     "id": "129",
     "CVE": "CVE-2023-42295",
     "vuln. type": "CWE-190",
@@ -4622,6 +4670,22 @@
     "infer": "2/0/0(✓/✓)",
     "gcc": "0/0/0(✖/✖)",
     "symbiotic": "1/0/0(✓/✓)"
+  },
+  {
+    "id": "Fix",
+    "CVE": "",
+    "vuln. type": "",
+    "Project": "",
+    "Commit (hash)": "",
+    "file (function)": "-",
+    "file len": "",
+    "func len": "",
+    "clang": "0/1/0(✓)",
+    "cppcheck": "0/0/0(✓)",
+    "ikos": "3/34/0(✖)",
+    "infer": "0/0/0(✓)",
+    "gcc": "0/0/0(✓)",
+    "symbiotic": "0/0/0(✓)"
   },
   {
     "id": "150",
