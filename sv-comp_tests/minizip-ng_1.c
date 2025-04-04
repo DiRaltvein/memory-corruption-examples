@@ -51,19 +51,13 @@ int32_t mz_path_convert_slashes(char *path, char slash) {
 }
 
 int main() {
-  // if (argc < 2) {
-  //   printf("Usage %s <file system path>\n", argv[0]);
-  //   return 1;
-  // }
-  // const char *path = argv[1];
-  // size_t path_length = strlen(path);
-
   const char *path = getRandomString(0, 500);
   size_t path_length = strlen(path);
 
   char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
   if (pathwfs == NULL) {
     printf("Out of memory\n");
+    free(path);
     return 1;
   }
   strncat(pathwfs, path, path_length);
@@ -75,4 +69,5 @@ int main() {
     printf("provided path does not have a slash at the end\n");
   }
   free(pathwfs);
+  free(path);
 }

@@ -63,7 +63,6 @@ void initDsi(DSI *dsi, char *executableName) {
 }
 
 int main() {
-
   char* executableName = getRandomString(5, 50);
 
   DSI dsi = {0};

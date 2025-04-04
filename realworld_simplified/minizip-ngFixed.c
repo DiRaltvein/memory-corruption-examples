@@ -5,9 +5,6 @@
 
 #include <stdio.h>
 
-// mz_path_resolve function can write out of bound of the memory segment where output pointer points. The write out of bound is only 1 byte before the buffer.
-// eg if output points to 0x000020 then 0x000019 can be overwritten
-
 // function that resolves (simplifies) paths.
 // if path is given as 'c:\test\123\..\abc.txt' it will get resolved to 'c:\test\abc.txt' ('c:\test\abc.txt' will be written into output buffer)
 int mz_path_resolve(const char *path, char *output, int max_output) {
@@ -35,29 +32,24 @@ int mz_path_resolve(const char *path, char *output, int max_output) {
 
             /* Search backwards for previous slash */
             if (target != output) {
-              target -= 1; // Problem: do while loop substracts target 2 times and because of that target pointer goes out of bound of the output buffer
+              target -= 1;
               do {
                 if ((target == output) || (*target == '\\') || (*target == '/'))
                   break;
 
-                target -= 1; // second substraction of the same pointer
+                target -= 1;
                 max_output += 1;
               } while (target > output);
             }
 
-            // after do while loop target may be out of bound because if initial addresses were as follows:
-            // output: 0x000020
-            // target: 0x000021
-            // then after do while loop target will point to address 0x00019 that will be out of bound
-
-            *target = 0; // write out of bound
+            *target = 0;
             continue;
           }
         }
       }
     }
 
-    *target = *source; // write out of bound
+    *target = *source;
 
     source += 1;
     target += 1;

@@ -42,7 +42,7 @@ int decode(RAnalOp *op) {
     const uint8_t *p = buf + 1;
     int i = 1;
     len--;
-    while (i < len && i < 0xfe && *p) { // Problem: Read out of bound of pointer p because length is greater than 255
+    while (i < len && i < 0xfe && *p) {
       if (*p == ']') {
         op->size = i;
         goto beach;

@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// input like ./a.out 'c' will produce unexpected result
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     printf("Usage: %s <string to parse>\n", argv[0]);

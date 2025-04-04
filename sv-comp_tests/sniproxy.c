@@ -47,4 +47,6 @@ int main() {
 
     printf("%s\n", ip_buf);
   }
+
+  free(hostname_or_ip);
 }

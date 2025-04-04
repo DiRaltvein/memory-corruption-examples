@@ -54,5 +54,4 @@ int main() {
   strcat(script, "')");
   free(script);
   free(sanitized_url);
-  return 0;
 }

@@ -46,7 +46,7 @@ int __parse_json_members(const char *cursor, const char **end) {
     cursor++;
     int len = __json_string_length(cursor);
     if (len < 0) {
-      return -1; // here should be a return not a break, otherwise status code returned to main function will not indicate an error when an error actually occured when calculating length of a string
+      return -1;
     }
 
     char *value = calloc(len + 1, sizeof(char));
@@ -80,13 +80,13 @@ int __parse_json_members(const char *cursor, const char **end) {
 // logic is pretty much the same as with json where you have one object {...} and nothing can follow after it otherwise json input is invalid
 int main() {
   // char doc[] = "{\"Hello\",\"World\",\"!\"}"; // valid input
-  char doc[] = "{\""; // input that breaks everything
+  char doc[] = "{\"";
   const char *docp = doc;
 
   int ret = __parse_json_members(docp, &docp);
   if (ret >= 0) {
     // 0x20 is a space character
-    while (*docp == 0x20) { // Problem: access out of bound
+    while (*docp == 0x20) {
       docp++;
     }
 

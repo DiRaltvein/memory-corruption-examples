@@ -78,6 +78,7 @@ int main() {
   comp.data = calloc(7, sizeof(unsigned char));
   if (!comp.data) {
     printf("out of memory");
+    free(data);
     exit(1);
   }
   char dataArray[] = "Data: ";

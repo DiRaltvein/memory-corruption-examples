@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #define TEMPLATE_READ_VALUE(Type, p) \
-  (p += sizeof(Type), *(Type *)(p - sizeof(Type))) // Problem: read out of bound. Initially given pointer (p) is out of bound by 1 and it is dereferenced
+  (p += sizeof(Type), *(Type *)(p - sizeof(Type)))
 
 int main() {
   uint8_t p_ar[3] = {0, 1, 2};

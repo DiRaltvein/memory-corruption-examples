@@ -14,17 +14,16 @@ int vq_getchain(struct iovec *iov) {
   for (; i < 32; i++) {
     int iov_len = rand() % 10;
     if (iov_len == 9) {
-      return -1; // some error because of what not all iovec structs could be generated
+      return -1;
     }
     iov[i].iov_len = iov_len;
   }
   return i;
 }
 
-// iov is an array with iovec structs and number of structs in array is defined by iov_len number
 void iovec_pull(struct iovec **iov, int iov_len, int *result) {
   *result = 0;
-  while (iov_len) { // Problem: negative iov_len will result in a out of bound memory access as well as infinite loop (or at least until program exits with 'Segmentation fault')
+  while (iov_len) {
     *result += (*iov)[0].iov_len;
     iov_len--;
     (*iov)++;
@@ -35,7 +34,7 @@ int main() {
   int iov_len, result;
   struct iovec iov_array[32];
   struct iovec *iov = iov_array;
-  iov_len = vq_getchain(iov); // generate iovec structs array but do not check for the returned error
+  iov_len = vq_getchain(iov);
   if (iov_len < 0) {
     return 0;
   }

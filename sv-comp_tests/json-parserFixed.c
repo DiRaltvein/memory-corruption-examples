@@ -1,0 +1,122 @@
+// https://www.cvedetails.com/cve/CVE-2023-23088/
+// repository: https://github.com/Barenboim/json-parser
+// commit: fc599bf
+// extract of: json_parser.c (function: __parse_json_members)
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = __VERIFIER_nondet_int();
+  while (stringSize < lowestSize || stringSize > highestSize) {
+    stringSize = __VERIFIER_nondet_int();
+  }
+
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+
+static int __json_string_length(const char *cursor) {
+  int len = 0;
+
+  while (1) {
+    if (*cursor == '\"')
+      break;
+
+    if (*(const unsigned char *)cursor < ' ')
+      return -2;
+
+    cursor++;
+    if (cursor[-1] == '\\') {
+      if (!*cursor)
+        return -2;
+
+      cursor++;
+    }
+
+    len++;
+  }
+
+  return len;
+}
+
+int __parse_json_members(const char *cursor, const char **end) {
+  if (*cursor != '{') {
+    return -1;
+  }
+
+  cursor++;
+
+  while (1) {
+    if (*cursor != '\"') {
+      return -1;
+    }
+
+    cursor++;
+    int len = __json_string_length(cursor);
+    if (len < 0) {
+      return -1;
+    }
+
+    char *value = calloc(len + 1, sizeof(char));
+    if (!value) {
+      printf("Out of memory!\n");
+      return -1;
+    }
+
+    memcpy(value, cursor, len);
+    printf("%s\n", value);
+    free(value);
+
+    cursor += len + 1;
+
+    if (*cursor == ',') {
+      cursor++;
+    } else if (*cursor == '}') {
+      break;
+    } else {
+      return -2;
+    }
+  }
+
+  *end = cursor + 1;
+  return 0;
+}
+
+// Extract of functionality that parses json
+// Extracted functionality only parses strings that are not actually formatted as json but are rather in a format "{\"<string1>\",\"<string2>\",\"<string3>\"...}"
+// after finishing with parsing string algorithm also checks whether after closing bracket } any data follows and if it does then input is condidered 'invalid'.
+// logic is pretty much the same as with json where you have one object {...} and nothing can follow after it otherwise json input is invalid
+int main() {
+  // char doc[] = "{\"Hello\",\"World\",\"!\"}"; // valid input
+  char *randomString = getRandomString(5, 500);
+  const char *docp = randomString;
+
+  int ret = __parse_json_members(docp, &docp);
+  if (ret >= 0) {
+    // 0x20 is a space character
+    while (*docp == 0x20) {
+      docp++;
+    }
+
+    if (*docp) {
+      printf("Invalid input\n");
+    }
+  }
+  free(randomString);
+}

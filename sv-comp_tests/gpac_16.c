@@ -135,4 +135,5 @@ int main() {
   size_t len = strlen(sdt_data);
 
   gf_m2ts_process_sdt(sdt_data, len);
+  free(sdt_data);
 }

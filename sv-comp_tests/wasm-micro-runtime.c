@@ -37,7 +37,7 @@ char *getRandomString(int lowestSize, int highestSize) {
 }
 
 int main() {
-  uint8_t* p_ar = getRandomString(0, 5);
+  uint8_t* p_ar = (uint8_t*)getRandomString(0, 5);
   uint8_t *p = p_ar;
   uint8_t *p_end = p + 3;
 

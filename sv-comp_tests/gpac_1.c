@@ -110,10 +110,7 @@ int main() {
   //     0x00};
 
   char *line = getRandomString(5, 1000);
-
   gf_text_get_UTF8_line(line);
-
   printf("%s\n", line);
-
   free(line);
 }

@@ -14,6 +14,7 @@
     "initializer_list": "c",
     "string": "c",
     "string.h": "c",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "stdio.h": "c"
   }
 }

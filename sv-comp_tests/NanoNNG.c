@@ -129,6 +129,7 @@ int main() {
 
   if (packet[pos] != CMD_CONNECT) {
     printf("Malformed packet\n");
+    free(packet);
     return 1;
   } else {
     pos++;
@@ -140,6 +141,7 @@ int main() {
 
   char *body = (char *)copyn_utf8_str(packet, &pos, &len_of_str, max - pos);
   if (body == NULL) {
+    free(packet);
     return 1;
   }
 	printf("Decoded sentence: %s\n", body);
@@ -147,4 +149,5 @@ int main() {
 	printf("Some out of bound memory access byte: %u", packet[pos]); // Problem: access of packet out of bound
 
   free(body);
+  free(packet);
 }

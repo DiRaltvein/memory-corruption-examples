@@ -185,4 +185,5 @@ int main() {
   iconv_close(ctx->from_oem);
   iconv_close(ctx->to_oem);
   free(ctx);
+  free(data);
 }

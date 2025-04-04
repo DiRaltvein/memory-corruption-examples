@@ -59,7 +59,7 @@ uint64_t r_read_le64(const void *src) {
 }
 
 int main() {
-  char *buf = getRandomString(5, 1000);
+  char *buf = getRandomString(1, 1000);
   int j;
   for (j = 0; j < strlen(buf); j += 8) {
     r_read_le64(buf + j); // if buf is less than 8 bytes long than later try to read 8 bytes from it will result in an access out of bound problem
