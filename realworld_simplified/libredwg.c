@@ -66,8 +66,8 @@ int main() {
 
   uint16_t crc = bit_calc_CRC(
       0xC0C1,
-      (unsigned char *)data + 4, // skip length definition
-      dataSize - 4               // skip 4 bytes that show length in the beggining
+      (unsigned char *)data + sizeof(int), // skip length definition
+      dataSize - sizeof(int)               // skip 4 bytes that show length in the beggining
   );
 
   printf("CRC of message is %d\n", crc);

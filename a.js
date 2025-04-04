@@ -161,13 +161,13 @@ oaf(
 // symbiotic
 
 // greps
-for (const noteType of ['error', 'warning', 'note']) {
-  console.log(
-    `${c('- 2>&1', true)} | grep -Ec "${removeLeadingSlashWithDot(
-      fileToAnalyze
-    )}:[0-9]+:([0-9]+:)? ${noteType}:"\n`
-  );
-}
+// for (const noteType of ['error', 'warning', 'note']) {
+//   console.log(
+//     `${c('- 2>&1', true)} | grep -Ec "${removeLeadingSlashWithDot(
+//       fileToAnalyze
+//     )}:[0-9]+:([0-9]+:)? ${noteType}:"\n`
+//   );
+// }
 
 console.log(
   `${c('- 2>&1', true)} | grep -E "${removeLeadingSlashWithDot(

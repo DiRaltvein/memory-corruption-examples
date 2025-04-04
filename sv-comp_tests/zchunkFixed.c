@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 #define bool _Bool
@@ -20,23 +20,28 @@ typedef struct {
 } zckComp;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -54,7 +59,7 @@ bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size
     return false;
   }
 
-  unsigned char *temp = (unsigned char *)realloc(comp->data, comp->data_size + src_size);
+  unsigned char *temp = realloc(comp->data, comp->data_size + src_size);
   if (!temp) {
     printf("Reallocation failed\n");
     return false;
@@ -68,12 +73,12 @@ bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size
 // Program reads entries from file in form: (tag 1 byte), (length 4 byte), null terminated string
 // if tag is not 0x50 it is skipped. Values of tags with value 0x50 tags are concatinated togeather and printed at the end of function
 int main() {
-  char* data = getRandomString(5, 1000);
-  size_t data_length = strlen(data);
+  size_t data_length = getNumberInRange(5, 1000);
+  unsigned char* data = getRandomByteStream(data_length);
   uint32_t offset = 0;
 
   zckComp comp = {0};
-  comp.data = (unsigned char *)calloc(6, sizeof(unsigned char));
+  comp.data = calloc(6, sizeof(unsigned char));
   if (comp.data == NULL) {
     printf("out of memory");
     free(data);

@@ -43,6 +43,11 @@ void gf_text_get_UTF8_line(char *szLine) {
 
   u32 j = 0;
   u32 len = (u32)strlen(szLine);
+
+  if (len == 0) {
+    return;
+  }
+
   for (u32 i = 0; i < len; i++) {
     if ((szLine[i] & 0x80)) {
       /*non u8 (likely some win-CP)*/

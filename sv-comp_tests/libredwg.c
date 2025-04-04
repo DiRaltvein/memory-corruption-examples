@@ -11,27 +11,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -86,15 +79,15 @@ int main() {
   //     0x66, 0x65, 0x72, 0x20, 0x6f, 0x76, 0x65, 0x72, 0x66, 0x6c, 0x6f, 0x77, 0x20, 0x61, 0x6c, 0x77,
   //     0x61, 0x79, 0x73, 0x20, 0x68, 0x61, 0x70, 0x70, 0x65, 0x6e, 0x3f};
 
-  char* data = getRandomString(50, 1000);
+  unsigned char* data = getRandomByteStream(50);
   int dataSize = 0;
 
   memcpy(&dataSize, data, sizeof(int));
 
   uint16_t crc = bit_calc_CRC(
       0xC0C1,
-      (unsigned char *)data + 4, // skip length definition
-      dataSize - 4               // skip 4 bytes that show length in the beggining
+      data + sizeof(int), // skip length definition
+      dataSize - sizeof(int) // skip 4 bytes that show length in the beggining
   );
 
   printf("CRC of message is %d\n", crc);

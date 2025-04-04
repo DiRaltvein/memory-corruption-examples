@@ -8,8 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
+
 
 #define STUN_A_LAST_MANDATORY 0x2020
 #define STUN_A_OPTIONAL 0x7fff
@@ -30,23 +31,28 @@ typedef struct stun_attr_s {
 } stun_attr_t;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -56,13 +62,13 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   int len = get16(p, 2); // get length from p that is potentially user controller variable (or in this case just malicious hardcoded data)
 
   if (attr_type > STUN_A_LAST_MANDATORY && attr_type < STUN_A_OPTIONAL) {
-    exit(1);
+    return 1;
   }
 
   *attr = (stun_attr_t *)calloc(1, sizeof(stun_attr_t));
   if (!(*attr)) {
     printf("Out of memory!\n");
-    exit(1);
+    return 1;
   }
   p += 4;
   (*attr)->enc_buf.size = len;
@@ -70,7 +76,7 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   if (!(*attr)->enc_buf.data) {
     printf("Out of memory!\n");
     free(*attr);
-    exit(1);
+    return 1;
   }
   memcpy((*attr)->enc_buf.data, p, len); // Problem: reading data from p of length that was read from p. p may be smaller then len leading to buffer overflow
 }
@@ -84,10 +90,11 @@ int main() {
   //     0x66, 0x6c, 0x6f, 0x77, 0x20, 0x68, 0x61, 0x70,
   //     0x70, 0x65, 0x6e, 0x65, 0x64, 0x21, 0x00};
 
-  char* data = getRandomString(5, 1000);
+  int size = getNumberInRange(5, 1000);
+  unsigned char* data = getRandomByteStream(5, 1000);
 
   stun_attr_t *attr = {0};
-  stun_parse_attribute((unsigned char *)data, &attr);
+  stun_parse_attribute(data, &attr);
   if (attr) {
     printf("data: %s\n", attr->enc_buf.data);
     free(attr->enc_buf.data);

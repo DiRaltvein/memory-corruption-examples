@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 #define STUN_A_LAST_MANDATORY 0x0023
@@ -18,23 +18,28 @@ extern int __VERIFIER_nondet_int(void);
    ((b)[(offset) + 1] << 0))
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -74,7 +79,10 @@ int main() {
   // unsigned char data[] = {
   //     0x00, 0x09, 0x00, 0x00, 0x00};
   // size_t length = sizeof(data) / sizeof(data[0]);
-  char* data = getRandomString(4, 100);
+  int size = getNumberInRange(4, 100);
+  unsigned char* data = getRandomByteStream(size);
 
-  return stun_parse_attribute((unsigned char *)data, strlen(data));
+  int ret = stun_parse_attribute(data, size);
+  free(data);
+  return ret;
 }

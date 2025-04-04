@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
 
 #define fallthrough __attribute__((__fallthrough__))
 
@@ -19,16 +20,27 @@ struct razer_report {
 };
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   return randomString;
 }
@@ -61,8 +73,8 @@ static void razer_send_payload(struct razer_report *request_report) {
 }
 
 int main() {
-  size_t count = 200;
-  const char *buf = getRandomString(count);
+  size_t count = getNumberInRange(5, 300);
+  const unsigned char *buf = getRandomByteStream(count);
 
   struct razer_report report = {0};
   size_t offset = 0;
@@ -92,7 +104,7 @@ int main() {
       break;
     }
 
-    report = razer_chroma_extended_matrix_set_custom_frame2(row_id, start_col, stop_col, (unsigned char *)&buf[offset]);
+    report = razer_chroma_extended_matrix_set_custom_frame2(row_id, start_col, stop_col, &buf[offset]);
     razer_send_payload(&report);
 
     // *3 as its 3 bytes per col (RGB)

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
 
 #define UINT_MAX (__INT_MAX__ * 2U + 1U)
 
@@ -21,9 +21,9 @@ void check_overflow(unsigned int val1, unsigned int val2, unsigned int val3) {
 
 // Example of input that will overflow: 4294967195 4294967290 2849931574
 int main() {
-  unsigned int val1 = (unsigned int) __VERIFIER_nondet_int();
-  unsigned int val2 = (unsigned int) __VERIFIER_nondet_int();
-  unsigned int val3 = (unsigned int) __VERIFIER_nondet_int();
+  unsigned int val1 = __VERIFIER_nondet_uint();
+  unsigned int val2 = __VERIFIER_nondet_uint();
+  unsigned int val3 = __VERIFIER_nondet_uint();
 
   check_overflow(val1, val2, val3);
 

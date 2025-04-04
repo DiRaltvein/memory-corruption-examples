@@ -891,9 +891,9 @@ char *getRandomString(int lowestSize, int highestSize) {
   return randomString;
 }
 int main() {
-  uint8_t* p_ar = (uint8_t*)getRandomString(0, 5);
+  uint8_t* p_ar = (uint8_t*)getRandomString(0, 500);
   uint8_t *p = p_ar;
-  uint8_t *p_end = p + 3;
+  uint8_t *p_end = p + strlen(p_ar);
   while (p < p_end) {
     uint8_t val = (p += sizeof(uint8_t), *(uint8_t *)(p - sizeof(uint8_t)));
     printf("%d\n", val);

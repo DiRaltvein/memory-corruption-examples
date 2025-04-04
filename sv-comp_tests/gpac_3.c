@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 typedef struct {
@@ -21,19 +21,19 @@ typedef struct {
 /**
  * Just a utility function in test creation that generates random string of specified size
  */
-char *getRandomString(int lowestSize, int highestSize) {
+unsigned char *getRandomUnsignedString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
     stringSize = __VERIFIER_nondet_int();
   }
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  unsigned char *randomString = (unsigned char*)calloc(stringSize + 1, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   randomString[stringSize] = '\0';
   return randomString;
@@ -91,7 +91,7 @@ void latm_dmx_sync_frame_bs(GF_BitStream *bs, uint32_t *nb_bytes, uint8_t *buffe
 
 int main() {
   // unsigned char data[] = "\x58The golden sun dips below the horizon, painting the sky in hues of fire and gentle rose.";
-  unsigned char* data = getRandomString(5, 5000);
+  unsigned char* data = getRandomUnsignedString(5, 5000);
   GF_BitStream bs = {0};
   bs.position = 0;
   bs.data = data;

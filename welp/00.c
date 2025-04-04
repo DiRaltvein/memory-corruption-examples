@@ -2,6 +2,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
+
+extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
+
+// ------------------------------------------------------------------------------------------------------------------------------------- \\
+
+
 extern char __VERIFIER_nondet_char(void);
 
 /**

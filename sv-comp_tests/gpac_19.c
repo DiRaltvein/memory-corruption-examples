@@ -11,6 +11,9 @@
 #define strnicmp strncasecmp
 #define PAD_EVEN(x) (((x) + 1) & ~1)
 
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
+
 typedef struct {
   unsigned char *data;
   size_t data_size;
@@ -19,27 +22,29 @@ typedef struct {
   size_t pos;
 } avi_t;
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -170,13 +175,15 @@ int main() {
   // };
   // size_t dataSize = sizeof(data) / sizeof(data[0]);
 
-  unsigned char *data = getRandomString(5, 1000);
-  size_t dataSize = strlen(data);
+  size_t dataSize = getNumberInRange(5, 5000);
+  unsigned char* data = getRandomByteStream(dataSize);
 
   avi_t AVI = {0};
-  AVI.data = (unsigned char *)data;
+  AVI.data = data;
   AVI.data_size = dataSize;
   AVI.pos = 0;
 
-  return avi_parse_input_file(&AVI);
+  int ret = avi_parse_input_file(&AVI);
+  free(data);
+  return ret;
 }

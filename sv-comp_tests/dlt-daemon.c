@@ -10,11 +10,28 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char __VERIFIER_nondet_char(void);
+
 typedef struct sDltFile {
   FILE *handle;    /**< file handle of opened file */
   long *index;     /**< file positions of all messages for fast access to file, only filtered messages */
   int32_t counter; /**< number of messages in file */
 } DltFile;
+
+/**
+ * Just a utility function in test creation that generates random string of specified size
+ */
+char *getRandomString(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == NULL) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 
 void readMessageFromFile(DltFile *file, char **message) {
   if (file == NULL || feof(file->handle)) {
@@ -102,12 +119,12 @@ int main() {
   // There is a problem with all this reading as negative indexes are not checked and read out of bound is possible with negative numebrs
   printf("Input a number that would correspond to an index of a message in hex file to see the message on that position. Alternatively input 'q' to stop the program.\n");
   while (1) {
-    char userValue[5] = {0};
-    scanf("%4s", (char *)&userValue);
-    if (userValue[0] == 'q') {
+    char* userValue = getRandomString(1, 5);
+    if (*userValue == 'q') {
       break;
     }
     dlt_file_message(&file, atoi(userValue));
+    free(userValue);
   };
 
   fclose(file.handle);

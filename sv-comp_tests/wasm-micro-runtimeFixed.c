@@ -36,9 +36,9 @@ char *getRandomString(int lowestSize, int highestSize) {
 }
 
 int main() {
-  uint8_t* p_ar = (uint8_t*)getRandomString(0, 5);
+  uint8_t* p_ar = (uint8_t*)getRandomString(0, 500);
   uint8_t *p = p_ar;
-  uint8_t *p_end = p + 3;
+  uint8_t *p_end = p + strlen(p_ar);
 
   while (p < p_end) {
     uint8_t val = TEMPLATE_READ_VALUE(uint8_t, p);

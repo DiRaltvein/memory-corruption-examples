@@ -896,6 +896,9 @@ void gf_text_get_UTF8_line(char *szLine) {
   char szLineConv[2048] = {0};
   u32 j = 0;
   u32 len = (u32)strlen(szLine);
+  if (len == 0) {
+    return;
+  }
   for (u32 i = 0; i < len; i++) {
     if ((szLine[i] & 0x80)) {
       if (i + 1 < len && (szLine[i + 1] & 0xc0) != 0x80) {

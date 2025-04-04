@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 #define bool _Bool
@@ -19,23 +19,28 @@ typedef struct {
 } zckComp;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -69,20 +74,20 @@ int main() {
   //     0x10, 0x04, 0x00, 0x00, 0x00, 0x73, 0x6b, 0x69, 0x70,              // second message that is skipped with tag 0x10
   //     0x50, 0xff, 0xff, 0xff, 0xff, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21}; // third message with tag 0x50
   // size_t data_length = sizeof(data);
-  char* data = getRandomString(5, 1000);
-  size_t data_length = strlen(data);
+  size_t data_length = getNumberInRange(5, 1000);
+  unsigned char* data = getRandomByteStream(data_length);
 
   size_t offset = 0;
 
   zckComp comp = {0};
-  comp.data = calloc(7, sizeof(unsigned char));
+  comp.data = calloc(6, sizeof(unsigned char));
   if (!comp.data) {
     printf("out of memory");
     free(data);
     exit(1);
   }
-  char dataArray[] = "Data: ";
-  memcpy(comp.data, dataArray, 6);
+  memcpy(comp.data, "Data: ", 6);
+  comp.data_size = 6;
 
   int tag = 0;
   size_t length = 0;

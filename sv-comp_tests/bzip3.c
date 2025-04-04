@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 typedef uint8_t u8;
@@ -16,23 +16,28 @@ typedef uint32_t u32;
 typedef int32_t s32;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -92,9 +97,8 @@ int main() {
   //     0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x41, 0x42, 0x42, 0x41, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42};
   // size_t in_size = sizeof(data) / sizeof(data[0]);
 
-  unsigned char* data = (unsigned char*)getRandomString(10, 1000);
-  size_t in_size = strlen(data);
-
+  size_t in_size = getNumberInRange(10, 1000);
+  unsigned char* data = getRandomByteStream(in_size);
   unsigned char *datap = data;
 
   if (in_size < 4)

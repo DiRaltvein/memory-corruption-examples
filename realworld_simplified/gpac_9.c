@@ -13,11 +13,11 @@ typedef uint32_t u32;
 int main() {
   uint8_t splitting_flag = 1;
   u32 i, num_scalability_types, sum;
-  char scalability_mask[] = "0000000000000000";
+  char scalability_mask[] = "abcdef@#@!_A)#($!#@'\'\"QW)0";
   u32 dimension_id_len[16];
 
   num_scalability_types = 0;
-  for (i = 0; i < 16; i++) {
+  for (i = 0; i < strlen((char*)scalability_mask); i++) {
     num_scalability_types += atoi(&scalability_mask[i]);
   }
   if (num_scalability_types >= 16) {
