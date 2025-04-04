@@ -1,3 +1,12 @@
+
+typedef unsigned int size_t;
+typedef void *iconv_t;
+extern iconv_t iconv_open (const char *__tocode, const char *__fromcode);
+extern size_t iconv (iconv_t __cd, char **__restrict __inbuf,
+       size_t *__restrict __inbytesleft,
+       char **__restrict __outbuf,
+       size_t *__restrict __outbytesleft);
+extern int iconv_close (iconv_t __cd);
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
 typedef unsigned int __u_int;
@@ -92,7 +101,6 @@ typedef int intptr_t;
 typedef unsigned int uintptr_t;
 typedef __intmax_t intmax_t;
 typedef __uintmax_t uintmax_t;
-typedef unsigned int size_t;
 typedef __builtin_va_list va_list;
 typedef __builtin_va_list __gnuc_va_list;
 typedef struct
@@ -871,12 +879,28 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+typedef void *iconv_t;
+struct ntlm_ctx {
+  iconv_t from_oem;
+  iconv_t to_oem;
+};
+struct ntlm_buffer {
+  uint8_t *data;
+  size_t length;
+};
+struct wire_field_hdr {
+  uint16_t len;
+  uint32_t offset;
+};
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
     stringSize = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  char *randomString = (char *)calloc(stringSize + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
@@ -887,36 +911,103 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
+int ntlm_init_ctx(struct ntlm_ctx **ctx) {
+  struct ntlm_ctx *_ctx;
+  int ret = 0;
+  _ctx = calloc(1, sizeof(struct ntlm_ctx));
+  if (!_ctx) {
     return 1;
-  return 0;
+  }
+  _ctx->from_oem = iconv_open("UTF16LE", "UTF-8");
+  if (_ctx->from_oem == (iconv_t)-1) {
+    ret = 1;
+  }
+  _ctx->to_oem = iconv_open("UTF-8", "UTF16LE");
+  if (_ctx->to_oem == (iconv_t)-1) {
+    iconv_close(_ctx->from_oem);
+    ret = 1;
+  }
+  if (ret) {
+    do { free(_ctx); _ctx = ((void*)0); } while (0);
+  } else {
+    *ctx = _ctx;
+  }
+  return ret;
 }
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+static int ntlm_str_convert(iconv_t cd,
+                            const char *in, char *out,
+                            size_t baselen, size_t *outlen) {
+  char *_in;
+  size_t inleft, outleft;
+  size_t ret;
+  ret = iconv(cd, ((void*)0), ((void*)0), ((void*)0), ((void*)0));
+  if (ret == -1) {
+    return 1;
+  }
+  _in = ((void *)((uintptr_t)(in)));
+  inleft = baselen;
+  outleft = baselen * 2;
+  ret = iconv(cd, &_in, &inleft, &out, &outleft);
+  if (ret == -1) {
+    return 1;
+  }
+  if (outlen) {
+    *outlen = baselen * 2 - outleft;
   }
   return 0;
+}
+static int ntlm_decode_u16l_str_hdr(struct ntlm_ctx *ctx,
+                                    struct wire_field_hdr *str_hdr,
+                                    struct ntlm_buffer *buffer, char **str) {
+  char *in, *out = ((void*)0);
+  uint16_t str_len;
+  uint32_t str_offs;
+  size_t outlen = 0;
+  int ret = 0;
+  str_len = str_hdr->len;
+  if (str_len == 0)
+    return 1;
+  str_offs = str_hdr->offset;
+  if ((str_offs > buffer->length) ||
+      ((4294967295U) - str_offs < str_len) ||
+      (str_offs + str_len > buffer->length)) {
+    return 1;
+  }
+  in = (char *)&buffer->data[str_offs];
+  out = malloc(str_len * 2 + 1);
+  if (!out) {
+    return 1;
+  }
+  ret = ntlm_str_convert(ctx->to_oem, in, out, str_len, &outlen);
+  if (ret) {
+    do { free(out); out = ((void*)0); } while (0);
+  } else {
+    out[outlen] = '\0';
+  }
+  *str = out;
+  return ret;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
+  char *data = getRandomString(50, 5000);
+  size_t dataLen = strlen(data);
+  struct ntlm_ctx *ctx;
+  if (ntlm_init_ctx(&ctx)) {
+    printf("Could not initialize context\n");
+    exit(1);
   }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
+  struct wire_field_hdr str_hdr = {
+      .offset = 0,
+      .len = dataLen};
+  struct ntlm_buffer buffer = {
+      .data = (uint8_t *)data,
+      .length = dataLen};
+  char *result;
+  if (!ntlm_decode_u16l_str_hdr(ctx, &str_hdr, &buffer, &result)) {
+    printf("Result: %s\n", result);
+    free(result);
   }
-  free(pathwfs);
-  free(path);
+  iconv_close(ctx->from_oem);
+  iconv_close(ctx->to_oem);
+  free(ctx);
+  free(data);
 }

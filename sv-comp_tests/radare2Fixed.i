@@ -1,3 +1,7 @@
+typedef unsigned int size_t;
+typedef __builtin_va_list va_list;
+typedef __builtin_va_list __gnuc_va_list;
+
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
 typedef unsigned int __u_int;
@@ -62,39 +66,6 @@ __extension__ typedef int __intptr_t;
 __extension__ typedef unsigned int __socklen_t;
 typedef int __sig_atomic_t;
 __extension__ typedef __int64_t __time64_t;
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
-typedef __uint8_t uint8_t;
-typedef __uint16_t uint16_t;
-typedef __uint32_t uint32_t;
-typedef __uint64_t uint64_t;
-typedef __int_least8_t int_least8_t;
-typedef __int_least16_t int_least16_t;
-typedef __int_least32_t int_least32_t;
-typedef __int_least64_t int_least64_t;
-typedef __uint_least8_t uint_least8_t;
-typedef __uint_least16_t uint_least16_t;
-typedef __uint_least32_t uint_least32_t;
-typedef __uint_least64_t uint_least64_t;
-typedef signed char int_fast8_t;
-typedef int int_fast16_t;
-typedef int int_fast32_t;
-__extension__
-typedef long long int int_fast64_t;
-typedef unsigned char uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned int uint_fast32_t;
-__extension__
-typedef unsigned long long int uint_fast64_t;
-typedef int intptr_t;
-typedef unsigned int uintptr_t;
-typedef __intmax_t intmax_t;
-typedef __uintmax_t uintmax_t;
-typedef unsigned int size_t;
-typedef __builtin_va_list va_list;
-typedef __builtin_va_list __gnuc_va_list;
 typedef struct
 {
   int __count;
@@ -383,6 +354,10 @@ typedef __timer_t timer_t;
 typedef unsigned long int ulong;
 typedef unsigned short int ushort;
 typedef unsigned int uint;
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
 typedef __uint8_t u_int8_t;
 typedef __uint16_t u_int16_t;
 typedef __uint32_t u_int32_t;
@@ -871,52 +846,201 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+extern char __VERIFIER_nondet_char(void);
+typedef unsigned char ut8;
+typedef enum {
+  TYPE_FALSE = 'F',
+  TYPE_INT = 'i',
+  TYPE_NONE = 'N',
+  TYPE_TRUE = 'T',
+} pyc_marshal_type;
+typedef struct {
+  pyc_marshal_type type;
+  void *data;
+} pyc_object;
+typedef struct r_list_iter_t {
+  pyc_object *data;
+} RListIter;
+typedef struct r_buf_t {
+  char *data;
+  size_t len;
+  size_t offset;
+} RBuffer;
+char *getRandomString(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
+  for (int i = 0; i < size; i++) {
     randomString[i] = __VERIFIER_nondet_char();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+static ut8 get_ut8(RBuffer *buffer, _Bool *error) {
+  if (buffer->offset + 1 > buffer->len) {
+    *error = 1;
+    return 0;
   }
-  return 0;
+  return (ut8)buffer->data[buffer->offset++];
+}
+static int get_st32(RBuffer *buffer, _Bool *error) {
+  if (buffer->offset + sizeof(int) > buffer->len) {
+    *error = 1;
+    return 0;
+  }
+  int st32;
+  memcpy(&st32, buffer->data + buffer->offset, sizeof(int));
+  buffer->offset += sizeof(int);
+  return st32;
+}
+static void free_object(pyc_object *object) {
+  if (!object) {
+    return;
+  }
+  if (object->data) {
+    free(object->data);
+  }
+  free(object);
+}
+static pyc_object *get_none_object(void) {
+  pyc_object *ret;
+  ret = (pyc_object *)calloc(1, sizeof(pyc_object));
+  if (!ret) {
+    return ((void*)0);
+  }
+  ret->type = TYPE_NONE;
+  ret->data = strdup("None");
+  if (!ret->data) {
+    { free((void *)ret); ret = ((void*)0); };
+  }
+  return ret;
+}
+static pyc_object *get_false_object(void) {
+  pyc_object *ret = (pyc_object *)calloc(1, sizeof(pyc_object));
+  if (!ret) {
+    return ((void*)0);
+  }
+  ret->type = TYPE_FALSE;
+  ret->data = strdup("False");
+  if (!ret->data) {
+    { free((void *)ret); ret = ((void*)0); };
+  }
+  return ret;
+}
+static pyc_object *get_true_object(void) {
+  pyc_object *ret = (pyc_object *)calloc(1, sizeof(pyc_object));
+  if (!ret) {
+    return ((void*)0);
+  }
+  ret->type = TYPE_TRUE;
+  ret->data = strdup("True");
+  if (!ret->data) {
+    { free((void *)ret); ret = ((void*)0); };
+  }
+  return ret;
+}
+static pyc_object *get_int_object(RBuffer *buffer) {
+  _Bool error = 0;
+  pyc_object *ret = ((void*)0);
+  int i = get_st32(buffer, &error);
+  if (error) {
+    return ((void*)0);
+  }
+  ret = (pyc_object *)calloc(1, sizeof(pyc_object));
+  if (!ret) {
+    return ((void*)0);
+  }
+  ret->type = TYPE_INT;
+  int length = snprintf(((void*)0), 0, "%d", i);
+  ret->data = malloc(length + 1);
+  if (!ret->data) {
+    { free((void *)ret); ret = ((void*)0); };
+    return ((void*)0);
+  }
+  snprintf((char *)ret->data, length + 1, "%d", i);
+  return ret;
+}
+RListIter *r_list_append(pyc_object *data) {
+  RListIter *item = ((void*)0);
+  item = (RListIter *)malloc(sizeof(RListIter));
+  if (!item) {
+    return item;
+  }
+  item->data = data;
+  return item;
+}
+static pyc_object *get_object(RBuffer *buffer) {
+  _Bool error = 0;
+  pyc_object *ret = ((void*)0);
+  ut8 code = get_ut8(buffer, &error);
+  ut8 flag = code & '\x80';
+  RListIter *ref_idx = ((void*)0);
+  ut8 type = code & ~'\x80';
+  if (error) {
+    return ((void*)0);
+  }
+  if (flag) {
+    ret = get_none_object();
+    if (!ret) {
+      return ((void*)0);
+    }
+    ref_idx = r_list_append(ret);
+    if (!ref_idx) {
+      free_object(ret);
+      return ((void*)0);
+    }
+  }
+  switch (type) {
+  case TYPE_TRUE:
+    free_object(ret);
+    free(ref_idx);
+    return get_true_object();
+  case TYPE_FALSE:
+    free_object(ret);
+    free(ref_idx);
+    return get_false_object();
+  case TYPE_NONE:
+    free_object(ret);
+    free(ref_idx);
+    return get_none_object();
+  case TYPE_INT:
+    ret = get_int_object(buffer);
+    break;
+  case 1:
+    break;
+  default:
+    printf("Undefined type in get_object (0x%x)\n", type);
+    free_object(ret);
+    free(ref_idx);
+    return ((void*)0);
+  }
+  if (flag && ref_idx) {
+    if (ref_idx->data != ret) {
+      free_object((pyc_object *)ref_idx->data);
+    }
+    ref_idx->data = get_none_object();
+  }
+  if (ref_idx && ref_idx->data) {
+    printf("Object type: 0x%x\n", ref_idx->data->type);
+    free_object(ref_idx->data);
+  }
+  free(ref_idx);
+  return ret;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
+  char* data = getRandomString(10);
+  RBuffer buffer = {0};
+  buffer.data = (char *)&data;
+  buffer.len = strlen(data);
+  buffer.offset = 0;
+  pyc_object *obj = get_object(&buffer);
+  if (obj != ((void*)0)) {
+    printf("Object type: 0x%x\n", obj->type);
+    if (obj->type == TYPE_INT) {
+      printf("Extracted number: %s\n", (char *)obj->data);
+    }
+    free_object(obj);
   }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  free(data);
 }

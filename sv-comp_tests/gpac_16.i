@@ -926,4 +926,5 @@ int main() {
   u8 *sdt_data = (u8*)getRandomString(5, 1000);
   size_t len = strlen(sdt_data);
   gf_m2ts_process_sdt(sdt_data, len);
+  free(sdt_data);
 }

@@ -871,6 +871,11 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+typedef uint32_t u32;
+typedef uint8_t u8;
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +892,57 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+void gf_text_get_UTF8_line(char *szLine) {
+  char szLineConv[2048] = {0};
+  u32 j = 0;
+  u32 len = (u32)strlen(szLine);
+  for (u32 i = 0; i < len; i++) {
+    if ((szLine[i] & 0x80)) {
+      if (i + 1 < len && (szLine[i + 1] & 0xc0) != 0x80) {
+        if (j >= (sizeof(szLineConv) / sizeof((szLineConv)[0])))
+          break;
+        szLineConv[j++] = 0xc0 | ((szLine[i] >> 6) & 0x3);
+        szLine[i] &= 0xbf;
+      }
+      else if ((szLine[i] & 0xe0) == 0xc0) {
+        if (j >= (sizeof(szLineConv) / sizeof((szLineConv)[0])) || i >= len)
+          break;
+        szLineConv[j++] = szLine[i++];
+      }
+      else if ((szLine[i] & 0xf0) == 0xe0) {
+        if (j + 1 >= (sizeof(szLineConv) / sizeof((szLineConv)[0])) || i + 1 >= len)
+          break;
+        szLineConv[j++] = szLine[i++];
+        szLineConv[j++] = szLine[i++];
+      }
+      else if ((szLine[i] & 0xf8) == 0xf0) {
+        if (j + 2 >= (sizeof(szLineConv) / sizeof((szLineConv)[0])) || i + 2 >= len)
+          break;
+        szLineConv[j++] = szLine[i++];
+        szLineConv[j++] = szLine[i++];
+        szLineConv[j++] = szLine[i++];
+      } else {
+        i += 1;
+        continue;
+      }
+    }
+    if (j >= (sizeof(szLineConv) / sizeof((szLineConv)[0])) || i >= len)
+      break;
+    szLineConv[j++] = szLine[i];
   }
-  return 0;
+  if (j >= (sizeof(szLineConv) / sizeof((szLineConv)[0]))) {
+    printf("Line too long to convert to utf8 (len: %u)\n", len);
+    j = (sizeof(szLineConv) / sizeof((szLineConv)[0])) - 1;
+  }
+  if (j >= len) {
+    j = len - 1;
+  }
+  szLineConv[j] = 0;
+  strcpy(szLine, szLineConv);
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
-  }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  char *line = getRandomString(5, 1000);
+  gf_text_get_UTF8_line(line);
+  printf("%s\n", line);
+  free(line);
 }

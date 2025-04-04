@@ -1,3 +1,7 @@
+typedef unsigned int size_t;
+typedef __builtin_va_list va_list;
+typedef __builtin_va_list __gnuc_va_list;
+
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
 typedef unsigned int __u_int;
@@ -62,39 +66,6 @@ __extension__ typedef int __intptr_t;
 __extension__ typedef unsigned int __socklen_t;
 typedef int __sig_atomic_t;
 __extension__ typedef __int64_t __time64_t;
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
-typedef __uint8_t uint8_t;
-typedef __uint16_t uint16_t;
-typedef __uint32_t uint32_t;
-typedef __uint64_t uint64_t;
-typedef __int_least8_t int_least8_t;
-typedef __int_least16_t int_least16_t;
-typedef __int_least32_t int_least32_t;
-typedef __int_least64_t int_least64_t;
-typedef __uint_least8_t uint_least8_t;
-typedef __uint_least16_t uint_least16_t;
-typedef __uint_least32_t uint_least32_t;
-typedef __uint_least64_t uint_least64_t;
-typedef signed char int_fast8_t;
-typedef int int_fast16_t;
-typedef int int_fast32_t;
-__extension__
-typedef long long int int_fast64_t;
-typedef unsigned char uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned int uint_fast32_t;
-__extension__
-typedef unsigned long long int uint_fast64_t;
-typedef int intptr_t;
-typedef unsigned int uintptr_t;
-typedef __intmax_t intmax_t;
-typedef __uintmax_t uintmax_t;
-typedef unsigned int size_t;
-typedef __builtin_va_list va_list;
-typedef __builtin_va_list __gnuc_va_list;
 typedef struct
 {
   int __count;
@@ -383,6 +354,10 @@ typedef __timer_t timer_t;
 typedef unsigned long int ulong;
 typedef unsigned short int ushort;
 typedef unsigned int uint;
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
 typedef __uint8_t u_int8_t;
 typedef __uint16_t u_int16_t;
 typedef __uint32_t u_int32_t;
@@ -752,6 +727,14 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern void __assert_fail (const char *__assertion, const char *__file,
+      unsigned int __line, const char *__function)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+extern void __assert_perror_fail (int __errnum, const char *__file,
+      unsigned int __line, const char *__function)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
+extern void __assert (const char *__assertion, const char *__file, int __line)
+     __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
 extern void *memcpy (void *__restrict __dest, const void *__restrict __src,
        size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 extern void *memmove (void *__dest, const void *__src, size_t __n)
@@ -871,6 +854,9 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +873,35 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+char *mallocAndJoin2Dir(const char *dir1, const char *dir2) {
+  ((void) sizeof ((dir1 != ((void*)0) && dir2 != ((void*)0)) ? 1 : 0), __extension__ ({ if (dir1 != ((void*)0) && dir2 != ((void*)0)) ; else __assert_fail ("dir1 != NULL && dir2 != NULL", "/mnt/a/master/master/sv-comp_tests/zstdFixed.c", 38, __extension__ __PRETTY_FUNCTION__); }));
+  const size_t dir1Size = strlen(dir1);
+  const size_t dir2Size = strlen(dir2);
+  char *outDirBuffer, *buffer;
+  outDirBuffer = (char *)malloc(dir1Size + dir2Size + 2);
+  if (outDirBuffer == ((void*)0)) {
+    printf("Out of memory!\n");
+    exit(1);
   }
-  return 0;
+  memcpy(outDirBuffer, dir1, dir1Size);
+  outDirBuffer[dir1Size] = '\0';
+  if (dir2[0] == '.')
+    return outDirBuffer;
+  buffer = outDirBuffer + dir1Size;
+  if (dir1Size > 0 && *(buffer - 1) != '/') {
+    *buffer = '/';
+    buffer++;
+  }
+  memcpy(buffer, dir2, dir2Size);
+  buffer[dir2Size] = '\0';
+  return outDirBuffer;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
-  }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  char *dir1 = getRandomString(0, 100);
+  char* dir2 = getRandomString(0, 100);
+  char* joinedDirs = mallocAndJoin2Dir(dir1, dir2);
+  printf("%s\n", joinedDirs);
+  free(dir1);
+  free(dir2);
+  free(joinedDirs);
 }

@@ -1,3 +1,7 @@
+typedef unsigned int size_t;
+typedef __builtin_va_list va_list;
+typedef __builtin_va_list __gnuc_va_list;
+
 typedef unsigned char __u_char;
 typedef unsigned short int __u_short;
 typedef unsigned int __u_int;
@@ -62,39 +66,6 @@ __extension__ typedef int __intptr_t;
 __extension__ typedef unsigned int __socklen_t;
 typedef int __sig_atomic_t;
 __extension__ typedef __int64_t __time64_t;
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
-typedef __uint8_t uint8_t;
-typedef __uint16_t uint16_t;
-typedef __uint32_t uint32_t;
-typedef __uint64_t uint64_t;
-typedef __int_least8_t int_least8_t;
-typedef __int_least16_t int_least16_t;
-typedef __int_least32_t int_least32_t;
-typedef __int_least64_t int_least64_t;
-typedef __uint_least8_t uint_least8_t;
-typedef __uint_least16_t uint_least16_t;
-typedef __uint_least32_t uint_least32_t;
-typedef __uint_least64_t uint_least64_t;
-typedef signed char int_fast8_t;
-typedef int int_fast16_t;
-typedef int int_fast32_t;
-__extension__
-typedef long long int int_fast64_t;
-typedef unsigned char uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned int uint_fast32_t;
-__extension__
-typedef unsigned long long int uint_fast64_t;
-typedef int intptr_t;
-typedef unsigned int uintptr_t;
-typedef __intmax_t intmax_t;
-typedef __uintmax_t uintmax_t;
-typedef unsigned int size_t;
-typedef __builtin_va_list va_list;
-typedef __builtin_va_list __gnuc_va_list;
 typedef struct
 {
   int __count;
@@ -383,6 +354,10 @@ typedef __timer_t timer_t;
 typedef unsigned long int ulong;
 typedef unsigned short int ushort;
 typedef unsigned int uint;
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
 typedef __uint8_t u_int8_t;
 typedef __uint16_t u_int16_t;
 typedef __uint32_t u_int32_t;
@@ -871,6 +846,11 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+typedef unsigned char u8;
+typedef unsigned int u32;
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +867,67 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
+  u32 pos = 0;
+  while (pos < data_size) {
+    u32 descs_size, d_pos, ulen;
+    if (data_size - pos < 5)
+      return;
+    u32 service_id = (data[pos] << 8) + data[pos + 1];
+    u32 EIT_schedule = (data[pos + 2] & 0x2) ? 1 : 0;
+    u32 EIT_present_following = (data[pos + 2] & 0x1);
+    u32 running_status = (data[pos + 3] >> 5) & 0x7;
+    u32 free_CA_mode = (data[pos + 3] >> 4) & 0x1;
+    descs_size = ((data[pos + 3] & 0xf) << 8) | data[pos + 4];
+    pos += 5;
+    printf("service_id: %u\n", service_id);
+    printf("EIT_schedule: %u\n", EIT_schedule);
+    printf("EIT_present_following: %u\n", EIT_present_following);
+    printf("running_status: %u\n", running_status);
+    printf("free_CA_mode: %u\n", free_CA_mode);
+    printf("descs_size: %u\n", descs_size);
+    if (pos + descs_size > data_size) {
+      return;
+    }
+    d_pos = 0;
+    while (d_pos < descs_size) {
+      u8 d_tag = data[pos + d_pos];
+      u8 d_len = data[pos + d_pos + 1];
+      switch (d_tag) {
+      case 0x48:
+        d_pos += 2;
+        u8 service_type = data[pos + d_pos];
+        ulen = data[pos + d_pos + 1];
+        d_pos += 2;
+        char *provider = (char *)malloc(sizeof(char) * (ulen + 1));
+        memcpy(provider, data + pos + d_pos, sizeof(char) * ulen);
+        provider[ulen] = 0;
+        d_pos += ulen;
+        ulen = data[pos + d_pos];
+        d_pos += 1;
+        char *service = (char *)malloc(sizeof(char) * (ulen + 1));
+        memcpy(service, data + pos + d_pos, sizeof(char) * ulen);
+        service[ulen] = 0;
+        d_pos += ulen;
+        printf("Service type: 0x%x, Provider: %s, Service: %s\n", service_type, provider, service);
+        free(provider);
+        free(service);
+        break;
+      default:
+        printf("Skipping descriptor (0x%x) not supported\n", d_tag);
+        d_pos += d_len;
+        if (d_len == 0)
+          d_pos = descs_size;
+        break;
+      }
+    }
+    printf("\n");
+    pos += descs_size;
   }
-  return 0;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
-  }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  u8 *sdt_data = (u8*)getRandomString(5, 1000);
+  size_t len = strlen(sdt_data);
+  gf_m2ts_process_sdt(sdt_data, len);
+  free(sdt_data);
 }

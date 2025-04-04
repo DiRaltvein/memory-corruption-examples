@@ -871,6 +871,9 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +890,54 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+uint16_t *bit_utf8_to_TU(char *restrict str) {
+  uint16_t *wstr;
+  size_t i = 0;
+  size_t len = strlen(str);
+  unsigned char c;
+  if (len > 0xFFFE) {
+    printf("Overlong string truncated (len=%lu)\n", (unsigned long)len);
+    len = (65535) - 1;
   }
-  return 0;
+  wstr = (uint16_t *)calloc(2, len + 1);
+  if (!wstr) {
+    printf("Out of memory\n");
+    return ((void*)0);
+  }
+  while (len > 0 && (c = *str++)) {
+    len--;
+    if (c < 128) {
+      wstr[i++] = c;
+    } else if ((c & 0xe0) == 0xc0) {
+      if (len >= 1) {
+        wstr[i++] = ((c & 0x1f) << 6) | (str[1] & 0x3f);
+        len--;
+        str++;
+      }
+    } else if ((c & 0xf0) == 0xe0) {
+      if (len >= 2 && ((unsigned char)str[1] < 0x80 || (unsigned char)str[1] > 0xBF || (unsigned char)str[2] < 0x80 || (unsigned char)str[2] > 0xBF)) {
+        printf("utf-8: BAD_CONTINUATION_BYTE %s\n", str);
+      } else if (len >= 1 && c == 0xe0 && (unsigned char)str[1] < 0xa0) {
+        printf("utf-8: NON_SHORTEST %s\n", str);
+      } else if (len >= 2) {
+        wstr[i++] = ((c & 0x0f) << 12) | ((str[1] & 0x3f) << 6) | (str[2] & 0x3f);
+        str++;
+        str++;
+        len--;
+        len--;
+      }
+    }
+  }
+  return wstr;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
-  }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
+  char* randomString = getRandomString(5, 500);
+  uint16_t *converted = bit_utf8_to_TU(randomString);
+  if (converted) {
+    printf("String converted\n");
+    free(converted);
   } else {
-    printf("provided path does not have a slash at the end\n");
+    printf("Conversion failed\n");
   }
-  free(pathwfs);
-  free(path);
+  free(randomString);
 }

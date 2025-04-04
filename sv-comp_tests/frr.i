@@ -892,19 +892,22 @@ char *getRandomString(int lowestSize, int highestSize) {
 }
 int main() {
   char *version = getRandomString(10, 80);
-  char *versionp = (char *)version;
+  char *versionp = version;
   size_t verStringLength = strlen(version);
   uint8_t len = *versionp++;
   if (!len) {
     printf("Could not read version from argument string\n");
+    free(version);
     return 1;
   }
   if (verStringLength - 1 < len) {
     printf("malformed version string\n");
+    free(version);
     return 1;
   }
   char str[64 + 1];
   memcpy(str, versionp, len);
   str[len] = '\0';
   printf("Extracted version: %s\n", str);
+  free(version);
 }

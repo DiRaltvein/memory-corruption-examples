@@ -871,6 +871,12 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+typedef uint8_t u8;
+typedef uint32_t u32;
+typedef int32_t s32;
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +893,54 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
+static s32 read_neutral_s32(const u8 *data) {
+  return ((u32)data[0]) | (((u32)data[1]) << 8) | (((u32)data[2]) << 16) | (((u32)data[3]) << 24);
 }
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+s32 bz3_decode_block(unsigned char *datap, unsigned char *decoded_data, s32 data_size, s32 decoded_data_size) {
+  s32 decodedDataFinalSize = 0;
+  unsigned char *decodedDataInternalBuffer = (unsigned char *)calloc(decoded_data_size, sizeof(unsigned char));
+  if (!decodedDataInternalBuffer) {
+    printf("Out of memory\n");
+    return -1;
   }
-  return 0;
+  for (int i = 0; i < data_size && decodedDataFinalSize < decoded_data_size; i++) {
+    if (datap[i] == 'A') {
+      if (decodedDataFinalSize + 8 < decoded_data_size) {
+        strcpy((char *)decodedDataInternalBuffer + decodedDataFinalSize, "triple A");
+        decodedDataFinalSize += 8;
+        continue;
+      } else {
+        break;
+      }
+    }
+    decodedDataInternalBuffer[decodedDataFinalSize++] = datap[i];
+  }
+  decodedDataInternalBuffer[decoded_data_size - 1] = '\0';
+  if (decodedDataFinalSize > decoded_data_size || decodedDataFinalSize < 0) {
+    printf("decodedDataFinalSize length is greater than decoded_data_size\n");
+    free(decodedDataInternalBuffer);
+    return -1;
+  }
+  memcpy(decoded_data, decodedDataInternalBuffer, decodedDataFinalSize);
+  free(decodedDataInternalBuffer);
+  return decodedDataFinalSize;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
+  unsigned char* data = (unsigned char*)getRandomString(10, 1000);
+  size_t in_size = strlen(data);
+  unsigned char *datap = data;
+  if (in_size < 4)
+    return 1;
+  u32 orig_size = read_neutral_s32(datap);
+  in_size -= 4;
+  datap += 4;
+  unsigned char *decoded_data = (unsigned char *)calloc(orig_size, sizeof(unsigned char));
+  if (!decoded_data) {
     printf("Out of memory\n");
-    free(path);
     return 1;
   }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
+  if (bz3_decode_block(datap, decoded_data, in_size, orig_size) != -1) {
+    printf("Decoded data: %s\n", decoded_data);
   }
-  free(pathwfs);
-  free(path);
+  free(decoded_data);
 }

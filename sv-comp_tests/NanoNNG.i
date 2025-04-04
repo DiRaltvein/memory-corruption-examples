@@ -939,6 +939,7 @@ int main() {
   int len_of_str = 0;
   if (packet[pos] != 0x10) {
     printf("Malformed packet\n");
+    free(packet);
     return 1;
   } else {
     pos++;
@@ -947,7 +948,12 @@ int main() {
   printf("Decoded length: %u\n", len);
   pos += len_of_var;
   char *body = (char *)copyn_utf8_str(packet, &pos, &len_of_str, max - pos);
+  if (body == ((void*)0)) {
+    free(packet);
+    return 1;
+  }
  printf("Decoded sentence: %s\n", body);
  printf("Some out of bound memory access byte: %u", packet[pos]);
   free(body);
+  free(packet);
 }

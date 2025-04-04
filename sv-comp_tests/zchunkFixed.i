@@ -871,6 +871,13 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+typedef struct {
+  unsigned char *data;
+  uint32_t data_size;
+} zckComp;
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +894,62 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
+uint32_t readUInt32(const unsigned char *ptr, uint32_t offset) {
+  uint32_t value = ((uint32_t)ptr[offset + 3]) << 24;
+  value += ptr[offset + 2] << 16;
+  value += ptr[offset + 1] << 8;
+  value += ptr[offset];
+  return value;
 }
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+_Bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size) {
+  if ((comp->data_size > comp->data_size + src_size) || (src_size > comp->data_size + src_size)) {
+    return 0;
   }
-  return 0;
+  unsigned char *temp = (unsigned char *)realloc(comp->data, comp->data_size + src_size);
+  if (!temp) {
+    printf("Reallocation failed\n");
+    return 0;
+  }
+  comp->data = temp;
+  memcpy(comp->data + comp->data_size, src, src_size);
+  comp->data_size += src_size;
+  return 1;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
+  char* data = getRandomString(5, 1000);
+  size_t data_length = strlen(data);
+  uint32_t offset = 0;
+  zckComp comp = {0};
+  comp.data = (unsigned char *)calloc(6, sizeof(unsigned char));
+  if (comp.data == ((void*)0)) {
+    printf("out of memory");
+    free(data);
     return 1;
   }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
+  memcpy(comp.data, "Data: ", 6);
+  comp.data_size = 6;
+  int tag = 0;
+  uint32_t length = 0;
+  while (data_length > offset + 5) {
+    tag = data[offset++];
+    length = readUInt32(data, offset);
+    offset += 4;
+    if (offset + length > data_length || length == 0) {
+      break;
+    }
+    if (tag == 0x50) {
+      comp_add_to_data(&comp, data + offset, length);
+    } else {
+      printf("skipping tag: 0x%.2X\n", tag);
+    }
+    if (offset + length < offset) {
+      break;
+    }
+    offset += length;
   }
-  free(pathwfs);
-  free(path);
+  unsigned char zeroByteArray[] = {0x00};
+  comp_add_to_data(&comp, (unsigned char *)&zeroByteArray, 1);
+  printf("concatinated value of tag 0x50: %s\n", comp.data);
+  free(comp.data);
+  free(data);
 }

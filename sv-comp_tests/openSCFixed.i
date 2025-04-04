@@ -871,6 +871,9 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +890,109 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
+int sc_asn1_read_tag(const uint8_t **buf, size_t buflen, unsigned int *cla_out, unsigned int *tag_out, size_t *taglen) {
+  const uint8_t *p = *buf;
+  size_t left = buflen, len;
+  unsigned int cla, tag, i;
+  *buf = ((void*)0);
+  if (left == 0 || !p)
+    return 1;
+  if (*p == 0xff || *p == 0) {
+    *taglen = 0;
+    *tag_out = 0;
+    return 0;
+  }
+  cla = (*p & 0xC0) | (*p & 0x20);
+  tag = *p & 0x1F;
+  p++;
+  left--;
+  if (tag == 0x1F) {
+    size_t n = 3 - 1;
+    do {
+      if (left == 0 || n == 0)
+        return 1;
+      tag <<= 8;
+      tag |= *p;
+      p++;
+      left--;
+      n--;
+    } while (tag & 0x80);
+  }
+  if (left == 0)
+    return 1;
+  len = *p;
+  p++;
+  left--;
+  if (len & 0x80) {
+    len &= 0x7f;
+    unsigned int a = 0;
+    if (len > sizeof a || len > left)
+      return 1;
+    for (i = 0; i < len; i++) {
+      a <<= 8;
+      a |= *p;
+      p++;
+      left--;
+    }
+    len = a;
+  }
+  *cla_out = cla;
+  *tag_out = tag;
+  *taglen = len;
+  *buf = p;
+  if (len > left)
     return 1;
   return 0;
 }
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+const uint8_t *sc_asn1_find_tag(const uint8_t *buf, size_t buflen, unsigned int tag_in, size_t *taglen_in) {
+  size_t left = buflen, taglen;
+  const uint8_t *p = buf;
+  *taglen_in = 0;
+  while (left >= 2) {
+    unsigned int cla = 0, tag, mask = 0xff00;
+    buf = p;
+    if (sc_asn1_read_tag(&p, left, &cla, &tag, &taglen) != 0 || p == ((void*)0))
+      return ((void*)0);
+    left -= (p - buf);
+    while ((tag & mask) != 0) {
+      cla <<= 8;
+      mask <<= 8;
+    }
+    if ((tag | cla) == tag_in) {
+      if (taglen > left)
+        return ((void*)0);
+      *taglen_in = taglen;
+      return p;
+    }
+    left -= taglen;
+    p += taglen;
   }
-  return 0;
+  return ((void*)0);
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
+  char* rbuf = getRandomString(5, 500);
+  size_t len = strlen(rbuf), tlen = 0, ilen = 0;
+  const uint8_t *p = (uint8_t*)rbuf, *q, *pp;
+  while (len != 0) {
+    pp = sc_asn1_find_tag(p, len, 0xE1, &tlen);
+    if (pp == ((void*)0)) {
+      printf("Could not find tag 0xE1\n");
+      free(rbuf);
+      return 0;
+    }
+    q = sc_asn1_find_tag(pp, tlen, 0x03, &ilen);
+    if (q == ((void*)0) || ilen != 4) {
+      printf("Could not find tag 0x03 inside a 0xE1 tag or its length is not 4\n");
+      free(rbuf);
+      return 0;
+    }
+    if (q[0] == 0x02) {
+      printf("Found 0x02 byte as a first byte after 0x03 tag\n");
+      free(rbuf);
+      return 1;
+    }
+    p += tlen;
+    len -= tlen + 2;
   }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  free(rbuf);
 }

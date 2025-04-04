@@ -889,6 +889,8 @@ char *getRandomString(int lowestSize, int highestSize) {
 }
 int32_t mz_path_has_slash(const char *path) {
   int32_t path_len = (int32_t)strlen(path);
+  if (path_len == 0)
+    return 1;
   if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
     return 1;
   return 0;

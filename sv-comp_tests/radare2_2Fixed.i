@@ -871,6 +871,13 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+
+extern char __VERIFIER_nondet_char(void);
+extern int __VERIFIER_nondet_int(void);
+typedef struct r_anal_op_t {
+  int size;
+  uint8_t *bytes;
+} RAnalOp;
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = __VERIFIER_nondet_int();
   while (stringSize < lowestSize || stringSize > highestSize) {
@@ -887,36 +894,59 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
-int32_t mz_path_has_slash(const char *path) {
-  int32_t path_len = (int32_t)strlen(path);
-  if (path[path_len - 1] != '\\' && path[path_len - 1] != '/')
-    return 1;
-  return 0;
-}
-int32_t mz_path_convert_slashes(char *path, char slash) {
-  int32_t i = 0;
-  for (i = 0; i < (int32_t)strlen(path); i += 1) {
-    if (path[i] == '\\' || path[i] == '/')
-      path[i] = slash;
+size_t countChar(const uint8_t *buf, int len, char ch) {
+  size_t i;
+  for (i = 0; i < len; i++) {
+    if (buf[i] != ch) {
+      break;
+    }
   }
-  return 0;
+  return i;
+}
+int decode(RAnalOp *op) {
+  int len = op->size;
+  uint8_t *buf = op->bytes;
+  if (len < 1) {
+    return 0;
+  }
+  switch (buf[0]) {
+  case '[':
+    buf = malloc(0xff);
+    if (len > 0xff) {
+      memcpy(buf, op->bytes, 0xff);
+    } else {
+      memcpy(buf, op->bytes, len);
+    }
+    const uint8_t *p = buf + 1;
+    int i = 1;
+    len--;
+    while (i < len && i < 0xfe && *p) {
+      if (*p == ']') {
+        op->size = i;
+        goto beach;
+      } else if (*p == 0x00 || *p == 0xff) {
+        goto beach;
+      }
+      p++;
+      i++;
+    }
+  beach:
+    free(buf);
+    break;
+  case '>':
+    op->size = countChar(buf, len, '>');
+    break;
+  case '<':
+    op->size = countChar(buf, len, '<');
+    break;
+  }
+  return op->size;
 }
 int main() {
-  const char *path = getRandomString(0, 500);
-  size_t path_length = strlen(path);
-  char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));
-  if (pathwfs == ((void*)0)) {
-    printf("Out of memory\n");
-    free(path);
-    return 1;
-  }
-  strncat(pathwfs, path, path_length);
-  mz_path_convert_slashes(pathwfs, ('/'));
-  if (mz_path_has_slash(pathwfs) == 0) {
-    printf("provided path has a slash at the end\n");
-  } else {
-    printf("provided path does not have a slash at the end\n");
-  }
-  free(pathwfs);
-  free(path);
+  RAnalOp op = {0};
+  op.bytes = (uint8_t*)getRandomString(5, 1000);
+  op.size = strlen(op.bytes);
+  int size = decode(&op);
+  printf("Decoded size: %d\n", size);
+  free(op.bytes);
 }
