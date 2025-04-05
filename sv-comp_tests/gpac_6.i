@@ -752,6 +752,7 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
+extern unsigned char __VERIFIER_nondet_uchar();
 typedef uint64_t u64;
 typedef uint32_t u32;
 typedef struct
@@ -765,6 +766,17 @@ typedef struct {
   u64 size;
   u64 position;
 } GF_BitStream;
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
 u32 readUnsignedIntFromBuffer(GF_BitStream *bs) {
   if (bs->position + 4 >= bs->size) {
     return 0;
@@ -777,7 +789,7 @@ void gf_vvc_read_pps_bs_internal(GF_BitStream *bs, VVC_PPS *pps) {
   u32 ctu_size = readUnsignedIntFromBuffer(bs);
   if (ctu_size > 30) {
     printf("malformed data\n");
-    exit(1);
+    return;
   }
   u32 num_exp_tile_columns = 1 + readUnsignedIntFromBuffer(bs);
   ctu_size = 1 << ctu_size;
@@ -804,14 +816,9 @@ void gf_vvc_read_pps_bs_internal(GF_BitStream *bs, VVC_PPS *pps) {
 int main() {
   VVC_PPS pps = {0};
   GF_BitStream bs = {0};
-  unsigned char data[] = {
-      0x80, 0x00, 0x00, 0x00,
-      0x01, 0x00, 0x00, 0x00,
-      0x01, 0x00, 0x00, 0x00,
-      0x01, 0x00, 0x00, 0x00,
-      0x01, 0x00, 0x00, 0x00};
-  bs.data = (unsigned char *)data;
+  bs.data = getRandomByteStream(20);
   bs.position = 0;
-  bs.size = sizeof(data) / sizeof(data[0]);
+  bs.size = 20;
   gf_vvc_read_pps_bs_internal(&bs, &pps);
+  free(bs.data);
 }

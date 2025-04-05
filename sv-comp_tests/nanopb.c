@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 typedef struct pb_istream_s {
@@ -22,23 +22,28 @@ typedef struct pb_istream_s {
 } pb_istream_t;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -104,9 +109,10 @@ int main() {
   //   0x69, 0x61, 0x62, 0x6c, 0x65
   // };
 
-  unsigned char* data = (unsigned char*)getRandomString(1, 1000);
+  size_t data_length = getNumberInRange(1, 1000);
+  unsigned char* data = getRandomByteStream(data_length);
 
-  pb_istream_t stream = pb_istream_from_buffer(data, strlen(data));
+  pb_istream_t stream = pb_istream_from_buffer(data, data_length);
   char* dest = NULL;
   if (!pb_dec_string(&stream, (void**)&dest)){ 
     printf("Decoding failed\n");

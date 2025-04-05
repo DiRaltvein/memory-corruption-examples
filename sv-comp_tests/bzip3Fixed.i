@@ -872,75 +872,154 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
 typedef uint8_t u8;
 typedef uint32_t u32;
 typedef int32_t s32;
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+typedef int8_t s8;
+struct bz3_state {
+  s32 block_size;
+  s8 last_error;
+};
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
+u32 bz3_bound(u32 input_size) { return input_size + input_size / 50 + 32; }
 static s32 read_neutral_s32(const u8 *data) {
   return ((u32)data[0]) | (((u32)data[1]) << 8) | (((u32)data[2]) << 16) | (((u32)data[3]) << 24);
 }
-s32 bz3_decode_block(unsigned char *datap, unsigned char *decoded_data, s32 data_size, s32 decoded_data_size) {
-  s32 decodedDataFinalSize = 0;
-  unsigned char *decodedDataInternalBuffer = (unsigned char *)calloc(decoded_data_size, sizeof(unsigned char));
-  if (!decodedDataInternalBuffer) {
-    printf("Out of memory\n");
-    return -1;
+struct bz3_state *bz3_new(s32 block_size) {
+  if (block_size < 0x10 || block_size > ((65) * 1024)) {
+    return ((void*)0);
   }
-  for (int i = 0; i < data_size && decodedDataFinalSize < decoded_data_size; i++) {
-    if (datap[i] == 'A') {
-      if (decodedDataFinalSize + 8 < decoded_data_size) {
-        strcpy((char *)decodedDataInternalBuffer + decodedDataFinalSize, "triple A");
-        decodedDataFinalSize += 8;
-        continue;
-      } else {
-        break;
-      }
+  struct bz3_state *bz3_state = (struct bz3_state *)malloc(sizeof(struct bz3_state));
+  if (!bz3_state) {
+    return ((void*)0);
+  }
+  bz3_state->block_size = block_size;
+  bz3_state->last_error = 0;
+  return bz3_state;
+}
+void bz3_decode_block(struct bz3_state *state, u8 *buffer, s32 data_size, s32 orig_size) {
+  if (data_size > bz3_bound(state->block_size) || data_size < 1) {
+    state->last_error = 1;
+    return;
+  }
+  s8 model = *buffer;
+  s32 lzp_size = -1;
+  if (model & 2 && data_size >= 5) {
+    lzp_size = read_neutral_s32(buffer + 1);
+  }
+  if (((model & 2) && (lzp_size > bz3_bound(state->block_size) || lzp_size < 0))) {
+    state->last_error = 1;
+    return;
+  }
+  if (orig_size > bz3_bound(state->block_size) || orig_size < 0) {
+    state->last_error = 1;
+    return;
+  }
+  s32 size_src;
+  if (model & 2)
+    size_src = lzp_size;
+  else
+    size_src = orig_size;
+  u8 *b1 = (u8*)malloc(size_src);
+  if(b1 == ((void*)0)) {
+    state->last_error = 1;
+    free(b1);
+    return;
+  }
+  memset(b1, 0x46, size_src);
+  state->last_error = 0;
+  if (size_src > state->block_size || size_src < 0) {
+    state->last_error = 1;
+    free(b1);
+    return;
+  }
+  memcpy(buffer, b1, size_src);
+  free(b1);
+}
+int bz3_decompress(const uint8_t *in, uint8_t *out, u32 in_size, u32 *out_size) {
+  if (in_size < 13)
+    return 1;
+  if (in[0] != 'B' || in[1] != 'Z' || in[2] != '3' || in[3] != 'v' || in[4] != '1') {
+    return 1;
+  }
+  u32 block_size = read_neutral_s32(in + 5);
+  u32 n_blocks = read_neutral_s32(in + 9);
+  in_size -= 13;
+  in += 13;
+  struct bz3_state *state = bz3_new(block_size);
+  if (!state)
+    return 1;
+  u8 *compression_buf = (u8 *)malloc(block_size);
+  if (!compression_buf) {
+    free(state);
+    return 1;
+  }
+  u32 buf_max = *out_size;
+  *out_size = 0;
+  for (u32 i = 0; i < n_blocks; i++) {
+    if (in_size < 8) {
+    malformed_header:
+      free(state);
+      free(compression_buf);
+      return 1;
     }
-    decodedDataInternalBuffer[decodedDataFinalSize++] = datap[i];
+    s32 size = read_neutral_s32(in);
+    if (size < 0 || size > block_size || in_size < size + 8) {
+      goto malformed_header;
+    }
+    s32 orig_size = read_neutral_s32(in + 4);
+    if (orig_size < 0 || buf_max < *out_size + orig_size) {
+      goto malformed_header;
+    }
+    memcpy(compression_buf, in + 8, size);
+    bz3_decode_block(state, compression_buf, size, orig_size);
+    if (state->last_error != 0) {
+      goto malformed_header;
+    }
+    memcpy(out + *out_size, compression_buf, orig_size);
+    *out_size += orig_size;
+    in += size + 8;
+    in_size -= size + 8;
   }
-  decodedDataInternalBuffer[decoded_data_size - 1] = '\0';
-  if (decodedDataFinalSize > decoded_data_size || decodedDataFinalSize < 0) {
-    printf("decodedDataFinalSize length is greater than decoded_data_size\n");
-    free(decodedDataInternalBuffer);
-    return -1;
-  }
-  memcpy(decoded_data, decodedDataInternalBuffer, decodedDataFinalSize);
-  free(decodedDataInternalBuffer);
-  return decodedDataFinalSize;
+  free(state);
+  free(compression_buf);
+  return 0;
 }
 int main() {
-  unsigned char* data = (unsigned char*)getRandomString(10, 1000);
-  size_t in_size = strlen(data);
-  unsigned char *datap = data;
-  if (in_size < 4)
-    return 1;
-  u32 orig_size = read_neutral_s32(datap);
-  in_size -= 4;
-  datap += 4;
-  unsigned char *decoded_data = (unsigned char *)calloc(orig_size, sizeof(unsigned char));
-  if (!decoded_data) {
-    printf("Out of memory\n");
+  u32 in_size = (u32)getNumberInRange(50, 5000);
+  uint8_t *in = getRandomByteStream(in_size);
+  u32 orig_size = *(u32 *)in;
+  uint8_t *outbuf = (uint8_t *)calloc(orig_size, sizeof(uint8_t));
+  if (outbuf == ((void*)0)) {
+    free(in);
     return 1;
   }
-  if (bz3_decode_block(datap, decoded_data, in_size, orig_size) != -1) {
-    printf("Decoded data: %s\n", decoded_data);
+  if (bz3_decompress(in + sizeof(u32), outbuf, in_size - sizeof(u32), &orig_size) != 0) {
+    printf("decompression failed\n");
+    free(outbuf);
+    free(in);
+    return 1;
   }
-  free(decoded_data);
+  printf("OK, %u => %u\n", in_size, orig_size);
+  free(outbuf);
+  free(in);
 }

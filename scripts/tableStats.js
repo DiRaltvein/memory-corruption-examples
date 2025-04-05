@@ -16,7 +16,7 @@ import { Canvas } from 'skia-canvas';
 import fsp from 'node:fs/promises';
 import lodash from 'lodash';
 
-const calculateForTestSuit = false;
+const calculateForTestSuit = true;
 
 const cvesToAnalyze = cves.filter(
   (cve) =>
@@ -99,7 +99,7 @@ if (!calculateForTestSuit) {
 }
 
 for (const analyzer of analyzersToUse) {
-  const error = cvesToAnalyze.reduce(
+  const error = cvesToAnalyze.concat(patchedCves).reduce(
     (acc, cve) => (acc += cve[analyzer] === '✖' ? 1 : 0),
     0
   );
@@ -120,7 +120,7 @@ for (const analyzer of analyzersToUse) {
     warnings: 0,
     errors: 0,
   };
-  for (const cve of cvesToAnalyze) {
+  for (const cve of cvesToAnalyze.concat(patchedCves)) {
     if (cve[analyzer].length < 5) continue;
     const notes = cve[analyzer].split('(')[0];
     const notesSplit = notes.split('/');
@@ -146,14 +146,14 @@ for (const analyzer of analyzersToUse) {
     numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes,
     ' errors: ',
     numberOfNotes.errors,
-    'warnings: ',
+    ' warnings: ',
     numberOfNotes.warnings,
     ' notes: ',
     numberOfNotes.notes
   );
   if (patchedCves.length > 0) {
     const falsePositives = patchedCves.filter((cve) =>
-      cve[analyzer].includes('✖')
+      cve[analyzer].length > 1 && cve[analyzer].includes('✖')
     ).length;
     const trueNegative = patchedCves.filter((cve) =>
       cve[analyzer].includes('✓')

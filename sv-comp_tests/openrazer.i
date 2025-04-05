@@ -872,20 +872,28 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
 struct razer_report {
   unsigned char data_size;
   unsigned char command_class;
   unsigned char arguments[80];
 };
-char *getRandomString(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   return randomString;
 }
@@ -910,14 +918,14 @@ static void razer_send_payload(struct razer_report *request_report) {
   printf("rgb data: %s\n", &request_report->arguments[5]);
 }
 int main() {
-  size_t count = 200;
-  const char *buf = getRandomString(count);
+  size_t count = getNumberInRange(5, 300);
+  const unsigned char *buf = getRandomByteStream(count);
   struct razer_report report = {0};
   size_t offset = 0;
   unsigned char row_id;
   unsigned char start_col;
   unsigned char stop_col;
-  unsigned char row_length;
+  size_t row_length;
   while (offset < count) {
     if (offset + 3 > count) {
       printf("razerkbd: Wrong Amount of data provided: Should be ROW_ID, START_COL, STOP_COL, N_RGB\n");
@@ -926,16 +934,16 @@ int main() {
     row_id = buf[offset++];
     start_col = buf[offset++];
     stop_col = buf[offset++];
-    row_length = ((stop_col + 1) - start_col) * 3;
     if (start_col > stop_col) {
       printf("razerkbd: Start column is greater than end column\n");
       break;
     }
+    row_length = ((stop_col + 1) - start_col) * 3;
     if (offset + row_length > count) {
       printf("razerkbd: Not enough RGB to fill row\n");
       break;
     }
-    report = razer_chroma_extended_matrix_set_custom_frame2(row_id, start_col, stop_col, (unsigned char *)&buf[offset]);
+    report = razer_chroma_extended_matrix_set_custom_frame2(row_id, start_col, stop_col, &buf[offset]);
     razer_send_payload(&report);
     offset += row_length;
   }

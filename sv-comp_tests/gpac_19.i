@@ -871,27 +871,29 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
 typedef struct {
   unsigned char *data;
   size_t data_size;
   size_t pos;
 } avi_t;
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 static uint32_t avi_read(avi_t *AVI, char *buf, uint32_t len) {
@@ -977,11 +979,13 @@ int avi_parse_input_file(avi_t *AVI) {
   return 0;
 }
 int main() {
-  unsigned char *data = getRandomString(5, 1000);
-  size_t dataSize = strlen(data);
+  size_t dataSize = getNumberInRange(5, 5000);
+  unsigned char* data = getRandomByteStream(dataSize);
   avi_t AVI = {0};
-  AVI.data = (unsigned char *)data;
+  AVI.data = data;
   AVI.data_size = dataSize;
   AVI.pos = 0;
-  return avi_parse_input_file(&AVI);
+  int ret = avi_parse_input_file(&AVI);
+  free(data);
+  return ret;
 }

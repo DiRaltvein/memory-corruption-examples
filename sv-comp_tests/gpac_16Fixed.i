@@ -269,6 +269,37 @@ extern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ )) ;
 extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
 extern int __uflow (FILE *);
 extern int __overflow (FILE *, int);
+
+typedef __int8_t int8_t;
+typedef __int16_t int16_t;
+typedef __int32_t int32_t;
+typedef __int64_t int64_t;
+typedef __uint8_t uint8_t;
+typedef __uint16_t uint16_t;
+typedef __uint32_t uint32_t;
+typedef __uint64_t uint64_t;
+typedef __int_least8_t int_least8_t;
+typedef __int_least16_t int_least16_t;
+typedef __int_least32_t int_least32_t;
+typedef __int_least64_t int_least64_t;
+typedef __uint_least8_t uint_least8_t;
+typedef __uint_least16_t uint_least16_t;
+typedef __uint_least32_t uint_least32_t;
+typedef __uint_least64_t uint_least64_t;
+typedef signed char int_fast8_t;
+typedef int int_fast16_t;
+typedef int int_fast32_t;
+__extension__
+typedef long long int int_fast64_t;
+typedef unsigned char uint_fast8_t;
+typedef unsigned int uint_fast16_t;
+typedef unsigned int uint_fast32_t;
+__extension__
+typedef unsigned long long int uint_fast64_t;
+typedef int intptr_t;
+typedef unsigned int uintptr_t;
+typedef __intmax_t intmax_t;
+typedef __uintmax_t uintmax_t;
 typedef int wchar_t;
 typedef struct
   {
@@ -354,10 +385,6 @@ typedef __timer_t timer_t;
 typedef unsigned long int ulong;
 typedef unsigned short int ushort;
 typedef unsigned int uint;
-typedef __int8_t int8_t;
-typedef __int16_t int16_t;
-typedef __int32_t int32_t;
-typedef __int64_t int64_t;
 typedef __uint8_t u_int8_t;
 typedef __uint16_t u_int16_t;
 typedef __uint32_t u_int32_t;
@@ -849,22 +876,24 @@ extern char *stpncpy (char *__restrict __dest,
 
 typedef unsigned char u8;
 typedef unsigned int u32;
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+u8 *getRandomByteStream(int size) {
+  u8 *randomString = (u8*)calloc(size, sizeof(u8));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
@@ -890,21 +919,36 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
       return;
     }
     d_pos = 0;
-    while (d_pos < descs_size) {
+    while (d_pos + 1 < descs_size) {
       u8 d_tag = data[pos + d_pos];
       u8 d_len = data[pos + d_pos + 1];
       switch (d_tag) {
       case 0x48:
+      {
         d_pos += 2;
+        if (d_pos + 1 >= descs_size) {
+          break;
+        }
         u8 service_type = data[pos + d_pos];
         ulen = data[pos + d_pos + 1];
         d_pos += 2;
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          break;
+        }
         char *provider = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(provider, data + pos + d_pos, sizeof(char) * ulen);
         provider[ulen] = 0;
         d_pos += ulen;
+        if (d_pos >= descs_size) {
+          free(provider);
+          break;
+        }
         ulen = data[pos + d_pos];
         d_pos += 1;
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          free(provider);
+          break;
+        }
         char *service = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(service, data + pos + d_pos, sizeof(char) * ulen);
         service[ulen] = 0;
@@ -913,6 +957,7 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
         free(provider);
         free(service);
         break;
+      }
       default:
         printf("Skipping descriptor (0x%x) not supported\n", d_tag);
         d_pos += d_len;
@@ -926,8 +971,8 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
   }
 }
 int main() {
-  u8 *sdt_data = (u8*)getRandomString(5, 1000);
-  size_t len = strlen(sdt_data);
+  u32 len = (u32)getNumberInRange(5, 1000);
+  u8 *sdt_data = getRandomByteStream(len);
   gf_m2ts_process_sdt(sdt_data, len);
   free(sdt_data);
 }

@@ -872,22 +872,16 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+extern unsigned char __VERIFIER_nondet_uchar();
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 uint16_t
@@ -932,13 +926,13 @@ bit_calc_CRC(const uint16_t seed, unsigned char *addr, int len) {
   return dx;
 }
 int main() {
-  char* data = getRandomString(50, 1000);
+  unsigned char* data = getRandomByteStream(50);
   int dataSize = 0;
   memcpy(&dataSize, data, sizeof(int));
   uint16_t crc = bit_calc_CRC(
       0xC0C1,
-      (unsigned char *)data + 4,
-      dataSize - 4
+      data + sizeof(int),
+      dataSize - sizeof(int)
   );
   printf("CRC of message is %d\n", crc);
   free(data);

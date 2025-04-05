@@ -847,26 +847,28 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 typedef struct {
   unsigned char *data;
   size_t data_size;
 } zckComp;
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 size_t readUInt32(const unsigned char *ptr, size_t offset) {
@@ -888,18 +890,18 @@ _Bool comp_add_to_data(zckComp *comp, const unsigned char *src, size_t src_size)
   return 1;
 }
 int main() {
-  char* data = getRandomString(5, 1000);
-  size_t data_length = strlen(data);
+  size_t data_length = getNumberInRange(5, 1000);
+  unsigned char* data = getRandomByteStream(data_length);
   size_t offset = 0;
   zckComp comp = {0};
-  comp.data = calloc(7, sizeof(unsigned char));
+  comp.data = calloc(6, sizeof(unsigned char));
   if (!comp.data) {
     printf("out of memory");
     free(data);
     exit(1);
   }
-  char dataArray[] = "Data: ";
-  memcpy(comp.data, dataArray, 6);
+  memcpy(comp.data, "Data: ", 6);
+  comp.data_size = 6;
   int tag = 0;
   size_t length = 0;
   while (data_length > offset + 4) {

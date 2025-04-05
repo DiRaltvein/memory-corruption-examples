@@ -874,27 +874,29 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 typedef struct pb_istream_s {
   _Bool (*callback)(struct pb_istream_s *stream, uint8_t *buf, size_t count);
   void *state;
   size_t bytes_left;
 } pb_istream_t;
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 static _Bool buf_read(pb_istream_t *stream, uint8_t *buf, size_t count)
@@ -936,8 +938,9 @@ _Bool pb_dec_string(pb_istream_t *stream, void **dest) {
   return status;
 }
 int main() {
-  unsigned char* data = (unsigned char*)getRandomString(1, 1000);
-  pb_istream_t stream = pb_istream_from_buffer(data, strlen(data));
+  size_t data_length = getNumberInRange(1, 1000);
+  unsigned char* data = getRandomByteStream(data_length);
+  pb_istream_t stream = pb_istream_from_buffer(data, data_length);
   char* dest = ((void*)0);
   if (!pb_dec_string(&stream, (void**)&dest)){
     printf("Decoding failed\n");

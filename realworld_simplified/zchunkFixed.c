@@ -66,16 +66,13 @@ int main() {
     tag = data[offset++];
     length = readUInt32(data, offset);
     offset += 4;
-    if (offset + length > data_length || length == 0) { // Still integer overflow
+    if (offset + length > data_length || offset + length < offset || length == 0) { // Still integer overflow
       break;
     }
     if (tag == 0x50) {
       comp_add_to_data(&comp, data + offset, length);
     } else {
       printf("skipping tag: 0x%.2X\n", tag);
-    }
-    if (offset + length < offset) {
-      break;
     }
     offset += length;
   }

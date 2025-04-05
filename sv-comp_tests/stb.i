@@ -877,22 +877,24 @@ typedef struct _stb_vorbis {
   unsigned int stream_size;
   unsigned int currect_stream_position;
 } vorb;
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 int get32_packet(vorb *f) {
@@ -950,8 +952,8 @@ cleanup:
 }
 int main() {
   vorb f = {0};
-  f.stream = (unsigned char *)getRandomString(5, 500);
-  f.stream_size = strlen(f.stream);
+  f.stream_size = getNumberInRange(5, 500);
+  f.stream = getRandomByteStream(f.stream_size);
   f.currect_stream_position = 0;
   start_decoder(&f);
   free(f.stream);

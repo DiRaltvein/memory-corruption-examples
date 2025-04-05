@@ -39,23 +39,45 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
     }
 
     d_pos = 0;
-    while (d_pos < descs_size) {
+    while (d_pos + 1 < descs_size) {
       u8 d_tag = data[pos + d_pos];
       u8 d_len = data[pos + d_pos + 1];
 
       switch (d_tag) {
       case 0x48:
+      {
         d_pos += 2;
+
+        if (d_pos + 1 >= descs_size) {
+          break;
+        }
+
         u8 service_type = data[pos + d_pos];
         ulen = data[pos + d_pos + 1];
         d_pos += 2;
+
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          break;
+        }
+
         char *provider = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(provider, data + pos + d_pos, sizeof(char) * ulen);
         provider[ulen] = 0;
         d_pos += ulen;
 
+        if (d_pos >= descs_size) {
+          free(provider);
+          break;
+        }
+
         ulen = data[pos + d_pos];
         d_pos += 1;
+
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          free(provider);
+          break;
+        }
+
         char *service = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(service, data + pos + d_pos, sizeof(char) * ulen);
         service[ulen] = 0;
@@ -65,7 +87,7 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
         free(provider);
         free(service);
         break;
-
+      }
       default:
         printf("Skipping descriptor (0x%x) not supported\n", d_tag);
         d_pos += d_len;

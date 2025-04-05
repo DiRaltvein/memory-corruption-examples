@@ -119,7 +119,7 @@ int main() {
   // There is a problem with all this reading as negative indexes are not checked and read out of bound is possible with negative numebrs
   printf("Input a number that would correspond to an index of a message in hex file to see the message on that position. Alternatively input 'q' to stop the program.\n");
   while (1) {
-    char* userValue = getRandomString(1, 5);
+    char* userValue = getRandomString(2);
     if (*userValue == 'q') {
       break;
     }

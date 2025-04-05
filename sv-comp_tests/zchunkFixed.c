@@ -59,7 +59,7 @@ bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size
     return false;
   }
 
-  unsigned char *temp = realloc(comp->data, comp->data_size + src_size);
+  unsigned char *temp = (unsigned char*)realloc(comp->data, comp->data_size + src_size);
   if (!temp) {
     printf("Reallocation failed\n");
     return false;
@@ -73,12 +73,12 @@ bool comp_add_to_data(zckComp *comp, const unsigned char *src, uint32_t src_size
 // Program reads entries from file in form: (tag 1 byte), (length 4 byte), null terminated string
 // if tag is not 0x50 it is skipped. Values of tags with value 0x50 tags are concatinated togeather and printed at the end of function
 int main() {
-  size_t data_length = getNumberInRange(5, 1000);
+  uint32_t data_length = getNumberInRange(5, 1000);
   unsigned char* data = getRandomByteStream(data_length);
   uint32_t offset = 0;
 
   zckComp comp = {0};
-  comp.data = calloc(6, sizeof(unsigned char));
+  comp.data = (unsigned char*)calloc(6, sizeof(unsigned char));
   if (comp.data == NULL) {
     printf("out of memory");
     free(data);
@@ -93,16 +93,13 @@ int main() {
     tag = data[offset++];
     length = readUInt32(data, offset);
     offset += 4;
-    if (offset + length > data_length || length == 0) { // Still integer overflow
+    if (offset + length > data_length || offset + length < offset || length == 0) { // Still integer overflow
       break;
     }
     if (tag == 0x50) {
       comp_add_to_data(&comp, data + offset, length);
     } else {
       printf("skipping tag: 0x%.2X\n", tag);
-    }
-    if (offset + length < offset) {
-      break;
     }
     offset += length;
   }

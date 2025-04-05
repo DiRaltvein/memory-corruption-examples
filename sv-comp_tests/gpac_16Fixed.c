@@ -4,33 +4,39 @@
 // extract of: src/media_tools/mpegts.c (function: gf_m2ts_process_sdt)
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+u8 *getRandomByteStream(int size) {
+  u8 *randomString = (u8*)calloc(size, sizeof(u8));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -63,23 +69,45 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
     }
 
     d_pos = 0;
-    while (d_pos < descs_size) {
+    while (d_pos + 1 < descs_size) {
       u8 d_tag = data[pos + d_pos];
       u8 d_len = data[pos + d_pos + 1];
 
       switch (d_tag) {
       case 0x48:
+      {
         d_pos += 2;
+
+        if (d_pos + 1 >= descs_size) {
+          break;
+        }
+
         u8 service_type = data[pos + d_pos];
         ulen = data[pos + d_pos + 1];
         d_pos += 2;
+
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          break;
+        }
+
         char *provider = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(provider, data + pos + d_pos, sizeof(char) * ulen);
         provider[ulen] = 0;
         d_pos += ulen;
 
+        if (d_pos >= descs_size) {
+          free(provider);
+          break;
+        }
+
         ulen = data[pos + d_pos];
         d_pos += 1;
+
+        if (d_pos + ulen >= descs_size || ulen == 0) {
+          free(provider);
+          break;
+        }
+
         char *service = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(service, data + pos + d_pos, sizeof(char) * ulen);
         service[ulen] = 0;
@@ -89,7 +117,7 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
         free(provider);
         free(service);
         break;
-
+      }
       default:
         printf("Skipping descriptor (0x%x) not supported\n", d_tag);
         d_pos += d_len;
@@ -104,8 +132,8 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
 }
 
 int main() {
-  u8 *sdt_data = (u8*)getRandomString(5, 1000);
-  size_t len = strlen(sdt_data);
+  u32 len = (u32)getNumberInRange(5, 1000);
+  u8 *sdt_data = getRandomByteStream(len);
 
   gf_m2ts_process_sdt(sdt_data, len);
   free(sdt_data);

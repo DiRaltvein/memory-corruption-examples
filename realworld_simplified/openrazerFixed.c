@@ -58,7 +58,7 @@ int main() {
   unsigned char row_id;
   unsigned char start_col;
   unsigned char stop_col;
-  unsigned char row_length;
+  size_t row_length;
 
   while (offset < count) {
     if (offset + 3 > count) {
@@ -69,12 +69,13 @@ int main() {
     row_id = buf[offset++];
     start_col = buf[offset++];
     stop_col = buf[offset++];
-    row_length = ((stop_col + 1) - start_col) * 3;
 
     if (start_col > stop_col) {
       printf("razerkbd: Start column is greater than end column\n");
       break;
     }
+
+    row_length = ((stop_col + 1) - start_col) * 3;
 
     if (offset + row_length > count) {
       printf("razerkbd: Not enough RGB to fill row\n");

@@ -32,13 +32,13 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   int len = get16(p, 2); // get length from p that is potentially user controller variable (or in this case just malicious hardcoded data)
 
   if (attr_type > STUN_A_LAST_MANDATORY && attr_type < STUN_A_OPTIONAL) {
-    exit(1);
+    return;
   }
 
   *attr = (stun_attr_t *)calloc(1, sizeof(stun_attr_t));
   if (!(*attr)) {
     printf("Out of memory!\n");
-    exit(1);
+    return;
   }
   p += 4;
   (*attr)->enc_buf.size = len;
@@ -46,7 +46,8 @@ void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
   if (!(*attr)->enc_buf.data) {
     printf("Out of memory!\n");
     free(*attr);
-    exit(1);
+    *attr = NULL;
+    return;
   }
   memcpy((*attr)->enc_buf.data, p, len); // Problem: reading data from p of length that was read from p. p may be smaller then len leading to buffer overflow
 }
@@ -67,9 +68,9 @@ int main(int argc, char *argv[]) {
   //     0x66, 0x6c, 0x6f, 0x77, 0x20, 0x68, 0x61, 0x70,
   //     0x70, 0x65, 0x6e, 0x65, 0x64, 0x21, 0x00};
 
-  stun_attr_t *attr = {0};
+  stun_attr_t *attr = NULL;
   stun_parse_attribute((unsigned char *)argv[1], &attr); // with command line arguments pretty much any value will produce an overflow if value starts with "    " (4 spaces). For example ./a.out "    Hello this is my value"
-  if (attr) {
+  if (attr != NULL) {
     printf("data: %s\n", attr->enc_buf.data);
     free(attr->enc_buf.data);
     free(attr);

@@ -872,11 +872,23 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
+extern char __VERIFIER_nondet_char(void);
 typedef struct sDltFile {
   FILE *handle;
   long *index;
   int32_t counter;
 } DltFile;
+char *getRandomString(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 void readMessageFromFile(DltFile *file, char **message) {
   if (file == ((void*)0) || feof(file->handle)) {
     exit(1);
@@ -944,12 +956,12 @@ int main() {
   initializeDltFile(&file);
   printf("Input a number that would correspond to an index of a message in hex file to see the message on that position. Alternatively input 'q' to stop the program.\n");
   while (1) {
-    char userValue[5] = {0};
-    scanf("%4s", (char *)&userValue);
-    if (userValue[0] == 'q') {
+    char* userValue = getRandomString(2);
+    if (*userValue == 'q') {
       break;
     }
     dlt_file_message(&file, atoi(userValue));
+    free(userValue);
   };
   fclose(file.handle);
   free(file.index);
