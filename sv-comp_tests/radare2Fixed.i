@@ -1031,7 +1031,7 @@ static pyc_object *get_object(RBuffer *buffer) {
 int main() {
   char* data = getRandomString(10);
   RBuffer buffer = {0};
-  buffer.data = (char *)&data;
+  buffer.data = data;
   buffer.len = strlen(data);
   buffer.offset = 0;
   pyc_object *obj = get_object(&buffer);

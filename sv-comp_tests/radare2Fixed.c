@@ -232,7 +232,7 @@ int main() {
   char* data = getRandomString(10);
 
   RBuffer buffer = {0};
-  buffer.data = (char *)&data;
+  buffer.data = data;
   buffer.len = strlen(data);
   buffer.offset = 0;
 

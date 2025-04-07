@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 typedef struct r_anal_op_t {
@@ -18,23 +18,28 @@ typedef struct r_anal_op_t {
 } RAnalOp;
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -91,8 +96,8 @@ int decode(RAnalOp *op) {
 
 int main() {
   RAnalOp op = {0};
-  op.bytes = (uint8_t*)getRandomString(5, 1000);
-  op.size = strlen(op.bytes);
+  op.size = getNumberInRange(5, 1000);
+  op.bytes = (uint8_t*)getRandomByteStream(op.size);
 
   int size = decode(&op);
   printf("Decoded size: %d\n", size);

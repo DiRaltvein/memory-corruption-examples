@@ -872,7 +872,7 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 typedef unsigned char byte;
 typedef struct sf_private_tag {
   int64_t dataend;
@@ -880,14 +880,14 @@ typedef struct sf_private_tag {
   int bytewidth;
   byte *ptr;
 } SF_PRIVATE;
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
+byte *getRandomByteStream(int size) {
+  byte *randomString = (byte*)calloc(size, sizeof(byte));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   return randomString;
 }
@@ -910,7 +910,7 @@ int main() {
   SF_PRIVATE psf;
   psf.bytewidth = 8;
   psf.dataoffset = 0;
-  psf.ptr = (byte *)getRandomStringNotZeroTerminated(8);
+  psf.ptr = getRandomByteStream(8);
   mat4_read_header(&psf);
   free(psf.ptr);
 }

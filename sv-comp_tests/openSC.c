@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 #define SC_ASN1_TAGNUM_SIZE 3
@@ -17,23 +17,28 @@ extern int __VERIFIER_nondet_int(void);
 #define SC_ASN1_TAG_CONSTRUCTED 0x20
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -150,9 +155,10 @@ int main() {
   //   0xE1, 0x06, 0x03, 0x04, 0x54, 0x1A, 0x9A, 0xB3,
   //   0xE1, 0x06, 0x03, 0x04, 0xE9, 0xBA, 0x1B, 0xAA
   // };
-  char* rbuf = getRandomString(5, 500);
-  size_t len = strlen(rbuf), tlen = 0, ilen = 0;
-  const uint8_t *p = (uint8_t*)rbuf, *q;
+  int len = getNumberInRange(5, 500);
+  uint8_t* rbuf = getRandomByteStream(len);
+  size_t tlen = 0, ilen = 0;
+  const uint8_t *p = rbuf, *q;
 
   while (len != 0) {
     p = sc_asn1_find_tag(p, len, 0xE1, &tlen);

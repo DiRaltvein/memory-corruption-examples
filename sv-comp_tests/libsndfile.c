@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 
 typedef unsigned char byte;
 typedef struct sf_private_tag {
@@ -19,16 +19,16 @@ typedef struct sf_private_tag {
 } SF_PRIVATE;
 
 /**
- * Just a utility function in test creation that generates random string of specified size that is not zero terminated
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
  */
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
+byte *getRandomByteStream(int size) {
+  byte *randomString = (byte*)calloc(size, sizeof(byte));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   return randomString;
 }
@@ -57,7 +57,7 @@ int main() {
   // psf.ptr = calloc(8, sizeof(byte));
   // unsigned char byte_sequence[8] = {0xff, 0xff, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00};
   // memcpy(psf.ptr, byte_sequence, sizeof(byte_sequence));
-  psf.ptr = (byte *)getRandomStringNotZeroTerminated(8);
+  psf.ptr = getRandomByteStream(8);
 
   mat4_read_header(&psf);
   free(psf.ptr);

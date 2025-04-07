@@ -872,26 +872,28 @@ extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 typedef struct r_anal_op_t {
   int size;
   uint8_t *bytes;
 } RAnalOp;
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 size_t countChar(const uint8_t *buf, int len, char ch) {
@@ -944,8 +946,8 @@ int decode(RAnalOp *op) {
 }
 int main() {
   RAnalOp op = {0};
-  op.bytes = (uint8_t*)getRandomString(5, 1000);
-  op.size = strlen(op.bytes);
+  op.size = getNumberInRange(5, 1000);
+  op.bytes = (uint8_t*)getRandomByteStream(op.size);
   int size = decode(&op);
   printf("Decoded size: %d\n", size);
   free(op.bytes);

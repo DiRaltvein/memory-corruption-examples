@@ -848,15 +848,23 @@ extern char *stpncpy (char *__restrict __dest,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
 
 typedef unsigned char uchar;
-extern char __VERIFIER_nondet_char(void);
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
+extern unsigned char __VERIFIER_nondet_uchar();
+extern int __VERIFIER_nondet_int(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+uchar *getRandomByteStream(int size) {
+  uchar *randomString = (uchar*)calloc(size, sizeof(uchar));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
   return randomString;
 }
@@ -882,8 +890,8 @@ static void process_COM(uchar *Data, int length) {
   printf("COM marker comment: %s\n", Comment);
 }
 int main() {
-  char* data = getRandomStringNotZeroTerminated(200);
-  size_t dataSize = 200;
-  process_COM((uchar*)data, dataSize);
+  size_t dataSize = getNumberInRange(50, 200);
+  uchar* data = getRandomByteStream(dataSize);
+  process_COM(data, dataSize);
   free(data);
 }

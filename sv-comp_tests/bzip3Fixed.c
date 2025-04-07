@@ -158,7 +158,7 @@ int bz3_decompress(const uint8_t *in, uint8_t *out, u32 in_size, u32 *out_size) 
     }
 
     s32 orig_size = read_neutral_s32(in + 4);
-    if (orig_size < 0 || buf_max < *out_size + orig_size) {
+    if (orig_size < 0 || buf_max < *out_size + orig_size || orig_size > block_size) {
       goto malformed_header;
     }
 

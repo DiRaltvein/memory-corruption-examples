@@ -4,33 +4,39 @@
 // extract of: src/media_tools/mpegts.c (function: gf_m2ts_process_sdt)
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+u8 *getRandomByteStream(int size) {
+  u8 *randomString = (u8*)calloc(size, sizeof(u8));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -131,8 +137,8 @@ int main() {
   // };
   // size_t len = sizeof(sdt_data);
 
-  u8 *sdt_data = (u8*)getRandomString(5, 1000);
-  size_t len = strlen(sdt_data);
+  u32 len = (u32)getNumberInRange(5, 1000);
+  u8 *sdt_data = getRandomByteStream(len);
 
   gf_m2ts_process_sdt(sdt_data, len);
   free(sdt_data);

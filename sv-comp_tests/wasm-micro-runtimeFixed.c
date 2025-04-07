@@ -8,37 +8,45 @@
 #include <string.h>
 #include <stdlib.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
+
 #define TEMPLATE_READ_VALUE(Type, p) \
-  (p += sizeof(Type), *(Type *)(p - sizeof(Type)))
+  (p += sizeof(Type), *(Type *)(p - sizeof(Type))) // Problem: read out of bound. Initially given pointer (p) may be out of bound by 1 and it is dereferenced
+
+  
+/**
+ * Just a utility function in test creation that generates random integer in specified range
+ */
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
 int main() {
-  uint8_t* p_ar = (uint8_t*)getRandomString(0, 500);
+  int size = getNumberInRange(0, 50);
+  uint8_t* p_ar = (uint8_t*)getRandomByteStream(size);
   uint8_t *p = p_ar;
-  uint8_t *p_end = p + strlen(p_ar);
+  uint8_t *p_end = p + size;
 
   while (p < p_end) {
     uint8_t val = TEMPLATE_READ_VALUE(uint8_t, p);

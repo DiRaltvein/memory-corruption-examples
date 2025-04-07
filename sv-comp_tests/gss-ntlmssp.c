@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char __VERIFIER_nondet_char(void);
+extern unsigned char __VERIFIER_nondet_uchar();
 extern int __VERIFIER_nondet_int(void);
 
 #define discard_const(ptr) ((void *)((uintptr_t)(ptr)))
@@ -37,23 +37,28 @@ struct wire_field_hdr {
 };
 
 /**
- * Just a utility function in test creation that generates random string of specified size
+ * Just a utility function in test creation that generates random integer in specified range
  */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
 
-  char *randomString = (char *)calloc(stringSize + 1, sizeof(char));
+/**
+ * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
+ */
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
   }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
   }
-  randomString[stringSize] = '\0';
   return randomString;
 }
 
@@ -158,13 +163,14 @@ int main() {
   // char data[] = "Some valid string that ends with characters that make iconv output an error \xff\xff\xff";
   // size_t dataLen = strlen(data);
 
-  char *data = getRandomString(50, 5000);
-  size_t dataLen = strlen(data);
+  int dataLen = getNumberInRange(50, 5000);
+  uint8_t *data = (uint8_t *)getRandomByteStream(dataLen);
 
   struct ntlm_ctx *ctx;
   if (ntlm_init_ctx(&ctx)) {
     printf("Could not initialize context\n");
-    exit(1);
+    free(data);
+    return 1;
   }
 
   struct wire_field_hdr str_hdr = {
