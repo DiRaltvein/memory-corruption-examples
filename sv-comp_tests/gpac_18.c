@@ -5,8 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 typedef struct
 {
@@ -28,17 +27,6 @@ typedef struct
   AVC_SPS *sps;
   AVC_PPS *pps;
 } AVCSliceInfo;
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 
 void avc_parse_slice(AVCSliceInfo *si, AVCState *avc) {
   if (si->pps->sps_id >= 255)

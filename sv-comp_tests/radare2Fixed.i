@@ -846,7 +846,58 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
-extern char __VERIFIER_nondet_char(void);
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
+extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
+  }
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 typedef unsigned char ut8;
 typedef enum {
   TYPE_FALSE = 'F',
@@ -866,17 +917,6 @@ typedef struct r_buf_t {
   size_t len;
   size_t offset;
 } RBuffer;
-char *getRandomString(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
-  if (randomString == ((void*)0)) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  return randomString;
-}
 static ut8 get_ut8(RBuffer *buffer, _Bool *error) {
   if (buffer->offset + 1 > buffer->len) {
     *error = 1;

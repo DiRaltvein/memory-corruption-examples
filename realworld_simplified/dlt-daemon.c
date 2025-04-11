@@ -18,58 +18,70 @@ typedef struct sDltFile {
 
 void readMessageFromFile(DltFile *file, char **message) {
   if (file == NULL || feof(file->handle)) {
-    exit(1);
+    return;
   }
 
   unsigned char messageLength = fgetc(file->handle);
-  if (messageLength == 0 || messageLength == 0xff) {
+  if (messageLength == 0 || messageLength == 0xff || messageLength == EOF) {
     printf("Potentially invalid message.\n");
-    exit(1);
+    return;
   }
   *message = calloc(messageLength + 1, sizeof(char));
   if (*message == NULL) {
     printf("Out of memory\n");
-    exit(1);
+    return;
   }
 
   for (int i = 0; i < messageLength && !feof(file->handle); i++) {
-    (*message)[i] = fgetc(file->handle);
+    unsigned char character = fgetc(file->handle);
+    if (character == EOF) {
+      (*message)[i] = '\0';
+      break;
+    }
+    (*message)[i] = character;
   }
   (*message)[messageLength] = '\0';
 }
 
-void initializeDltFile(DltFile *file) {
+int initializeDltFile(DltFile *file) {
   file->counter = 0;
   file->handle = fopen("dlt-daemon.hex", "rb");
   if (file->handle == NULL || feof(file->handle)) {
     printf("Could not open file dlt-daemon.hex\n");
-    exit(1);
+    return -1;
   }
 
   unsigned char messageCount = fgetc(file->handle);
-  if (messageCount == 0) {
+  if (messageCount == 0 || messageCount == NULL || messageCount == EOF) {
     printf("Read 0 as message count\n");
-    exit(1);
+    fclose(file->handle);
+    return -1;
   }
   file->index = calloc(messageCount, sizeof(long));
   if (file->index == NULL) {
     printf("Out of memory\n");
-    exit(1);
+    fclose(file->handle);
+    return -1;
   }
 
   int i = 0;
   while (!feof(file->handle) && i < messageCount) {
     file->counter++;
-    char *message;
+    char *message = NULL;
     file->index[i++] = ftell(file->handle);
     readMessageFromFile(file, &message);
+    if (message = NULL) {
+      break;
+    }
     free(message);
   }
+
+  return 0;
 }
 
 void dlt_file_message(DltFile *file, int index) {
   if (file == NULL) {
-    exit(1);
+    return;
   }
 
   // check for upper bound is in place but no negative numbers check is done
@@ -83,8 +95,11 @@ void dlt_file_message(DltFile *file, int index) {
     return;
   }
 
-  char *message;
+  char *message = NULL;
   readMessageFromFile(file, &message);
+  if (message = NULL) {
+    return;
+  }
 
   printf("Message at position [%d] is %s\n", index, message);
 
@@ -97,7 +112,9 @@ void dlt_file_message(DltFile *file, int index) {
 // <length of message (1 byte)><message>
 int main() {
   DltFile file = {0};
-  initializeDltFile(&file);
+  if (initializeDltFile(&file) == -1) {
+    return 1;
+  }
 
   // There is a problem with all this reading as negative indexes are not checked and read out of bound is possible with negative numebrs
   printf("Input a number that would correspond to an index of a message in hex file to see the message on that position. Alternatively input 'q' to stop the program.\n");

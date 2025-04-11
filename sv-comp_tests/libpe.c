@@ -5,30 +5,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "helpers.c"
 
 #define LIBPE_PTR_ADD(p, o) ((void *)((char *)(p) + (o)))
 
 typedef unsigned long long uint64_t;
 typedef unsigned short uint16_t;
 
-extern int __VERIFIER_nondet_int(void);
-
 typedef struct pe_ctx {
   int NumberOfFunctions;
   int NumberOfNames;
   void *map_addr;
 } pe_ctx_t;
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 
 void initCtxMapAddr(pe_ctx_t *ctx) {
   ctx->map_addr = malloc(ctx->NumberOfNames * sizeof(uint16_t));

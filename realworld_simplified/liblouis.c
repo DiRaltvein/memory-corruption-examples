@@ -8,7 +8,7 @@
 #include <string.h>
 
 FILE *logFile = NULL;
-char initialLogFileName[256] = "";
+char initialLogFileName[256] = {0};
 
 void lou_logFile(const char *fileName) {
 	if (logFile) {
@@ -16,7 +16,7 @@ void lou_logFile(const char *fileName) {
 		logFile = NULL;
 	}
 	if (fileName == NULL || fileName[0] == 0) return;
-	if (initialLogFileName[0] == 0) strcpy(initialLogFileName, fileName); // Problem: copy of argv[1] value into a buffer with fixed length of 256
+	strcpy(initialLogFileName, fileName); // Problem: copy of argv[1] value into a buffer with fixed length of 256
 	logFile = fopen(fileName, "a");
 	if (logFile == NULL && initialLogFileName[0] != 0)
 		logFile = fopen(initialLogFileName, "a");

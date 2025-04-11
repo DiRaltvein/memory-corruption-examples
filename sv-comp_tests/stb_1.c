@@ -6,38 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = getNumberInRange(lowestSize, highestSize);
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
+#include "helpers.c"
 
 int getNumberOfNumbersInAString(char *string) {
   int i = 0;

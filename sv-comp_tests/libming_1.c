@@ -7,30 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
+#include "helpers.c"
 
 #define CPP "cpp -xc++ -P -Wall"
 #define DEFSWFVERSION 6
@@ -52,7 +29,7 @@ int main() {
     files[i] = getRandomString(0, 150);
   }
 
-  for (int i = 0; i < files; i++) {
+  for (int i = 0; i < 5; i++) {
     char ppfile[PATH_MAX];
     sprintf(ppfile, "%s.frame%d.pp", outputfile, i);
     makeswf_preprocess(files[i], ppfile);

@@ -5,8 +5,7 @@
 
 #include <stdint.h>
 #include <string.h>
-
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 typedef struct {
   uint32_t acmod;
@@ -16,17 +15,6 @@ typedef struct {
   uint32_t nb_streams;
   GF_AC3StreamInfo streams[8];
 } GF_AC3Config;
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 
 int main() {
   GF_AC3Config hdr;

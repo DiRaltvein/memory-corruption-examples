@@ -7,13 +7,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include "helpers.c"
 
 #define R_NEW0(x) (x*)calloc(1,sizeof(x))
 #define R_NEW(x) (x*)malloc(sizeof(x))
 #define R_FREE(x) { free((void *)x); x = NULL; }
 #define FLAG_REF '\x80'
-
-extern char __VERIFIER_nondet_char(void);
 
 typedef unsigned char ut8;
 
@@ -38,21 +37,6 @@ typedef struct r_buf_t {
 	size_t len;
 	size_t offset;
 } RBuffer;
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  return randomString;
-}
 
 static ut8 get_ut8(RBuffer *buffer, bool *error) {
 	if (buffer->offset + 1 > buffer->len) {
@@ -171,11 +155,11 @@ static pyc_object *get_object(RBuffer *buffer) {
 	}
 
 	if (flag) {
-		ret = get_none_object ();
+		ret = get_none_object();
 		if (!ret) {
 			return NULL;
 		}
-		ref_idx = r_list_append (ret);
+		ref_idx = r_list_append(ret);
 		if (!ref_idx) {
 			free_object (ret);
 			return NULL;
@@ -186,17 +170,17 @@ static pyc_object *get_object(RBuffer *buffer) {
 	case TYPE_TRUE:
 		free_object(ret);
 		free(ref_idx);
-		return get_true_object ();
+		return get_true_object();
 	case TYPE_FALSE:
 		free_object(ret);
 		free(ref_idx);
-		return get_false_object ();
+		return get_false_object();
 	case TYPE_NONE:
 		free_object(ret);
 		free(ref_idx);
-		return get_none_object ();
+		return get_none_object();
 	case TYPE_INT:
-		ret = get_int_object (buffer);
+		ret = get_int_object(buffer);
 		break;
 	case 1:
 		// nop
@@ -209,7 +193,7 @@ static pyc_object *get_object(RBuffer *buffer) {
 	}
 
 	if (flag && ref_idx) {
-		free_object (ref_idx->data); // Problem: free of ret object that is returned from function
+		free_object(ref_idx->data); // Problem: free of ret object that is returned from function
 		ref_idx->data = get_none_object();
 	}
 

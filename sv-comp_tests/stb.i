@@ -871,14 +871,16 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
-
-typedef struct _stb_vorbis {
-  unsigned char *stream;
-  unsigned int stream_size;
-  unsigned int currect_stream_position;
-} vorb;
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
 extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
 int getNumberInRange(int lowestBound, int highestBound) {
   int value = __VERIFIER_nondet_int();
   while (value < lowestBound || value > highestBound) {
@@ -897,9 +899,39 @@ unsigned char *getRandomByteStream(int size) {
   }
   return randomString;
 }
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+
+typedef struct _stb_vorbis {
+  unsigned char *stream;
+  unsigned int stream_size;
+  unsigned int currect_stream_position;
+} vorb;
 int get32_packet(vorb *f) {
   if (f->currect_stream_position + 3 >= f->stream_size) {
-    exit(1);
+    return -1;
   }
   uint32_t x;
   x = f->stream[f->currect_stream_position++];
@@ -913,9 +945,12 @@ void *setup_malloc(int sz) {
   return sz ? malloc(sz) : ((void*)0);
 }
 void start_decoder(vorb *f) {
-  int i;
+  int i = 0;
   char **comment_list = {0};
   int comment_list_length = get32_packet(f);
+  if (comment_list_length == -1) {
+    return;
+  }
   if (comment_list_length > 0) {
     comment_list = (char **)setup_malloc(sizeof(char *) * comment_list_length);
     if (comment_list == ((void*)0)) {
@@ -925,7 +960,7 @@ void start_decoder(vorb *f) {
   }
   for (i = 0; i < comment_list_length; ++i) {
     int len = get32_packet(f);
-    if (f->currect_stream_position + len - 1 >= f->stream_size) {
+    if (len > 0xffff || f->currect_stream_position + len - 1 >= f->stream_size) {
       printf("Not enough buffer to read comment number [%d]\n", i);
       goto cleanup;
     }
@@ -943,10 +978,10 @@ void start_decoder(vorb *f) {
     printf("Comment number [%d] content: %s\n", i, comment_list[i]);
   }
 cleanup:
-  for (int i2 = 0; i2 < i; i2++) {
-    free(comment_list[i2]);
-  }
   if (comment_list) {
+    for (int i2 = 0; i2 < i; i2++) {
+      free(comment_list[i2]);
+    }
     free(comment_list);
   }
 }

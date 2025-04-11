@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 typedef struct _krb5_data {
   unsigned int length;
@@ -24,38 +25,6 @@ struct tgs_req_info {
   krb5_ticket *header_tkt;
   unsigned int flags;
 };
-
-extern int __VERIFIER_nondet_int(void);
-extern char __VERIFIER_nondet_char(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = getNumberInRange(lowestSize, highestSize);
-
-  char *randomString = (char *)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
 
 int handle_authdata(struct tgs_req_info *t) {
   if (t->header_tkt->enc_part.ciphertext.length < 15) {

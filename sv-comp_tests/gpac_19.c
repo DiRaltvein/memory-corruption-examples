@@ -7,12 +7,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 #define strnicmp strncasecmp
 #define PAD_EVEN(x) (((x) + 1) & ~1)
-
-extern unsigned char __VERIFIER_nondet_uchar();
-extern int __VERIFIER_nondet_int(void);
 
 typedef struct {
   unsigned char *data;
@@ -21,32 +19,6 @@ typedef struct {
   // Because test case uses buffer rather than a FILE such index is required.
   size_t pos;
 } avi_t;
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 static uint32_t avi_read(avi_t *AVI, char *buf, uint32_t len) {
   size_t r = 0;

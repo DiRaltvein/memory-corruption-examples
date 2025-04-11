@@ -6,30 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
+#include "helpers.c"
 
 int SkipString(const char **jsonPtr, const char **outStrStart) {
   // skip '"'
@@ -59,14 +36,14 @@ int SkipString(const char **jsonPtr, const char **outStrStart) {
 void ParseString(const char **jsonPtr) {
   if (*(*jsonPtr) != '"') {
     printf("String must be between double quotes and the first element must be thus a double quote\n");
-    exit(1);
+    return;
   }
   const char *strStart;
   int length = SkipString(jsonPtr, &strStart);
   char *string = calloc(length + 1, sizeof(char));
   if (!string) {
     printf("Out of memory!\n");
-    exit(1);
+    return;
   }
   memcpy(string, strStart, length);
   printf("%s\n", string);
@@ -77,6 +54,7 @@ void ParseString(const char **jsonPtr) {
 // for example \"123
 int main() {
   char* randomString = getRandomString(5, 500);
-  ParseString(&randomString);
+  char* copy = randomString;
+  ParseString(&copy);
   free(randomString);
 }

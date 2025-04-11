@@ -871,21 +871,36 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
-
-extern char __VERIFIER_nondet_char(void);
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
-static uint64_t power(uint64_t x, uint32_t n) {
-  uint64_t val = 1;
-  for (uint32_t i = 0; i <= n; ++i) {
-    val = x * val;
+extern unsigned int __VERIFIER_nondet_uint(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  return val / x;
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
 }
 char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
+  int stringSize = getNumberInRange(lowestSize, highestSize);
   char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
@@ -896,6 +911,24 @@ char *getRandomString(int lowestSize, int highestSize) {
   }
   randomString[stringSize] = '\0';
   return randomString;
+}
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+static uint64_t power(uint64_t x, uint32_t n) {
+  uint64_t val = 1;
+  for (uint32_t i = 0; i <= n; ++i) {
+    val = x * val;
+  }
+  return val / x;
 }
 uint32_t get_var_integer(const uint8_t *buf, uint32_t *pos) {
   uint8_t temp;

@@ -120,7 +120,7 @@ for (const analyzer of analyzersToUse) {
     warnings: 0,
     errors: 0,
   };
-  for (const cve of cvesToAnalyze.concat(patchedCves)) {
+  for (const cve of cvesToAnalyze) { // when using .concat(patchedCves) then DE can not be trusted as then also numbers from patched versions come into diagnostics
     if (cve[analyzer].length < 5) continue;
     const notes = cve[analyzer].split('(')[0];
     const notesSplit = notes.split('/');
@@ -164,14 +164,29 @@ for (const analyzer of analyzersToUse) {
       ' True Negative (TN): ',
       trueNegative
     );
-  }
 
-  // failed is FN as tool outputted that file has no error while error was there
-  // success is TP because tool outputted that file has error while error was there
-  console.log(
-    'True Positive Rate (TPR): ',
-    (success / (success + failed)).toFixed(4)
-  );
+    // failed is FN as tool outputted that file has no error while error was there
+    // success is TP because tool outputted that file has error while error was there
+    console.log(
+      'True Positive Rate (TPR): ',
+      (success / (success + failed)).toFixed(4),
+      ' False Positive Rate (FPR): ',
+      (falsePositives / (falsePositives + trueNegative)).toFixed(4),
+      ' TPR - FPR + 1: ',
+      ((success / (success + failed)) - (falsePositives / (falsePositives + trueNegative)) + 1).toFixed(4),
+      ' Diagnostic Efficiency (DE): ',
+      (success / (numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes)).toFixed(4)
+    );
+  } else {
+    // failed is FN as tool outputted that file has no error while error was there
+    // success is TP because tool outputted that file has error while error was there
+    console.log(
+      'True Positive Rate (TPR): ',
+      (success / (success + failed)).toFixed(4),
+      ' Diagnostic Efficiency (DE): ',
+      (success / (numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes)).toFixed(4)
+    );
+  }
 }
 // Simple console log stats
 

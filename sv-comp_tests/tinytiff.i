@@ -894,22 +894,28 @@ typedef struct _TinyTIFFReaderFile {
 uint32_t TinyTIFFReader_readuint32(TinyTIFFReaderFile *tiff) {
   uint32_t res = 0;
   size_t size = fread(&res, 4, 1, tiff->file);
-  if (size != 1)
+  if (size != 1) {
+    fclose(tiff->file);
     exit(1);
+  }
   return res;
 }
 uint16_t TinyTIFFReader_readuint16(TinyTIFFReaderFile *tiff) {
   uint16_t res = 0;
   size_t size = fread(&res, 2, 1, tiff->file);
-  if (size != 1)
+  if (size != 1) {
+    fclose(tiff->file);
     exit(1);
+  }
   return res;
 }
 uint8_t TinyTIFFReader_readuint8(TinyTIFFReaderFile *tiff) {
   uint8_t res = 0;
   size_t size = fread(&res, 1, 1, tiff->file);
-  if (size != 1)
+  if (size != 1) {
+    fclose(tiff->file);
     exit(1);
+  }
   return res;
 }
 TinyTIFFReader_IFD TinyTIFFReader_readIFD(TinyTIFFReaderFile *tiff) {
@@ -940,6 +946,8 @@ TinyTIFFReader_IFD TinyTIFFReader_readIFD(TinyTIFFReaderFile *tiff) {
       d.pvalue[i] = TinyTIFFReader_readuint32(tiff);
     }
     break;
+  default:
+    break;
   }
   return d;
 }
@@ -956,6 +964,9 @@ void TinyTIFFReader_readNextFrame(TinyTIFFReaderFile *tiff) {
       break;
     case 273: {
       tiff->currentFrame.stripcount = ifd.value;
+      if (tiff.currentFrame.stripoffsets) {
+        free(tiff.currentFrame.stripoffsets);
+      }
       tiff->currentFrame.stripoffsets = (uint32_t *)calloc(ifd.value, sizeof(uint32_t));
       if (tiff->currentFrame.stripoffsets == ((void*)0))
         break;
@@ -969,6 +980,8 @@ void TinyTIFFReader_readNextFrame(TinyTIFFReaderFile *tiff) {
       break;
     case 339:
       tiff->currentFrame.sampleformat = ifd.value;
+      break;
+    default:
       break;
     }
     if (ifd.pvalue) {

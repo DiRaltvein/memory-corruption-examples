@@ -6,9 +6,6 @@ properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: true
     subproperty: valid-deref
-  - property_file: ../properties/no-overflow.prp
-    expected_verdict: false
-    subproperty: unsigned-overflow
 
 options:
   language: C

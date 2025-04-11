@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 #define PICO_PROTO_ICMP4 1
 #define PICO_PROTO_IGMP 2
@@ -18,17 +17,6 @@ extern int __VERIFIER_nondet_int(void);
 struct pico_frame {
   char *proto;
 };
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
 
 void pico_frame_discard(struct pico_frame *f) {
   if (f) {
@@ -66,7 +54,6 @@ int32_t pico_transport_receive(struct pico_frame *f, int proto) {
     /* Protocol not available */
     printf("pkt: no such protocol (%d)\n", proto);
     pico_frame_discard(f);
-    ret = -1;
   }
   return ret;
 }
@@ -77,6 +64,7 @@ static int pico_fragments_reassemble(int proto) {
     printf("Out of memory\n");
     return 1;
   }
+  full->proto = NULL;
   if (pico_transport_receive(full, proto) == -1) {
     pico_frame_discard(full); // Problem: double free
     return 1;

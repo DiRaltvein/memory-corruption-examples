@@ -7,10 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern unsigned char __VERIFIER_nondet_uchar();
-extern int __VERIFIER_nondet_int(void);
-
+#include "helpers.c"
 
 #define STUN_A_LAST_MANDATORY 0x2020
 #define STUN_A_OPTIONAL 0x7fff
@@ -29,32 +26,6 @@ typedef struct stun_buffer_s {
 typedef struct stun_attr_s {
   stun_buffer_t enc_buf;
 } stun_attr_t;
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 void stun_parse_attribute(unsigned char *p, stun_attr_t **attr) {
 

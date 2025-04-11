@@ -16,7 +16,7 @@ typedef struct _stb_vorbis {
 
 int get32_packet(vorb *f) {
   if (f->currect_stream_position + 3 >= f->stream_size) {
-    exit(1);
+    return -1;
   }
   uint32_t x;
   x = f->stream[f->currect_stream_position++];
@@ -32,9 +32,14 @@ void *setup_malloc(int sz) {
 }
 
 void start_decoder(vorb *f) {
-  int i;
+  int i = 0;
   char **comment_list = {0};
   int comment_list_length = get32_packet(f);
+
+  if (comment_list_length == -1) {
+    return;
+  }
+
   if (comment_list_length > 0) {
     // Problem: blind trust into data read from a file (in test case read from a buffer)
     // sizeof(char *) * comment_list_length would overflow and result in a 4 passes to setup_malloc that will return 8 because of rounding
@@ -44,14 +49,14 @@ void start_decoder(vorb *f) {
       return;
     }
   }
+
   for (i = 0; i < comment_list_length; ++i) {
     int len = get32_packet(f);
-    if (f->currect_stream_position + len - 1 >= f->stream_size) {
+    if (len > 0xffff || f->currect_stream_position + len - 1 >= f->stream_size) {
       printf("Not enough buffer to read comment number [%d]\n", i);
       goto cleanup;
     }
     // Problem: comment_list overflow on last comment (i = 8).
-    // Also the same problem with overflow here if len is maliciously big then once again integer overflow can happen
     comment_list[i] = (char *)setup_malloc(sizeof(char) * (len + 1));
     if (comment_list[i] == NULL) {
       printf("Out of memory\n");
@@ -62,15 +67,16 @@ void start_decoder(vorb *f) {
     }
     comment_list[i][len] = (char)'\0';
   }
+
   for (int i = 0; i < comment_list_length; ++i) {
     printf("Comment number [%d] content: %s\n", i, comment_list[i]);
   }
 
 cleanup:
-  for (int i2 = 0; i2 < i; i2++) {
-    free(comment_list[i2]);
-  }
   if (comment_list) {
+    for (int i2 = 0; i2 < i; i2++) {
+      free(comment_list[i2]);
+    }
     free(comment_list);
   }
 }

@@ -4,22 +4,10 @@
 // extract of: src/media_tools/av_parsers.c (function: hevc_parse_vps_extension)
 
 #include <string.h>
-
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
+#include "helpers.c"
 
 int main() {
-  int num_scalability_types = getNumberInRange(0, 16);
+  int num_scalability_types = getNumberInRange(0, 20);
   char dim_bit_offset[16];
 
   if (num_scalability_types >= 16) {

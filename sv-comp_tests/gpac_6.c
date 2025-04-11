@@ -6,10 +6,9 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "helpers.c"
 
 #define MAX_TILE_COLS 30
-
-extern unsigned char __VERIFIER_nondet_uchar();
 
 typedef uint64_t u64;
 typedef uint32_t u32;
@@ -26,21 +25,6 @@ typedef struct {
   u64 size;
   u64 position;
 } GF_BitStream;
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 u32 readUnsignedIntFromBuffer(GF_BitStream *bs) {
   if (bs->position + 4 >= bs->size) {

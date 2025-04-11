@@ -5,7 +5,11 @@ input_files: 'radare2.i'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
-    subproperty: valid-deref
+    # subproperty: valid-free
+    # subproperty: valid-deref
+    # TODO: test idea is that free_object is called 2 times where 2 call uses already freed pointer (pointer is freed but not NULL)
+    # Overall 2 memory violations occur, 1 is when object->data is accessed that is invalid pointer dereference and another is when object->data or object are freed that is double free.
+    # As there is 2 memory violations probably is would make sense to check only for the parent classification that is valid-memsafety.prp
 
 options:
   language: C

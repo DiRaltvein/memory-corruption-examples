@@ -6,38 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 typedef unsigned char uchar;
 #define MAX_COMMENT_SIZE 200
-
-extern unsigned char __VERIFIER_nondet_uchar();
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-uchar *getRandomByteStream(int size) {
-  uchar *randomString = (uchar*)calloc(size, sizeof(uchar));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 static void process_COM(uchar *Data, int length) {
   int ch;

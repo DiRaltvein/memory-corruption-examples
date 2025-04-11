@@ -7,8 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern unsigned char __VERIFIER_nondet_uchar();
+#include "helpers.c"
 
 typedef unsigned char byte;
 typedef struct sf_private_tag {
@@ -17,21 +16,6 @@ typedef struct sf_private_tag {
   int bytewidth;
   byte *ptr;
 } SF_PRIVATE;
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-byte *getRandomByteStream(int size) {
-  byte *randomString = (byte*)calloc(size, sizeof(byte));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 static inline int32_t
 psf_get_le32(const uint8_t *ptr, int offset) {

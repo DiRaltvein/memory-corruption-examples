@@ -847,14 +847,36 @@ extern int getsubopt (char **__restrict __optionp,
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2, 3))) ;
 extern int getloadavg (double __loadavg[], int __nelem)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1)));
-
-extern char __VERIFIER_nondet_char(void);
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+extern unsigned int __VERIFIER_nondet_uint(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
   char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
@@ -866,15 +888,27 @@ char *getRandomString(int lowestSize, int highestSize) {
   randomString[stringSize] = '\0';
   return randomString;
 }
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+
 FILE *logFile = ((void*)0);
-char initialLogFileName[256] = "";
+char initialLogFileName[256] = {0};
 void lou_logFile(const char *fileName) {
  if (logFile) {
   fclose(logFile);
   logFile = ((void*)0);
  }
  if (fileName == ((void*)0) || fileName[0] == 0) return;
- if (initialLogFileName[0] == 0) strcpy(initialLogFileName, fileName);
+ strcpy(initialLogFileName, fileName);
  logFile = fopen(fileName, "a");
  if (logFile == ((void*)0) && initialLogFileName[0] != 0)
   logFile = fopen(initialLogFileName, "a");

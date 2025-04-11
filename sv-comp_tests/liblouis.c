@@ -7,33 +7,10 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
+#include "helpers.c"
 
 FILE *logFile = NULL;
-char initialLogFileName[256] = "";
+char initialLogFileName[256] = {0};
 
 void lou_logFile(const char *fileName) {
 	if (logFile) {
@@ -41,7 +18,7 @@ void lou_logFile(const char *fileName) {
 		logFile = NULL;
 	}
 	if (fileName == NULL || fileName[0] == 0) return;
-	if (initialLogFileName[0] == 0) strcpy(initialLogFileName, fileName); // Problem: copy of argv[1] value into a buffer with fixed length of 256
+	strcpy(initialLogFileName, fileName); // Problem: copy of randomString value into a buffer with fixed length of 256
 	logFile = fopen(fileName, "a");
 	if (logFile == NULL && initialLogFileName[0] != 0)
 		logFile = fopen(initialLogFileName, "a");

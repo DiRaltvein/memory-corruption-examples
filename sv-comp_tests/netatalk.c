@@ -6,9 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 #define BUF_LEN 40
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -18,27 +16,6 @@ typedef struct _ {
   char *eof;
   size_t datasize;
 } DSI;
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
 
 size_t dsi_writeinit(DSI *dsi, void *buf, const size_t buflen) {
   size_t bytes = 0;

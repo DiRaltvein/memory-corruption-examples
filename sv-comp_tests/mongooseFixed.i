@@ -845,9 +845,16 @@ extern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ )) ;
 extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
 extern int __uflow (FILE *);
 extern int __overflow (FILE *, int);
-
-extern char __VERIFIER_nondet_char(void);
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
 int getNumberInRange(int lowestBound, int highestBound) {
   int value = __VERIFIER_nondet_int();
   while (value < lowestBound || value > highestBound) {
@@ -855,8 +862,32 @@ int getNumberInRange(int lowestBound, int highestBound) {
   }
   return value;
 }
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
@@ -866,13 +897,13 @@ char *getRandomStringNotZeroTerminated(int size) {
   }
   return randomString;
 }
-static int decode_variable_length(const char *buf, int *bytes_consumed, int bufSize) {
-  int value = 0, multiplier = 1, offset;
+
+static int decode_variable_length(const uint8_t *buf, int *bytes_consumed, int bufSize) {
+  int value = 0, multiplier = 2, offset;
   for (offset = 0; offset < 4 && offset < bufSize; offset++) {
-    char encoded_byte = buf[offset];
-    value += encoded_byte * multiplier;
-    multiplier *= 128;
-    if (!(encoded_byte & 0x10)) {
+    uint8_t encoded_byte = buf[offset];
+    value += (encoded_byte & 0x7F) * multiplier;
+    if (!(encoded_byte & 0x80)) {
       break;
     }
   }
@@ -882,7 +913,7 @@ static int decode_variable_length(const char *buf, int *bytes_consumed, int bufS
 }
 int main() {
   int size = getNumberInRange(1, 500);
-  char* buf = getRandomStringNotZeroTerminated(size);
+  uint8_t* buf = (uint8_t *)getRandomByteStream(size);
   int bytes_consumed = 0;
   int decodedValue = decode_variable_length(buf, &bytes_consumed, size);
   printf("Value: %d, bytes consumed: %d\n", decodedValue, bytes_consumed);

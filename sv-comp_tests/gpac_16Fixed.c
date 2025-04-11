@@ -7,38 +7,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 typedef unsigned char u8;
 typedef unsigned int u32;
-
-extern unsigned char __VERIFIER_nondet_uchar();
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-u8 *getRandomByteStream(int size) {
-  u8 *randomString = (u8*)calloc(size, sizeof(u8));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 // function that processes a services from Service Description Table (SDT) that is part of part of the MPEG-TS.
 void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
@@ -133,7 +105,7 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
 
 int main() {
   u32 len = (u32)getNumberInRange(5, 1000);
-  u8 *sdt_data = getRandomByteStream(len);
+  u8 *sdt_data = (u8 *)getRandomByteStream(len);
 
   gf_m2ts_process_sdt(sdt_data, len);
   free(sdt_data);

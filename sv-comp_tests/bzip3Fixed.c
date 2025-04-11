@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 typedef uint8_t u8;
 typedef uint32_t u32;
@@ -18,36 +19,7 @@ struct bz3_state {
   s8 last_error;
 };
 
-extern unsigned char __VERIFIER_nondet_uchar();
-extern int __VERIFIER_nondet_int(void);
-
 #define KiB(x) ((x) * 1024)
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
 
 u32 bz3_bound(u32 input_size) { return input_size + input_size / 50 + 32; }
 

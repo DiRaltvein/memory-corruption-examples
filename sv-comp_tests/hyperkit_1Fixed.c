@@ -4,8 +4,7 @@
 // extract of: src/lib/pci_virtio_sock.c (function: iovec_pull)
 
 #include <stdlib.h>
-
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 struct iovec {
   int iov_len;

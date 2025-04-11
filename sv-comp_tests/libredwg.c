@@ -10,23 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-extern unsigned char __VERIFIER_nondet_uchar();
-
-/**
- * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
- */
-unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
-  }
-  return randomString;
-}
+#include "helpers.c"
 
 uint16_t
 bit_calc_CRC(const uint16_t seed, unsigned char *addr, int len) {

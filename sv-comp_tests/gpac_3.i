@@ -871,30 +871,64 @@ extern char *__stpncpy (char *__restrict __dest,
 extern char *stpncpy (char *__restrict __dest,
         const char *__restrict __src, size_t __n)
      __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
-
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
 extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
-typedef struct {
-  unsigned char *data;
-  size_t position;
-  size_t size;
-} GF_BitStream;
-unsigned char *getRandomUnsignedString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
+extern unsigned int __VERIFIER_nondet_uint(void);
+int getNumberInRange(int lowestBound, int highestBound) {
+  int value = __VERIFIER_nondet_int();
+  while (value < lowestBound || value > highestBound) {
+    value = __VERIFIER_nondet_int();
   }
-  unsigned char *randomString = (unsigned char*)calloc(stringSize + 1, sizeof(unsigned char));
+  return value;
+}
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
   if (randomString == ((void*)0)) {
     printf("Out of memory\n");
     exit(1);
   }
   for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_uchar();
+    randomString[i] = __VERIFIER_nondet_char();
   }
   randomString[stringSize] = '\0';
   return randomString;
 }
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
+
+typedef struct {
+  unsigned char *data;
+  size_t position;
+  size_t size;
+} GF_BitStream;
 uint8_t gf_bs_read_int(GF_BitStream *bs) {
   return bs->data[bs->position++];
 }
@@ -937,11 +971,12 @@ void latm_dmx_sync_frame_bs(GF_BitStream *bs, uint32_t *nb_bytes, uint8_t *buffe
   }
 }
 int main() {
-  unsigned char* data = getRandomUnsignedString(5, 5000);
+  int size = getNumberInRange(5, 5000);
+  unsigned char* data = getRandomByteStream(size);
   GF_BitStream bs = {0};
   bs.position = 0;
   bs.data = data;
-  bs.size = strlen(data);
+  bs.size = size;
   uint8_t latm_buffer[64] = {0};
   uint32_t latm_frame_size = 64;
   latm_dmx_sync_frame_bs(&bs, &latm_frame_size, latm_buffer);

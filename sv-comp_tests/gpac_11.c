@@ -7,11 +7,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "helpers.c"
 
 #define MAX_LAYERS 16
 #define gf_bs_read_int_log(_bs, _nBits) gf_bs_read_int(_bs, _nBits)
-
-extern int __VERIFIER_nondet_int(void);
 
 typedef struct {
   FILE *stream;
@@ -41,17 +40,6 @@ uint8_t gf_bs_read_bit(GF_BitStream *bs) {
   uint8_t ret = (bs->current >> (bs->nbBits - 1)) & 1;
   bs->nbBits--;
   return ret;
-}
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
 }
 
 uint32_t gf_bs_read_int(GF_BitStream *bs, uint32_t nBits) {

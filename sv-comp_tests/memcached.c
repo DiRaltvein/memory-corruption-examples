@@ -8,13 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 #define PARSER_MAX_TOKENS 24
 #define KEY_MAX_LENGTH 250
 #define VALUE_MAX_LENGTH 1024
-
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
 
 typedef struct key_value {
   char key[KEY_MAX_LENGTH];
@@ -39,27 +37,6 @@ const key_value mockCache[] = {
     {"to", "value3"},
     {"test", "value4"},
 };
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int lowestSize, int highestSize) {
-  int stringSize = __VERIFIER_nondet_int();
-  while (stringSize < lowestSize || stringSize > highestSize) {
-    stringSize = __VERIFIER_nondet_int();
-  }
-
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < stringSize; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  randomString[stringSize] = '\0';
-  return randomString;
-}
 
 const char *findValueByKey(const char *key) {
   size_t cacheSize = sizeof(mockCache) / sizeof(mockCache[0]);

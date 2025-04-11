@@ -6,45 +6,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "helpers.c"
 
-extern char __VERIFIER_nondet_char(void);
-extern int __VERIFIER_nondet_int(void);
-
-/**
- * Just a utility function in test creation that generates random integer in specified range
- */
-int getNumberInRange(int lowestBound, int highestBound) {
-  int value = __VERIFIER_nondet_int();
-  while (value < lowestBound || value > highestBound) {
-    value = __VERIFIER_nondet_int();
-  }
-  return value;
-}
-
-/**
- * Just a utility function in test creation that generates random string of specified size that is not zero terminated
- */
-char *getRandomStringNotZeroTerminated(int size) {
-  char *randomString = (char*)calloc(size, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  return randomString;
-}
-
-static int decode_variable_length(const char *buf, int *bytes_consumed, int bufSize) {
-  int value = 0, multiplier = 1, offset;
+static int decode_variable_length(const uint8_t *buf, int *bytes_consumed, int bufSize) {
+  int value = 0, multiplier = 2, offset;
 
   for (offset = 0; offset < 4 && offset < bufSize; offset++) {
-    char encoded_byte = buf[offset];
-    value += encoded_byte * multiplier;
-    multiplier *= 128;
+    uint8_t encoded_byte = buf[offset];
+    value += (encoded_byte & 0x7F) * multiplier;
 
-    if (!(encoded_byte & 0x10)) {
+    if (!(encoded_byte & 0x80)) {
       break;
     }
   }
@@ -57,7 +28,7 @@ static int decode_variable_length(const char *buf, int *bytes_consumed, int bufS
 
 int main() {
   int size = getNumberInRange(1, 500);
-  char* buf = getRandomStringNotZeroTerminated(size);
+  uint8_t* buf = (uint8_t *)getRandomByteStream(size);
   int bytes_consumed = 0;
   int decodedValue = decode_variable_length(buf, &bytes_consumed, size);
   printf("Value: %d, bytes consumed: %d\n", decodedValue, bytes_consumed);

@@ -5,8 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-extern int __VERIFIER_nondet_int(void);
+#include "helpers.c"
 
 typedef struct {
   unsigned char *data;

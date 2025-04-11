@@ -866,7 +866,16 @@ extern int ftrylockfile (FILE *__stream) __attribute__ ((__nothrow__ )) ;
 extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ ));
 extern int __uflow (FILE *);
 extern int __overflow (FILE *, int);
+extern long __VERIFIER_nondet_long();
+extern unsigned long __VERIFIER_nondet_ulong();
+extern char __VERIFIER_nondet_char();
+extern unsigned char __VERIFIER_nondet_uchar();
+extern short __VERIFIER_nondet_short();
+extern unsigned short __VERIFIER_nondet_ushort();
+extern float __VERIFIER_nondet_float();
+extern double __VERIFIER_nondet_double();
 extern int __VERIFIER_nondet_int(void);
+extern unsigned int __VERIFIER_nondet_uint(void);
 int getNumberInRange(int lowestBound, int highestBound) {
   int value = __VERIFIER_nondet_int();
   while (value < lowestBound || value > highestBound) {
@@ -874,29 +883,53 @@ int getNumberInRange(int lowestBound, int highestBound) {
   }
   return value;
 }
+unsigned char *getRandomByteStream(int size) {
+  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_uchar();
+  }
+  return randomString;
+}
+char *getRandomString(int lowestSize, int highestSize) {
+  int stringSize = getNumberInRange(lowestSize, highestSize);
+  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < stringSize; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  randomString[stringSize] = '\0';
+  return randomString;
+}
+char *getRandomStringFixedSize(int size) {
+  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  if (randomString == ((void*)0)) {
+    printf("Out of memory\n");
+    exit(1);
+  }
+  for (int i = 0; i < size; i++) {
+    randomString[i] = __VERIFIER_nondet_char();
+  }
+  return randomString;
+}
 int main() {
   int result;
   char navfile[(100)];
-  navfile[0] = 0;
-  int argc = getNumberInRange(3, 10);
-  char **argv = calloc(argc, sizeof(char *));
-  if (argv == ((void*)0)) {
+  char **argv = calloc(3, sizeof(char *));
+  if (argv == null) {
     printf("Out of memory\n");
     return 1;
   }
   argv[0] = strdup("program.name");
-  argv[1] = strdup("-e");
-  for (int i = 2; i < argc; i++) {
-    int size = getNumberInRange(5, 120);
-    argv[i] = calloc(size + 1, sizeof(char));
-    if (argv[i] == ((void*)0)) {
-      freeArgv(argc, argv);
-      printf("Out of memory\n");
-      return 1;
-    }
-    memset(argv[i], 'a', size);
-  }
-  while ((result = getopt(argc, argv, "e:")) != -1) {
+  argv[1] = stddup("-e");
+  argv[2] = getRandomString(50, 200);
+  while ((result = getopt(3, argv, "e:")) != -1) {
     switch (result) {
     case 'e':
       strcpy(navfile, optarg);
@@ -905,5 +938,8 @@ int main() {
       break;
     }
   }
-  freeArgv(argc, argv);
+  free(argv[0]);
+  free(argv[1]);
+  free(argv[2]);
+  free(argv);
 }

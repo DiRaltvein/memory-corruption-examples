@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "helpers.c"
 
 #define R_NEW0(x) (x *)calloc(1, sizeof(x))
 #define R_NEW(x) (x *)malloc(sizeof(x))
@@ -16,8 +17,6 @@
     x = NULL;        \
   }
 #define FLAG_REF '\x80'
-
-extern char __VERIFIER_nondet_char(void);
 
 typedef unsigned char ut8;
 
@@ -42,21 +41,6 @@ typedef struct r_buf_t {
   size_t len;
   size_t offset;
 } RBuffer;
-
-/**
- * Just a utility function in test creation that generates random string of specified size
- */
-char *getRandomString(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
-  if (randomString == NULL) {
-    printf("Out of memory\n");
-    exit(1);
-  }
-  for (int i = 0; i < size; i++) {
-    randomString[i] = __VERIFIER_nondet_char();
-  }
-  return randomString;
-}
 
 static ut8 get_ut8(RBuffer *buffer, bool *error) {
   if (buffer->offset + 1 > buffer->len) {

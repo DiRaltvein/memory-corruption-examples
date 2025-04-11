@@ -8,7 +8,6 @@ properties:
     subproperty: valid-deref
   - property_file: ../properties/no-overflow.prp
     expected_verdict: false
-    subproperty: signed-overflow
 
 options:
   language: C

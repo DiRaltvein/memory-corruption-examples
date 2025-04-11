@@ -6,10 +6,9 @@
 #include <limits.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "helpers.c"
 
 #define ENTRIES_LENGTH 5
-
-extern int __VERIFIER_nondet_int(void);
 
 typedef struct
 {
