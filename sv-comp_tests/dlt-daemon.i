@@ -956,8 +956,13 @@ void readMessageFromFile(DltFile *file, char **message) {
 int initializeDltFile(DltFile *file) {
   file->counter = 0;
   file->handle = fopen("dlt-daemon.hex", "rb");
-  if (file->handle == ((void*)0) || feof(file->handle)) {
+  if (file->handle == ((void*)0)) {
     printf("Could not open file dlt-daemon.hex\n");
+    return -1;
+  }
+  if (feof(file->handle)) {
+    printf("Could not open file dlt-daemon.hex\n");
+    fclose(file->handle);
     return -1;
   }
   unsigned char messageCount = fgetc(file->handle);

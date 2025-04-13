@@ -898,6 +898,32 @@ char *getRandomStringFixedSize(int size) {
   return randomString;
 }
 
+typedef __uint8_t uint8_t;
+typedef __uint16_t uint16_t;
+typedef __uint32_t uint32_t;
+typedef __uint64_t uint64_t;
+typedef __int_least8_t int_least8_t;
+typedef __int_least16_t int_least16_t;
+typedef __int_least32_t int_least32_t;
+typedef __int_least64_t int_least64_t;
+typedef __uint_least8_t uint_least8_t;
+typedef __uint_least16_t uint_least16_t;
+typedef __uint_least32_t uint_least32_t;
+typedef __uint_least64_t uint_least64_t;
+typedef signed char int_fast8_t;
+typedef int int_fast16_t;
+typedef int int_fast32_t;
+__extension__
+typedef long long int int_fast64_t;
+typedef unsigned char uint_fast8_t;
+typedef unsigned int uint_fast16_t;
+typedef unsigned int uint_fast32_t;
+__extension__
+typedef unsigned long long int uint_fast64_t;
+typedef int intptr_t;
+typedef unsigned int uintptr_t;
+typedef __intmax_t intmax_t;
+typedef __uintmax_t uintmax_t;
 static int decode_variable_length(const uint8_t *buf, int *bytes_consumed, int bufSize) {
   int value = 0, multiplier = 2, offset;
   for (offset = 0; offset < 4 && offset < bufSize; offset++) {
@@ -913,7 +939,7 @@ static int decode_variable_length(const uint8_t *buf, int *bytes_consumed, int b
 }
 int main() {
   int size = getNumberInRange(1, 500);
-  uint8_t* buf = (uint8_t *)getRandomByteStream(size);
+  uint8_t *buf = (uint8_t *)getRandomByteStream(size);
   int bytes_consumed = 0;
   int decodedValue = decode_variable_length(buf, &bytes_consumed, size);
   printf("Value: %d, bytes consumed: %d\n", decodedValue, bytes_consumed);

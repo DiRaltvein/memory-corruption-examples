@@ -25,7 +25,7 @@
 
 #define PATTERN_MAX 40
 
-int ec_glob(char *pattern) {
+void ec_glob(char *pattern) {
   char *c;
   char pcre_str[2 * PATTERN_MAX] = "^";
   char *p_pcre;
@@ -45,8 +45,6 @@ int ec_glob(char *pattern) {
   }
 
   printf("pcre_str: %s\n", pcre_str);
-
-  return 0;
 }
 
 int main() {

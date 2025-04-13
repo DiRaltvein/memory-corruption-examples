@@ -1069,7 +1069,7 @@ static pyc_object *get_object(RBuffer *buffer) {
   return ret;
 }
 int main() {
-  char* data = getRandomString(10);
+  char* data = getRandomStringFixedSize(10);
   RBuffer buffer = {0};
   buffer.data = data;
   buffer.len = strlen(data);

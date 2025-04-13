@@ -5,6 +5,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "helpers.c"
 
 #define DNS_MAX_CNAME_LEN 256
 #define DNS_PACKET_DICT_SIZE 16
@@ -151,32 +152,27 @@ void hexPrint(unsigned char *arr) {
 
 // DNS domain encoding to a format of [number]domain[number]domain[number]domain....
 // in addition to encoding also DNS compression pointers can be used that point
-
-// to see program working correctly change context.data buffer size to something appropriate like 100 (also change context.maxsize that shows context.data size to the same value)
 int main() {
   int total_len = 0;
   struct dns_context context = {0};
-  context.data = calloc(35, sizeof(unsigned char));
+  context.maxsize = 200;
+  context.data = calloc(context.maxsize, sizeof(unsigned char));
   if (!context.data) {
     printf("Out of memory!\n");
     return 1;
   }
   context.ptr = context.data;
-  context.maxsize = 35;
-  const char domainsToEncode[4][20] = {
-      {"random.page.ee"},
-      {"google.com"},
-      {"auth.google.com"},
-      {"register.google.com"}};
-  for (int i = 0; i < 4; i++) {
-    int encodedLength = _dns_encode_domain(&context, domainsToEncode[i]);
+  for (int i = 0; i < getNumberInRange(1, 10); i++) {
+    char* domainToEncode = getRandomString(10, 50);
+    int encodedLength = _dns_encode_domain(&context, domainToEncode);
     if (encodedLength > 0) {
       printf("Encoded domain: ");
       hexPrint(context.data + total_len);
       total_len += encodedLength;
     } else {
-      printf("Error occured while encoding domain: [%s]\n", domainsToEncode[i]);
+      printf("Error occured while encoding domain: [%s]\n", domainToEncode);
     }
+    free(domainToEncode);
   }
   free(context.data);
 }

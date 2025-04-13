@@ -922,12 +922,12 @@ int main() {
   int result;
   char navfile[(100)];
   char **argv = calloc(3, sizeof(char *));
-  if (argv == null) {
+  if (argv == ((void*)0)) {
     printf("Out of memory\n");
     return 1;
   }
   argv[0] = strdup("program.name");
-  argv[1] = stddup("-e");
+  argv[1] = strdup("-e");
   argv[2] = getRandomString(50, 200);
   while ((result = getopt(3, argv, "e:")) != -1) {
     switch (result) {

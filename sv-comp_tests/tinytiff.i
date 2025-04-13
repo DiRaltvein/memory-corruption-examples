@@ -964,8 +964,8 @@ void TinyTIFFReader_readNextFrame(TinyTIFFReaderFile *tiff) {
       break;
     case 273: {
       tiff->currentFrame.stripcount = ifd.value;
-      if (tiff.currentFrame.stripoffsets) {
-        free(tiff.currentFrame.stripoffsets);
+      if (tiff->currentFrame.stripoffsets) {
+        free(tiff->currentFrame.stripoffsets);
       }
       tiff->currentFrame.stripoffsets = (uint32_t *)calloc(ifd.value, sizeof(uint32_t));
       if (tiff->currentFrame.stripoffsets == ((void*)0))

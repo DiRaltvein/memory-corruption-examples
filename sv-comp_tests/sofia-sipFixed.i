@@ -902,6 +902,7 @@ int main() {
   char *record = getRandomString(0, 500);
   if (strlen(record) < 3) {
     printf("Input too small\n");
+    free(record);
     return 1;
   }
   char field = record[0];

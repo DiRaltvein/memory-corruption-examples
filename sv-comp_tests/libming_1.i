@@ -906,14 +906,9 @@ static void makeswf_preprocess(const char *file, const char *out) {
   printf("Formatted buffer: %s\n", buf);
 }
 int main() {
-  char files[5];
-  for (int i = 0; i < 5; i++) {
-    files[i] = getRandomString(0, 150);
-  }
-  for (int i = 0; i < 5; i++) {
-    char ppfile[4096];
-    sprintf(ppfile, "%s.frame%d.pp", outputfile, i);
-    makeswf_preprocess(files[i], ppfile);
-    free(files[i]);
-  }
+  char* filename = getRandomString(0, 150);
+  char ppfile[4096];
+  sprintf(ppfile, "%s.frame5.pp", outputfile);
+  makeswf_preprocess(filename, ppfile);
+  free(filename);
 }

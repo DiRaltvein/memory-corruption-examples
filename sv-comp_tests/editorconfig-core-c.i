@@ -897,7 +897,7 @@ char *getRandomStringFixedSize(int size) {
   }
   return randomString;
 }
-int ec_glob(char *pattern) {
+void ec_glob(char *pattern) {
   char *c;
   char pcre_str[2 * 40] = "^";
   char *p_pcre;
@@ -907,14 +907,13 @@ int ec_glob(char *pattern) {
   for (c = pattern; *c; ++c) {
     switch (*c) {
     case '?':
-      do { size_t string_len = strlen("[^/]"); if (p_pcre + string_len >= pcre_str_end) return -1; strcat(p_pcre, "[^/]"); p_pcre += string_len; } while (0);
+      do { size_t string_len = strlen("[^/]"); if (p_pcre + string_len >= pcre_str_end) return; strcat(p_pcre, "[^/]"); p_pcre += string_len; } while (0);
       break;
     default:
       *(p_pcre++) = *c;
     }
   }
   printf("pcre_str: %s\n", pcre_str);
-  return 0;
 }
 int main() {
   char* randomString = getRandomString(5, 70);
