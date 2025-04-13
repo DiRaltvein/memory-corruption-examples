@@ -1,5 +1,5 @@
 // https://www.cvedetails.com/cve/CVE-2023-1448/
-// repository: <https://github.com/gpac/gpac
+// repository: https://github.com/gpac/gpac
 // commit: a5efec8
 // extract of: src/media_tools/mpegts.c (function: gf_m2ts_process_sdt)
 
