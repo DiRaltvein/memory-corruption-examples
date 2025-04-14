@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 typedef unsigned int size_t;
 extern void *memcpy (void *__restrict __dest, const void *__restrict __src,
        size_t __n) __attribute__ ((__nothrow__ )) __attribute__ ((__nonnull__ (1, 2)));
@@ -1016,12 +1023,10 @@ int main() {
     return 1;
   }
   while (1) {
-    char *userValue = getRandomStringFixedSize(2);
-    if (*userValue == 'q') {
+    int index = getNumberInRange(-20, 20);
+    if (index == -1) {
       break;
     }
-    int index = atoi(userValue);
-    free(userValue);
     dlt_file_message(&file, index);
   };
   fclose(file.handle);

@@ -5,11 +5,6 @@ input_files: 'picotcp.i'
 properties:
   - property_file: ../properties/valid-memsafety.prp
     expected_verdict: false
-    # subproperty: valid-free
-    # subproperty: valid-deref
-    # TODO: test idea is that pico_frame_discard is called 2 times where 2 call uses already freed pointer (pointer is freed but not NULL)
-    # Overall 2 memory violations occur, 1 is when f->proto is accessed that is invalid pointer dereference and another is when f->proto or f are freed that is double free.
-    # As there is 2 memory violations probably is would make sense to check only for the parent classification that is valid-memsafety.prp
 
 options:
   language: C

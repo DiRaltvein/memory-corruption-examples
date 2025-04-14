@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 typedef unsigned int size_t;
 typedef __builtin_va_list va_list;
 typedef __builtin_va_list __gnuc_va_list;

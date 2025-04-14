@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // https://www.cvedetails.com/cve/CVE-2023-36321/
 // repository: https://github.com/COVESA/dlt-daemon
 // commit: 198715e
@@ -124,12 +131,10 @@ int main() {
   }
 
   while (1) {
-    char *userValue = getRandomStringFixedSize(2);
-    if (*userValue == 'q') {
+    int index = getNumberInRange(-20, 20);
+    if (index == -1) {
       break;
     }
-    int index = atoi(userValue);
-    free(userValue);
     dlt_file_message(&file, index);
   };
 

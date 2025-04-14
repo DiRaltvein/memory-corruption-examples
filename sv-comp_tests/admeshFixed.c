@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // https://www.cvedetails.com/cve/CVE-2022-38072/
 // repository: https://github.com/admesh/admesh
 // commit: 767a105

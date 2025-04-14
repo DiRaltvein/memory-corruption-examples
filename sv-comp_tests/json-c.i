@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 extern void __assert_fail (const char *__assertion, const char *__file,
       unsigned int __line, const char *__function)
      __attribute__ ((__nothrow__ )) __attribute__ ((__noreturn__));
@@ -938,7 +945,7 @@ int parseit(FILE *fd) {
         return 1;
       }
       start_pos += parse_end;
-      ((void) sizeof ((start_pos <= ret) ? 1 : 0), __extension__ ({ if (start_pos <= ret) ; else __assert_fail ("start_pos <= ret", "/mnt/a/master/master/sv-comp_tests/json-c.c", 92, __extension__ __PRETTY_FUNCTION__); }));
+      ((void) sizeof ((start_pos <= ret) ? 1 : 0), __extension__ ({ if (start_pos <= ret) ; else __assert_fail ("start_pos <= ret", "/mnt/a/master/master/sv-comp_tests/json-c.c", 99, __extension__ __PRETTY_FUNCTION__); }));
     }
   }
   return 0;

@@ -1,3 +1,10 @@
+// This file is part of the SV-Benchmarks collection of verification tasks:
+// https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+//
+// SPDX-FileCopyrightText: 2025 Roman Amjaga
+//
+// SPDX-License-Identifier: Apache-2.0
+
 typedef unsigned int size_t;
 typedef __builtin_va_list va_list;
 typedef __builtin_va_list __gnuc_va_list;
@@ -908,7 +915,7 @@ char *getRandomStringFixedSize(int size) {
 }
 char* mallocAndJoin2Dir(const char *dir1, const char *dir2)
 {
-  ((void) sizeof ((dir1 != ((void*)0) && dir2 != ((void*)0)) ? 1 : 0), __extension__ ({ if (dir1 != ((void*)0) && dir2 != ((void*)0)) ; else __assert_fail ("dir1 != NULL && dir2 != NULL", "/mnt/a/master/master/sv-comp_tests/zstd.c", 16, __extension__ __PRETTY_FUNCTION__); }));
+  ((void) sizeof ((dir1 != ((void*)0) && dir2 != ((void*)0)) ? 1 : 0), __extension__ ({ if (dir1 != ((void*)0) && dir2 != ((void*)0)) ; else __assert_fail ("dir1 != NULL && dir2 != NULL", "/mnt/a/master/master/sv-comp_tests/zstd.c", 23, __extension__ __PRETTY_FUNCTION__); }));
   const size_t dir1Size = strlen(dir1);
   const size_t dir2Size = strlen(dir2);
   char *outDirBuffer, *buffer, trailingChar;
