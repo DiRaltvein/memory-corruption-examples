@@ -47,11 +47,9 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
       case 0x48:
       {
         d_pos += 2;
-
         u8 service_type = data[pos + d_pos]; // Problem: buffer data read out of bounds
         ulen = data[pos + d_pos + 1];
         d_pos += 2;
-
         char *provider = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(provider, data + pos + d_pos, sizeof(char) * ulen);
         provider[ulen] = 0;
@@ -59,7 +57,6 @@ void gf_m2ts_process_sdt(u8 *data, u32 data_size) {
 
         ulen = data[pos + d_pos];
         d_pos += 1;
-
         char *service = (char *)malloc(sizeof(char) * (ulen + 1));
         memcpy(service, data + pos + d_pos, sizeof(char) * ulen);
         service[ulen] = 0;

@@ -11,7 +11,7 @@
   do {                                  \
     size_t string_len = strlen(string); \
     if (p + string_len >= end)          \
-      return -1;                        \
+      return;                           \
     strcat(p, string);                  \
     p += string_len;                    \
   } while (0)
@@ -19,7 +19,7 @@
 #define ADD_CHAR(string, new_chr, end) \
   do {                                 \
     if (string + 1 >= end)             \
-      return -1;                       \
+      return;                          \
     *(string++) = new_chr;             \
   } while (0)
 
@@ -48,5 +48,5 @@ void ec_glob(char *pattern) {
 }
 
 int main() {
-  return ec_glob("???????????????????aaaaaaaaaaa");
+  ec_glob("???????????????????aaaaaaaaaaa");
 }

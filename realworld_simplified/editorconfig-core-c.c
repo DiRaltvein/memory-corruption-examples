@@ -11,7 +11,7 @@
   do {                                  \
     size_t string_len = strlen(string); \
     if (p + string_len >= end)          \
-      return -1;                        \
+      return;                           \
     strcat(p, string);                  \
     p += string_len;                    \
   } while (0)
