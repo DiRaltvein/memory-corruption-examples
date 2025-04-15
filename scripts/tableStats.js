@@ -16,12 +16,26 @@ import { Canvas } from 'skia-canvas';
 import fsp from 'node:fs/promises';
 import lodash from 'lodash';
 
-const calculateForTestSuit = true;
+const syntheticCveIds = ['Vuln', 'Fix', 'Found']
+
+const cveIsParent = (cve) => syntheticCveIds.indexOf(cve.id) === -1
+const gerParentCve = (cve) => {
+  if (cveIsParent(cve)) return cve;
+  for (let i = cves.indexOf(cve) - 1; i >= 0; --i) {
+    const potentialParentCVE = cves[i];
+    if (syntheticCveIds.indexOf(potentialParentCVE.id) === -1) return potentialParentCVE;
+  }
+  return null;
+}
+const getCveNumber = (cve) => gerParentCve(cve).CVE
+const getCategories = (cve) => gerParentCve(cve)['vuln. type'].split('/')
+
+const calculateForTestSuit = process.argv[2] === 'test-suite';
 
 const cvesToAnalyze = cves.filter(
   (cve) =>
-    (calculateForTestSuit && cve.id === 'Vuln') ||
-    (!calculateForTestSuit && cve.id !== 'Vuln' && cve.id !== 'Fix')
+    (calculateForTestSuit && (cve.id === 'Vuln' || cve.id === 'Found')) ||
+    (!calculateForTestSuit && syntheticCveIds.indexOf(cve.id) === -1)
 );
 const patchedCves = !calculateForTestSuit
   ? []
@@ -36,20 +50,8 @@ const analyzersToUse = [
   ...(calculateForTestSuit ? ['symbiotic'] : []),
 ];
 
-const getCveNumber = (cve) => {
-  if (cve.id !== 'Vuln' && cve.id !== 'Fix') return cve.CVE;
-  if (cve.id === 'Vuln') return cves[cves.indexOf(cve) - 1].CVE;
-  return cves[cves.indexOf(cve) - 2].CVE;
-};
 
-const getCategories = (cve) => {
-  if (cve.id !== 'Vuln' && cve.id !== 'Fix')
-    return cve['vuln. type'].split('/');
-  if (cve.id === 'Vuln')
-    return cves[cves.indexOf(cve) - 1]['vuln. type'].split('/');
-  return cves[cves.indexOf(cve) - 2]['vuln. type'].split('/');
-};
-
+// ----------------------------- File/Function length stats ---------------------------- \\
 const allFileLengths = [];
 const allVulnFunctionsLengths = [];
 
@@ -58,7 +60,6 @@ for (const cve of cvesToAnalyze) {
   allVulnFunctionsLengths.push(parseInt(cve['func len']));
 }
 
-// Simple console log stats
 console.log('Vulnerable file length:');
 console.log('max: ', Math.max(...allFileLengths));
 console.log('min: ', Math.min(...allFileLengths));
@@ -79,7 +80,10 @@ console.log(
       allVulnFunctionsLengths.length
   )
 );
+// ----------------------------- File/Function length stats ---------------------------- \\
 
+
+// ----------------------------- CWE CATEGORIES ---------------------------- \\
 if (!calculateForTestSuit) {
   const categories = cvesToAnalyze.reduce((acc, cve) => {
     const categories = getCategories(cve);
@@ -98,6 +102,10 @@ if (!calculateForTestSuit) {
   );
 }
 
+// ----------------------------- CWE CATEGORIES ---------------------------- \\
+
+
+// ----------------------------- STATIC CODE ANALYZER RESULTS ---------------------------- \\
 for (const analyzer of analyzersToUse) {
   const error = cvesToAnalyze.concat(patchedCves).reduce(
     (acc, cve) => (acc += cve[analyzer] === '✖' ? 1 : 0),
@@ -120,7 +128,7 @@ for (const analyzer of analyzersToUse) {
     warnings: 0,
     errors: 0,
   };
-  for (const cve of cvesToAnalyze) { // when using .concat(patchedCves) then DE can not be trusted as then also numbers from patched versions come into diagnostics
+  for (const cve of cvesToAnalyze) {
     if (cve[analyzer].length < 5) continue;
     const notes = cve[analyzer].split('(')[0];
     const notesSplit = notes.split('/');
@@ -129,6 +137,17 @@ for (const analyzer of analyzersToUse) {
     numberOfNotes.notes += parseInt(notesSplit[2]);
     numberOfNotes.warnings += parseInt(notesSplit[1]);
     numberOfNotes.errors += parseInt(notesSplit[0]);
+  }
+  const numberOfNotesOverall = { ...numberOfNotes }; // with patched cases
+  for (const cve of patchedCves) {
+    if (cve[analyzer].length < 5) continue;
+    const notes = cve[analyzer].split('(')[0];
+    const notesSplit = notes.split('/');
+    if (notesSplit.length !== 3)
+      console.error('cve', cve, analyzer, 'could not parse stats');
+    numberOfNotesOverall.notes += parseInt(notesSplit[2]);
+    numberOfNotesOverall.warnings += parseInt(notesSplit[1]);
+    numberOfNotesOverall.errors += parseInt(notesSplit[0]);
   }
   console.log(`\n${analyzer} statistics:`);
   console.log(
@@ -143,13 +162,13 @@ for (const analyzer of analyzersToUse) {
   );
   console.log(
     'total num of notes: ',
-    numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes,
+    numberOfNotesOverall.errors + numberOfNotesOverall.warnings + numberOfNotesOverall.notes,
     ' errors: ',
-    numberOfNotes.errors,
+    numberOfNotesOverall.errors,
     ' warnings: ',
-    numberOfNotes.warnings,
+    numberOfNotesOverall.warnings,
     ' notes: ',
-    numberOfNotes.notes
+    numberOfNotesOverall.notes
   );
   if (patchedCves.length > 0) {
     const falsePositives = patchedCves.filter((cve) =>
@@ -188,7 +207,8 @@ for (const analyzer of analyzersToUse) {
     );
   }
 }
-// Simple console log stats
+// ----------------------------- STATIC CODE ANALYZER RESULTS ---------------------------- \\
+
 
 Chart.register([
   BarController,
@@ -201,7 +221,7 @@ Chart.register([
   PointElement,
 ]);
 
-//
+// File len graph
 const canvas = new Canvas(1920, 1200);
 const fileLenChart = new Chart(canvas, {
   type: 'bar',
@@ -235,7 +255,7 @@ await fsp.writeFile(
 fileLenChart.destroy();
 //
 
-//
+// function len graph
 const funcChart = new Chart(canvas, {
   type: 'bar',
   data: {
@@ -334,48 +354,3 @@ await fsp.writeFile(
 );
 detectedVulnsRatioByFuncLen.destroy();
 //
-
-if (!calculateForTestSuit) {
-  const detectedVulnsRatioByFuncLenIkos = new Chart(canvas, {
-    type: 'line',
-    data: {
-      yLabels: '%',
-      labels: buckets.map(
-        (bucket) =>
-          `${bucket[0]['func len']} - ${bucket[bucket.length - 1]['func len']}`
-      ),
-      datasets: [
-        {
-          data: buckets.map((b) => getDetectionRateInBucket(b, ['ikos'])),
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: '% of vulnerabilities detected',
-          },
-        },
-        x: {
-          title: {
-            display: true,
-            text: 'Length of function containing vulnerability',
-          },
-        },
-      },
-    },
-  });
-
-  const detectedVulnsIkosPngBuffer = await canvas.toBuffer('png', {
-    matte: 'white',
-  });
-  await fsp.writeFile(
-    `charts/detectedVulnsRatioByFuncLenIkos${
-      calculateForTestSuit ? '-suit' : ''
-    }.png`,
-    detectedVulnsIkosPngBuffer
-  );
-  detectedVulnsRatioByFuncLenIkos.destroy();
-}

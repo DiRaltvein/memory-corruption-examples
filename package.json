@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-cves": "node ./scripts/generate_cves.js",
     "generate-categories": "node ./scripts/generateCategories.js",
-    "stats": "node scripts/tableStats.js"
+    "stats": "node scripts/tableStats.js",
+    "stats-test": "node scripts/tableStats.js test-suite"
   },
   "keywords": [],
   "author": "",

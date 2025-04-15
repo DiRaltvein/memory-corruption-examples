@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-// https://github.com/openrazer/openrazer/issues/2433
+// https://www.cvedetails.com/cve/CVE-2025-32776/
 // repository: https://github.com/openrazer/openrazer
 // commit: 67cf917
 // extract of: driver/razerchromacommon.c (function: razer_chroma_extended_matrix_set_custom_frame2)

@@ -1,0 +1,16 @@
+<!--
+This file is part of the SV-Benchmarks collection of verification tasks:
+https://gitlab.com/sosy-lab/benchmarking/sv-benchmarks
+
+SPDX-FileCopyrightText: 2025 Roman Amjaga
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+### Test suite
+
+Test suite is a collection of vulnerabilities that were extracted from real-world projects. All vulnerabilities occured in 2023 and are related to memory safety (mainly valid deref). Test suit also contains patched versions of vulnerabilities where original patches from projects were used whenever possible. Test suite contains a total of 114 test cases where 84 contain a vulnerability and 30 are patched and are benign. The connection of each test case with original vulnerability is preserved by a comment in each test case (.c file) that references the original project version and function where vulnerability occured.
+
+### Found vulnerabilities
+
+During analysis of extracted test cases 2 vulnerabilities were found (CVE-2025-32776 and https://github.com/gpac/gpac/issues/3180). Found vulnerabilities are also part of the test suite and were found using tools that participate in SV-COMP competition.
