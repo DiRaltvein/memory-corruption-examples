@@ -29,24 +29,24 @@ void readMessageFromFile(DltFile *file, char **message) {
     return;
   }
 
-  unsigned char messageLength = fgetc(file->handle);
-  if (messageLength == 0 || messageLength == 0xff || messageLength == EOF) {
+  int messageLength = fgetc(file->handle);
+  if (messageLength <= 0 || messageLength >= 0xff || messageLength == EOF) {
     printf("Potentially invalid message.\n");
     return;
   }
-  *message = calloc(messageLength + 1, sizeof(char));
+  *message = (char*)calloc(messageLength + 1, sizeof(char));
   if (*message == NULL) {
     printf("Out of memory\n");
     return;
   }
 
   for (int i = 0; i < messageLength && !feof(file->handle); i++) {
-    unsigned char character = fgetc(file->handle);
-    if (character == EOF) {
+    int character = fgetc(file->handle);
+    if (character == EOF || character <= 0 || character > 127) {
       (*message)[i] = '\0';
       break;
     }
-    (*message)[i] = character;
+    (*message)[i] = (char)character;
   }
   (*message)[messageLength] = '\0';
 }
@@ -59,19 +59,13 @@ int initializeDltFile(DltFile *file) {
     return -1;
   }
 
-  if (feof(file->handle)) {
-    printf("Could not open file dlt-daemon.hex\n");
-    fclose(file->handle);
-    return -1;
-  }
-
-  unsigned char messageCount = fgetc(file->handle);
-  if (messageCount == 0 || messageCount == NULL || messageCount == EOF) {
+  int messageCount = fgetc(file->handle);
+  if (messageCount <= 0 || messageCount >= 0xff || messageCount == EOF) {
     printf("Read 0 as message count\n");
     fclose(file->handle);
     return -1;
   }
-  file->index = calloc(messageCount, sizeof(long));
+  file->index = (long*)calloc(messageCount, sizeof(long));
   if (file->index == NULL) {
     printf("Out of memory\n");
     fclose(file->handle);
@@ -84,7 +78,7 @@ int initializeDltFile(DltFile *file) {
     char *message = NULL;
     file->index[i++] = ftell(file->handle);
     readMessageFromFile(file, &message);
-    if (message = NULL) {
+    if (message == NULL) {
       break;
     }
     free(message);
@@ -111,7 +105,7 @@ void dlt_file_message(DltFile *file, int index) {
 
   char *message = NULL;
   readMessageFromFile(file, &message);
-  if (message = NULL) {
+  if (message == NULL) {
     return;
   }
 

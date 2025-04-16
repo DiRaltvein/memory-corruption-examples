@@ -940,23 +940,23 @@ void readMessageFromFile(DltFile *file, char **message) {
   if (file == ((void*)0) || feof(file->handle)) {
     return;
   }
-  unsigned char messageLength = fgetc(file->handle);
-  if (messageLength == 0 || messageLength == 0xff || messageLength == (-1)) {
+  int messageLength = fgetc(file->handle);
+  if (messageLength <= 0 || messageLength >= 0xff || messageLength == (-1)) {
     printf("Potentially invalid message.\n");
     return;
   }
-  *message = calloc(messageLength + 1, sizeof(char));
+  *message = (char*)calloc(messageLength + 1, sizeof(char));
   if (*message == ((void*)0)) {
     printf("Out of memory\n");
     return;
   }
   for (int i = 0; i < messageLength && !feof(file->handle); i++) {
-    unsigned char character = fgetc(file->handle);
-    if (character == (-1)) {
+    int character = fgetc(file->handle);
+    if (character == (-1) || character <= 0 || character > 127) {
       (*message)[i] = '\0';
       break;
     }
-    (*message)[i] = character;
+    (*message)[i] = (char)character;
   }
   (*message)[messageLength] = '\0';
 }
@@ -967,18 +967,13 @@ int initializeDltFile(DltFile *file) {
     printf("Could not open file dlt-daemon.hex\n");
     return -1;
   }
-  if (feof(file->handle)) {
-    printf("Could not open file dlt-daemon.hex\n");
-    fclose(file->handle);
-    return -1;
-  }
-  unsigned char messageCount = fgetc(file->handle);
-  if (messageCount == 0 || messageCount == ((void*)0) || messageCount == (-1)) {
+  int messageCount = fgetc(file->handle);
+  if (messageCount <= 0 || messageCount >= 0xff || messageCount == (-1)) {
     printf("Read 0 as message count\n");
     fclose(file->handle);
     return -1;
   }
-  file->index = calloc(messageCount, sizeof(long));
+  file->index = (long*)calloc(messageCount, sizeof(long));
   if (file->index == ((void*)0)) {
     printf("Out of memory\n");
     fclose(file->handle);
@@ -990,7 +985,7 @@ int initializeDltFile(DltFile *file) {
     char *message = ((void*)0);
     file->index[i++] = ftell(file->handle);
     readMessageFromFile(file, &message);
-    if (message = ((void*)0)) {
+    if (message == ((void*)0)) {
       break;
     }
     free(message);
@@ -1011,7 +1006,7 @@ void dlt_file_message(DltFile *file, int index) {
   }
   char *message = ((void*)0);
   readMessageFromFile(file, &message);
-  if (message = ((void*)0)) {
+  if (message == ((void*)0)) {
     return;
   }
   printf("Message at position [%d] is %s\n", index, message);

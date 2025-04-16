@@ -198,12 +198,12 @@ int process_request(mcp_parser_t *pr, const char *command, size_t cmdlen) {
   return 0;
 }
 
-void proxy_process_command(char *command, size_t cmdlen, bool multiget) {
+int proxy_process_command(char *command, size_t cmdlen, bool multiget) {
   mcp_parser_t pr = {0};
 
   int ret = process_request(&pr, command, cmdlen);
   if (ret != 0) {
-    exit(1);
+    return 1;
   }
 
   if (!multiget && pr.has_space) {
@@ -212,7 +212,7 @@ void proxy_process_command(char *command, size_t cmdlen, bool multiget) {
       char temp[KEY_MAX_LENGTH + 30] = {0};
       char *cur = temp;
       if (pr.klen > KEY_MAX_LENGTH) {
-        exit(1);
+        return 1;
       } else {
         // copy original request up until the original key token.
         memcpy(cur, pr.request, pr.tokens[pr.keytoken]); // Problem pr.tokens[pr.keytoken] (or in other words index where first cache key starts) can be greater than KEY_MAX_LENGTH + 30 causing buffer overflow
@@ -230,13 +230,13 @@ void proxy_process_command(char *command, size_t cmdlen, bool multiget) {
       keyoff = _process_request_next_key(&pr);
     }
 
-    return;
+    return 0;
   }
 
   char *key = calloc(pr.klen + 1, sizeof(char));
   if (key == NULL) {
     printf("Out of memory!\n");
-    exit(1);
+    return 1;
   }
   memcpy(key, &pr.request[pr.tokens[pr.keytoken]], pr.klen);
 
@@ -248,6 +248,8 @@ void proxy_process_command(char *command, size_t cmdlen, bool multiget) {
   }
 
   free(key);
+
+  return 0;
 }
 
 // Program is a simple extracted logic that handles in memory cache
@@ -260,5 +262,7 @@ int main() {
   //                                                                                                   mock cache to test\n";
   char* command = getRandomString(50, 500);
 
-  proxy_process_command(command, strlen(command), false);
+  int ret = proxy_process_command(command, strlen(command), false);
+  free(command);
+  return ret;
 }

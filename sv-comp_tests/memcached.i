@@ -1069,11 +1069,11 @@ int process_request(mcp_parser_t *pr, const char *command, size_t cmdlen) {
   _process_request_key(pr);
   return 0;
 }
-void proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
+int proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
   mcp_parser_t pr = {0};
   int ret = process_request(&pr, command, cmdlen);
   if (ret != 0) {
-    exit(1);
+    return 1;
   }
   if (!multiget && pr.has_space) {
     uint32_t keyoff = pr.tokens[pr.keytoken];
@@ -1081,7 +1081,7 @@ void proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
       char temp[250 + 30] = {0};
       char *cur = temp;
       if (pr.klen > 250) {
-        exit(1);
+        return 1;
       } else {
         memcpy(cur, pr.request, pr.tokens[pr.keytoken]);
         cur += pr.tokens[pr.keytoken];
@@ -1093,12 +1093,12 @@ void proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
       }
       keyoff = _process_request_next_key(&pr);
     }
-    return;
+    return 0;
   }
   char *key = calloc(pr.klen + 1, sizeof(char));
   if (key == ((void*)0)) {
     printf("Out of memory!\n");
-    exit(1);
+    return 1;
   }
   memcpy(key, &pr.request[pr.tokens[pr.keytoken]], pr.klen);
   char *value = findValueByKey(key);
@@ -1108,8 +1108,11 @@ void proxy_process_command(char *command, size_t cmdlen, _Bool multiget) {
     printf("Could not find a value in cache that would correspond to key [%s]\n", key);
   }
   free(key);
+  return 0;
 }
 int main() {
   char* command = getRandomString(50, 500);
-  proxy_process_command(command, strlen(command), 0);
+  int ret = proxy_process_command(command, strlen(command), 0);
+  free(command);
+  return ret;
 }
