@@ -62,7 +62,7 @@ int main() {
   // size_t count = sizeof(buf) / sizeof(buf[0]);
 
   size_t count = getNumberInRange(5, 300);
-  const unsigned char *buf = getRandomByteStream(count);
+  unsigned char *buf = getRandomByteStream(count);
 
   struct razer_report report = {0};
   size_t offset = 0;

@@ -38,7 +38,7 @@ int32_t mz_path_convert_slashes(char *path, char slash) {
 }
 
 int main() {
-  const char *path = getRandomString(0, 500);
+  char *path = getRandomString(0, 500);
   size_t path_length = strlen(path);
 
   char *pathwfs = (char *)calloc(path_length + 1, sizeof(char));

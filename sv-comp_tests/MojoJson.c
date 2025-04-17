@@ -15,9 +15,9 @@
 #include <string.h>
 #include "helpers.c"
 
-int SkipString(const char **jsonPtr, const char **outStrStart) {
+int SkipString(char **jsonPtr, char **outStrStart) {
   // skip '"'
-  const char *json = ++(*jsonPtr);
+  char *json = ++(*jsonPtr);
   int count = 0;
   char c;
 
@@ -40,12 +40,12 @@ int SkipString(const char **jsonPtr, const char **outStrStart) {
   return count - 1;
 }
 
-void ParseString(const char **jsonPtr) {
+void ParseString(char **jsonPtr) {
   if (*(*jsonPtr) != '"') {
     printf("String must be between double quotes and the first element must be thus a double quote\n");
     return;
   }
-  const char *strStart;
+  char *strStart;
   int length = SkipString(jsonPtr, &strStart);
   char *string = calloc(length + 1, sizeof(char));
   if (!string) {

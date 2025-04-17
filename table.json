@@ -422,7 +422,7 @@
     "Project": "",
     "Commit (hash)": "",
     "file (function)": "-",
-    "file len": "81",
+    "file len": "80",
     "func len": "16",
     "clang": "0/1/0(✓/✓)",
     "cppcheck": "0/0/0(✖/✖)",

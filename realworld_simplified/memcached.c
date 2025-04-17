@@ -30,14 +30,14 @@ typedef struct mcp_parser_s {
   bool has_space;
 } mcp_parser_t;
 
-const key_value mockCache[] = {
-    {"mock", "value1"},
-    {"cache", "value2"},
-    {"to", "value3"},
-    {"test", "value4"},
+key_value mockCache[] = {
+  {"mock", "value1"},
+  {"cache", "value2"},
+  {"to", "value3"},
+  {"test", "value4"},
 };
 
-const char *findValueByKey(const char *key) {
+char *findValueByKey(const char *key) {
   size_t cacheSize = sizeof(mockCache) / sizeof(mockCache[0]);
 
   for (size_t i = 0; i < cacheSize; i++) {
