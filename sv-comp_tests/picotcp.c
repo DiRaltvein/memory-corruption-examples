@@ -34,8 +34,8 @@ void pico_frame_discard(struct pico_frame *f) {
   }
 }
 
-int32_t pico_transport_receive(struct pico_frame *f, int proto) {
-  int32_t ret = -1;
+int pico_transport_receive(struct pico_frame *f, int proto) {
+  int ret = -1;
   switch (proto) {
   case PICO_PROTO_ICMP4:
     f->proto = strdup("ICMPV4");
@@ -73,7 +73,7 @@ static int pico_fragments_reassemble(int proto) {
   }
   full->proto = NULL;
   if (pico_transport_receive(full, proto) == -1) {
-    pico_frame_discard(full); // Problem: double free
+    free(full); // Problem: double free
     return 1;
   }
 

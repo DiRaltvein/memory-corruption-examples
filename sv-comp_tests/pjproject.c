@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "helpers.c"
-#ifdef linux
+#ifdef __linux__
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #endif

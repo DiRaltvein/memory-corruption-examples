@@ -43,13 +43,6 @@ int main() {
     return 1;
   }
 
-  // loop is done to access out of bound when integer overflow happens
-  for (int row = 0; row < surface->height; row++) {
-    for (int column = 0; column < surface->width; column++) {
-      surface->data[row * surface->width + column] = row * column; // in case integer overflow happened this assignment will result in an access out of bound
-    }
-  }
-
   free(surface->data);
   free(surface);
 }

@@ -30,7 +30,6 @@ void mat4_read_header(SF_PRIVATE *psf) {
   psf->dataoffset += 4;
   int cols = psf_get_le32(psf->ptr, psf->dataoffset);
   psf->dataend = psf->dataoffset + rows * cols * psf->bytewidth; // Problem: integer overflow
-  printf("%ld\n", psf->dataend);
 }
 
 int main() {

@@ -31,7 +31,7 @@ static void makeswf_preprocess(const char *file, const char *out) {
 
 int main() {
   char* filename = getRandomString(0, 150);
-  char ppfile[PATH_MAX];
+  char ppfile[4096] = {0};
   sprintf(ppfile, "%s.frame5.pp", outputfile);
   makeswf_preprocess(filename, ppfile);
   free(filename);
