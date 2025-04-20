@@ -1,0 +1,168 @@
+   BENCHMARK INFORMATION
+benchmark definition:    /mnt/a/master/master/sv-comp_tools/symbiotic.xml
+name:                    symbiotic
+run sets:                valid-memsafety.valid-memsafety, no-overflow.no-overflow
+date:                    Sun, 2025-04-20 09:46:54 EEST
+tool:                    symbiotic 10.0.0-rc1-f6104f53
+tool executable:         /usr/svcomp/tools/symbiotic/bin/symbiotic
+options:                 --sv-comp
+parallel runs:           16
+resource limits:
+- memory:                4000.0 MB
+- time:                  120 s
+- cpu cores:             1
+hardware requirements:
+- cpu cores:             1
+- memory:                4000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    raltvein
+os:                      Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.35
+cpu:                     AMD Ryzen 9 7900X 12-Core Processor
+- cores:                 16
+- max frequency:         4691.107 MHz
+ram:                     8330.231808 MB
+------------------------------------------------------------
+
+
+
+valid-memsafety.valid-memsafety
+Run set 1 of 2 with options '--sv-comp' and propertyfile 'None'
+
+inputfile                       status                       cpu time   wall time        host
+---------------------------------------------------------------------------------------------
+MicroHttpServer.yml             false(valid-deref)              14.32       15.42        None
+MojoJson.yml                    false(valid-deref)               2.47        2.98        None
+NTSC-CRT.yml                    true                             0.47        0.84        None
+NanoNNG.yml                     TIMEOUT (verification)         121.03      141.40        None
+NanoNNGFixed.yml                TIMEOUT (verification)         121.03      140.57        None
+admesh.yml                      false(valid-deref)               0.63        0.97        None
+admeshFixed.yml                 true                             0.52        0.85        None
+asterisk.yml                    ERROR(returned 1, verification-finished)        0.74        1.58        None
+bzip3.yml                       false(valid-deref)              87.46       95.49        None
+bzip3Fixed.yml                  TIMEOUT (verification)         120.24      137.61        None
+cups.yml                        false(valid-deref)               1.79        2.18        None
+dlt-daemon.yml                  ERROR(returned 1, verification-finished)        0.83        1.41        None
+editorconfig-core-c.yml         TIMEOUT (verification)         120.35      137.68        None
+editorconfig-core-cFixed.yml    TIMEOUT (verification)         120.41      136.86        None
+flatcc.yml                      false(valid-deref)               0.96        1.28        None
+frr.yml                         TIMEOUT (verification)         120.35      134.11        None
+frrFixed.yml                    TIMEOUT (verification)         120.66      135.25        None
+gpac_1.yml                      false(valid-deref)              28.09       28.27        None
+gpac_10.yml                     false(valid-deref)               0.82        0.94        None
+gpac_11.yml                     ERROR(returned 1, verification-finished)        0.84        1.42        None
+gpac_12.yml                     ERROR(returned 1, verification-finished)        0.60        1.08        None
+gpac_13.yml                     ERROR(returned 1, verification-finished)        0.60        1.32        None
+gpac_14.yml                     ERROR(returned 1, verification-finished)        0.65        1.21        None
+gpac_16.yml                     false(valid-deref)               2.39        2.46        None
+gpac_16Fixed.yml                TIMEOUT (verification)         120.99      136.04        None
+gpac_16Found.yml                false(valid-deref)               2.72        2.76        None
+gpac_17.yml                     false(valid-deref)               8.66        8.71        None
+gpac_18.yml                     false(valid-deref)               0.81        0.84        None
+gpac_19.yml                     false(valid-deref)              12.76       12.84        None
+gpac_1Fixed.yml                 TIMEOUT (verification)         120.94      139.79        None
+gpac_3.yml                      TIMEOUT (verification)         120.99      146.12        None
+gpac_5.yml                      false(valid-deref)               0.54        0.58        None
+gpac_5Fixed.yml                 TIMEOUT (verification)         120.79      157.37        None
+gpac_6.yml                      false(valid-deref)              16.42       16.49        None
+gpac_7.yml                      ERROR(returned 1, verification-finished)        0.53        0.76        None
+gpac_8.yml                      ERROR(returned 1, verification-finished)        3.09        3.77        None
+gpac_9.yml                      ERROR(returned 1, verification-finished)        0.71        0.97        None
+gps-sdr-sim.yml                 ERROR(returned 1, verification-finished)        0.64        0.87        None
+gss-ntlmssp.yml                 false(valid-deref)               9.72        9.80        None
+gss-ntlmsspFixed.yml            TIMEOUT (verification)         120.15      141.68        None
+hyperkit_1.yml                  false(valid-deref)               0.61        0.65        None
+hyperkit_1Fixed.yml             true                             0.63        0.69        None
+jhead.yml                       TIMEOUT (verification)         120.21      140.53        None
+jhead_1.yml                     TIMEOUT (verification)         121.17      144.40        None
+jq.yml                          false(valid-deref)               8.34        8.40        None
+json-c.yml                      ERROR(unknown, verification-finished)        0.63        0.67        None
+json-parser.yml                 false(valid-deref)               2.34        2.38        None
+json-parserFixed.yml            TIMEOUT (verification)         121.01      133.09        None
+krb5.yml                        false(valid-free)                3.79        7.62        None
+krb5Fixed.yml                   TIMEOUT (verification)         117.77      181.19        None
+libeconf.yml                    TIMEOUT (verification)         120.94      138.37        None
+liblouis.yml                    TIMEOUT (verification)         120.12      171.59        None
+libming_1.yml                   TIMEOUT (verification)         109.38      181.04        None
+libpe.yml                       false(valid-deref)               1.36        1.41        None
+libredwg.yml                    false(valid-deref)               6.83        6.86        None
+libredwg_1.yml                  false(valid-deref)               4.92        4.96        None
+libredwg_1Fixed.yml             TIMEOUT (verification)         120.42      163.75        None
+memcached.yml                   TIMEOUT (verification)         120.85      170.71        None
+minizip-ng.yml                  false(valid-deref)              18.85       19.61        None
+minizip-ngFixed.yml             TIMEOUT (verification)         120.17      161.39        None
+minizip-ng_1.yml                false(valid-deref)               1.40        1.44        None
+minizip-ng_1Fixed.yml           TIMEOUT (verification)         120.26      172.60        None
+mongoose.yml                    false(valid-deref)               0.88        0.92        None
+mongooseFixed.yml               TIMEOUT (verification)         120.64      180.87        None
+mongoose_1.yml                  true                             0.47        0.64        None
+moonlight-common-c.yml          ERROR(returned 1, verification-finished)        3.28        3.95        None
+nanopb.yml                      false(valid-deref)               2.96        5.47        None
+netatalk.yml                    TIMEOUT (verification)         120.72      169.63        None
+netatalkFixed.yml               TIMEOUT (verification)         120.95      174.22        None
+netconsd.yml                    TIMEOUT (verification)         121.01      162.19        None
+openNDS_1.yml                   TIMEOUT (verification)         121.11      177.50        None
+openNDS_1Fixed.yml              TIMEOUT (verification)         109.68      181.01        None
+openSC.yml                      TIMEOUT (verification)         121.02      164.72        None
+openSCFixed.yml                 TIMEOUT (verification)         121.04      168.77        None
+openrazer.yml                   TIMEOUT (verification)         120.29      127.54        None
+openrazerFixed.yml              TIMEOUT (verification)         121.02      128.28        None
+openrazerFound.yml              false(valid-deref)               2.55        3.99        None
+pacparser.yml                   TIMEOUT (verification)         121.00      129.46        None
+pacparserFixed.yml              TIMEOUT (verification)         121.02      128.00        None
+picotcp.yml                     false(valid-free)                2.02        3.54        None
+picotcpFixed.yml                ERROR(returned 1, verification-finished)        2.17        5.14        None
+pjproject.yml                   TIMEOUT (verification)         120.61      132.92        None
+ppp.yml                         TIMEOUT (verification)         121.02      128.18        None
+radare2Fixed.yml                ERROR(returned 1, verification-finished)        1.24        1.79        None
+radare2_1.yml                   false(valid-deref)               1.17        1.26        None
+radare2_1Fixed.yml              TIMEOUT (verification)         121.03      125.39        None
+radare2_2.yml                   TIMEOUT (verification)         121.01      125.68        None
+radare2_2Fixed.yml              TIMEOUT (verification)         121.02      125.13        None
+rizin.yml                       TIMEOUT (verification)         121.01      123.72        None
+smartdns.yml                    TIMEOUT (verification)         121.07      129.76        None
+sniproxy.yml                    TIMEOUT (verification)         121.02      124.85        None
+sniproxyFixed.yml               TIMEOUT (verification)         121.02      124.93        None
+sofia-sip.yml                   false(valid-deref)               0.95        0.99        None
+sofia-sipFixed.yml              TIMEOUT (verification)         121.02      124.19        None
+sofia-sip_1.yml                 false(valid-deref)               1.14        1.18        None
+sofia-sip_2.yml                 false(valid-deref)               1.52        1.56        None
+stb.yml                         false(valid-deref)               4.87        4.91        None
+stb_1.yml                       ERROR(returned 1, verification-finished)        1.80        2.17        None
+tinydir.yml                     TIMEOUT (verification)         121.03      124.69        None
+tinytiff.yml                    ERROR(unknown, verification-finished)        0.58        0.61        None
+wasm-micro-runtime.yml          false(valid-deref)               0.74        0.79        None
+wasm-micro-runtimeFixed.yml     TIMEOUT (verification)         121.12      124.79        None
+zchunk.yml                      false(valid-deref)               2.11        3.54        None
+zchunkFixed.yml                 TIMEOUT (verification)         121.03      123.79        None
+zephyr.yml                      TIMEOUT (verification)         121.02      123.69        None
+zstd.yml                        false(valid-deref)               1.58        1.94        None
+zstdFixed.yml                   TIMEOUT (verification)         120.99      122.09        None
+---------------------------------------------------------------------------------------------
+Run set 1                       done                           541.06      561.22           -
+
+
+no-overflow.no-overflow
+Run set 2 of 2 with options '--sv-comp' and propertyfile 'None'
+
+inputfile               status                       cpu time   wall time        host
+-------------------------------------------------------------------------------------
+gpac.yml                false(no-overflow)               1.03        1.15        None
+gpac_15.yml             false(no-overflow)               1.59        1.75        None
+kilo.yml                false(no-overflow)               0.54        0.61        None
+libsndfile.yml          false(no-overflow)               7.73        8.39        None
+mujs.yml                false(no-overflow)               7.97        8.65        None
+plutovg.yml             false(no-overflow)              28.44       30.83        None
+-------------------------------------------------------------------------------------
+Run set 2               done                            47.30       31.01           -
+
+Statistics:            113 Files
+  correct:              45
+    correct true:        2
+    correct false:      43
+  incorrect:             2
+    incorrect true:      2
+    incorrect false:     0
+  unknown:              66
+  Score:               -17 (max: 143)

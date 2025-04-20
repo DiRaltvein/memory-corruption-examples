@@ -196,6 +196,15 @@ for (const analyzer of analyzersToUse) {
       ' Diagnostic Efficiency (DE): ',
       (success / (numberOfNotes.errors + numberOfNotes.warnings + numberOfNotes.notes)).toFixed(4)
     );
+    const allTestCases = patchedCves.length + cvesToAnalyze.length - error;
+    console.log(
+      'Correct results: ',
+      success + trueNegative + ` (${((success + trueNegative) * 100 / allTestCases).toFixed(2)}%)`,
+      'incorrect results: ',
+      failed + falsePositives + ` (${((failed + falsePositives) * 100 / allTestCases).toFixed(2)}%)`,
+      'All test cases: ',
+      allTestCases
+    )
   } else {
     // failed is FN as tool outputted that file has no error while error was there
     // success is TP because tool outputted that file has error while error was there

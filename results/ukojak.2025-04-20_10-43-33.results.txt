@@ -1,0 +1,168 @@
+   BENCHMARK INFORMATION
+benchmark definition:    /mnt/a/master/master/sv-comp_tools/ukojak.xml
+name:                    ukojak
+run sets:                valid-memsafety.valid-memsafety, no-overflow.no-overflow
+date:                    Sun, 2025-04-20 10:43:33 EEST
+tool:                    ULTIMATE Kojak 0.3.0-d790fecc
+tool executable:         /usr/svcomp/tools/UAutomizer-linux/Ultimate.py
+options:                 --full-output
+parallel runs:           16
+resource limits:
+- memory:                4000.0 MB
+- time:                  120 s
+- cpu cores:             1
+hardware requirements:
+- cpu cores:             1
+- memory:                4000.0 MB
+------------------------------------------------------------
+
+   SYSTEM INFORMATION
+host:                    raltvein
+os:                      Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.35
+cpu:                     AMD Ryzen 9 7900X 12-Core Processor
+- cores:                 16
+- max frequency:         4691.107 MHz
+ram:                     8330.231808 MB
+------------------------------------------------------------
+
+
+
+valid-memsafety.valid-memsafety
+Run set 1 of 2 with options '--full-output' and propertyfile 'None'
+
+inputfile                       status                       cpu time   wall time        host
+---------------------------------------------------------------------------------------------
+MicroHttpServer.yml             TIMEOUT                        121.05      126.33        None
+MojoJson.yml                    TIMEOUT                        121.11      123.70        None
+NTSC-CRT.yml                    true                            14.27       16.18        None
+NanoNNG.yml                     TIMEOUT                        121.11      123.76        None
+NanoNNGFixed.yml                TIMEOUT                        121.18      123.20        None
+admesh.yml                      TIMEOUT                        121.24      124.01        None
+admeshFixed.yml                 TIMEOUT                        121.16      124.02        None
+asterisk.yml                    unknown                         19.84       21.03        None
+bzip3.yml                       TIMEOUT                        121.07      127.01        None
+bzip3Fixed.yml                  TIMEOUT                        121.11      125.32        None
+cups.yml                        unknown                         95.95      101.22        None
+dlt-daemon.yml                  unknown                         19.61       21.52        None
+editorconfig-core-c.yml         unknown                         66.37       71.43        None
+editorconfig-core-cFixed.yml    unknown                         43.91       48.03        None
+flatcc.yml                      unknown                         21.34       23.75        None
+frr.yml                         unknown                         37.08       40.40        None
+frrFixed.yml                    unknown                         40.01       44.23        None
+gpac_1.yml                      TIMEOUT                        121.15      123.29        None
+gpac_10.yml                     false(valid-deref)              24.22       24.43        None
+gpac_11.yml                     TIMEOUT                        121.22      124.13        None
+gpac_12.yml                     TIMEOUT                        121.18      123.47        None
+gpac_13.yml                     TIMEOUT                        121.05      123.12        None
+gpac_14.yml                     TIMEOUT                        121.15      123.03        None
+gpac_16.yml                     false(valid-deref)              35.42       37.27        None
+gpac_16Fixed.yml                TIMEOUT                        121.15      124.72        None
+gpac_16Found.yml                false(valid-deref)              78.92       82.38        None
+gpac_17.yml                     TIMEOUT                        121.14      123.46        None
+gpac_18.yml                     false(valid-deref)              22.04       23.51        None
+gpac_19.yml                     TIMEOUT                        121.04      123.46        None
+gpac_1Fixed.yml                 TIMEOUT                        121.04      122.46        None
+gpac_3.yml                      TIMEOUT                        121.03      122.64        None
+gpac_5.yml                      false(valid-deref)               7.14        7.39        None
+gpac_5Fixed.yml                 true                             7.92        8.10        None
+gpac_6.yml                      TIMEOUT                        121.05      123.96        None
+gpac_7.yml                      true                            12.33       12.79        None
+gpac_8.yml                      TIMEOUT                        121.04      122.56        None
+gpac_9.yml                      unknown                         75.67       79.17        None
+gps-sdr-sim.yml                 unknown                         14.94       16.31        None
+gss-ntlmssp.yml                 TIMEOUT                        121.03      122.55        None
+gss-ntlmsspFixed.yml            TIMEOUT                        121.04      122.62        None
+hyperkit_1.yml                  TIMEOUT                        121.02      122.91        None
+hyperkit_1Fixed.yml             TIMEOUT                        121.03      123.80        None
+jhead.yml                       TIMEOUT                        121.03      126.05        None
+jhead_1.yml                     TIMEOUT                        121.04      124.33        None
+jq.yml                          TIMEOUT                        121.03      126.77        None
+json-c.yml                      TIMEOUT                        121.06      123.44        None
+json-parser.yml                 TIMEOUT                        120.39      121.02        None
+json-parserFixed.yml            TIMEOUT                        120.43      121.01        None
+krb5.yml                        TIMEOUT                        120.75      121.02        None
+krb5Fixed.yml                   TIMEOUT                        120.47      121.02        None
+libeconf.yml                    unknown                         13.98       15.03        None
+liblouis.yml                    unknown                         53.56       57.26        None
+libming_1.yml                   TIMEOUT                        121.03      122.61        None
+libpe.yml                       TIMEOUT                        120.26      121.01        None
+libredwg.yml                    TIMEOUT                        120.71      121.01        None
+libredwg_1.yml                  TIMEOUT                        120.10      121.03        None
+libredwg_1Fixed.yml             TIMEOUT                        120.23      121.02        None
+memcached.yml                   TIMEOUT                        120.24      121.01        None
+minizip-ng.yml                  false(valid-deref)              51.04       52.80        None
+minizip-ngFixed.yml             TIMEOUT                        120.87      122.82        None
+minizip-ng_1.yml                unknown                         22.46       24.73        None
+minizip-ng_1Fixed.yml           unknown                         22.83       24.70        None
+mongoose.yml                    false(valid-deref)              12.42       13.10        None
+mongooseFixed.yml               true                            17.19       17.92        None
+mongoose_1.yml                  true                             7.98        8.38        None
+moonlight-common-c.yml          unknown                         87.18       92.68        None
+nanopb.yml                      TIMEOUT                        121.04      122.75        None
+netatalk.yml                    unknown                         77.27       82.14        None
+netatalkFixed.yml               TIMEOUT                        121.04      125.49        None
+netconsd.yml                    ERROR (7)                       11.43       11.86        None
+openNDS_1.yml                   TIMEOUT                        121.03      122.01        None
+openNDS_1Fixed.yml              TIMEOUT                        120.35      121.04        None
+openSC.yml                      TIMEOUT                        121.04      122.07        None
+openSCFixed.yml                 TIMEOUT                        120.08      121.01        None
+openrazer.yml                   TIMEOUT                        120.25      121.01        None
+openrazerFixed.yml              TIMEOUT                        120.25      121.01        None
+openrazerFound.yml              TIMEOUT                        121.04      122.41        None
+pacparser.yml                   unknown                         85.51       89.77        None
+pacparserFixed.yml              unknown                         87.01       91.06        None
+picotcp.yml                     unknown                         17.17       18.61        None
+picotcpFixed.yml                unknown                         17.10       18.53        None
+pjproject.yml                   true                            32.38       33.28        None
+ppp.yml                         TIMEOUT                        120.11      121.02        None
+radare2Fixed.yml                TIMEOUT                        120.67      125.88        None
+radare2_1.yml                   unknown                         27.21       29.57        None
+radare2_1Fixed.yml              unknown                         26.86       29.49        None
+radare2_2.yml                   TIMEOUT                        121.03      122.30        None
+radare2_2Fixed.yml              TIMEOUT                        121.04      122.96        None
+rizin.yml                       false(valid-deref)              11.53       12.23        None
+smartdns.yml                    TIMEOUT                        121.03      125.25        None
+sniproxy.yml                    unknown                         25.92       28.98        None
+sniproxyFixed.yml               true                            12.63       13.17        None
+sofia-sip.yml                   false(valid-deref)              11.44       11.94        None
+sofia-sipFixed.yml              unknown                         25.76       28.13        None
+sofia-sip_1.yml                 false(valid-deref)              16.34       16.96        None
+sofia-sip_2.yml                 false(valid-deref)              66.22       67.26        None
+stb.yml                         TIMEOUT                        121.03      122.13        None
+stb_1.yml                       unknown                         33.07       36.08        None
+tinydir.yml                     unknown                         60.90       66.00        None
+tinytiff.yml                    true                            27.91       28.57        None
+wasm-micro-runtime.yml          false(valid-deref)              10.80       11.19        None
+wasm-micro-runtimeFixed.yml     true                            13.84       14.30        None
+zchunk.yml                      TIMEOUT                        121.02      122.18        None
+zchunkFixed.yml                 TIMEOUT                        120.99      122.47        None
+zephyr.yml                      TIMEOUT                        120.88      123.11        None
+zstd.yml                        unknown                         69.29       71.99        None
+zstdFixed.yml                   unknown                         70.24       73.40        None
+---------------------------------------------------------------------------------------------
+Run set 1                       done                          2000.15      615.19           -
+
+
+no-overflow.no-overflow
+Run set 2 of 2 with options '--full-output' and propertyfile 'None'
+
+inputfile               status                       cpu time   wall time        host
+-------------------------------------------------------------------------------------
+gpac.yml                false(no-overflow)              10.87       12.28        None
+gpac_15.yml             false(no-overflow)               5.36        5.86        None
+kilo.yml                false(no-overflow)               5.26        5.95        None
+libsndfile.yml          false(no-overflow)              12.33       13.91        None
+mujs.yml                TIMEOUT                        121.04      123.11        None
+plutovg.yml             false(no-overflow)               5.39        6.10        None
+-------------------------------------------------------------------------------------
+Run set 2               done                            39.28      123.81           -
+
+Statistics:            113 Files
+  correct:              21
+    correct true:        4
+    correct false:      17
+  incorrect:             5
+    incorrect true:      5
+    incorrect false:     0
+  unknown:              87
+  Score:              -135 (max: 143)
