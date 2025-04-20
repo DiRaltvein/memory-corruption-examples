@@ -3510,13 +3510,13 @@
     "Project": "",
     "Commit (hash)": "",
     "file (function)": "-",
-    "file len": "177",
-    "func len": "40",
+    "file len": "216",
+    "func len": "43",
     "clang": "0/5/0(✓/✓)",
     "cppcheck": "0/0/0(✖/✖)",
-    "ikos": "0/53/0(✓/✖)",
+    "ikos": "0/76/0(✓/✖)",
     "infer": "0/0/0(✖/✖)",
-    "gcc": "0/14/4(✓/✖)",
+    "gcc": "0/1/0(✓/✓)",
     "symbiotic": "0/0/0(✖/✖)"
   },
   {

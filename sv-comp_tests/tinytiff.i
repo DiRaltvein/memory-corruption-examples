@@ -411,8 +411,7 @@ uint32_t TinyTIFFReader_readuint32(TinyTIFFReaderFile *tiff) {
   uint32_t res = 0;
   size_t size = fread(&res, 4, 1, tiff->file);
   if (size != 1) {
-    fclose(tiff->file);
-    exit(1);
+    return 0;
   }
   return res;
 }
@@ -420,8 +419,7 @@ uint16_t TinyTIFFReader_readuint16(TinyTIFFReaderFile *tiff) {
   uint16_t res = 0;
   size_t size = fread(&res, 2, 1, tiff->file);
   if (size != 1) {
-    fclose(tiff->file);
-    exit(1);
+    return 0;
   }
   return res;
 }
@@ -429,37 +427,75 @@ uint8_t TinyTIFFReader_readuint8(TinyTIFFReaderFile *tiff) {
   uint8_t res = 0;
   size_t size = fread(&res, 1, 1, tiff->file);
   if (size != 1) {
-    fclose(tiff->file);
-    exit(1);
+    return 0;
   }
   return res;
 }
-TinyTIFFReader_IFD TinyTIFFReader_readIFD(TinyTIFFReaderFile *tiff) {
-  TinyTIFFReader_IFD d;
-  d.pvalue = 0;
-  d.tag = TinyTIFFReader_readuint16(tiff);
-  d.type = TinyTIFFReader_readuint16(tiff);
-  d.value = TinyTIFFReader_readuint32(tiff);
-  switch (d.type) {
+TinyTIFFReader_IFD *TinyTIFFReader_readIFD(TinyTIFFReaderFile *tiff) {
+  TinyTIFFReader_IFD *d = calloc(1, sizeof(TinyTIFFReader_IFD));
+  if (d == ((void*)0))
+    return ((void*)0);
+  d->pvalue = 0;
+  d->tag = TinyTIFFReader_readuint16(tiff);
+  if (d->tag == 0) {
+    free(d);
+    return ((void*)0);
+  }
+  d->type = TinyTIFFReader_readuint16(tiff);
+  if (d->type == 0) {
+    free(d);
+    return ((void*)0);
+  }
+  d->value = TinyTIFFReader_readuint32(tiff);
+  if (d->value == 0 || d->value > 0xffff) {
+    free(d);
+    return ((void*)0);
+  }
+  switch (d->type) {
   case 1:
   case 2:
-    if (d.value > 0) {
-      d.pvalue = (uint32_t *)calloc(d.value, sizeof(uint32_t));
-      for (size_t i = 0; i < d.value; i++) {
-        d.pvalue[i] = TinyTIFFReader_readuint8(tiff);
+    d->pvalue = (uint32_t *)calloc(d->value, sizeof(uint32_t));
+    if (d->pvalue == ((void*)0)) {
+      free(d);
+      return ((void*)0);
+    }
+    for (size_t i = 0; i < d->value; i++) {
+      d->pvalue[i] = TinyTIFFReader_readuint8(tiff);
+      if (d->pvalue[i] == 0) {
+        free(d->pvalue);
+        free(d);
+        return ((void*)0);
       }
     }
     break;
   case 3:
-    d.pvalue = (uint32_t *)calloc(d.value, sizeof(uint32_t));
-    for (size_t i = 0; i < d.value; i++) {
-      d.pvalue[i] = TinyTIFFReader_readuint16(tiff);
+    d->pvalue = (uint32_t *)calloc(d->value, sizeof(uint32_t));
+    if (d->pvalue == ((void*)0)) {
+      free(d);
+      return ((void*)0);
+    }
+    for (size_t i = 0; i < d->value; i++) {
+      d->pvalue[i] = TinyTIFFReader_readuint16(tiff);
+      if (d->pvalue[i] == 0) {
+        free(d->pvalue);
+        free(d);
+        return ((void*)0);
+      }
     }
     break;
   case 4:
-    d.pvalue = (uint32_t *)calloc(d.value, sizeof(uint32_t));
-    for (size_t i = 0; i < d.value; i++) {
-      d.pvalue[i] = TinyTIFFReader_readuint32(tiff);
+    d->pvalue = (uint32_t *)calloc(d->value, sizeof(uint32_t));
+    if (d->pvalue == ((void*)0)) {
+      free(d);
+      return ((void*)0);
+    }
+    for (size_t i = 0; i < d->value; i++) {
+      d->pvalue[i] = TinyTIFFReader_readuint32(tiff);
+      if (d->pvalue[i] == 0) {
+        free(d->pvalue);
+        free(d);
+        return ((void*)0);
+      }
     }
     break;
   default:
@@ -470,39 +506,42 @@ TinyTIFFReader_IFD TinyTIFFReader_readIFD(TinyTIFFReaderFile *tiff) {
 void TinyTIFFReader_readNextFrame(TinyTIFFReaderFile *tiff) {
   uint16_t ifd_count = TinyTIFFReader_readuint16(tiff);
   for (uint16_t i = 0; i < ifd_count; i++) {
-    TinyTIFFReader_IFD ifd = TinyTIFFReader_readIFD(tiff);
-    switch (ifd.tag) {
+    TinyTIFFReader_IFD *ifd = TinyTIFFReader_readIFD(tiff);
+    if (ifd == ((void*)0))
+      return;
+    switch (ifd->tag) {
     case 256:
-      tiff->currentFrame.width = ifd.value;
+      tiff->currentFrame.width = ifd->value;
       break;
     case 257:
-      tiff->currentFrame.imagelength = ifd.value;
+      tiff->currentFrame.imagelength = ifd->value;
       break;
     case 273: {
-      tiff->currentFrame.stripcount = ifd.value;
-      if (tiff->currentFrame.stripoffsets) {
+      tiff->currentFrame.stripcount = ifd->value;
+      if (tiff->currentFrame.stripoffsets != ((void*)0)) {
         free(tiff->currentFrame.stripoffsets);
       }
-      tiff->currentFrame.stripoffsets = (uint32_t *)calloc(ifd.value, sizeof(uint32_t));
+      tiff->currentFrame.stripoffsets = (uint32_t *)calloc(ifd->value, sizeof(uint32_t));
       if (tiff->currentFrame.stripoffsets == ((void*)0))
         break;
-      memcpy(tiff->currentFrame.stripoffsets, ifd.pvalue, ifd.value * sizeof(uint32_t));
+      memcpy(tiff->currentFrame.stripoffsets, ifd->pvalue, ifd->value * sizeof(uint32_t));
     } break;
     case 277:
-      tiff->currentFrame.samplesperpixel = ifd.value;
+      tiff->currentFrame.samplesperpixel = ifd->value;
       break;
     case 278:
-      tiff->currentFrame.rowsperstrip = ifd.value;
+      tiff->currentFrame.rowsperstrip = ifd->value;
       break;
     case 339:
-      tiff->currentFrame.sampleformat = ifd.value;
+      tiff->currentFrame.sampleformat = ifd->value;
       break;
     default:
       break;
     }
-    if (ifd.pvalue) {
-      free(ifd.pvalue);
+    if (ifd->pvalue) {
+      free(ifd->pvalue);
     }
+    free(ifd);
   }
 }
 int main() {
@@ -521,7 +560,7 @@ int main() {
   printf("Frame samplesperpixel: %u\n", tiff.currentFrame.samplesperpixel);
   printf("Frame rowsperstrip: %u\n", tiff.currentFrame.rowsperstrip);
   printf("Frame sampleformat: %u\n", tiff.currentFrame.sampleformat);
-  if (tiff.currentFrame.stripoffsets) {
+  if (tiff.currentFrame.stripoffsets != ((void*)0)) {
     free(tiff.currentFrame.stripoffsets);
   }
   fclose(tiff.file);
