@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "helpers.c"
 
 #define BUFSIZE 32
 

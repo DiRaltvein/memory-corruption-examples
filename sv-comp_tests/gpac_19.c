@@ -16,7 +16,6 @@
 #include <string.h>
 #include "helpers.c"
 
-#define strnicmp strncasecmp
 #define PAD_EVEN(x) (((x) + 1) & ~1)
 
 typedef struct {
@@ -50,7 +49,7 @@ int avi_parse_input_file(avi_t *AVI) {
     return 1;
   }
 
-  if (strnicmp(data, "RIFF", 4) != 0 || strnicmp(data + 8, "AVI ", 4) != 0) {
+  if (strncmp(data, "RIFF", 4) != 0 || strncmp(data + 8, "AVI ", 4) != 0) {
     printf("Not a valid avi file (even through we parse locally hardcoded buffer initially parsed was avi file)\n");
     return 1;
   }
@@ -65,13 +64,13 @@ int avi_parse_input_file(avi_t *AVI) {
     n = str2ulong((unsigned char *)data + 4);
     n = PAD_EVEN(n);
 
-    if (strnicmp(data, "LIST", 4) == 0) {
+    if (strncmp(data, "LIST", 4) == 0) {
       if (avi_read(AVI, data, 4) != 4) {
         printf("Error reading from buffer\n");
         return 1;
       }
       n -= 4;
-      if (strnicmp(data, "hdrl", 4) == 0) {
+      if (strncmp(data, "hdrl", 4) == 0) {
         if (n > 0xFFFFFFFF) {
           printf("Error reading from buffer\n");
           return 1;
@@ -104,7 +103,7 @@ int avi_parse_input_file(avi_t *AVI) {
   }
 
   for (i = 0; i < hdrl_len;) {
-    if (strnicmp((char *)hdrl_data + i, "LIST", 4) == 0) {
+    if (strncmp((char *)hdrl_data + i, "LIST", 4) == 0) {
       i += 12;
       continue;
     }

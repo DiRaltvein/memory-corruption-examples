@@ -5,9 +5,9 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // #include "helpers.c"
 
@@ -41,7 +41,7 @@ int getNumberInRange(int lowestBound, int highestBound) {
  * Just a utility function in test creation that generates random sequence of unsigned characters (sequence is not zero terminated)
  */
 unsigned char *getRandomByteStream(int size) {
-  unsigned char *randomString = (unsigned char*)calloc(size, sizeof(unsigned char));
+  unsigned char *randomString = (unsigned char *)calloc(size, sizeof(unsigned char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
@@ -58,7 +58,7 @@ unsigned char *getRandomByteStream(int size) {
 char *getRandomString(int lowestSize, int highestSize) {
   int stringSize = getNumberInRange(lowestSize, highestSize);
 
-  char *randomString = (char*)calloc(stringSize + 1, sizeof(char));
+  char *randomString = (char *)calloc(stringSize + 1, sizeof(char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
@@ -74,7 +74,7 @@ char *getRandomString(int lowestSize, int highestSize) {
  * Just a utility function in test creation that generates random string of specified size
  */
 char *getRandomStringFixedSize(int size) {
-  char *randomString = (char*)calloc(size + 1, sizeof(char));
+  char *randomString = (char *)calloc(size + 1, sizeof(char));
   if (randomString == NULL) {
     printf("Out of memory\n");
     exit(1);
@@ -83,4 +83,31 @@ char *getRandomStringFixedSize(int size) {
     randomString[i] = __VERIFIER_nondet_char();
   }
   return randomString;
+}
+
+/**
+ * Function is defined separately as it is not in a C99 standard
+*/
+char *strdup(const char *s) {
+  size_t size = strlen(s) + 1;
+  char *p = malloc(size);
+  if (p) {
+    memcpy(p, s, size);
+  }
+  return p;
+}
+
+/**
+ * Function is defined separately as it is not in a C99 standard
+*/
+char *strsep(char **stringp, const char *delim) {
+  char *rv = *stringp;
+  if (rv) {
+    *stringp += strcspn(*stringp, delim);
+    if (**stringp)
+      *(*stringp)++ = '\0';
+    else
+      *stringp = 0;
+  }
+  return rv;
 }

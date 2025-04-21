@@ -49,7 +49,7 @@ int main() {
     return 1;
   si.pps->sps_id = getNumberInRange(0, 35); // value >= 32 will cause a buffer overflow later in program
 
-  AVCState avc = {0};
+  AVCState avc;
   for (int i = 0; i < 32; i++) {
     avc.sps[i].profile_idc = i;
   }

@@ -76,7 +76,7 @@ int krb5_encrypt_tkt_part(krb5_ticket *t) {
 
 int tgs_issue_ticket(struct tgs_req_info *t) {
   int ret = 0;
-  krb5_ticket ticket_reply = {0};
+  krb5_ticket ticket_reply = {{0}};
 
   if (t->flags & (1 << 2)) {
     ticket_reply = *t->header_tkt;

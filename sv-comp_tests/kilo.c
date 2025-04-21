@@ -22,13 +22,13 @@ enum KEY_ACTION{
 
 void editorUpdateRow(char* string) {
   int tabs = 0, j;
-  size_t length = strlen(string);
+  unsigned int length = strlen(string);
 
   for (j = 0; j < length; j++)
     if (string[j] == TAB) tabs++;
 
   // integer overflow if row is very long with lots of tabs
-  printf("Line length with tabs substituted to spaces: %ld\n", length + tabs*8 + 1);
+  printf("Line length with tabs substituted to spaces: %u\n", length + tabs*8 + 1);
 }
 
 int main() {

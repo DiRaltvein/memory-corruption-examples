@@ -24,8 +24,6 @@
     x = NULL;       \
   } while (0)
 
-typedef void *iconv_t;
-
 struct ntlm_ctx {
   iconv_t from_oem;
   iconv_t to_oem;
